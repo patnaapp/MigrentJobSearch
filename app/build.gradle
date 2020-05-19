@@ -44,7 +44,4 @@ dependencies {
     implementation 'com.matthew-tamlin:sliding-intro-screen:3.0.2'
 
 
-
-
-
 }
