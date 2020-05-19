@@ -47,17 +47,30 @@
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:layout_marginTop="12dp"
-            android:text="Welcome to e-Labharthi Physical Verification "
-            android:textColor="@android:color/white"
-            android:textSize="17sp"
+            android:text="बिहार सरकार"
+            android:textColor="#DD2424"
+            android:textSize="24sp"
             android:textStyle="bold" />
 
+        <TextView
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_marginTop="12dp"
+            android:text="प्रवासी मज़दूर श्रम शाधन ऐप"
+            android:textColor="@android:color/white"
+            android:textSize="22sp"
+            android:textStyle="normal" />
+
         <ImageView
+            android:padding="26dp"
             android:layout_marginTop="26dp"
             android:id="@+id/iv_logo"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:src="@drawable/ic_aadhar_round_splash" />
+            android:src="@drawable/labour1"
+            android:background="@drawable/circular_shape_white"/>
 
         <ProgressBar
             android:id="@+id/progress1"
