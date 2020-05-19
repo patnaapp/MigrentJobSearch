@@ -39,11 +39,12 @@ public class Login extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
+        getActionBar().hide();
 
-        Utiilties.setActionBarBackground(Login.this);
+//        Utiilties.setActionBarBackground(Login.this);
         Utiilties.setStatusBarColor(Login.this);
-        ActionBar actionBar = getActionBar();
-        actionBar.setTitle(" Log In ");
+//        ActionBar actionBar = getActionBar();
+//        actionBar.setTitle(" Log In ");
         Initialization();
 
         email_sign_in_button.setOnClickListener(new View.OnClickListener() {

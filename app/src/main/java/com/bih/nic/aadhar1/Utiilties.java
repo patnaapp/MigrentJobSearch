@@ -196,7 +196,7 @@ public class Utiilties {
 			window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
 			// finally change the color
-			window.setStatusBarColor(Color.parseColor("#FF2B9CC5"));
+			window.setStatusBarColor(activity.getResources().getColor(R.color.colorPrimaryDark));
 		}
 	}
 

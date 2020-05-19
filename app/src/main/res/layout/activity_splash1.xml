@@ -2,28 +2,31 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#6AD1F2">
+    android:background="@color/holo_gray_bright">
 
-    <RelativeLayout
-        android:padding="8dp"
+    <LinearLayout
+        android:padding="4dp"
         android:id="@+id/rl_nav"
-        android:gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_alignParentTop="true"
-        android:background="#07FFFFFF"
-        android:layout_height="56dp">
+        android:background="#E6FFFFFF"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:weightSum="2">
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@drawable/digital_india" />
 
         <ImageView
-            android:layout_width="241dp"
-            android:layout_height="39dp"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:src="@drawable/nic" />
-    </RelativeLayout>
+    </LinearLayout>
 
     <ImageView
         android:visibility="gone"
@@ -59,7 +62,7 @@
             android:textAlignment="center"
             android:layout_marginTop="12dp"
             android:text="प्रवासी मज़दूर श्रम शाधन ऐप"
-            android:textColor="@android:color/white"
+            android:textColor="@color/colorPrimary"
             android:textSize="22sp"
             android:textStyle="normal" />
 
