@@ -66,6 +66,7 @@ public class BenDetails implements KvmSerializable {
     private String OtpVerify="";
     private String is_having_cold="";
     private String intBloodTest="";
+    private String intBloodTest1="";
 
 
     public BenDetails() {
@@ -616,5 +617,13 @@ public class BenDetails implements KvmSerializable {
 
     public void setIntBloodTest(String intBloodTest) {
         this.intBloodTest = intBloodTest;
+    }
+
+    public String getIntBloodTest1() {
+        return intBloodTest1;
+    }
+
+    public void setIntBloodTest1(String intBloodTest1) {
+        this.intBloodTest1 = intBloodTest1;
     }
 }
