@@ -91,6 +91,7 @@ public class Login extends Activity {
     private void Initialization() {
         et_reg_no = (EditText) findViewById(R.id.et_reg_no);
         et_otp = (EditText) findViewById(R.id.et_otp);
+        btn_login = (Button) findViewById(R.id.btn_login);
     }
 
     public void onRequestOtp(View view){
