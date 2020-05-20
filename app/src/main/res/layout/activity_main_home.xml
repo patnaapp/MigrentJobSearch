@@ -19,7 +19,7 @@
         <LinearLayout
             android:background="#10163A"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="150dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -31,6 +31,7 @@
                 <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/profile_image"
                     android:layout_width="70dp"
+                    android:layout_gravity="center"
                     android:layout_height="70dp"
                     android:layout_marginLeft="10dp"
                     android:gravity="center"
@@ -38,10 +39,16 @@
                     app:civ_border_width="0dp" />
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_weight="0.7"
+                    android:layout_width="0dp"
                     android:layout_height="100dp"
                     android:orientation="vertical"
                     android:gravity="center_vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
 
                     <TextView
                         android:padding="5dp"
@@ -57,6 +64,7 @@
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
+                    </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -70,12 +78,18 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.5"
-                            android:text="Role"
+                            android:text="  Detail of user for job search "
                             android:textColor="@android:color/white"
-                            android:textSize="16sp"
+                            android:textSize="14sp"
                             android:textStyle="bold" />
                     </LinearLayout>
                 </LinearLayout>
+                <ImageView
+                    android:layout_weight="0.3"
+                    android:layout_gravity="end"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_action_logout"></ImageView>
             </LinearLayout>
 
 
@@ -150,7 +164,7 @@
             android:layout_height="40sp"
             android:layout_weight="0.9"
             android:background="@drawable/searchboxdesign"
-            android:hint="Search new job"
+            android:hint="  नई नौकरी खोजें"
             android:padding="5dip" />
         <ImageView
             android:layout_gravity="center"
@@ -203,12 +217,14 @@
                     android:orientation="vertical">
 
                     <LinearLayout
+
                         android:layout_margin="12dp"
                         android:layout_width="match_parent"
-                        android:layout_height="130dp"
+                        android:layout_height="110dp"
                         android:orientation="horizontal">
 
                         <LinearLayout
+                            android:layout_marginLeft="20dp"
                             android:onClick="onRegister"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -222,11 +238,12 @@
                             <ImageView
                                 android:layout_width="50dp"
                                 android:layout_height="50dp"
-                                android:background="@drawable/search_icon_red" />
+                                android:src="@drawable/new_entry"
+                                android:tint="#10163A"/>
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="शिकायत दर्ज करें"
+                                android:text="दस्तावेज़ में संशोधन करें"
                                 android:gravity="center"
                                 android:textSize="13sp"
                                 android:layout_marginTop="8dp"
@@ -244,6 +261,7 @@
                         </View>
 
                         <LinearLayout
+                            android:layout_marginRight="20dp"
                             android:onClick="onTrackGrievance"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -257,11 +275,12 @@
                             <ImageView
                                 android:layout_width="50dp"
                                 android:layout_height="50dp"
-                                android:background="@drawable/ic_search"/>
+                                android:tint="#10163A"
+                                android:src="@drawable/ic_person_black_24dp"/>
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="शिकायत ट्रैक करें"
+                                android:text="प्रोफाइल देखिये"
                                 android:gravity="center"
                                 android:layout_marginTop="8dp"
                                 android:textSize="13sp"
