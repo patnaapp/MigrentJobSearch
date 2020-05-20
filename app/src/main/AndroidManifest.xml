@@ -63,18 +63,17 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/labour1"
+        android:icon="@drawable/ic_aadhar_round"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/labour1"
+        android:roundIcon="@drawable/ic_aadhar_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".RequestOtpActivity"></activity>
-        <activity android:name=".MainHomeActivity" />
+        <activity android:name=".MainHomeActivity"
+            android:theme="@style/NoActionBar"></activity>
         <activity android:name=".HomeActivity" />
         <activity android:name=".VerifyAadhaar1" />
-        <activity
-            android:name=".SplashActivity"
+        <activity android:name=".SplashActivity"
             android:theme="@style/NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

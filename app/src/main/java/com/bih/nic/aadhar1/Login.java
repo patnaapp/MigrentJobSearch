@@ -162,7 +162,7 @@ public class Login extends Activity {
 
                     dataBaseHelper.insertUserDetails(result,str_email);
                     PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("UserId",str_email.toLowerCase()).commit();
-                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("password",result.get_UserId().toLowerCase()).commit();
+                   /* PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("password",result.get_UserId().toLowerCase()).commit();
                     PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("Role",result.getRole().toLowerCase()).commit();
                     if(result.getRole().equals("BLKOPTMOB")){
                         PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("Block",result.getBlockCode()).commit();
@@ -177,12 +177,12 @@ public class Login extends Activity {
                     }else if(result.getRole().equals("DSWO")){
                         PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("DistrictName",result.getDistName()).commit();
                         PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("District",result.getDistCode()).commit();
-                    }
+                    }*/
                    // new loadPanchayatData(result.getBlockCode()).execute();
                    // String panchyatcode = "";
                   //  panchyatcode=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("PanchayatCode", "");
                   //  if(!panchyatcode.equals("")) {
-                        Intent intent=new Intent(Login.this,VerifyAadhaar.class);
+                        Intent intent=new Intent(Login.this,MainHomeActivity.class);
                         startActivity(intent);
                         finish();
 

@@ -200,7 +200,7 @@ public class SplashActivity extends Activity {
                         startActivity(i);
                         finish();
                     }else {
-                        Intent i = new Intent(SplashActivity.this, VerifyAadhaar.class);
+                        Intent i = new Intent(SplashActivity.this, MainHomeActivity.class);
                         startActivity(i);
                         finish();
                     }
