@@ -1,5 +1,6 @@
 package com.bih.nic.aadhar1;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.EditText;
@@ -7,7 +8,7 @@ import android.widget.TextView;
 
 import com.bih.nic.aadhar1.Model.BenDetails;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends Activity {
 
     BenDetails benDetails;
     TextView tv_user_name,tv_mobile;
@@ -17,6 +18,9 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        getActionBar().hide();
+        Utiilties.setStatusBarColor(this);
         tv_user_name=(TextView)findViewById(R.id.tv_user_name);
         tv_mobile=(TextView)findViewById(R.id.tv_user_name);
         et_reg_num =(EditText) findViewById(R.id.et_reg_num);

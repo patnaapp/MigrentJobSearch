@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.TestLooperManager;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bih.nic.aadhar1.Model.BenDetails;
@@ -22,7 +24,8 @@ import com.bih.nic.aadhar1.Model.DefaultResponse;
 
 public class MainHomeActivity extends Activity {
     LinearLayout ll_profile;
-    String Reg_No="";
+    String Reg_No="",user_name="";
+    TextView tv_benname;
 
 
     @Override
@@ -33,8 +36,11 @@ public class MainHomeActivity extends Activity {
       //  Utiilties.setActionBarBackground(MainHomeActivity.this);
         Utiilties.setStatusBarColor(MainHomeActivity.this);
         Reg_No=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserId", "");
+        user_name=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserName", "");
 
         ll_profile=(LinearLayout)findViewById(R.id.ll_profile);
+        tv_benname=(TextView) findViewById(R.id.tv_benname);
+        tv_benname.setText(user_name);
         ll_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
