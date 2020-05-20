@@ -70,9 +70,9 @@
                 android:layout_centerHorizontal="true"/>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="ओटीपी प्राप्त करने के हेतु कृपया अपना रेजिस्ट्रेशन संख्या और रेजिस्टर्ड मोबाइल संख्या डालें"
+                android:text="मोबाइल संख्या बदलने हेतु कृपया अपना रेजिस्ट्रेशन विवरण डालें"
                 android:layout_below="@id/iv_logo1"
                 android:id="@+id/tv_desc"
                 android:layout_margin="20dp"
