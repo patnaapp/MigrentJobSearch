@@ -17,7 +17,13 @@ public class UserDetails implements KvmSerializable {
     private String DistName="";
     private String BlockCode="";
     private String BlockName="";
+    private String PanchayatName="";
+    private String PanchayatCode="";
+    private String Age="";
+    private String MobileNo="";
+    private String Address="";
     private String Role="";
+    private String Message="";
     private String EMEI;
     private String AadhaarNo;
 
@@ -42,17 +48,20 @@ public class UserDetails implements KvmSerializable {
 
     }*/
  public UserDetails(SoapObject res1) {
-        this.setAuthenticated(Boolean.parseBoolean(res1.getProperty(
-                "isAuthenticated").toString()));
-      //  this.IsAuth=res1.getProperty("IsAuthienticated").toString();
-        this.DistCode=res1.getProperty("District_Code").toString();
+        this.setAuthenticated(Boolean.parseBoolean(res1.getProperty("Status").toString()));
+
+        this.DistCode=res1.getProperty("DistrictCode").toString();
+        this.DistName=res1.getProperty("DistrictName").toString();
         this.BlockCode=res1.getProperty("BlockCode").toString();
-        this.DistName=res1.getProperty("district_name").toString();
-        this.BlockName=res1.getProperty("Block_Name").toString();
-        this.Role=res1.getProperty("UserType").toString();
-        this.EMEI=res1.getProperty("IMEI").toString();
-        this.UserName=res1.getProperty("Name").toString();
-        this.AadhaarNo=res1.getProperty("Aadhaar").toString();
+        this.BlockName=res1.getProperty("BlockName").toString();
+        this.PanchayatCode=res1.getProperty("PanchayatCode").toString();
+        this.PanchayatName=res1.getProperty("PanchayatName").toString();
+        this.Message=res1.getProperty("msg").toString();
+        this._UserId=res1.getProperty("vchRegNum").toString();
+        this.UserName=res1.getProperty("vchName").toString();
+        this.Age=res1.getProperty("intAge").toString();
+        this.MobileNo=res1.getProperty("vchMobile").toString();
+        this.Address=res1.getProperty("vchAddress").toString();
 
     }
 
@@ -74,6 +83,54 @@ public class UserDetails implements KvmSerializable {
     @Override
     public void getPropertyInfo(int index, Hashtable properties, PropertyInfo info) {
 
+    }
+
+    public String getPanchayatName() {
+        return PanchayatName;
+    }
+
+    public void setPanchayatName(String panchayatName) {
+        PanchayatName = panchayatName;
+    }
+
+    public String getPanchayatCode() {
+        return PanchayatCode;
+    }
+
+    public void setPanchayatCode(String panchayatCode) {
+        PanchayatCode = panchayatCode;
+    }
+
+    public String getAge() {
+        return Age;
+    }
+
+    public void setAge(String age) {
+        Age = age;
+    }
+
+    public String getMobileNo() {
+        return MobileNo;
+    }
+
+    public void setMobileNo(String mobileNo) {
+        MobileNo = mobileNo;
+    }
+
+    public String getAddress() {
+        return Address;
+    }
+
+    public void setAddress(String address) {
+        Address = address;
+    }
+
+    public String getMessage() {
+        return Message;
+    }
+
+    public void setMessage(String message) {
+        Message = message;
     }
 
     public boolean isAuthenticated() {

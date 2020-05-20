@@ -387,7 +387,12 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
             values.put("distname", result.getDistName());
             values.put("blockcode", result.getBlockCode());
             values.put("blockname", result.getBlockName());
-            values.put("role", result.getRole());
+            values.put("PanchayatCode", result.getPanchayatCode());
+            values.put("PanchayatName", result.getPanchayatName());
+            values.put("UserName", result.getUserName());
+            values.put("Age", result.getAge());
+            values.put("Mobile", result.getMobileNo());
+            values.put("Address", result.getAddress());
           //  values.put("Email", result.getE());
             String[] whereArgs = new String[]{userid.toLowerCase()};
 

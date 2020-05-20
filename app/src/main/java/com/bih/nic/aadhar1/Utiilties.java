@@ -408,4 +408,20 @@ public class Utiilties {
 		return finaltext;
 
 	}
+
+	public static void internetNotAvailableDialog(final Context context){
+		new AlertDialog.Builder(context)
+				.setIcon(R.drawable.labour1)
+				.setTitle(R.string.appTitle)
+				.setMessage("इंटरनेट कनेक्शन उपलब्ध नहीं हैं ..\nकृपया मोबाइल कनेक्शन और वाइफ़ाई कनेक्शन आन कारें")
+				.setCancelable(false)
+				.setPositiveButton("ओके", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						Intent I = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
+						context.startActivity(I);
+					}
+				})
+				.setNegativeButton("रद्द करें", null)
+				.show();
+	}
 }

@@ -7,7 +7,9 @@ import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -15,6 +17,7 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.telephony.TelephonyManager;
 import android.text.Html;
+import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -29,6 +32,7 @@ public class SplashActivity extends Activity {
     ProgressBar progressBar;
     DataBaseHelper databaseHelper;
     MarshmallowPermission permission;
+    SQLiteDatabase db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,18 +53,15 @@ public class SplashActivity extends Activity {
         } catch (IOException ioe) {
 
             throw new Error("Unable to create database");
-
         }
 
         try {
 
             databaseHelper.openDataBase();
-
+            modifyTable();
         } catch (SQLException sqle) {
 
             throw sqle;
-
-
         }
 
        // start();
@@ -76,13 +77,69 @@ public class SplashActivity extends Activity {
         new CheckUpdate().execute();}else {start();}
     }
 
+    public void modifyTable(){
+        String UserTable = "UserDetails";
+
+        if(isColumnExists(UserTable, "UserName") == false){
+            AlterTable(UserTable, "UserName");
+        }
+
+        if(isColumnExists(UserTable, "PanchayatCode") == false){
+            AlterTable(UserTable, "PanchayatCode");
+        }
+
+        if(isColumnExists(UserTable, "PanchayatName") == false){
+            AlterTable(UserTable, "PanchayatName");
+        }
+
+        if(isColumnExists(UserTable, "Age") == false){
+            AlterTable(UserTable, "Age");
+        }
+
+        if(isColumnExists(UserTable, "Mobile") == false){
+            AlterTable(UserTable, "Mobile");
+        }
+
+        if(isColumnExists(UserTable, "Address") == false){
+            AlterTable(UserTable, "Address");
+        }
+    }
+
+    public void AlterTable(String tableName,String columnName)
+    {
+        db = databaseHelper.getReadableDatabase();
+
+        try{
+            db.execSQL("ALTER TABLE "+tableName+" ADD COLUMN "+columnName+" TEXT");
+            Log.e("ALTER Done",tableName +"-"+ columnName);
+        }
+        catch (Exception e)
+        {
+            Log.e("ALTER Failed",tableName +"-"+ columnName);
+        }
+    }
+
+    public boolean isColumnExists (String table, String column) {
+        db = databaseHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery("PRAGMA table_info("+ table +")", null);
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                String name = cursor.getString(cursor.getColumnIndex("name"));
+                if (column.equalsIgnoreCase(name)) {
+                    return true;
+                }
+            }
+        }
+        cursor.close();
+        return false;
+    }
+
     private class CheckUpdate extends AsyncTask<Void, Void, Versioninfo> {
 
 
         CheckUpdate() {
 
         }
-
 
         @Override
         protected void onPreExecute() {
@@ -195,15 +252,15 @@ public class SplashActivity extends Activity {
                     startActivity(i);
                     finish();
                 }else {
-                    if(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserId", "").equalsIgnoreCase("BLKADM")) {
-                        Intent i = new Intent(SplashActivity.this, VerifyAadhaar.class);
-                        startActivity(i);
-                        finish();
-                    }else {
+//                    if(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserId", "").equalsIgnoreCase("BLKADM")) {
+//                        Intent i = new Intent(SplashActivity.this, VerifyAadhaar.class);
+//                        startActivity(i);
+//                        finish();
+//                    }else {
                         Intent i = new Intent(SplashActivity.this, MainHomeActivity.class);
                         startActivity(i);
                         finish();
-                    }
+                   // }
                 }
             }
         }, SPLASH_TIME_OUT);

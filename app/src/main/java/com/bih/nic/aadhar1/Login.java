@@ -11,6 +11,7 @@ import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -27,8 +28,8 @@ import java.util.ArrayList;
 
 public class Login extends Activity {
 
-    Button email_sign_in_button,email_sign_in_button2;
-    EditText email, password;
+    Button btn_login;
+    EditText et_reg_no, et_otp;
     String str_email, str_pass;
     String[] param;
     TextView text_signup;
@@ -41,62 +42,55 @@ public class Login extends Activity {
         setContentView(R.layout.login_activity);
         getActionBar().hide();
 
-//        Utiilties.setActionBarBackground(Login.this);
         Utiilties.setStatusBarColor(Login.this);
-//        ActionBar actionBar = getActionBar();
-//        actionBar.setTitle(" Log In ");
         Initialization();
 
-        email_sign_in_button.setOnClickListener(new View.OnClickListener() {
+        btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               if(Utiilties.isOnline(getApplicationContext())) {
-                   setvalue();
-                   PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("Link","1").commit();
-                   param = new String[2];
-                   param[0] = email.getText().toString();
-                   param[1] = password.getText().toString();
-                   new LoginTask().execute();
-               }else {
-                   CustomDialogClass cdd=new CustomDialogClass(Login.this,email.getText().toString(),password.getText().toString());
-                   cdd.show();
-               }
 
-            }
-        }); email_sign_in_button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               if(Utiilties.isOnline(getApplicationContext())) {
-                   setvalue();
-                   PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("Link","2").commit();
-                   param = new String[2];
-                   param[0] = email.getText().toString();
-                   param[1] = password.getText().toString();
-                   new LoginTask().execute();
-               }else {
-                   CustomDialogClass cdd=new CustomDialogClass(Login.this,email.getText().toString(),password.getText().toString());
-                   cdd.show();
-               }
+                if(isValidInput()){
+                    if(Utiilties.isOnline(getApplicationContext())) {
+                        new LoginTask(et_reg_no.getText().toString(),et_otp.getText().toString()).execute();
+                    }else {
+                        Utiilties.internetNotAvailableDialog(Login.this);
+                    }
+                }
 
             }
         });
-        getIMEI();
+        //getIMEI();
 
+    }
+
+    Boolean isValidInput(){
+        View focusView = null;
+        boolean validate = true;
+
+        if (et_reg_no.getText().toString().equals("")) {
+            et_reg_no.setError("कृप्या सही पंजीकरण संख्या डालें");
+            focusView = et_reg_no;
+            validate = false;
+        }
+
+        if (et_otp.getText().toString().equals("")) {
+            et_otp.setError("कृप्या सही ओटीपी डालें");
+            focusView = et_otp;
+            validate = false;
+        }
+
+        if (!validate) focusView.requestFocus();
+        return validate;
     }
 
     private void setvalue() {
-        str_email = email.getText().toString();
-        str_pass = password.getText().toString();
+        str_email = et_reg_no.getText().toString();
+        str_pass = et_otp.getText().toString();
     }
 
     private void Initialization() {
-        email = (EditText) findViewById(R.id.email);
-        password = (EditText) findViewById(R.id.password);
-        text_signup = (TextView) findViewById(R.id.text_signup);
-        email_sign_in_button = (Button) findViewById(R.id.email_sign_in_button);
-        email_sign_in_button2 = (Button) findViewById(R.id.email_sign_in_button2);
-        info=(TextView)findViewById(R.id.info);
-        BlinkTextView(info);
+        et_reg_no = (EditText) findViewById(R.id.et_reg_no);
+        et_otp = (EditText) findViewById(R.id.et_otp);
     }
 
     public void onRequestOtp(View view){
@@ -115,30 +109,39 @@ public class Login extends Activity {
        // getIMEI();
 
     }
-    private void getIMEI() {
+//    private void getIMEI() {
+//
+//        MarshmallowPermission permission = new MarshmallowPermission(this, Manifest.permission.READ_PHONE_STATE);
+//        if (permission.result == -1 || permission.result == 0) {
+//            try {
+//                tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+//
+//                if (tm != null) imei = tm.getDeviceId();
+//            } catch (Exception e) {
+//            }
+//        } else if (permission.result == 1) {
+//            tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+//            if (tm != null) imei = tm.getDeviceId();
+//                    /* Intent i=new Intent(this,LoginActivity.class);
+//                     startActivity(i);
+//	            	 finish();*/
+//        }
+//        }
+//    }
 
-        MarshmallowPermission permission = new MarshmallowPermission(this, Manifest.permission.READ_PHONE_STATE);
-        if (permission.result == -1 || permission.result == 0) {
-            try {
-                tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-
-                if (tm != null) imei = tm.getDeviceId();
-            } catch (Exception e) {
-            }
-        } else if (permission.result == 1) {
-            tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-            if (tm != null) imei = tm.getDeviceId();
-                    /* Intent i=new Intent(this,LoginActivity.class);
-                     startActivity(i);
-	            	 finish();*/
-        }
-    }
     private class LoginTask extends AsyncTask<String, Void, UserDetails> {
 
         private final ProgressDialog dialog = new ProgressDialog(Login.this);
 
         private final AlertDialog alertDialog = new AlertDialog.Builder(
                 Login.this).create();
+
+        String regN0,otp;
+
+        public LoginTask(String regN0, String otp) {
+            this.regN0 = regN0;
+            this.otp = otp;
+        }
 
         @Override
         protected void onPreExecute() {
@@ -151,14 +154,14 @@ public class Login extends Activity {
         @Override
         protected UserDetails doInBackground(String... param) {
 
-            if (!Utiilties.isOnline(Login.this)) {
-                UserDetails userDetails = new UserDetails();
-                userDetails.setAuthenticated(true);
-                return userDetails;
-
-            } else {
-                return WebserviceHelper.getAdharUserDetail(str_email,str_pass);
-            }
+//            if (!Utiilties.isOnline(Login.this)) {
+//                UserDetails userDetails = new UserDetails();
+//                userDetails.setAuthenticated(true);
+//                return userDetails;
+//
+//            } else {
+                return WebserviceHelper.loginUser(regN0,otp);
+            //}
 
         }
 
@@ -169,43 +172,25 @@ public class Login extends Activity {
 
             if(result!=null) {
                 if(result.isAuthenticated()) {
+                    result.set_Passwoed(et_otp.getText().toString());
                     DataBaseHelper dataBaseHelper = new DataBaseHelper(getApplicationContext());
-
                     dataBaseHelper.insertUserDetails(result,str_email);
-                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("UserId",str_email.toLowerCase()).commit();
-                   /* PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("password",result.get_UserId().toLowerCase()).commit();
-                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("Role",result.getRole().toLowerCase()).commit();
-                    if(result.getRole().equals("BLKOPTMOB")){
-                        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("Block",result.getBlockCode()).commit();
-                        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("BlockName",result.getBlockName()).commit();
-                        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("DistrictName",result.getDistName()).commit();
-                        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("District",result.getDistCode()).commit();
-                    }else if(result.getRole().equalsIgnoreCase("ABU")){
-                        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("Block",result.getBlockCode()).commit();
-                        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("BlockName",result.getBlockName()).commit();
-                        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("DistrictName",result.getDistName()).commit();
-                        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("District",result.getDistCode()).commit();
-                    }else if(result.getRole().equals("DSWO")){
-                        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("DistrictName",result.getDistName()).commit();
-                        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("District",result.getDistCode()).commit();
-                    }*/
-                   // new loadPanchayatData(result.getBlockCode()).execute();
-                   // String panchyatcode = "";
-                  //  panchyatcode=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("PanchayatCode", "");
-                  //  if(!panchyatcode.equals("")) {
-                        Intent intent=new Intent(Login.this,MainHomeActivity.class);
-                        startActivity(intent);
-                        finish();
 
-                    /*}else {
-                        Intent intent=new Intent(Login.this,ChooseCenter.class);
-                        startActivity(intent);
-                        finish();
-                    }*/
+                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("UserId",et_reg_no.getText().toString()).commit();
+                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("Password",et_otp.getText().toString()).commit();
+                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("UserName",result.getUserName()).commit();
+                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("Mobile",result.getMobileNo()).commit();
+                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("Age",result.getAge()).commit();
+
+                    Intent intent=new Intent(Login.this,MainHomeActivity.class);
+                    startActivity(intent);
+                    finish();
 
                 }else {
-                    Toast.makeText(getApplicationContext(),"Invalid User Id and  ",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),result.getMessage(),Toast.LENGTH_LONG).show();
                 }
+            }else{
+                Toast.makeText(getApplicationContext(),"Null Response: Check Network and try again!!",Toast.LENGTH_LONG).show();
             }
         }
     }

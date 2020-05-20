@@ -122,7 +122,7 @@
 
             <EditText
                 android:layout_toRightOf="@+id/ll_divider"
-                android:id="@+id/email"
+                android:id="@+id/et_reg_no"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/textboxshape2"
@@ -163,7 +163,7 @@
 
             <EditText
                 android:layout_toRightOf="@+id/ll_divider_pass"
-                android:id="@+id/password"
+                android:id="@+id/et_otp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/textboxshape2"
@@ -189,7 +189,7 @@
             android:textSize="17sp" />
          <Button
             android:layout_gravity="center"
-            android:id="@+id/email_sign_in_button2"
+            android:id="@+id/btn_login"
             android:layout_width="150dp"
             android:layout_height="36dp"
             android:layout_marginTop="20dp"
