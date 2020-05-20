@@ -3,17 +3,20 @@ package com.bih.nic.aadhar1;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.bih.nic.aadhar1.DataBaseHelper.DataBaseHelper;
+import com.bih.nic.aadhar1.Model.DefaultResponse;
 import com.bih.nic.aadhar1.Model.UserDetails;
 
 public class RequestOtpActivity extends Activity {
@@ -32,13 +35,13 @@ public class RequestOtpActivity extends Activity {
 
     private void initialization() {
         et_reg_no = (EditText) findViewById(R.id.et_reg_no);
-        et_mobile = (EditText) findViewById(R.id.et_otp);
+        et_mobile = (EditText) findViewById(R.id.et_mobile);
     }
 
     public void onRequestOtp(View view){
         if(isValidInput()){
             if(Utiilties.isOnline(getApplicationContext())) {
-                //new requestOtp(et_reg_no.getText().toString(),et_mobile.getText().toString()).execute();
+                new requestOtp().execute();
             }else {
                 Utiilties.internetNotAvailableDialog(RequestOtpActivity.this);
             }
@@ -69,69 +72,99 @@ public class RequestOtpActivity extends Activity {
         return validate;
     }
 
-//    private class requestOtp extends AsyncTask<String, Void, UserDetails> {
-//
-//        private final ProgressDialog dialog = new ProgressDialog(Login.this);
-//
-//        private final AlertDialog alertDialog = new AlertDialog.Builder(
-//                Login.this).create();
-//
-//        String regN0,otp;
-//
-//        public LoginTask(String regN0, String otp) {
-//            this.regN0 = regN0;
-//            this.otp = otp;
-//        }
-//
-//        @Override
-//        protected void onPreExecute() {
-//
-//            this.dialog.setCanceledOnTouchOutside(false);
-//            this.dialog.setMessage(getResources().getString(R.string.authenticating));
-//            this.dialog.show();
-//        }
-//
-//        @Override
-//        protected UserDetails doInBackground(String... param) {
-//
-////            if (!Utiilties.isOnline(Login.this)) {
-////                UserDetails userDetails = new UserDetails();
-////                userDetails.setAuthenticated(true);
-////                return userDetails;
-////
-////            } else {
-//            return WebserviceHelper.loginUser(regN0,otp);
-//            //}
-//
-//        }
-//
-//        @Override
-//        protected void onPostExecute( UserDetails result) {
-//
-//            if (this.dialog.isShowing()) this.dialog.dismiss();
-//
-//            if(result!=null) {
-//                if(result.isAuthenticated()) {
-//                    result.set_Passwoed(et_otp.getText().toString());
-//                    DataBaseHelper dataBaseHelper = new DataBaseHelper(getApplicationContext());
-//                    dataBaseHelper.insertUserDetails(result,str_email);
-//
-//                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("UserId",et_reg_no.getText().toString()).commit();
-//                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("Password",et_otp.getText().toString()).commit();
-//                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("UserName",result.getUserName()).commit();
-//                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("Mobile",result.getMobileNo()).commit();
-//                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("Age",result.getAge()).commit();
-//
-//                    Intent intent=new Intent(Login.this,MainHomeActivity.class);
-//                    startActivity(intent);
-//                    finish();
-//
-//                }else {
-//                    Toast.makeText(getApplicationContext(),result.getMessage(),Toast.LENGTH_LONG).show();
-//                }
-//            }else{
-//                Toast.makeText(getApplicationContext(),"Null Response: Check Network and try again!!",Toast.LENGTH_LONG).show();
-//            }
-//        }
-//    }
+
+    private class requestOtp extends AsyncTask<String, Void, DefaultResponse> {
+        DefaultResponse data;
+        String _uid;
+        private final ProgressDialog dialog = new ProgressDialog(RequestOtpActivity.this);
+        private final AlertDialog alertDialog = new AlertDialog.Builder(RequestOtpActivity.this).create();
+
+
+        @Override
+        protected void onPreExecute() {
+
+            this.dialog.setCanceledOnTouchOutside(false);
+            this.dialog.setMessage("UpLoading...");
+            if (!RequestOtpActivity.this.isFinishing()) {
+                this.dialog.show();
+            }
+        }
+
+        @Override
+        protected DefaultResponse doInBackground(String... param) {
+
+            return WebserviceHelper.RequestOTP(et_reg_no.getText().toString(),et_mobile.getText().toString());
+
+        }
+
+        @Override
+        protected void onPostExecute(DefaultResponse result) {
+            if (this.dialog.isShowing()) {
+                this.dialog.dismiss();
+            }
+            Log.d("Responsevalue", "" + result);
+            if (result != null) {
+
+
+
+                if (result.getStatus()==true) {
+
+                    AlertDialog.Builder ab = new AlertDialog.Builder(RequestOtpActivity.this);
+                    ab.setCancelable(false);
+                    ab.setTitle("OTP SENT");
+                    //ab.setIcon(R.drawable.labour1);
+                    ab.setMessage(result.getMessage());
+                    ab.setPositiveButton("[OK]", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            Intent intent = new Intent(getBaseContext(),Login.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                            //setFinishOnTouchOutside(false);
+                            finish();
+                            dialog.dismiss();
+                        }
+                    });
+
+                    ab.create().getWindow().getAttributes().windowAnimations = R.style.alert_animation;
+                    ab.show();
+
+
+                }
+                else  if (result.getStatus()==false){
+                    // Toast.makeText(getApplicationContext(), "Uploading data failed ", Toast.LENGTH_SHORT).show();
+
+
+                    AlertDialog.Builder ab = new AlertDialog.Builder(RequestOtpActivity.this);
+                    ab.setCancelable(false);
+                    ab.setTitle("Failed");
+                    //  ab.setIcon(R.drawable.labour1);
+                    ab.setMessage(result.getMessage());
+                    ab.setPositiveButton("[OK]", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            Intent intent = new Intent(getBaseContext(),Login.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                            //setFinishOnTouchOutside(false);
+                            finish();
+                            dialog.dismiss();
+                        }
+                    });
+
+                    ab.create().getWindow().getAttributes().windowAnimations = R.style.alert_animation;
+                    ab.show();
+
+
+
+                }
+
+            } else {
+                //chk_msg_OK_networkdata("Uploading failed.Please Try Again Later");
+                Toast.makeText(getApplicationContext(), "Result Null..Please Try Later", Toast.LENGTH_SHORT).show();
+            }
+
+        }
+    }
+
 }

@@ -44,6 +44,7 @@ public class WebserviceHelper implements KvmSerializable {
     private static final String GETAADHAARUSERDETAIL="getAadharUserDetail";
     private static final String UploadDataForMobNo_chng="VerifyDetail";
     private static final String UpdateMobile="updateUserMob";
+    private static final String Reques_tOTP="ResendVerifyOtp";
     // private static final String SEARCADAARBYID="getAadharbyid";
 
     private static final String UpdateAadhar_Status="UpdateAadhar_Status";
@@ -675,6 +676,40 @@ public class WebserviceHelper implements KvmSerializable {
             envelope.addMapping(SERVICENAMESPACE, DefaultResponse.DefaultResponse_CLASS.getSimpleName(), DefaultResponse.DefaultResponse_CLASS);
             HttpTransportSE androidHttpTransport = new HttpTransportSE(SERVICEURL);
             androidHttpTransport.call(SERVICENAMESPACE + UpdateMobile, envelope);
+
+            res1 = (SoapObject) envelope.getResponse();
+
+            int TotalProperty = res1.getPropertyCount();
+
+            userDetails = new DefaultResponse(res1);
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return userDetails;
+
+    }
+
+    public static DefaultResponse RequestOTP(String regno, String newmobile)
+    {
+
+        SoapObject request = new SoapObject(SERVICENAMESPACE, Reques_tOTP);
+
+        request.addProperty("_registrationNo",regno);
+        request.addProperty("_MobileNo", newmobile);
+
+        DefaultResponse userDetails;
+        SoapObject res1;
+        try {
+
+            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+            envelope.dotNet = true;
+            envelope.setOutputSoapObject(request);
+            envelope.addMapping(SERVICENAMESPACE, DefaultResponse.DefaultResponse_CLASS.getSimpleName(), DefaultResponse.DefaultResponse_CLASS);
+            HttpTransportSE androidHttpTransport = new HttpTransportSE(SERVICEURL);
+            androidHttpTransport.call(SERVICENAMESPACE + Reques_tOTP, envelope);
 
             res1 = (SoapObject) envelope.getResponse();
 
