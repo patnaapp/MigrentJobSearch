@@ -69,7 +69,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".RequestOtpActivity"></activity>
+        <activity android:name=".ChangeMobileNumberActivity"></activity>
+        <activity android:name=".RequestOtpActivity" />
         <activity android:name=".MainHomeActivity" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".VerifyAadhaar1" />

@@ -98,6 +98,17 @@ public class Login extends Activity {
         info=(TextView)findViewById(R.id.info);
         BlinkTextView(info);
     }
+
+    public void onRequestOtp(View view){
+        Intent intent = new Intent(this, RequestOtpActivity.class);
+        startActivity(intent);
+    }
+
+    public void onChangeMobileNo(View view){
+        Intent intent = new Intent(this, ChangeMobileNumberActivity.class);
+        startActivity(intent);
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
