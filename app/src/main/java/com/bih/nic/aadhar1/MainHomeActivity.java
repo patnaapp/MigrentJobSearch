@@ -11,9 +11,9 @@ public class MainHomeActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_home);
-
+        getActionBar().hide();
       //  Utiilties.setActionBarBackground(MainHomeActivity.this);
-      //  Utiilties.setStatusBarColor(MainHomeActivity.this);
+        Utiilties.setStatusBarColor(MainHomeActivity.this);
        // ActionBar actionBar = getActionBar();
        // actionBar.setTitle("Physical Verification");
     }
