@@ -22,7 +22,7 @@ public class ProfileActivity extends Activity {
         getActionBar().hide();
         Utiilties.setStatusBarColor(this);
         tv_user_name=(TextView)findViewById(R.id.tv_user_name);
-        tv_mobile=(TextView)findViewById(R.id.tv_user_name);
+        tv_mobile=(TextView)findViewById(R.id.tv_mobile);
         et_reg_num =(EditText) findViewById(R.id.et_reg_num);
 
         benDetails = new BenDetails();
