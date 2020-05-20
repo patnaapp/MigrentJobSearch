@@ -183,6 +183,7 @@ public class Login extends Activity {
                     PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("Mobile",result.getMobileNo()).commit();
                     PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("Age",result.getAge()).commit();
 
+
                     Intent intent=new Intent(Login.this,MainHomeActivity.class);
                     startActivity(intent);
                     finish();

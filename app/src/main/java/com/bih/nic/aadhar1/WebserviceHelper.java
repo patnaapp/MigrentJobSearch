@@ -3,6 +3,7 @@ package com.bih.nic.aadhar1;
 import android.content.Context;
 import android.util.Log;
 
+import com.bih.nic.aadhar1.Model.BenDetails;
 import com.bih.nic.aadhar1.Model.BlockWeb;
 import com.bih.nic.aadhar1.Model.DefaultResponse;
 import com.bih.nic.aadhar1.Model.District;
@@ -43,6 +44,7 @@ public class WebserviceHelper implements KvmSerializable {
     private static final String SEARCHGLOBAL="getAadharbyid";
     private static final String GETAADHAARUSERDETAIL="getAadharUserDetail";
     private static final String UploadDataForMobNo_chng="VerifyDetail";
+    private static final String GET_BEN_DETAILS="getuserDetails";
     private static final String UpdateMobile="updateUserMob";
     private static final String Reques_tOTP="ResendVerifyOtp";
     // private static final String SEARCADAARBYID="getAadharbyid";
@@ -647,6 +649,39 @@ public class WebserviceHelper implements KvmSerializable {
             int TotalProperty = res1.getPropertyCount();
 
             userDetails = new DefaultResponse(res1);
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return userDetails;
+
+    }
+
+    public static BenDetails getBen_Details(String regno)
+    {
+
+        SoapObject request = new SoapObject(SERVICENAMESPACE, GET_BEN_DETAILS);
+
+        request.addProperty("RegistrationNo",regno);
+
+        BenDetails userDetails;
+        SoapObject res1;
+        try {
+
+            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+            envelope.dotNet = true;
+            envelope.setOutputSoapObject(request);
+            envelope.addMapping(SERVICENAMESPACE, BenDetails.USER_CLASS.getSimpleName(), BenDetails.USER_CLASS);
+            HttpTransportSE androidHttpTransport = new HttpTransportSE(SERVICEURL);
+            androidHttpTransport.call(SERVICENAMESPACE + GET_BEN_DETAILS, envelope);
+
+            res1 = (SoapObject) envelope.getResponse();
+
+            int TotalProperty = res1.getPropertyCount();
+
+            userDetails = new BenDetails(res1);
 
         }
         catch (Exception e) {

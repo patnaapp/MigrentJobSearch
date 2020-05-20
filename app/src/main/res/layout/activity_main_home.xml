@@ -262,7 +262,6 @@
 
                         <LinearLayout
                             android:layout_marginRight="20dp"
-                            android:onClick="onTrackGrievance"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -270,7 +269,7 @@
                             android:padding="5dp"
                             android:gravity="center"
                             android:background="@drawable/boxouterlayer"
-                            android:id="@+id/ll_track_Grievance">
+                            android:id="@+id/ll_profile">
 
                             <ImageView
                                 android:layout_width="50dp"

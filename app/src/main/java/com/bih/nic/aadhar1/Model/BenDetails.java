@@ -4,10 +4,11 @@ import org.ksoap2.serialization.KvmSerializable;
 import org.ksoap2.serialization.PropertyInfo;
 import org.ksoap2.serialization.SoapObject;
 
+import java.io.Serializable;
 import java.util.Hashtable;
 
-public class BenDetails implements KvmSerializable {
-    private static Class<BenDetails> USER_CLASS = BenDetails.class;
+public class BenDetails implements KvmSerializable, Serializable {
+    public static Class<BenDetails> USER_CLASS = BenDetails.class;
     private String Password="";
     private String DistrictCode="";
     private String DistrictName="";

@@ -69,7 +69,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".RequestOtpActivity"></activity>
+        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".RequestOtpActivity" />
         <activity android:name=".MainHomeActivity" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".VerifyAadhaar1" />
@@ -98,7 +99,7 @@
         <activity android:name=".MultiplePhotoActivity" />
         <activity android:name=".ChangeMobileNumberActivity" />
         <activity android:name=".CameraActivity" />
-        <activity android:name=".UpdateMobileNumberActivity"/>
+        <activity android:name=".UpdateMobileNumberActivity" />
 
         <uses-library
             android:name="org.apache.http.legacy"
