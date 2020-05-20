@@ -1,14 +1,25 @@
 package com.bih.nic.aadhar1;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
+
+import com.bih.nic.aadhar1.Model.DefaultResponse;
 
 import java.util.ArrayList;
 
@@ -20,6 +31,9 @@ public class ChangeMobileNumberActivity extends Activity {
     String Gender_Name="",Gender_Code="";
     ArrayAdapter ben_type_aangan_aaray;
     ArrayList<String> statusOfEncroachmentArray;
+    String _ben_reg_no="",_ben_aadhar_no="",_ben_Name="";
+    private boolean validAadhaar;
+    Button email_sign_in_button2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,14 +55,14 @@ public class ChangeMobileNumberActivity extends Activity {
 
                     if (Gender_Name.equals("पुरुष")) {
 
-                        Gender_Code = "M";
+                        Gender_Code = "1";
                     } else if (Gender_Name.equals("महिला")) {
 
-                        Gender_Code = "F";
+                        Gender_Code = "2";
                     }
                     else if (Gender_Name.equals("अन्य")) {
 
-                        Gender_Code = "T";
+                        Gender_Code = "3";
                     }
 
                 }
@@ -62,6 +76,13 @@ public class ChangeMobileNumberActivity extends Activity {
             }
 
         });
+
+        email_sign_in_button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                registration();
+            }
+        });
     }
 
 
@@ -70,9 +91,162 @@ public class ChangeMobileNumberActivity extends Activity {
         reg_no=findViewById(R.id.reg_no);
         et_aadhar_No=findViewById(R.id.et_aadhar_No);
         et_ben_Name=findViewById(R.id.et_ben_Name);
+        email_sign_in_button2=findViewById(R.id.email_sign_in_button2);
         spin_gender=findViewById(R.id.spin_gender);
         ben_type_aangan_aaray = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, ben_type_aangan);
         spin_gender.setAdapter(ben_type_aangan_aaray);
+    }
+
+
+    public void registration() {
+        //Toast.makeText(this, "Register", Toast.LENGTH_SHORT).show();
+        _ben_reg_no = reg_no.getText().toString();
+        _ben_aadhar_no = et_aadhar_No.getText().toString();
+        _ben_Name = et_ben_Name.getText().toString();
+
+        boolean cancelRegistration = false;
+        String isValied = "yes";
+        View focusView = null;
+
+        if (TextUtils.isEmpty(_ben_reg_no)) {
+            reg_no.setError("कृपया लाभार्थी का पंजीकरण संख्या डाले |");
+            focusView = reg_no;
+            cancelRegistration = true;
+        }
+        if (TextUtils.isEmpty(_ben_aadhar_no)) {
+            et_aadhar_No.setError("कृपया आधार नंबर डाले |");
+            focusView = et_aadhar_No;
+            cancelRegistration = true;
+        }
+
+        if (TextUtils.isEmpty(Gender_Code)) {
+            Toast.makeText(getApplicationContext(), "कृपया लाभार्थी अपना लिंग का चयन करे |", Toast.LENGTH_LONG).show();
+            //sp_panchayat.setError("कृपया पंचायत का नाम का चयन करे |");
+            focusView = spin_gender;
+            cancelRegistration = true;
+        }
+
+        if (TextUtils.isEmpty(_ben_Name)) {
+            et_ben_Name.setError("कृपया पिता /पति का नाम डाले |");
+            focusView = et_ben_Name;
+            cancelRegistration = true;
+        }
+
+        if(!validAadhaar){
+            if(!Verhoeff.validateVerhoeff(_ben_aadhar_no)){
+                et_aadhar_No.setError("कृपया आधार नंबर सही डाले |");
+                focusView = et_aadhar_No;
+                cancelRegistration = true;
+            }
+        }
+        if (cancelRegistration) {
+            // error in login
+            focusView.requestFocus();
+        } else {
+
+            if (!GlobalVariables.isOffline && !Utiilties.isOnline(this)) {
+
+                AlertDialog.Builder ab = new AlertDialog.Builder(this);
+                ab.setMessage(Html.fromHtml(
+                        "<font color=#000000>Internet Connection is not avaliable..Please Turn ON Network Connection </font>"));
+                ab.setPositiveButton("Turn On Network Connection", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        Intent I = new Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS);
+                        startActivity(I);
+                    }
+                });
+
+                ab.create().getWindow().getAttributes().windowAnimations = R.style.alert_animation;
+                ab.show();
+
+            }else{
+                new UPLOADDATA().execute();
+                //new ValidateAdhhar(benfiList).execute();
+            }
+
+        }
+    }
+
+
+    private class UPLOADDATA extends AsyncTask<String, Void, DefaultResponse> {
+        DefaultResponse data;
+        String _uid;
+        private final ProgressDialog dialog = new ProgressDialog(ChangeMobileNumberActivity.this);
+        private final android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(ChangeMobileNumberActivity.this).create();
+
+//
+//        UPLOADDATA(BarcodeEntity data) {
+//            this.data = data;
+//            this._uid = data.getUniqueNo();
+//
+//        }
+
+        @Override
+        protected void onPreExecute() {
+
+            this.dialog.setCanceledOnTouchOutside(false);
+            this.dialog.setMessage("UpLoading...");
+            if (!ChangeMobileNumberActivity.this.isFinishing()) {
+                this.dialog.show();
+            }
+        }
+
+        @Override
+        protected DefaultResponse doInBackground(String... param) {
+
+//
+//            String res = WebServiceHelper.UploadFinalData(data, PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("USERID", ""));
+//            return res;
+
+            return WebserviceHelper.UploadFinalData(_ben_reg_no,_ben_aadhar_no,_ben_Name,Gender_Code);
+
+        }
+
+        @Override
+        protected void onPostExecute(DefaultResponse result) {
+            if (this.dialog.isShowing()) {
+                this.dialog.dismiss();
+            }
+            Log.d("Responsevalue", "" + result);
+            if (result != null) {
+
+
+                //   if (result.getStatus().equals("true")) {
+                if (result.getStatus()==true) {
+
+                    Intent i=new Intent(ChangeMobileNumberActivity.this,UpdateMobileNumberActivity.class);
+                    i.putExtra("Reg_No", _ben_reg_no);
+                    i.putExtra("Migrant_Name", _ben_Name);
+                    startActivity(i);
+
+                }
+                // else  if (result.getStatus().equals("false")){
+                else  if (result.getStatus()==false){
+                    AlertDialog.Builder ab = new AlertDialog.Builder(ChangeMobileNumberActivity.this);
+                    ab.setCancelable(false);
+                    ab.setTitle("Failed");
+                   // ab.setIcon(R.drawable.labour1);
+                    ab.setMessage(result.getMessage());
+                    ab.setPositiveButton("[OK]", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    ab.create().getWindow().getAttributes().windowAnimations = R.style.alert_animation;
+                    ab.show();
+
+
+                }
+
+            } else {
+                //chk_msg_OK_networkdata("Uploading failed.Please Try Again Later");
+                Toast.makeText(getApplicationContext(), "Result Null..Please Try Later", Toast.LENGTH_SHORT).show();
+            }
+
+        }
     }
 
 }

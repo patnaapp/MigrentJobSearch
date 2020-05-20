@@ -8,7 +8,7 @@ import java.util.Hashtable;
 
 public class DefaultResponse implements KvmSerializable {
 
-    private static Class<DefaultResponse> DefaultResponse_CLASS = DefaultResponse.class;
+    public static Class<DefaultResponse> DefaultResponse_CLASS = DefaultResponse.class;
 
     private Boolean Status=false;
     private String Message="";

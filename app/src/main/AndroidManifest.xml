@@ -98,7 +98,7 @@
         <activity android:name=".MultiplePhotoActivity" />
         <activity android:name=".ChangeMobileNumberActivity" />
         <activity android:name=".CameraActivity" />
-        <activity android:name=".ChangeMobileNumberActivity"/>
+        <activity android:name=".UpdateMobileNumberActivity"/>
 
         <uses-library
             android:name="org.apache.http.legacy"

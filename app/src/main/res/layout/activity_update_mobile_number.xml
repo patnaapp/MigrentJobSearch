@@ -72,7 +72,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="मोबाइल संख्या बदलने हेतु कृपया अपना रेजिस्ट्रेशन विवरण डालें"
+                android:text="कृपया नया मोबाइल नंबर डाले"
                 android:layout_below="@id/iv_logo1"
                 android:id="@+id/tv_desc"
                 android:layout_margin="20dp"
@@ -103,47 +103,19 @@
 
                     <EditText
                         android:layout_marginTop="4dp"
-                        android:id="@+id/reg_no"
+                        android:id="@+id/edt_reg_no"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/textboxshape"
                         android:hint="रेजिस्ट्रेशन संख्या डालें"
                         android:padding="10dp"
                         android:singleLine="true"
-                        android:inputType="number"
                         android:textColor="#222222"
                         android:focusableInTouchMode="true"
                         android:textSize="15sp" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_marginTop="16dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="आधार संख्या"
-                        android:textColor="@color/black_overlay"
-                        android:textSize="12sp"/>
-
-                    <EditText
-                        android:layout_marginTop="4dp"
-                        android:id="@+id/et_aadhar_No"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/textboxshape"
-                        android:hint="आधार संख्या डालें"
-                        android:padding="10dp"
-                        android:inputType="number"
-                        android:maxLength="12"
-                        android:singleLine="true"
-                        android:textColor="#222222"
-                        android:focusableInTouchMode="true"
-                        android:textSize="15sp" />
-                </LinearLayout>
 
                 <LinearLayout
                     android:layout_marginTop="16dp"
@@ -160,14 +132,42 @@
 
                     <EditText
                         android:layout_marginTop="4dp"
-                        android:id="@+id/et_ben_Name"
+                        android:id="@+id/et_ben_Nameas_aadhar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/textboxshape"
                         android:hint="लाभार्थी का नाम आधार के अनुसार"
                         android:padding="10dp"
-                        android:inputType="textCapCharacters"
-                        android:maxLength="70"
+                        android:inputType="text"
+                        android:maxLength="60"
+                        android:singleLine="true"
+                        android:textColor="#222222"
+                        android:focusableInTouchMode="true"
+                        android:textSize="15sp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginTop="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="नया मोबाइल नंबर"
+                        android:textColor="@color/black_overlay"
+                        android:textSize="12sp"/>
+
+                    <EditText
+                        android:layout_marginTop="4dp"
+                        android:id="@+id/et_mobile_No"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/textboxshape"
+                        android:hint="कृपया मोबाइल नंबर डालें"
+                        android:padding="10dp"
+                        android:inputType="number"
+                        android:maxLength="10"
                         android:singleLine="true"
                         android:textColor="#222222"
                         android:focusableInTouchMode="true"
@@ -183,23 +183,24 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="लिंग"
+                        android:text="कन्फर्म मोबाइल नंबर"
                         android:textColor="@color/black_overlay"
                         android:textSize="12sp"/>
 
-                    <Spinner
-
-                        android:clickable="false"
-                        android:id="@+id/spin_gender"
-                        android:layout_width="fill_parent"
-                        android:layout_height="42sp"
-
-
-                        android:background="@drawable/spinner_bg"
-
+                    <EditText
+                        android:layout_marginTop="4dp"
+                        android:id="@+id/et_mobile_No_cnfrm"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/textboxshape"
+                        android:hint="कृपया मोबाइल नंबर फिर से डालें"
+                        android:padding="10dp"
+                        android:inputType="numberPassword"
+                        android:maxLength="10"
+                        android:singleLine="true"
                         android:textColor="#222222"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
+                        android:focusableInTouchMode="true"
+                        android:textSize="15sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -233,12 +234,12 @@
                 </LinearLayout>
                 <Button
                     android:layout_gravity="center"
-                    android:id="@+id/email_sign_in_button2"
+                    android:id="@+id/btn_update_mobile"
                     android:layout_width="150dp"
                     android:layout_height="36dp"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/buttonshape"
-                    android:text="    सत्यापित करेंं    "
+                    android:text="    अपडेट करेंं    "
                     android:textColor="#ffff"
                     android:textSize="17sp" />
 
