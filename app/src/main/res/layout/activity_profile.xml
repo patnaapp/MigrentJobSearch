@@ -71,10 +71,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="15sp"
-                            android:text="District (जिला)"/>
+                            android:text="Registration Number"/>
 
-                        <TextView
-                            android:id="@+id/tv_district"
+                        <EditText
+                            android:id="@+id/et_reg_num"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"

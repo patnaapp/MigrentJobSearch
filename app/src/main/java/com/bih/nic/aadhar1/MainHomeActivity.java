@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ import com.bih.nic.aadhar1.Model.DefaultResponse;
 public class MainHomeActivity extends Activity {
     LinearLayout ll_profile;
     String Reg_No="";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
