@@ -96,6 +96,7 @@
         <activity android:name=".ChooseCenter" />
         <activity android:name=".VerifyAadhaar" />
         <activity android:name=".MultiplePhotoActivity" />
+        <activity android:name=".ChangeMobileNumberActivity" />
         <activity android:name=".CameraActivity" />
         <activity android:name=".ChangeMobileNumberActivity"/>
 

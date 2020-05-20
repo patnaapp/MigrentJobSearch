@@ -130,14 +130,14 @@
 
                     <EditText
                         android:layout_marginTop="4dp"
-                        android:id="@+id/et_mobile"
+                        android:id="@+id/et_aadhar_No"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/textboxshape"
                         android:hint="आधार संख्या डालें"
                         android:padding="10dp"
                         android:inputType="number"
-                        android:maxLength="10"
+                        android:maxLength="12"
                         android:singleLine="true"
                         android:textColor="#222222"
                         android:focusableInTouchMode="true"
@@ -159,13 +159,13 @@
 
                     <EditText
                         android:layout_marginTop="4dp"
-                        android:id="@+id/et_mobile"
+                        android:id="@+id/et_ben_Name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/textboxshape"
-                        android:hint="आधार संख्या डालें"
+                        android:hint="लाभार्थी का नाम आधार के अनुसार"
                         android:padding="10dp"
-                        android:inputType="number"
+                        android:inputType="text"
                         android:maxLength="10"
                         android:singleLine="true"
                         android:textColor="#222222"
@@ -186,26 +186,26 @@
                         android:textColor="@color/black_overlay"
                         android:textSize="12sp"/>
 
-                    <EditText
-                        android:layout_marginTop="4dp"
-                        android:id="@+id/et_mobile"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/textboxshape"
-                        android:hint="आधार संख्या डालें"
-                        android:padding="10dp"
-                        android:inputType="number"
-                        android:maxLength="10"
-                        android:singleLine="true"
+                    <Spinner
+
+                        android:clickable="false"
+                        android:id="@+id/spin_gender"
+                        android:layout_width="fill_parent"
+                        android:layout_height="42sp"
+
+
+                        android:background="@drawable/spinner_bg"
+
                         android:textColor="#222222"
-                        android:focusableInTouchMode="true"
-                        android:textSize="15sp" />
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_marginTop="16dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:orientation="vertical">
 
                     <TextView

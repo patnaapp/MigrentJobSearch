@@ -9,7 +9,7 @@
     <string name="enter_password">Enter password</string>
     <string name="appTitle">श्रम शाधन</string>
     <string name="authenticating">प्रमाणित हों रहा हैं</string>
-
+    <string name="select_spinner_hint"> चयन करें</string>
     <string name="action_settings">action_settings</string>
     <string name="action_example">action_example</string>
     <string name="navigation_drawer_open">आँगन</string>
