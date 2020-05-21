@@ -69,7 +69,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".ModifyDocumentActivity"></activity>
+        <activity android:name=".ProfileActivity" />
         <activity android:name=".RequestOtpActivity" />
         <activity android:name=".MainHomeActivity" />
         <activity android:name=".HomeActivity" />

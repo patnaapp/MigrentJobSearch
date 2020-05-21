@@ -22,27 +22,32 @@ import android.widget.Toast;
 import com.bih.nic.aadhar1.Model.BenDetails;
 import com.bih.nic.aadhar1.Model.DefaultResponse;
 
+import java.util.ArrayList;
+
 public class MainHomeActivity extends Activity {
-    LinearLayout ll_profile;
+    LinearLayout ll_profile,ll_register_Grivance;
     String Reg_No="",user_name="";
     TextView tv_benname,urole;
 
-
+   BenDetails BenDetails;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_home);
         getActionBar().hide();
-      //  Utiilties.setActionBarBackground(MainHomeActivity.this);
+
+        BenDetails=new BenDetails();
         Utiilties.setStatusBarColor(MainHomeActivity.this);
         Reg_No=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserId", "");
         user_name=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserName", "");
 
         ll_profile=(LinearLayout)findViewById(R.id.ll_profile);
+        ll_register_Grivance=(LinearLayout)findViewById(R.id.ll_register_Grivance);
         tv_benname=(TextView) findViewById(R.id.tv_benname);
         urole=(TextView) findViewById(R.id.urole);
         tv_benname.setText(user_name);
         urole.setText(Reg_No);
+        new FetchBenData().execute();
         ll_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,7 +68,39 @@ public class MainHomeActivity extends Activity {
                     ab.show();
 
                 }else{
-                    new FetchBenData().execute();
+                    Intent i =new Intent(MainHomeActivity.this,ProfileActivity.class);
+                    i.putExtra("data",BenDetails);
+                    startActivity(i);
+
+                    //new ValidateAdhhar(benfiList).execute();
+                }
+
+            }
+        });
+        ll_register_Grivance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!GlobalVariables.isOffline && !Utiilties.isOnline(MainHomeActivity.this)) {
+
+                    AlertDialog.Builder ab = new AlertDialog.Builder(MainHomeActivity.this);
+                    ab.setMessage(Html.fromHtml(
+                            "<font color=#000000>Internet Connection is not avaliable..Please Turn ON Network Connection </font>"));
+                    ab.setPositiveButton("Turn On Network Connection", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            Intent I = new Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS);
+                            startActivity(I);
+                        }
+                    });
+
+                    ab.create().getWindow().getAttributes().windowAnimations = R.style.alert_animation;
+                    ab.show();
+
+                }else{
+                    Intent i =new Intent(MainHomeActivity.this,ModifyDocumentActivity.class);
+                    i.putExtra("data",BenDetails);
+                    startActivity(i);
+
                     //new ValidateAdhhar(benfiList).execute();
                 }
 
@@ -115,10 +152,7 @@ public class MainHomeActivity extends Activity {
             }
             Log.d("Responsevalue", "" + result);
             if (result != null) {
-
-             Intent i =new Intent(MainHomeActivity.this,ProfileActivity.class);
-             i.putExtra("data",result);
-             startActivity(i);
+                BenDetails=result;
 
             } else {
                 //chk_msg_OK_networkdata("Uploading failed.Please Try Again Later");
