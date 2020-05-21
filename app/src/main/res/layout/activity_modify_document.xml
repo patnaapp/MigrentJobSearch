@@ -55,16 +55,16 @@
                         android:textStyle="bold" />
 
                     <Spinner
-                        android:layout_margin="10dp"
-                        android:background="@drawable/spinner_bg"
+                        android:id="@+id/spn_dist_name"
                         style="@style/spinner"
-                        android:id="@+id/spn_st_sch_build"
                         android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_height="45dp"
+                        android:layout_margin="10dp"
                         android:layout_marginStart="10dp"
-                        android:paddingBottom="0dp"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/spinner_bg"
                         android:paddingTop="0dp"
+                        android:paddingBottom="0dp"
                         android:textColor="#222222"
                         android:textSize="14sp"
                         android:textStyle="bold" />
@@ -98,9 +98,9 @@
 
                         android:background="@drawable/spinner_bg"
                         style="@style/spinner"
-                        android:id="@+id/spn_type_of_construction"
+                        android:id="@+id/spn_block_name"
                         android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="45dp"
 
 
                         android:layout_marginLeft="10dp"
@@ -142,9 +142,9 @@
                     <Spinner
                         android:background="@drawable/spinner_bg"
                         style="@style/spinner"
-                        android:id="@+id/spn_condion_Buid"
+                        android:id="@+id/spn_panch_name"
                         android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="45dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginStart="10dp"
                         android:paddingBottom="0dp"
@@ -415,7 +415,7 @@
                         />
                     <EditText
                         android:inputType="number"
-                        android:id="@+id/edt_cctv_camera_no"
+                        android:id="@+id/edt_mobileno"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:layout_marginLeft="10dp"
@@ -446,7 +446,7 @@
 
                     <EditText
                         android:inputType="number"
-                        android:id="@+id/edt_no_totalclassroom"
+                        android:id="@+id/edt_ac_no"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:layout_marginLeft="10dp"
@@ -475,7 +475,7 @@
 
                     <EditText
                         android:inputType="number"
-                        android:id="@+id/edt_no_classneedofrepair"
+                        android:id="@+id/edt_ac_name"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:layout_marginLeft="10dp"
@@ -504,7 +504,7 @@
 
                     <EditText
                         android:inputType="number"
-                        android:id="@+id/edt_no_noneofrepair"
+                        android:id="@+id/edt_ifsc_code"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:layout_marginLeft="10dp"
@@ -574,18 +574,98 @@
 
                         />
 
-                    <EditText
-                        android:inputType="number"
-                        android:id="@+id/edt_classroom_construction"
-                        android:layout_width="match_parent"
+
+                    <Spinner
+                        android:background="@drawable/spinner_bg"
+                        style="@style/spinner"
+                        android:id="@+id/spn_category"
+                        android:layout_width="fill_parent"
                         android:layout_height="45dp"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginTop="2dp"
-                        android:background="@drawable/edittext_box" />
+                        android:layout_marginStart="10dp"
+                        android:paddingBottom="0dp"
+                        android:paddingTop="0dp"
+                        android:textColor="#222222"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/lin_no_otherroom"
+
+                    android:id="@+id/lin_skill"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+
+                    android:clickable="false"
+                    android:orientation="vertical"
+                    android:paddingTop="0dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/tv_skill"
+                        android:layout_marginStart="10dp"
+                        android:text="शैक्षिक कौशल:-"
+                        android:textColor="#222222"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                    <Spinner
+                        android:background="@drawable/spinner_bg"
+                        style="@style/spinner"
+                        android:id="@+id/spn_skill"
+                        android:layout_width="fill_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
+                        android:paddingBottom="0dp"
+                        android:paddingTop="0dp"
+                        android:textColor="#222222"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+                <LinearLayout
+
+                    android:id="@+id/lin_sub_skill"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+
+                    android:clickable="false"
+                    android:orientation="vertical"
+                    android:paddingTop="0dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/tv_sub_skill"
+                        android:layout_marginStart="10dp"
+                        android:text="उप शैक्षिक कौशल-"
+                        android:textColor="#222222"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                    <Spinner
+                        android:background="@drawable/spinner_bg"
+                        style="@style/spinner"
+                        android:id="@+id/spn_sub_skill"
+                        android:layout_width="fill_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
+                        android:paddingBottom="0dp"
+                        android:paddingTop="0dp"
+                        android:textColor="#222222"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+
+                    android:id="@+id/lin_type_of_worker"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -598,20 +678,25 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="10dp"
+                        android:id="@+id/tv_type_of_worker"
                         android:layout_marginStart="10dp"
-                        android:text="योग्यता :-"
+                        android:text="पेशे का नाम :-"
                         android:textColor="#222222"
                         android:textSize="16sp"
                         android:textStyle="bold" />
-
-                    <EditText
-                        android:inputType="number"
-                        android:id="@+id/edt_no_otherroom"
-                        android:layout_width="match_parent"
+                    <Spinner
+                        android:background="@drawable/spinner_bg"
+                        style="@style/spinner"
+                        android:id="@+id/spn_type_of_worker"
+                        android:layout_width="fill_parent"
                         android:layout_height="45dp"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginTop="2dp"
-                        android:background="@drawable/edittext_box" />
+                        android:layout_marginStart="10dp"
+                        android:paddingBottom="0dp"
+                        android:paddingTop="0dp"
+                        android:textColor="#222222"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
                 <LinearLayout
                     android:id="@+id/lin_no_adminroom"
@@ -635,7 +720,7 @@
 
                     <EditText
                         android:inputType="number"
-                        android:id="@+id/edt_used_for_admin"
+                        android:id="@+id/edt_exp_year"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:layout_marginLeft="10dp"
