@@ -73,7 +73,7 @@
                             android:textSize="15sp"
                             android:text="Registration Number"/>
 
-                        <EditText
+                        <TextView
                             android:id="@+id/et_reg_num"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -100,10 +100,39 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="15sp"
-                            android:text="Block (प्रखंड)"/>
+                            android:text="Age"/>
 
                         <TextView
-                            android:id="@+id/tv_block"
+                            android:id="@+id/tv_age"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:lines="1"
+                            android:text="New Text"
+                            android:textColor="#151B54"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="15sp"
+                            android:text="Address"/>
+
+                        <TextView
+                            android:id="@+id/tv_address"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
@@ -129,39 +158,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="15sp"
-                            android:text="Panchayat (पंचायत)"/>
+                            android:text="Experience In Years"/>
 
                         <TextView
-                            android:id="@+id/tv_panchayat"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:lines="1"
-                            android:textSize="13sp"
-                            android:textStyle="bold"
-                            android:text="New Text"
-                            android:textColor="#151B54" />
-                    </LinearLayout>
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="15sp"
-                            android:text="Father / Husband Name (पिता / पति का नाम)"/>
-
-                        <TextView
-                            android:id="@+id/tv_father"
+                            android:id="@+id/tv_experience"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
@@ -186,10 +186,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="11sp"
-                        android:text="Address (पता)"/>
+                        android:text="Qualification"/>
 
                     <TextView
-                        android:id="@+id/tv_address"
+                        android:id="@+id/tv_qualification"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"

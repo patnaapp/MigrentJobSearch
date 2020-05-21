@@ -11,8 +11,8 @@ import com.bih.nic.aadhar1.Model.BenDetails;
 public class ProfileActivity extends Activity {
 
     BenDetails benDetails;
-    TextView tv_user_name,tv_mobile;
-    EditText et_reg_num;
+    TextView tv_user_name,tv_mobile,tv_qualification,tv_age,tv_address,tv_experience,et_reg_num;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +23,11 @@ public class ProfileActivity extends Activity {
         Utiilties.setStatusBarColor(this);
         tv_user_name=(TextView)findViewById(R.id.tv_user_name);
         tv_mobile=(TextView)findViewById(R.id.tv_mobile);
-        et_reg_num =(EditText) findViewById(R.id.et_reg_num);
+        tv_qualification=(TextView)findViewById(R.id.tv_qualification);
+        tv_age=(TextView)findViewById(R.id.tv_age);
+        tv_address=(TextView)findViewById(R.id.tv_address);
+        tv_experience=(TextView)findViewById(R.id.tv_experience);
+        et_reg_num =(TextView) findViewById(R.id.et_reg_num);
 
         benDetails = new BenDetails();
         extractFrom_Data();
@@ -35,6 +39,11 @@ public class ProfileActivity extends Activity {
         tv_user_name.setText(benDetails.getVchName());
         tv_mobile.setText(benDetails.getVchMobile());
         et_reg_num.setText(benDetails.getVchRegNum());
+        tv_qualification.setText(benDetails.getIntQualification());
+        tv_age.setText(benDetails.getIntAge());
+        tv_age.setText(benDetails.getIntAge());
+        tv_address.setText(benDetails.getVchAddress());
+        tv_experience.setText(benDetails.getIntExpMonths());
 
     }
 }
