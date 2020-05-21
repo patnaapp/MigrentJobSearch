@@ -80,7 +80,7 @@
                             android:layout_weight="0.5"
                             android:text="  Detail of user for job search "
                             android:textColor="@android:color/white"
-                            android:textSize="14sp"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
                     </LinearLayout>
                 </LinearLayout>

@@ -25,7 +25,7 @@ import com.bih.nic.aadhar1.Model.DefaultResponse;
 public class MainHomeActivity extends Activity {
     LinearLayout ll_profile;
     String Reg_No="",user_name="";
-    TextView tv_benname;
+    TextView tv_benname,urole;
 
 
     @Override
@@ -40,7 +40,9 @@ public class MainHomeActivity extends Activity {
 
         ll_profile=(LinearLayout)findViewById(R.id.ll_profile);
         tv_benname=(TextView) findViewById(R.id.tv_benname);
+        urole=(TextView) findViewById(R.id.urole);
         tv_benname.setText(user_name);
+        urole.setText(Reg_No);
         ll_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
