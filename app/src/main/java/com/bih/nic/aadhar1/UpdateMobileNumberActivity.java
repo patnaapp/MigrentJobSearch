@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bih.nic.aadhar1.Model.DefaultResponse;
@@ -34,6 +35,7 @@ public class UpdateMobileNumberActivity extends Activity {
     private boolean validAadhaar;
     String regNo="",Name="";
     Button btn_update_mobile;
+    TextView tv_version;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,13 @@ public class UpdateMobileNumberActivity extends Activity {
         regNo=getIntent().getStringExtra("Reg_No");
         Name=getIntent().getStringExtra("Migrant_Name");
         Initialize();
+
+        String version = Utiilties.getAppVersion(this);
+        if(version != null){
+            tv_version.setText("ऐप वर्ज़न "+version);
+        }else{
+            tv_version.setText("");
+        }
 
         edt_reg_no.setEnabled(false);
         et_ben_Nameas_aadhar.setEnabled(false);
@@ -68,8 +77,7 @@ public class UpdateMobileNumberActivity extends Activity {
         et_mobile_No=findViewById(R.id.et_mobile_No);
         et_mobile_No_cnfrm=findViewById(R.id.et_mobile_No_cnfrm);
         btn_update_mobile=findViewById(R.id.btn_update_mobile);
-
-
+        tv_version=findViewById(R.id.tv_version);
     }
 
 

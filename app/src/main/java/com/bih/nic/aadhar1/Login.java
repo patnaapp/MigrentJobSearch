@@ -24,6 +24,8 @@ import com.bih.nic.aadhar1.DataBaseHelper.DataBaseHelper;
 import com.bih.nic.aadhar1.Model.UserDetails;
 import com.bih.nic.aadhar1.Model.panchayat;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class Login extends Activity {
@@ -32,7 +34,7 @@ public class Login extends Activity {
     EditText et_reg_no, et_otp;
     String str_email, str_pass;
     String[] param;
-    TextView text_signup;
+    TextView text_signup,tv_version;
     TelephonyManager tm;
     private static String imei;
     TextView info;
@@ -44,6 +46,14 @@ public class Login extends Activity {
 
         Utiilties.setStatusBarColor(Login.this);
         Initialization();
+
+        String version = Utiilties.getAppVersion(this);
+        if(version != null){
+            tv_version.setText("ऐप वर्ज़न "+version);
+        }else{
+            tv_version.setText("");
+        }
+
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,6 +102,8 @@ public class Login extends Activity {
         et_reg_no = (EditText) findViewById(R.id.et_reg_no);
         et_otp = (EditText) findViewById(R.id.et_otp);
         btn_login = (Button) findViewById(R.id.btn_login);
+
+        tv_version = (TextView) findViewById(R.id.tv_version);
     }
 
     public void onRequestOtp(View view){

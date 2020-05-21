@@ -171,6 +171,7 @@
                 android:hint="ओटीपी"
                 android:inputType="textPassword"
                 android:padding="10dp"
+                android:maxLength="4"
                 android:singleLine="true"
                 android:textColor="#222222"
                 android:focusableInTouchMode="true"
@@ -277,6 +278,7 @@
         android:layout_alignParentBottom="true"/>
 
     <TextView
+        android:id="@+id/tv_version"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ऐप वर्ज़न 1.0"

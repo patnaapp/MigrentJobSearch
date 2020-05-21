@@ -17,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bih.nic.aadhar1.Model.DefaultResponse;
@@ -34,6 +35,7 @@ public class ChangeMobileNumberActivity extends Activity {
     String _ben_reg_no="",_ben_aadhar_no="",_ben_Name="";
     private boolean validAadhaar;
     Button email_sign_in_button2;
+    TextView tv_version;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,13 @@ public class ChangeMobileNumberActivity extends Activity {
         Utiilties.setStatusBarColor(this);
 
         Initialize();
+
+        String version = Utiilties.getAppVersion(this);
+        if(version != null){
+            tv_version.setText("ऐप वर्ज़न "+version);
+        }else{
+            tv_version.setText("");
+        }
 
         spin_gender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -92,6 +101,9 @@ public class ChangeMobileNumberActivity extends Activity {
         et_aadhar_No=findViewById(R.id.et_aadhar_No);
         et_ben_Name=findViewById(R.id.et_ben_Name);
         email_sign_in_button2=findViewById(R.id.email_sign_in_button2);
+
+        tv_version=findViewById(R.id.tv_version);
+
         spin_gender=findViewById(R.id.spin_gender);
         ben_type_aangan_aaray = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, ben_type_aangan);
         spin_gender.setAdapter(ben_type_aangan_aaray);

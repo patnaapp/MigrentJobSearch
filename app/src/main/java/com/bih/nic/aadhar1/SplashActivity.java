@@ -153,8 +153,7 @@ public class SplashActivity extends Activity {
             String imei = null;
 
             permission=new MarshmallowPermission(SplashActivity.this, Manifest.permission.READ_PHONE_STATE);
-            if(permission.result==-1 || permission.result==0)
-            {
+            if(permission.result==-1 || permission.result==0){
 
             }
 
@@ -287,8 +286,7 @@ public class SplashActivity extends Activity {
                                                 int whichButton) {
 
                                 Intent launchIntent = getPackageManager()
-                                        .getLaunchIntentForPackage(
-                                                "com.android.vending");
+                                        .getLaunchIntentForPackage("com.android.vending");
                                 ComponentName comp = new ComponentName(
                                         "com.android.vending",
                                         "com.google.android.finsky.activities.LaunchUrlHandlerActivity"); // package

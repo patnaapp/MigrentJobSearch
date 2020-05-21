@@ -424,4 +424,16 @@ public class Utiilties {
 				.setNegativeButton("रद्द करें", null)
 				.show();
 	}
+
+	public static String getAppVersion(Context context){
+		String version = null;
+		try {
+			version = context.getPackageManager().getPackageInfo(context.getPackageName(),0).versionName;
+		} catch (PackageManager.NameNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return version;
+	}
 }

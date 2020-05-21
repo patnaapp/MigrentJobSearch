@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bih.nic.aadhar1.DataBaseHelper.DataBaseHelper;
@@ -22,6 +23,7 @@ import com.bih.nic.aadhar1.Model.UserDetails;
 public class RequestOtpActivity extends Activity {
 
     EditText et_reg_no,et_mobile;
+    TextView tv_version;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,11 +33,20 @@ public class RequestOtpActivity extends Activity {
         Utiilties.setStatusBarColor(this);
 
         initialization();
+
+        String version = Utiilties.getAppVersion(this);
+        if(version != null){
+            tv_version.setText("ऐप वर्ज़न "+version);
+        }else{
+            tv_version.setText("");
+        }
     }
 
     private void initialization() {
         et_reg_no = (EditText) findViewById(R.id.et_reg_no);
         et_mobile = (EditText) findViewById(R.id.et_mobile);
+
+        tv_version = (TextView) findViewById(R.id.tv_version);
     }
 
     public void onRequestOtp(View view){
