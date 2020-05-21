@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.TestLooperManager;
 import android.preference.PreferenceManager;
@@ -110,6 +111,28 @@ public class MainHomeActivity extends Activity {
        // actionBar.setTitle("Physical Verification");
     }
 
+    public void onLogout(View view){
+        new AlertDialog.Builder(this)
+                .setTitle("लॉग आउट??")
+                .setMessage("क्या आप वाकई एप्लिकेशन से लॉगआउट करना चाहते हैं \n ")
+                .setCancelable(false)
+                .setPositiveButton("हाँ", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        confirmLogout();
+                    }
+                })
+                .setNegativeButton("नहीं", null)
+                .show();
+    }
+
+    private void confirmLogout(){
+        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("UserId","").commit();
+
+        Intent intent = new Intent(this, Login.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK| Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
 
     private class FetchBenData extends AsyncTask<String, Void, BenDetails> {
         BenDetails data;
