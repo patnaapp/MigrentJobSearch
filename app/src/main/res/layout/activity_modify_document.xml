@@ -3,27 +3,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="15sp">
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/header"
+        layout="@layout/header_main"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" />
+
     <include
         android:id="@+id/footer"
         layout="@layout/footer"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-
         android:layout_alignParentBottom="true" />
 
     <ScrollView
+        android:layout_below="@+id/header"
+        android:layout_above="@+id/footer"
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true">
+        android:layout_height="wrap_content">
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-
 
             <LinearLayout
                 android:id="@+id/spinner_Layout"
@@ -60,7 +65,7 @@
                         style="@style/spinner"
                         android:id="@+id/spn_st_sch_build"
                         android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="42dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginStart="10dp"
                         android:paddingBottom="0dp"
@@ -100,7 +105,7 @@
                         style="@style/spinner"
                         android:id="@+id/spn_type_of_construction"
                         android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="42dp"
 
 
                         android:layout_marginLeft="10dp"
@@ -144,7 +149,7 @@
                         style="@style/spinner"
                         android:id="@+id/spn_condion_Buid"
                         android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="42dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginStart="10dp"
                         android:paddingBottom="0dp"
