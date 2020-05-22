@@ -13,6 +13,8 @@ import android.util.Log;
 import com.bih.nic.aadhar1.BenfiList;
 import com.bih.nic.aadhar1.Model.BlockWeb;
 import com.bih.nic.aadhar1.Model.District;
+import com.bih.nic.aadhar1.Model.SkillMaster;
+import com.bih.nic.aadhar1.Model.SubSkillMaster;
 import com.bih.nic.aadhar1.Model.UserDetails;
 import com.bih.nic.aadhar1.Model.panchayat;
 
@@ -183,9 +185,54 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
 
     }
 
+    public long setSkillMasterData(ArrayList<SkillMaster> distlist) {
 
+        long c = -1;
+        ArrayList<SkillMaster> dist = distlist;
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        db.delete("SkilMaster",null,null);
+        if (dist != null) {
+            try {
+                for (int i = 0; i < dist.size(); i++) {
+                    values.put("Id", dist.get(i).getId());
+                    values.put("SkillName", dist.get(i).getSkillName());
+                    values.put("SkillNameHn", dist.get(i).getSkillNameHn());
+                    c = db.insert("SkilMaster", null, values);
+                }
+                db.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+                return c;
+            }
+        }
+        return c;
+    }
 
+    public long setSubSkillMasterData(ArrayList<SubSkillMaster> distlist) {
 
+        long c = -1;
+        ArrayList<SubSkillMaster> dist = distlist;
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        db.delete("SubSkillMaster",null,null);
+        if (dist != null) {
+            try {
+                for (int i = 0; i < dist.size(); i++) {
+                    values.put("SubskillId", dist.get(i).getId());
+                    values.put("Sub_SkillName", dist.get(i).getSkillName());
+                    values.put("Sub_SkillNameHn", dist.get(i).getSkillNameHn());
+                    values.put("SkillId", dist.get(i).getSkillCategoryId());
+                    c = db.insert("SubSkillMaster", null, values);
+                }
+                db.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+                return c;
+            }
+        }
+        return c;
+    }
 
     public long setDistrictDataLocalUserWise(ArrayList<District> distlist) {
 
@@ -303,6 +350,68 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
         return DistList;
 
     }
+
+    public ArrayList<SkillMaster> getSkillMasterList() {
+
+        ArrayList<SkillMaster> list = new ArrayList<SkillMaster>();
+
+        try {
+
+            SQLiteDatabase db = this.getReadableDatabase();
+
+            Cursor cur = db.rawQuery("SELECT * FROM  SkilMaster", null);
+            int x = cur.getCount();
+
+            while (cur.moveToNext()) {
+                SkillMaster info = new SkillMaster();
+
+                info.setId(cur.getString(cur.getColumnIndex("Id")));
+                info.setSkillName(cur.getString(cur.getColumnIndex("SkillName")));
+                info.setSkillNameHn(cur.getString(cur.getColumnIndex("SkillNameHn")));
+                list.add(info);
+            }
+
+            cur.close();
+            db.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            // TODO: handle exception
+        }
+        return list;
+    }
+
+    public ArrayList<SubSkillMaster> getSubSkillMasterList() {
+
+        ArrayList<SubSkillMaster> list = new ArrayList<SubSkillMaster>();
+
+        try {
+
+            SQLiteDatabase db = this.getReadableDatabase();
+
+            Cursor cur = db.rawQuery("SELECT * FROM  SubSkillMaster", null);
+            int x = cur.getCount();
+
+            while (cur.moveToNext()) {
+                SubSkillMaster info = new SubSkillMaster();
+
+                info.setId(cur.getString(cur.getColumnIndex("SubskillId")));
+                info.setSkillName(cur.getString(cur.getColumnIndex("Sub_SkillName")));
+                info.setSkillNameHn(cur.getString(cur.getColumnIndex("Sub_SkillNameHn")));
+                info.setSkillCategoryId(cur.getString(cur.getColumnIndex("SkillId")));
+                list.add(info);
+            }
+
+            cur.close();
+            db.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            // TODO: handle exception
+        }
+        return list;
+    }
+
     public ArrayList<BlockWeb> getBlockDetail(String DistId) {
 
         ArrayList<BlockWeb> DistList = new ArrayList<BlockWeb>();

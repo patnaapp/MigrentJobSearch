@@ -7,6 +7,8 @@ import com.bih.nic.aadhar1.Model.BenDetails;
 import com.bih.nic.aadhar1.Model.BlockWeb;
 import com.bih.nic.aadhar1.Model.DefaultResponse;
 import com.bih.nic.aadhar1.Model.District;
+import com.bih.nic.aadhar1.Model.SkillMaster;
+import com.bih.nic.aadhar1.Model.SubSkillMaster;
 import com.bih.nic.aadhar1.Model.UserDetails;
 import com.bih.nic.aadhar1.Model.Versioninfo;
 import com.bih.nic.aadhar1.Model.panchayat;
@@ -38,6 +40,8 @@ public class WebserviceHelper implements KvmSerializable {
     private static final String GETBENEFICIARYLIST="getAadhaar";
     private static final String UpdateMobile_UID="UpdateMobile_UID";
     private static final String BLOCK_METHOD="getBlock";
+    private static final String SKILL_METHOD="SkilMasterList";
+    private static final String SUBSKILL_METHOD="SubSkilMasterList";
     private static final String DISTRICT_METHOD="getDistrict";
     private static final String PANCHAYAT_METHOD="getPanchyat";
     private static final String UpdateUID_Status="UpdateUID_Status";
@@ -79,6 +83,54 @@ public class WebserviceHelper implements KvmSerializable {
         }
 
 
+
+        return fieldList;
+    }
+
+    public static ArrayList<SkillMaster> getSkillMasterData() {
+
+        SoapObject res1;
+        res1=getServerData(SKILL_METHOD, SkillMaster.SkillMaster_CLASS);
+        int TotalProperty=0;
+        if(res1!=null) TotalProperty= res1.getPropertyCount();
+
+        ArrayList<SkillMaster> fieldList = new ArrayList<SkillMaster>();
+
+        for (int i = 0; i < TotalProperty; i++) {
+            if (res1.getProperty(i) != null) {
+                Object property = res1.getProperty(i);
+                if (property instanceof SoapObject) {
+                    SoapObject final_object = (SoapObject) property;
+                    SkillMaster block= new SkillMaster(final_object);
+                    fieldList.add(block);
+                }
+            } else
+                return fieldList;
+        }
+
+        return fieldList;
+    }
+
+    public static ArrayList<SubSkillMaster> getSubSkillMasterData() {
+
+        SoapObject res1;
+        res1=getServerData(SUBSKILL_METHOD, SubSkillMaster.SubSkillMaster_CLASS);
+        int TotalProperty=0;
+        if(res1!=null) TotalProperty= res1.getPropertyCount();
+
+        ArrayList<SubSkillMaster> fieldList = new ArrayList<SubSkillMaster>();
+
+        for (int i = 0; i < TotalProperty; i++) {
+            if (res1.getProperty(i) != null) {
+                Object property = res1.getProperty(i);
+                if (property instanceof SoapObject) {
+                    SoapObject final_object = (SoapObject) property;
+                    SubSkillMaster block= new SubSkillMaster(final_object);
+                    fieldList.add(block);
+                }
+            } else
+                return fieldList;
+        }
 
         return fieldList;
     }
