@@ -49,6 +49,7 @@ public class MainHomeActivity extends Activity {
         tv_benname.setText(user_name);
         urole.setText(Reg_No);
         new FetchBenData().execute();
+
         ll_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

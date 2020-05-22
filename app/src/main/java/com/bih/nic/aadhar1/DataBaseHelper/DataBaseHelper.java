@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class DataBaseHelper  extends SQLiteOpenHelper {
     private static String DB_PATH = "";
@@ -351,6 +352,36 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
 
     }
 
+    public ArrayList<SkillMaster> getCategoryMasterList() {
+
+        ArrayList<SkillMaster> list = new ArrayList<SkillMaster>();
+
+        try {
+
+            SQLiteDatabase db = this.getReadableDatabase();
+
+            Cursor cur = db.rawQuery("SELECT * FROM  CasteCatogery", null);
+            int x = cur.getCount();
+
+            while (cur.moveToNext()) {
+                SkillMaster info = new SkillMaster();
+
+                info.setId(cur.getString(cur.getColumnIndex("Id")));
+                info.setSkillName(cur.getString(cur.getColumnIndex("name")));
+                info.setSkillNameHn(cur.getString(cur.getColumnIndex("nameHN")));
+                list.add(info);
+            }
+
+            cur.close();
+            db.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            // TODO: handle exception
+        }
+        return list;
+    }
+
     public ArrayList<SkillMaster> getSkillMasterList() {
 
         ArrayList<SkillMaster> list = new ArrayList<SkillMaster>();
@@ -381,7 +412,7 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
         return list;
     }
 
-    public ArrayList<SubSkillMaster> getSubSkillMasterList() {
+    public ArrayList<SubSkillMaster> getSubSkillMasterList(String skillId) {
 
         ArrayList<SubSkillMaster> list = new ArrayList<SubSkillMaster>();
 
@@ -389,7 +420,7 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
 
             SQLiteDatabase db = this.getReadableDatabase();
 
-            Cursor cur = db.rawQuery("SELECT * FROM  SubSkillMaster", null);
+            Cursor cur = db.rawQuery("SELECT * FROM  SubSkillMaster WHERE SkillId = '"+ skillId +"'", null);
             int x = cur.getCount();
 
             while (cur.moveToNext()) {

@@ -8,6 +8,9 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -20,14 +23,16 @@ import com.bih.nic.aadhar1.Model.SubSkillMaster;
 
 import java.util.ArrayList;
 
-public class ModifyDocumentActivity extends Activity {
+public class ModifyDocumentActivity extends Activity implements AdapterView.OnItemSelectedListener {
     Spinner spn_panch_name,spn_block_name,spn_dist_name,spn_sub_skill,spn_skill,spn_category;
     EditText edt_exp_year,edt_Qualification,edt_catogery,edt_ifsc_code,edt_ac_name,edt_ac_no,edt_mobileno;
     BenDetails benDetails;
     DataBaseHelper dataBaseHelper;
 
-    ArrayList<SkillMaster> skillList;
+    ArrayList<SkillMaster> skillList, cateogryList;
     ArrayList<SubSkillMaster> subSkillList;
+
+    String skillId,subSkillId,CategoryId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +58,17 @@ public class ModifyDocumentActivity extends Activity {
         edt_mobileno=(EditText)findViewById(R.id.edt_mobileno);
         //  dataBaseHelper.getBlockDetail()
 
+        spn_panch_name.setOnItemSelectedListener(this);
+        spn_block_name.setOnItemSelectedListener(this);
+        spn_dist_name.setOnItemSelectedListener(this);
+        spn_sub_skill.setOnItemSelectedListener(this);
+        spn_skill.setOnItemSelectedListener(this);
+        spn_category.setOnItemSelectedListener(this);
+
         extractFrom_Data();
 
-        loadSpinnerData();
+        loadSkillSpinnerData();
+        loadCategorySpinnerData();
     }
 
     public void extractFrom_Data(){
@@ -75,13 +88,16 @@ public class ModifyDocumentActivity extends Activity {
     public void setSkillSpinner(){
         ArrayList<String> list = new ArrayList<String>();
         list.add("-Select-");
+        int index = 0;
         for (SkillMaster info: skillList){
             list.add(info.getSkillName());
+            //if(benDetails.get)
         }
 
         ArrayAdapter adaptor = new ArrayAdapter(this, android.R.layout.simple_spinner_item, list);
         adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spn_skill.setAdapter(adaptor);
+
     }
 
     public void setSubSkillSpinner(){
@@ -96,7 +112,21 @@ public class ModifyDocumentActivity extends Activity {
         spn_sub_skill.setAdapter(adaptor);
     }
 
-    public void loadSpinnerData(){
+    public void loadCategorySpinnerData(){
+        cateogryList = dataBaseHelper.getCategoryMasterList();
+        ArrayList<String> list = new ArrayList<String>();
+        list.add("-Select-");
+        int index = 0;
+        for (SkillMaster info: cateogryList){
+            list.add(info.getSkillNameHn());
+            //if(benDetails.get)
+        }
+        ArrayAdapter adaptor = new ArrayAdapter(this, android.R.layout.simple_spinner_item, list);
+        adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spn_category.setAdapter(adaptor);
+    }
+
+    public void loadSkillSpinnerData(){
         skillList = dataBaseHelper.getSkillMasterList();
         if (skillList.size() > 0){
             setSkillSpinner();
@@ -107,8 +137,10 @@ public class ModifyDocumentActivity extends Activity {
                 new SyncSkillMasterData().execute();
             }
         }
+    }
 
-        subSkillList = dataBaseHelper.getSubSkillMasterList();
+    public void loadSubSkillSpinnerData(){
+        subSkillList = dataBaseHelper.getSubSkillMasterList(skillId);
         if (subSkillList.size() > 0){
             setSubSkillSpinner();
         }else{
@@ -118,6 +150,28 @@ public class ModifyDocumentActivity extends Activity {
                 new SyncSubSkillMasterData().execute();
             }
         }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        switch (parent.getId()) {
+            case R.id.spn_skill:
+                if (position > 0) {
+                    skillId = skillList.get(position -1).getId();
+                    loadSubSkillSpinnerData();
+                }
+                break;
+            case R.id.spn_sub_skill:
+                if (position > 0) {
+                    subSkillId = subSkillList.get(position - 1).getId();
+                }
+                break;
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 
     private class SyncSkillMasterData extends AsyncTask<String, Void, ArrayList<SkillMaster>> {
@@ -190,7 +244,7 @@ public class ModifyDocumentActivity extends Activity {
                 DataBaseHelper helper=new DataBaseHelper(getApplicationContext());
                 long i= helper.setSubSkillMasterData(result);
 
-                subSkillList = helper.getSubSkillMasterList();
+                subSkillList = helper.getSubSkillMasterList(skillId);
                 setSubSkillSpinner();
 
                 if(i>0) {
