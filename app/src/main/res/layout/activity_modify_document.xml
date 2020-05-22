@@ -403,6 +403,7 @@
 
                         />
                     <EditText
+
                         android:inputType="number"
                         android:id="@+id/edt_mobileno"
                         android:layout_width="match_parent"

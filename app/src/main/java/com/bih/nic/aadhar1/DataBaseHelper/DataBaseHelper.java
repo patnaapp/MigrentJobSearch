@@ -159,6 +159,7 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
     public void openDataBase() throws SQLException {
 
         // Open the database
+
         this.getReadableDatabase();
         String myPath = DB_PATH + DB_NAME;
         myDataBase = SQLiteDatabase.openDatabase(myPath, null,

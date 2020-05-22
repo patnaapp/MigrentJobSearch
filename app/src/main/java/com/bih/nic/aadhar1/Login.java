@@ -122,25 +122,6 @@ public class Login extends Activity {
        // getIMEI();
 
     }
-//    private void getIMEI() {
-//
-//        MarshmallowPermission permission = new MarshmallowPermission(this, Manifest.permission.READ_PHONE_STATE);
-//        if (permission.result == -1 || permission.result == 0) {
-//            try {
-//                tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-//
-//                if (tm != null) imei = tm.getDeviceId();
-//            } catch (Exception e) {
-//            }
-//        } else if (permission.result == 1) {
-//            tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-//            if (tm != null) imei = tm.getDeviceId();
-//                    /* Intent i=new Intent(this,LoginActivity.class);
-//                     startActivity(i);
-//	            	 finish();*/
-//        }
-//        }
-//    }
 
     private class LoginTask extends AsyncTask<String, Void, UserDetails> {
 

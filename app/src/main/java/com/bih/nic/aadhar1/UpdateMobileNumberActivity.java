@@ -60,6 +60,7 @@ public class UpdateMobileNumberActivity extends Activity {
         edt_reg_no.setText(regNo);
         et_ben_Nameas_aadhar.setText(Name);
 
+
         btn_update_mobile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
