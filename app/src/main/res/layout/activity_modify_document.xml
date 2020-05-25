@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -49,9 +48,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="10dp"
                         android:layout_marginStart="10dp"
-                        android:text="जिला का नाम :-"
+                        android:text=" जिला का नाम :-"
                         android:textColor="#222222"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -413,6 +411,41 @@
                         android:background="@drawable/edittext_box" />
 
                 </LinearLayout>
+                <LinearLayout
+
+                    android:id="@+id/lin_aadharno"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+
+                    android:clickable="false"
+                    android:orientation="vertical"
+                    android:paddingTop="0dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/tv_aadharno"
+                        android:layout_marginStart="10dp"
+                        android:text=" आधार संख्या :-"
+                        android:textColor="#222222"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+
+                        />
+                    <EditText
+
+                        android:inputType="number"
+                        android:id="@+id/edt_aadharno"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:background="@drawable/edittext_box" />
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/lin_no_classroom"
@@ -464,7 +497,7 @@
                         android:textStyle="bold" />
 
                     <EditText
-                        android:inputType="number"
+
                         android:id="@+id/edt_ac_name"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
@@ -493,7 +526,6 @@
                         android:textStyle="bold" />
 
                     <EditText
-                        android:inputType="number"
                         android:id="@+id/edt_ifsc_code"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
@@ -541,7 +573,7 @@
                         android:textStyle="bold" />
                 </LinearLayout>
                 <LinearLayout
-
+                    android:visibility="gone"
                     android:id="@+id/lin_clss_undercons"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -598,7 +630,7 @@
                         android:layout_marginLeft="10dp"
                         android:id="@+id/tv_skill"
                         android:layout_marginStart="10dp"
-                        android:text="शैक्षिक कौशल:-"
+                        android:text="कौशल का नाम:-"
                         android:textColor="#222222"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -634,7 +666,7 @@
                         android:layout_marginLeft="10dp"
                         android:id="@+id/tv_sub_skill"
                         android:layout_marginStart="10dp"
-                        android:text="उप शैक्षिक कौशल-"
+                        android:text="उप कौशल नाम -"
                         android:textColor="#222222"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -654,7 +686,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-
+                    android:visibility="gone"
                     android:id="@+id/lin_type_of_worker"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -670,7 +702,7 @@
                         android:layout_marginLeft="10dp"
                         android:id="@+id/tv_type_of_worker"
                         android:layout_marginStart="10dp"
-                        android:text="पेशे का नाम :-"
+                        android:text="शिक्षा का स्तर :-"
                         android:textColor="#222222"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -703,19 +735,42 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="10dp"
                         android:layout_marginStart="10dp"
-                        android:text="वर्षों में अनुभव :-"
+                        android:text=" अनुभव :-"
                         android:textColor="#222222"
                         android:textSize="16sp"
                         android:textStyle="bold" />
-
-                    <EditText
-                        android:inputType="number"
-                        android:id="@+id/edt_exp_year"
+                    <LinearLayout
+                        android:weightSum="1"
+                        android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="45dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="2dp"
-                        android:background="@drawable/edittext_box" />
+                        android:layout_height="wrap_content">
+
+
+                        <EditText
+                            android:gravity="center"
+                            android:hint="महीनों की संख्या"
+                            android:layout_weight="0.5"
+                            android:inputType="number"
+                            android:id="@+id/edt_exp_year"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="2dp"
+                            android:background="@drawable/edittext_box" />
+                        <EditText
+                            android:layout_weight="0.5"
+                            android:hint="वर्षों की संख्या"
+                            android:gravity="center"
+                            android:inputType="number"
+                            android:id="@+id/edt_exp_month"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="2dp"
+                            android:background="@drawable/edittext_box" />
+                    </LinearLayout>
+
+
                 </LinearLayout>
                 <!--<LinearLayout
                     android:id="@+id/lin_no_comnroom"
@@ -898,7 +953,7 @@
                     android:layout_height="40dp"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/buttonbackshape"
-                    android:text="Change"
+                    android:text=" अपडेट करें "
                     android:textAllCaps="false"
                     android:textColor="#ffffffff"
                     android:textSize="20sp" />

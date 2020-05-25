@@ -68,6 +68,11 @@ public class BenDetails implements KvmSerializable, Serializable {
     private String is_having_cold="";
     private String intBloodTest="";
     private String intBloodTest1="";
+    private String Skill_Id;
+    private String Skill_Name;
+    private String SubSkillId;
+    private String SubSkillName;
+    private String User_RegId;
 
 
     public BenDetails() {
@@ -89,7 +94,15 @@ public class BenDetails implements KvmSerializable, Serializable {
         this.vchName=res1.getProperty("vchName").toString();
         this.intAge=res1.getProperty("intAge").toString();
         this.vchMobile=res1.getProperty("vchMobile").toString();
+
+
+        this.SubSkillId=res1.getProperty("intTypeOfWorker").toString();
+        this.Skill_Id=res1.getProperty("SkillCategoryId").toString();
+        this.Skill_Name=res1.getProperty("SkillCategory").toString();
+        this.SubSkillName=res1.getProperty("SkillName").toString();
+
         this.vchAddress=res1.getProperty("vchAddress").toString();
+        this.vchPhoto=res1.getProperty("vchPhoto").toString();
         this.vchPhoto=res1.getProperty("vchPhoto").toString();
         this.is_Dignity_Kit=res1.getProperty("is_Dignity_Kit").toString();
         this.is_having_fever=res1.getProperty("is_having_fever").toString();
@@ -101,38 +114,33 @@ public class BenDetails implements KvmSerializable, Serializable {
         this.stmCreatedOn=res1.getProperty("stmCreatedOn").toString();
         this.intCreatedBy=res1.getProperty("intCreatedBy").toString();
         this.stmUpdatedOn=res1.getProperty("stmUpdatedOn").toString();
-        this.intUpdatedBy=res1.getProperty("intUpdatedBy").toString();
+      /*  this.intUpdatedBy=res1.getProperty("intUpdatedBy").toString();
         this.bitDeletedFlag=res1.getProperty("bitDeletedFlag").toString();
         this.satusVal=res1.getProperty("satusVal").toString();
         this.statusDate1=res1.getProperty("statusDate1").toString();
         this.statusDate=res1.getProperty("statusDate").toString();
         this.intVechileType=res1.getProperty("intVechileType").toString();
         this.vchVechileNumber=res1.getProperty("vchVechileNumber").toString();
-        this.intRegistrationType=res1.getProperty("intRegistrationType").toString();
-        this.intCovidSymptom=res1.getProperty("intCovidSymptom").toString();
+      */  this.intRegistrationType=res1.getProperty("intRegistrationType").toString();
+        /*this.intCovidSymptom=res1.getProperty("intCovidSymptom").toString();
         this.intSyncId=res1.getProperty("intSyncId").toString();
-        this.vchOtherWorkerType=res1.getProperty("vchOtherWorkerType").toString();
+      */  this.vchOtherWorkerType=res1.getProperty("vchOtherWorkerType").toString();
         this.vchAadhaar=res1.getProperty("vchAadhaar").toString();
         this.vchBankAccount=res1.getProperty("vchBankAccount").toString();
         this.vchBankName=res1.getProperty("vchBankName").toString();
         this.vchIfsc=res1.getProperty("vchIfsc").toString();
         this.intCategory=res1.getProperty("intCategory").toString();
         this.intQualification=res1.getProperty("intQualification").toString();
-        this.intTestingLab=res1.getProperty("intTestingLab").toString();
+       /* this.intTestingLab=res1.getProperty("intTestingLab").toString();
         this.intPatientKept=res1.getProperty("intPatientKept").toString();
         this.intHstatusCreatedBy=res1.getProperty("intHstatusCreatedBy").toString();
         this.dtmHstatusCreatedOn=res1.getProperty("dtmHstatusCreatedOn").toString();
         this.dtsamplingDate1=res1.getProperty("dtsamplingDate1").toString();
         this.dtsamplingDate=res1.getProperty("dtsamplingDate").toString();
-        this.intExpYears=res1.getProperty("intExpYears").toString();
+      */  this.intExpYears=res1.getProperty("intExpYears").toString();
         this.vchWorkAddress=res1.getProperty("vchWorkAddress").toString();
         this.intExpMonths=res1.getProperty("intExpMonths").toString();
-        this.intTravelMode=res1.getProperty("intTravelMode").toString();
-        this.intTravelFare=res1.getProperty("intTravelFare").toString();
-        this.OTP=res1.getProperty("OTP").toString();
-        this.OtpVerify=res1.getProperty("OtpVerify").toString();
-        this.is_having_cold=res1.getProperty("is_having_cold").toString();
-        this.intBloodTest=res1.getProperty("intBloodTest").toString();
+
 
     }
 
@@ -626,5 +634,45 @@ public class BenDetails implements KvmSerializable, Serializable {
 
     public void setIntBloodTest1(String intBloodTest1) {
         this.intBloodTest1 = intBloodTest1;
+    }
+
+    public String getSkill_Id() {
+        return Skill_Id;
+    }
+
+    public void setSkill_Id(String skill_Id) {
+        Skill_Id = skill_Id;
+    }
+
+    public String getSkill_Name() {
+        return Skill_Name;
+    }
+
+    public void setSkill_Name(String skill_Name) {
+        Skill_Name = skill_Name;
+    }
+
+    public String getSubSkillId() {
+        return SubSkillId;
+    }
+
+    public void setSubSkillId(String subSkillId) {
+        SubSkillId = subSkillId;
+    }
+
+    public String getSubSkillName() {
+        return SubSkillName;
+    }
+
+    public void setSubSkillName(String subSkillName) {
+        SubSkillName = subSkillName;
+    }
+
+    public String getUser_RegId() {
+        return User_RegId;
+    }
+
+    public void setUser_RegId(String user_RegId) {
+        User_RegId = user_RegId;
     }
 }
