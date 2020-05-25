@@ -144,11 +144,46 @@
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
+    <RelativeLayout
+        android:onClick="onSearchJob"
+        android:padding="8dp"
+        android:id="@+id/rl_search"
+        android:layout_below="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/holo_light_primary">
+
+        <LinearLayout
+            android:layout_toLeftOf="@+id/img_search1"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/searchboxdesign">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="नई नौकरी खोजें"
+                android:textSize="16sp"
+                android:textColor="@color/black_overlay"/>
+        </LinearLayout>
+
+        <ImageView
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="4dp"
+            android:src="@drawable/button_press_style"
+            android:layout_alignParentRight="true"
+            android:id="@+id/img_search1"
+            android:padding="6dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:tint="@color/holo_light_button_pressed" />
+    </RelativeLayout>
 
     <LinearLayout
+        android:visibility="gone"
         android:padding="4sp"
-        android:layout_below="@+id/view"
-
+        android:layout_below="@+id/rl_search"
         android:background="#eaeaea"
         android:id="@+id/linfilter"
         android:layout_width="match_parent"

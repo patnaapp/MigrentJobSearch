@@ -63,5 +63,7 @@
     <color name="blue">#00abea</color>
     <color name="black_overlay">#66000000</color>
     <color name="holo_red_dark">#ffcc0000</color>
+    <color name="color_black">#000000</color>
+    <color name="color_white">#FFFFFF</color>
 
 </resources>

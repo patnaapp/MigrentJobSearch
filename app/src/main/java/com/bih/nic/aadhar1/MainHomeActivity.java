@@ -112,6 +112,12 @@ public class MainHomeActivity extends Activity {
        // actionBar.setTitle("Physical Verification");
     }
 
+    public void onSearchJob(View view){
+        Intent i =new Intent(MainHomeActivity.this,JobSearchActivity.class);
+        i.putExtra("data",BenDetails);
+        startActivity(i);
+    }
+
     public void onLogout(View view){
         new AlertDialog.Builder(this)
                 .setTitle("लॉग आउट??")
