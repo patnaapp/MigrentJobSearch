@@ -6,33 +6,50 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.bih.nic.aadhar1.DataBaseHelper.DataBaseHelper;
 import com.bih.nic.aadhar1.Model.BenDetails;
+import com.bih.nic.aadhar1.Model.BlockWeb;
+import com.bih.nic.aadhar1.Model.CategoryMaster;
+import com.bih.nic.aadhar1.Model.District;
 import com.bih.nic.aadhar1.Model.SkillMaster;
 import com.bih.nic.aadhar1.Model.SubSkillMaster;
+import com.bih.nic.aadhar1.Model.panchayat;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class ModifyDocumentActivity extends Activity implements AdapterView.OnItemSelectedListener {
     Spinner spn_panch_name,spn_block_name,spn_dist_name,spn_sub_skill,spn_skill,spn_category;
-    EditText edt_exp_year,edt_Qualification,edt_catogery,edt_ifsc_code,edt_ac_name,edt_ac_no,edt_mobileno;
+    EditText edt_exp_year,edt_Qualification,edt_catogery,edt_ifsc_code,edt_ac_name,edt_ac_no,edt_mobileno,edt_aadharno,edt_exp_month;
     BenDetails benDetails;
     DataBaseHelper dataBaseHelper;
 
-    ArrayList<SkillMaster> skillList, cateogryList;
+    ArrayList<SkillMaster> skillList;
+    ArrayList<CategoryMaster> cateogryList;
     ArrayList<SubSkillMaster> subSkillList;
+    ArrayList<District>DistrictList=new ArrayList<>();
+    ArrayList<BlockWeb>BlockList=new ArrayList<>();
+    ArrayList<panchayat>PanchayatList=new ArrayList<>();
+    Button save_button;
+
 
     String skillId,subSkillId,CategoryId;
+    String Dist_id="",Dist_name="",block_id="",block_name="",panch_id="",panch_name="",cat_id="",cat_name="";
+    String Mobile_no="",Bank_Ac_no="",_Bank_name="",Ifsc_code="",catogery="",skill_id="",sub_Skill_id="",Qualificaton="",int_no_year_exp="",str_adhaar="",str_int_no_month_exp="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +59,8 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
         getActionBar().hide();
         Utiilties.setStatusBarColor(this);
 
+
+        benDetails=(BenDetails)getIntent().getSerializableExtra("data");
         dataBaseHelper=new DataBaseHelper(this);
         spn_panch_name=(Spinner)findViewById(R.id.spn_panch_name);
         spn_block_name=(Spinner)findViewById(R.id.spn_block_name);
@@ -56,11 +75,14 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
         edt_ac_name=(EditText)findViewById(R.id.edt_ac_name);
         edt_ac_no=(EditText)findViewById(R.id.edt_ac_no);
         edt_mobileno=(EditText)findViewById(R.id.edt_mobileno);
-        //  dataBaseHelper.getBlockDetail()
+        edt_aadharno=(EditText)findViewById(R.id.edt_aadharno);
+        edt_exp_month=(EditText)findViewById(R.id.edt_exp_month);
+        save_button=(Button)findViewById(R.id.save_button) ;
 
         spn_panch_name.setOnItemSelectedListener(this);
         spn_block_name.setOnItemSelectedListener(this);
         spn_dist_name.setOnItemSelectedListener(this);
+
         spn_sub_skill.setOnItemSelectedListener(this);
         spn_skill.setOnItemSelectedListener(this);
         spn_category.setOnItemSelectedListener(this);
@@ -69,12 +91,133 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
 
         loadSkillSpinnerData();
         loadCategorySpinnerData();
+        loadDistrictSpinnerData();
+        loadBlockSpinnerData(benDetails.getDistrictCode());
+        loadPanchayatSpinnerData(benDetails.getBlockCode());
+        spn_panch_name.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position > 0) {
+                    panch_id = PanchayatList.get(position-1).getPanchayatId();
+                    panch_name = PanchayatList.get(position-1).getPanchayatName();
+
+
+                } else {
+                    panch_id = "";
+                    panch_name = "";
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                panch_id = "";
+                panch_name = "";
+            }
+
+        });spn_block_name.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position > 0) {
+                    block_id = BlockList.get(position-1).getBlockCode();
+                    block_name = BlockList.get(position-1).getBlockName();
+                    loadPanchayatSpinnerData(block_id);
+
+
+                } else {
+                    block_id = "";
+                    block_name = "";
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                block_id = "";
+                block_name = "";
+            }
+
+        });spn_dist_name.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position > 0) {
+                    Dist_id = DistrictList.get(position-1).get_DistCode();
+                    Dist_name = DistrictList.get(position-1).get_DistName();
+                    loadBlockSpinnerData(Dist_id);
+
+
+                } else {
+                    block_name = "";
+                    block_name = "";
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                block_name = "";
+                block_name = "";
+            }
+
+        });spn_category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position > 0) {
+                    cat_id = cateogryList.get(position).getCat_id();
+                    cat_name = cateogryList.get(position).getCat_name_HinDi();
+
+
+
+                } else {
+                    cat_id = "";
+                    cat_name = "";
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                cat_id = "";
+                cat_name = "";
+            }
+
+        });
+
+        save_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setDataTOUpload();
+                Boolean value = Utiilties.isOnline(ModifyDocumentActivity.this);
+                if (value.equals(true)) {
+                    if(validateData())
+                        benDetails=new BenDetails();
+                    benDetails.setDistrictCode(Dist_id);
+                    benDetails.setBlockCode(block_id);
+                    benDetails.setPanchayatCode(panch_id);
+                    benDetails.setVchMobile(Mobile_no);
+                    benDetails.setVchBankAccount(Bank_Ac_no);
+                    benDetails.setVchBankName(_Bank_name);
+                    benDetails.setVchIfsc(Ifsc_code);
+                    benDetails.setIntCategory(Dist_id);
+                    benDetails.setSkill_Id(skill_id);
+                    benDetails.setSubSkillId(sub_Skill_id);
+                    benDetails.setVchAadhaar(str_adhaar);
+                    benDetails.setIntExpYears(edt_exp_year.getText().toString());
+                    benDetails.setIntExpMonths(edt_exp_month.getText().toString());
+
+                    new UploadPendingTask(benDetails).execute();
+                }else {
+                    Toast.makeText(getApplicationContext(),"Please Turn On Internet Coneection First",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
     public void extractFrom_Data(){
 
-        benDetails=(BenDetails)getIntent().getSerializableExtra("data");
-        edt_exp_year.setText(benDetails.getIntExpYears());
+
+        edt_exp_year.setText(benDetails.getIntExpMonths());
+        edt_exp_month.setText(benDetails.getIntExpYears());
 
         //   spn_category
         edt_ifsc_code.setText(benDetails.getVchIfsc());
@@ -97,6 +240,10 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
         ArrayAdapter adaptor = new ArrayAdapter(this, android.R.layout.simple_spinner_item, list);
         adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spn_skill.setAdapter(adaptor);
+        if(benDetails.getSkill_Id()!=null){
+            spn_skill.setSelection(((ArrayAdapter<String>) spn_skill.getAdapter()).getPosition(benDetails.getSkill_Name()));
+
+        }
 
     }
 
@@ -110,6 +257,10 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
         ArrayAdapter adaptor = new ArrayAdapter(this, android.R.layout.simple_spinner_item, list);
         adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spn_sub_skill.setAdapter(adaptor);
+        if(benDetails.getSubSkillId()!=null){
+            spn_sub_skill.setSelection(((ArrayAdapter<String>) spn_sub_skill.getAdapter()).getPosition(benDetails.getSubSkillName()));
+
+        }
     }
 
     public void loadCategorySpinnerData(){
@@ -117,13 +268,66 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
         ArrayList<String> list = new ArrayList<String>();
         list.add("-Select-");
         int index = 0;
-        for (SkillMaster info: cateogryList){
-            list.add(info.getSkillNameHn());
+        for (CategoryMaster info: cateogryList){
+            list.add(info.getCat_name_HinDi());
             //if(benDetails.get)
         }
         ArrayAdapter adaptor = new ArrayAdapter(this, android.R.layout.simple_spinner_item, list);
         adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spn_category.setAdapter(adaptor);
+    }
+    public void loadDistrictSpinnerData(){
+        DistrictList = dataBaseHelper.getDistDetail();
+        ArrayList<String> list = new ArrayList<String>();
+        list.add("-Select-");
+        int index = 0;
+        for (District info: DistrictList){
+            list.add(info.get_DistName());
+            //if(benDetails.get)
+        }
+        ArrayAdapter adaptor = new ArrayAdapter(this, android.R.layout.simple_spinner_item, list);
+        adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spn_dist_name.setAdapter(adaptor);
+
+        if(benDetails.getDistrictName()!=null){
+            spn_dist_name.setSelection(((ArrayAdapter<String>) spn_dist_name.getAdapter()).getPosition(benDetails.getDistrictName()));
+
+        }
+    }
+    public void loadBlockSpinnerData(String district){
+        BlockList.clear();
+        BlockList = dataBaseHelper.getBlockDetail(district);
+        ArrayList<String> list = new ArrayList<String>();
+        list.add("-Select-");
+        int index = 0;
+        for (BlockWeb info: BlockList){
+            list.add(info.getBlockName());
+            //if(benDetails.get)
+        }
+        ArrayAdapter adaptor = new ArrayAdapter(this, android.R.layout.simple_spinner_item, list);
+        adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spn_block_name.setAdapter(adaptor);
+        if(benDetails.getBlockName()!=null){
+            spn_block_name.setSelection(((ArrayAdapter<String>) spn_block_name.getAdapter()).getPosition(benDetails.getBlockName()));
+
+        }
+    }
+    public void loadPanchayatSpinnerData(String panchayt){
+        PanchayatList = dataBaseHelper.getpanchayatDetail(panchayt);
+        ArrayList<String> list = new ArrayList<String>();
+        list.add("-Select-");
+        int index = 0;
+        for (panchayat info: PanchayatList){
+            list.add(info.getPanchayatName());
+            //if(benDetails.get)
+        }
+        ArrayAdapter adaptor = new ArrayAdapter(this, android.R.layout.simple_spinner_item, list);
+        adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spn_panch_name.setAdapter(adaptor);
+        if(benDetails.getPanchayatName()!=null){
+            spn_panch_name.setSelection(((ArrayAdapter<String>) spn_panch_name.getAdapter()).getPosition(benDetails.getPanchayatName()));
+
+        }
     }
 
     public void loadSkillSpinnerData(){
@@ -139,8 +343,8 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
         }
     }
 
-    public void loadSubSkillSpinnerData(){
-        subSkillList = dataBaseHelper.getSubSkillMasterList(skillId);
+    public void loadSubSkillSpinnerData(String skillid){
+        subSkillList = dataBaseHelper.getSubSkillMasterList(skillid);
         if (subSkillList.size() > 0){
             setSubSkillSpinner();
         }else{
@@ -157,13 +361,13 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
         switch (parent.getId()) {
             case R.id.spn_skill:
                 if (position > 0) {
-                    skillId = skillList.get(position -1).getId();
-                    loadSubSkillSpinnerData();
+                    skill_id = skillList.get(position -1).getId();
+                    loadSubSkillSpinnerData(skill_id);
                 }
                 break;
             case R.id.spn_sub_skill:
                 if (position > 0) {
-                    subSkillId = subSkillList.get(position - 1).getId();
+                    sub_Skill_id = subSkillList.get(position - 1).getId();
                 }
                 break;
         }
@@ -203,6 +407,7 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
 
                 skillList = helper.getSkillMasterList();
                 setSkillSpinner();
+
 
                 if(i>0) {
                     Toast.makeText(getApplicationContext(), "Data Synced Successfully",Toast.LENGTH_SHORT).show();
@@ -284,5 +489,129 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
                 });
 
         ab.show();
+    }
+
+    public void setDataTOUpload(){
+        Mobile_no=edt_mobileno.getText().toString();
+        Bank_Ac_no=edt_ac_no.getText().toString();
+        _Bank_name=edt_ac_name.getText().toString();
+        Ifsc_code=edt_ifsc_code.getText().toString();
+        int_no_year_exp=edt_exp_year.getText().toString();
+        str_int_no_month_exp=edt_exp_month.getText().toString();
+        str_adhaar=edt_aadharno.getText().toString();
+
+
+    }
+
+    private class UploadPendingTask extends AsyncTask<String, Void, String> {
+        String Reg_No=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserId", "");
+        String pid = "";
+        BenDetails data;
+        private final ProgressDialog dialog = new ProgressDialog(ModifyDocumentActivity.this);
+
+        UploadPendingTask(BenDetails data) {
+            this.data = data;
+
+            pid = Reg_No;
+            Log.e("Pid  ", pid + " ");
+        }
+
+        @Override
+        protected void onPreExecute() {
+
+            this.dialog.setCanceledOnTouchOutside(false);
+            this.dialog.setMessage(getApplicationContext().getResources().getString(R.string.uploading));
+            this.dialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... param) {
+
+
+            String date=getCurrentDate();
+
+            String res = WebserviceHelper.UpdateUserDetail(this.data,Reg_No,date);
+
+            return res;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            if (this.dialog.isShowing()) {
+                this.dialog.dismiss();
+
+            }
+            Log.d("uploddata",""+result);
+
+            if (result != null) {
+                String res=result;
+                String substring=res.substring(0,1);
+                Log.d("upldddoddata",""+substring);
+              if(substring.equalsIgnoreCase("1")){
+                  Toast.makeText(getApplicationContext(),res,Toast.LENGTH_LONG).show();
+              }
+
+            }
+
+
+        }
+
+    }
+    public static String getCurrentDate()
+    {
+        Calendar cal=Calendar.getInstance();
+        int day=cal.get(Calendar.DAY_OF_MONTH);
+        int month=cal.get(Calendar.MONTH);
+        int year=cal.get(Calendar.YEAR);
+        month=month+1;
+
+        int h=cal.get(Calendar.HOUR);
+        int m=cal.get(Calendar.MINUTE);
+        int s=cal.get(Calendar.SECOND);
+
+        String date=year+"-"+month+"-"+day;
+        return date;
+
+    }
+
+    private boolean validateData() {
+        View focusView = null;
+        boolean validate = true;
+
+        if (Dist_id.equalsIgnoreCase("")) {
+                Toast.makeText(getApplicationContext(), "Please Select District Number", Toast.LENGTH_LONG).show();
+                validate = false;
+
+        }else if(block_id.equalsIgnoreCase("")){
+            Toast.makeText(getApplicationContext(), "Please Select Block Name", Toast.LENGTH_LONG).show();
+            validate = false;
+        }else if(panch_id.equalsIgnoreCase("")){
+            Toast.makeText(getApplicationContext(), "Please Select Panchayat Name", Toast.LENGTH_LONG).show();
+            validate = false;
+        }
+        else if (!Verhoeff.validateVerhoeff(str_adhaar)) {
+            Toast.makeText(getApplicationContext(), "Please Enter valid Aadhaar Number", Toast.LENGTH_LONG).show();
+            validate = false;
+        }else if(Bank_Ac_no.equalsIgnoreCase("")){
+            Toast.makeText(getApplicationContext(), "Please Enter Bank Account Number", Toast.LENGTH_LONG).show();
+            validate = false;
+        }else if(_Bank_name.equalsIgnoreCase("")){
+            Toast.makeText(getApplicationContext(), "Please Enter Bank Name ", Toast.LENGTH_LONG).show();
+            validate = false;
+        }else if(Ifsc_code.equalsIgnoreCase("")){
+            Toast.makeText(getApplicationContext(), "Please Enter IfSc Code  ", Toast.LENGTH_LONG).show();
+            validate = false;
+        }else if(skill_id.equalsIgnoreCase("")){
+            Toast.makeText(getApplicationContext(), "Please Choose  Skill   ", Toast.LENGTH_LONG).show();
+            validate = false;
+        }else if(sub_Skill_id.equalsIgnoreCase("")){
+            Toast.makeText(getApplicationContext(), "Please choose sub skill  ", Toast.LENGTH_LONG).show();
+            validate = false;
+        }
+        if(focusView != null && focusView.requestFocus()) {
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        }
+        return validate;
+
     }
 }

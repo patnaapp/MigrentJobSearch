@@ -14,6 +14,7 @@ public class SkillMaster implements KvmSerializable {
     private String SkillName = "";
     private String SkillNameHn = "";
 
+
     public SkillMaster(SoapObject res1) {
         this.Id=res1.getProperty("Id").toString();
         this.SkillName=res1.getProperty("SkillName").toString();

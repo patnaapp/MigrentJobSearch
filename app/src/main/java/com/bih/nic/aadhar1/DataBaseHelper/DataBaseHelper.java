@@ -12,6 +12,7 @@ import android.util.Log;
 
 import com.bih.nic.aadhar1.BenfiList;
 import com.bih.nic.aadhar1.Model.BlockWeb;
+import com.bih.nic.aadhar1.Model.CategoryMaster;
 import com.bih.nic.aadhar1.Model.District;
 import com.bih.nic.aadhar1.Model.SkillMaster;
 import com.bih.nic.aadhar1.Model.SubSkillMaster;
@@ -329,13 +330,13 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
 
             SQLiteDatabase db = this.getReadableDatabase();
 
-            Cursor cur = db.rawQuery("SELECT * FROM  District ", null);
+            Cursor cur = db.rawQuery("SELECT * FROM  Districts ", null);
             int x = cur.getCount();
 
             while (cur.moveToNext()) {
                 District distClass = new District();
 
-                distClass.set_DistCode(cur.getString(cur.getColumnIndex("DistId")));
+                distClass.set_DistCode(cur.getString(cur.getColumnIndex("DistCode")));
                 distClass.set_DistName(cur.getString(cur.getColumnIndex("DistName")));
                 DistList.add(distClass);
             }
@@ -353,9 +354,9 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
 
     }
 
-    public ArrayList<SkillMaster> getCategoryMasterList() {
+    public ArrayList<CategoryMaster> getCategoryMasterList() {
 
-        ArrayList<SkillMaster> list = new ArrayList<SkillMaster>();
+        ArrayList<CategoryMaster> list = new ArrayList<CategoryMaster>();
 
         try {
 
@@ -365,11 +366,11 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
             int x = cur.getCount();
 
             while (cur.moveToNext()) {
-                SkillMaster info = new SkillMaster();
+                CategoryMaster info = new CategoryMaster();
 
-                info.setId(cur.getString(cur.getColumnIndex("Id")));
-                info.setSkillName(cur.getString(cur.getColumnIndex("name")));
-                info.setSkillNameHn(cur.getString(cur.getColumnIndex("nameHN")));
+                info.setCat_id(cur.getString(cur.getColumnIndex("Id")));
+                info.setCat_name(cur.getString(cur.getColumnIndex("name")));
+                info.setCat_name_HinDi(cur.getString(cur.getColumnIndex("nameHN")));
                 list.add(info);
             }
 
@@ -452,15 +453,15 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
 
             SQLiteDatabase db = this.getReadableDatabase();
 
-            Cursor cur = db.rawQuery("SELECT * FROM  Block where DistId = '" + DistId + "'", null);
+            Cursor cur = db.rawQuery("SELECT * FROM  Blocks where DistCode = '" + DistId + "'", null);
             int x = cur.getCount();
 
             while (cur.moveToNext()) {
                 BlockWeb distClass = new BlockWeb();
 
-                distClass.setBlockCode(cur.getString(cur.getColumnIndex("BlockId")));
+                distClass.setBlockCode(cur.getString(cur.getColumnIndex("BlockCode")));
                 distClass.setBlockName(cur.getString(cur.getColumnIndex("BlockName")));
-                distClass.setDistCode(cur.getString(cur.getColumnIndex("DistId")));
+                distClass.setDistCode(cur.getString(cur.getColumnIndex("DistCode")));
                 DistList.add(distClass);
             }
 
@@ -484,16 +485,16 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
 
             SQLiteDatabase db = this.getReadableDatabase();
 
-            Cursor cur = db.rawQuery("SELECT * FROM  PanchayatList where blockId = '" + DistId + "'", null);
+            Cursor cur = db.rawQuery("SELECT * FROM  Panchayat where BlockCode = '" + DistId + "'", null);
             int x = cur.getCount();
 
             while (cur.moveToNext()) {
                 panchayat panchayat = new panchayat();
 
-                panchayat.setPanchayatId(cur.getString(cur.getColumnIndex("panchId")));
-                panchayat.setPanchayatName(cur.getString(cur.getColumnIndex("panchName")));
-                panchayat.setBlockId(cur.getString(cur.getColumnIndex("blockId")));
-                panchayat.setDistId(cur.getString(cur.getColumnIndex("distId")));
+                panchayat.setPanchayatId(cur.getString(cur.getColumnIndex("PanchayatCode")));
+                panchayat.setPanchayatName(cur.getString(cur.getColumnIndex("PanchayatName")));
+                panchayat.setBlockId(cur.getString(cur.getColumnIndex("BlockCode")));
+                panchayat.setDistId(cur.getString(cur.getColumnIndex("DistrictCode")));
                 DistList.add(panchayat);
             }
 

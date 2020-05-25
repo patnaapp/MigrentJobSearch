@@ -59,7 +59,7 @@ public class WebserviceHelper implements KvmSerializable {
     private static final String BindWard="BindWard";
 
     public static final  String APPVERSION_METHOD = "getAppLatest";
-
+    public static final  String UpdateUserDetails = "UpdateUserDetails";
 
 
     public static ArrayList<District> getDistrictData() {
@@ -812,5 +812,44 @@ public class WebserviceHelper implements KvmSerializable {
         return userDetails;
 
     }
+    public static String UpdateUserDetail(BenDetails benDetails,String RegId,String Date) {
+        try {
+            SoapObject request = new SoapObject(SERVICENAMESPACE,
+                    UpdateUserDetails);
+            request.addProperty("_Reg",RegId);
+            request.addProperty("_Dist",benDetails.getDistrictCode());
+            request.addProperty("_Block",benDetails.getBlockCode());
+            request.addProperty("_Panchayat",benDetails.getPanchayatCode());
+            request.addProperty("_Mobile",benDetails.getVchMobile());
+            request.addProperty("_Account",benDetails.getVchBankAccount());
+            request.addProperty("_BankName",benDetails.getVchBankName());
+            request.addProperty("_IFSC",benDetails.getVchIfsc());
+            request.addProperty("_Skill",benDetails.getSkill_Id());
+            request.addProperty("_SubSkillId",benDetails.getSubSkillId());
+            request.addProperty("_Qualification",benDetails.getIntQualification());
+            request.addProperty("_Aadhaar",benDetails.getVchAadhaar());
+            request.addProperty("_NoofExperienceYear",benDetails.getIntExpYears());
+            request.addProperty("_NoofExperienceMonth",benDetails.getIntExpMonths());
+
+
+            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
+                    SoapEnvelope.VER11);
+            envelope.dotNet = true;
+            envelope.setOutputSoapObject(request);
+            HttpTransportSE androidHttpTransport = new HttpTransportSE(SERVICEURL);
+            androidHttpTransport.call(SERVICENAMESPACE + UpdateUserDetails, envelope);
+            Object result = envelope.getResponse();
+            if (result != null) {
+                return result.toString();
+            } else
+                return null;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
 
 }
