@@ -197,6 +197,7 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
                     benDetails.setVchMobile(Mobile_no);
                     benDetails.setVchBankAccount(Bank_Ac_no);
                     benDetails.setVchBankName(_Bank_name);
+
                     benDetails.setVchIfsc(Ifsc_code);
                     benDetails.setIntCategory(Dist_id);
                     benDetails.setSkill_Id(skill_id);
@@ -218,6 +219,7 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
 
         edt_exp_year.setText(benDetails.getIntExpMonths());
         edt_exp_month.setText(benDetails.getIntExpYears());
+        edt_aadharno.setText(benDetails.getVchAadhaar());
 
         //   spn_category
         edt_ifsc_code.setText(benDetails.getVchIfsc());
