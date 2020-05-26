@@ -122,7 +122,7 @@ public class MainHomeActivity extends Activity {
 
     public void onSearchJob(View view){
         Intent i =new Intent(MainHomeActivity.this,JobSearchActivity.class);
-        i.putExtra("data",BenDetails);
+        i.putExtra("data",Reg_No);
         startActivity(i);
     }
 
