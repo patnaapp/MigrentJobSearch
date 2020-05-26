@@ -216,7 +216,8 @@ public class MainHomeActivity extends Activity {
             }
 
         }
-    } private class FetchBenData1 extends AsyncTask<String, Void, BenDetails> {
+    }
+    private class FetchBenData1 extends AsyncTask<String, Void, BenDetails> {
         BenDetails data;
         String _uid;
         private final ProgressDialog dialog = new ProgressDialog(MainHomeActivity.this);
