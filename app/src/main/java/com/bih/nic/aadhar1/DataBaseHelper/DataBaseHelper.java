@@ -543,6 +543,35 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
 
     }
 
+
+    public String getBenImg(String uid) {
+
+        String status="NA";
+        try {
+
+            SQLiteDatabase db = this.getReadableDatabase();
+
+            String[] whereArgs = new String[]{uid};
+            Cursor cur = db.rawQuery("SELECT Img_ben from UserDetails where UseId=?",whereArgs);
+            int x = cur.getCount();
+            while (cur.moveToNext()) {
+
+                status = cur.getString(cur.getColumnIndex("Img_ben"));
+
+            }
+            cur.close();
+            db.close();
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            // TODO: handle exception
+
+        }
+        return status;
+
+    }
+
     //Insert User
 
     public long insertUserDetails(UserDetails result,String userid) {

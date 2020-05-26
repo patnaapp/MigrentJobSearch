@@ -119,7 +119,7 @@ public class Login extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-       // getIMEI();
+
 
     }
 
@@ -148,14 +148,8 @@ public class Login extends Activity {
         @Override
         protected UserDetails doInBackground(String... param) {
 
-//            if (!Utiilties.isOnline(Login.this)) {
-//                UserDetails userDetails = new UserDetails();
-//                userDetails.setAuthenticated(true);
-//                return userDetails;
-//
-//            } else {
                 return WebserviceHelper.loginUser(regN0,otp);
-            //}
+
 
         }
 
@@ -239,10 +233,9 @@ public class Login extends Activity {
 
                     DataBaseHelper placeData = new DataBaseHelper(Login.this);
                     long i = placeData.setPanchayatLocal(result, PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("District", ""),blockcode);
-                  //  if (i > 0) setPanchayatList(blockcode);
+
                 } else {
-                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.loading_fail),
-                            Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.loading_fail), Toast.LENGTH_LONG).show();
 
                 }
             }

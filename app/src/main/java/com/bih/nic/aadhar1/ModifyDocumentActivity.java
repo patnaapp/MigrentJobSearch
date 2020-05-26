@@ -294,6 +294,11 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
         ArrayAdapter adaptor = new ArrayAdapter(this, android.R.layout.simple_spinner_item, list);
         adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spn_type_of_worker.setAdapter(adaptor);
+        if(benDetails.getIntQualification()!=null){
+            //if(!benDetails.getIntCategory().equalsIgnoreCase("NA"))
+          //  spn_type_of_worker.setSelection());
+
+        }
     }
     public void loadDistrictSpinnerData(){
         DistrictList = dataBaseHelper.getDistDetail();

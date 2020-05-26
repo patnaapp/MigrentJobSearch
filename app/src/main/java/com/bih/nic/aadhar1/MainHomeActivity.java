@@ -7,21 +7,27 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.TestLooperManager;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bih.nic.aadhar1.DataBaseHelper.DataBaseHelper;
 import com.bih.nic.aadhar1.Model.BenDetails;
 import com.bih.nic.aadhar1.Model.DefaultResponse;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -34,13 +40,16 @@ public class MainHomeActivity extends Activity {
     CircleImageView profile_image;
 
    BenDetails BenDetails;
+    DataBaseHelper dataBaseHelper;
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_home);
         getActionBar().hide();
 
         BenDetails=new BenDetails();
+        dataBaseHelper=new DataBaseHelper(MainHomeActivity.this);
         Utiilties.setStatusBarColor(MainHomeActivity.this);
         Reg_No=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserId", "");
         user_name=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserName", "");
@@ -61,7 +70,21 @@ public class MainHomeActivity extends Activity {
         tv_mobile.setText("  मोबाइल नंबर: "+mobile);
         tv_address.setText("  पता: "+address);
 
+        String imagesr=dataBaseHelper.getBenImg(Reg_No);
 
+        if (imagesr!=null) {
+
+            byte[] imgData = Base64.decode(imagesr, Base64.DEFAULT);
+            Bitmap bmp = BitmapFactory.decodeByteArray(imgData, 0, imgData.length);
+            profile_image.setImageBitmap(bmp);
+
+
+            //}
+        }
+        else {
+            Picasso.get().load(BenDetails.getVchPhoto()).into(profile_image);
+        }
+        
         ll_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,7 +107,7 @@ public class MainHomeActivity extends Activity {
                 }else{
 
                     new FetchBenData1().execute();
-                    //new ValidateAdhhar(benfiList).execute();
+
                 }
 
             }
@@ -111,13 +134,11 @@ public class MainHomeActivity extends Activity {
 
                 }else{
                     new FetchBenData().execute();
-                    //new ValidateAdhhar(benfiList).execute();
+
                 }
 
             }
         });
-       // ActionBar actionBar = getActionBar();
-       // actionBar.setTitle("Physical Verification");
     }
 
     public void onSearchJob(View view){
@@ -155,13 +176,6 @@ public class MainHomeActivity extends Activity {
         private final ProgressDialog dialog = new ProgressDialog(MainHomeActivity.this);
         private final android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(MainHomeActivity.this).create();
 
-//
-//        UPLOADDATA(BarcodeEntity data) {
-//            this.data = data;
-//            this._uid = data.getUniqueNo();
-//
-//        }
-
         @Override
         protected void onPreExecute() {
 
@@ -197,7 +211,7 @@ public class MainHomeActivity extends Activity {
 
 
             } else {
-                //chk_msg_OK_networkdata("Uploading failed.Please Try Again Later");
+
                 Toast.makeText(getApplicationContext(), "Result Null..Please Try Later", Toast.LENGTH_SHORT).show();
             }
 
@@ -223,10 +237,6 @@ public class MainHomeActivity extends Activity {
         @Override
         protected BenDetails doInBackground(String... param) {
 
-//
-//            String res = WebServiceHelper.UploadFinalData(data, PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("USERID", ""));
-//            return res;
-
             return WebserviceHelper.getBen_Details(Reg_No);
 
         }
@@ -245,7 +255,7 @@ public class MainHomeActivity extends Activity {
 
 
             } else {
-                //chk_msg_OK_networkdata("Uploading failed.Please Try Again Later");
+
                 Toast.makeText(getApplicationContext(), "Result Null..Please Try Later", Toast.LENGTH_SHORT).show();
             }
 
