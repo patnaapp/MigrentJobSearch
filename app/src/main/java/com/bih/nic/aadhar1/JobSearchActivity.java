@@ -44,7 +44,7 @@ public class JobSearchActivity extends Activity implements AdapterView.OnItemSel
     ArrayList<District> DistrictList;
 
     String skillId,subSkillId;
-    String DistId="";
+    String DistId="", RegNo;
 
     DataBaseHelper dataBaseHelper;
 
@@ -58,7 +58,7 @@ public class JobSearchActivity extends Activity implements AdapterView.OnItemSel
 
         initialise();
 
-        benDetails = (BenDetails)getIntent().getSerializableExtra("data");
+        RegNo = getIntent().getStringExtra("data");
 
         setDistrictSpinner();
 
@@ -185,7 +185,7 @@ public class JobSearchActivity extends Activity implements AdapterView.OnItemSel
 
         @Override
         protected ArrayList<JobListEntity> doInBackground(String...arg) {
-            return WebserviceHelper.searchJobMasterData(benDetails.getUser_RegId(), DistId);
+            return WebserviceHelper.searchJobMasterData(RegNo, DistId);
         }
 
         @Override
