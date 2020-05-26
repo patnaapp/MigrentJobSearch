@@ -60,7 +60,7 @@ public class JobSearchActivity extends Activity implements AdapterView.OnItemSel
 
         benDetails = (BenDetails)getIntent().getSerializableExtra("data");
 
-        loadSkillSpinnerData();
+        setDistrictSpinner();
 
         //For Testing
         JobListEntity info = new JobListEntity();
@@ -68,7 +68,6 @@ public class JobSearchActivity extends Activity implements AdapterView.OnItemSel
         data = new ArrayList<>();
         data.add(info);
         populateData();
-        loadSubSkillSpinnerData();
     }
 
     public void initialise(){
@@ -98,21 +97,21 @@ public class JobSearchActivity extends Activity implements AdapterView.OnItemSel
         }
     }
 
-    public void setSkillSpinner(){
-        ArrayList<String> list = new ArrayList<String>();
-        list.add("-Select-");
-        int index = 0;
-        for (SkillMaster info: skillList){
-            list.add(info.getSkillName());
-        }
+//    public void setSkillSpinner(){
+//        ArrayList<String> list = new ArrayList<String>();
+//        list.add("-Select-");
+//        int index = 0;
+//        for (SkillMaster info: skillList){
+//            list.add(info.getSkillName());
+//        }
+//
+//        ArrayAdapter adaptor = new ArrayAdapter(this, android.R.layout.simple_spinner_item, list);
+//        adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spn_skill.setAdapter(adaptor);
+//
+//    }
 
-        ArrayAdapter adaptor = new ArrayAdapter(this, android.R.layout.simple_spinner_item, list);
-        adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spn_skill.setAdapter(adaptor);
-
-    }
-
-    public void setSubSkillSpinner(){
+    public void setDistrictSpinner(){
         DistrictList=dataBaseHelper.getDistDetail();
         ArrayList<String> list = new ArrayList<String>();
         list.add("-Select-");
@@ -125,41 +124,41 @@ public class JobSearchActivity extends Activity implements AdapterView.OnItemSel
         spn_sub_skill.setAdapter(adaptor);
     }
 
-    public void loadSkillSpinnerData(){
-        skillList = dataBaseHelper.getSkillMasterList();
-        if (skillList.size() > 0){
-            setSkillSpinner();
-        }else{
-            if (Utiilties.isOnline(this) == false) {
-                showAlertForInternet();
-            } else {
-                new SyncSkillMasterData().execute();
-            }
-        }
-    }
+//    public void loadSkillSpinnerData(){
+//        skillList = dataBaseHelper.getSkillMasterList();
+//        if (skillList.size() > 0){
+//            setSkillSpinner();
+//        }else{
+//            if (Utiilties.isOnline(this) == false) {
+//                showAlertForInternet();
+//            } else {
+//                new SyncSkillMasterData().execute();
+//            }
+//        }
+//    }
 
-    public void loadSubSkillSpinnerData(){
-        subSkillList = dataBaseHelper.getSubSkillMasterList(skillId);
-        if (subSkillList.size() > 0){
-            setSubSkillSpinner();
-        }else{
-            if (Utiilties.isOnline(this) == false) {
-                showAlertForInternet();
-            } else {
-                new SyncSubSkillMasterData().execute();
-            }
-        }
-    }
+//    public void loadSubSkillSpinnerData(){
+//        subSkillList = dataBaseHelper.getSubSkillMasterList(skillId);
+//        if (subSkillList.size() > 0){
+//            setSubSkillSpinner();
+//        }else{
+//            if (Utiilties.isOnline(this) == false) {
+//                showAlertForInternet();
+//            } else {
+//                new SyncSubSkillMasterData().execute();
+//            }
+//        }
+//    }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         switch (parent.getId()) {
-            case R.id.spn_skill:
-                if (position > 0) {
-                    skillId = skillList.get(position -1).getId();
-                    loadSubSkillSpinnerData();
-                }
-                break;
+//            case R.id.spn_skill:
+//                if (position > 0) {
+//                    skillId = skillList.get(position -1).getId();
+//                    loadSubSkillSpinnerData();
+//                }
+//                break;
             case R.id.spn_sub_skill:
                 if (position > 0) {
                     DistId = DistrictList.get(position - 1).get_DistCode();
@@ -173,91 +172,119 @@ public class JobSearchActivity extends Activity implements AdapterView.OnItemSel
 
     }
 
-    private class SyncSkillMasterData extends AsyncTask<String, Void, ArrayList<SkillMaster>> {
+    private class SyncJobSearchData extends AsyncTask<String, Void, ArrayList<JobListEntity>> {
         private final ProgressDialog dialog = new ProgressDialog(JobSearchActivity.this);
         int optionType;
 
         @Override
         protected void onPreExecute() {
             this.dialog.setCanceledOnTouchOutside(false);
-            this.dialog.setMessage("Syncing Skills Data...");
+            this.dialog.setMessage("नौकरी खोजा जा रहा हैं...");
             this.dialog.show();
         }
 
         @Override
-        protected ArrayList<SkillMaster> doInBackground(String...arg) {
-            return WebserviceHelper.getSkillMasterData();
+        protected ArrayList<JobListEntity> doInBackground(String...arg) {
+            return WebserviceHelper.searchJobMasterData(benDetails.getUser_RegId(), DistId);
         }
 
         @Override
-        protected void onPostExecute(ArrayList<SkillMaster> result) {
+        protected void onPostExecute(ArrayList<JobListEntity> result) {
             if (this.dialog.isShowing()) {
                 this.dialog.dismiss();
             }
 
-            if(result.size() > 0){
-
-                DataBaseHelper helper=new DataBaseHelper(getApplicationContext());
-                long i= helper.setSkillMasterData(result);
-
-                skillList = helper.getSkillMasterList();
-                setSkillSpinner();
-
-                if(i>0) {
-                    Toast.makeText(getApplicationContext(), "Data Synced Successfully",Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    Toast.makeText(getApplicationContext(), "Failed to save Data! Try again",Toast.LENGTH_SHORT).show();
-                }
-            }else{
-                Toast.makeText(getApplicationContext(), "No Data Found!!",Toast.LENGTH_SHORT).show();
-            }
+            data = result;
+            populateData();
 
         }
     }
 
-    private class SyncSubSkillMasterData extends AsyncTask<String, Void, ArrayList<SubSkillMaster>> {
-        private final ProgressDialog dialog = new ProgressDialog(JobSearchActivity.this);
-        int optionType;
-
-        @Override
-        protected void onPreExecute() {
-            this.dialog.setCanceledOnTouchOutside(false);
-            this.dialog.setMessage("Syncing Skills Data...");
-            this.dialog.show();
-        }
-
-        @Override
-        protected ArrayList<SubSkillMaster> doInBackground(String...arg) {
-            return WebserviceHelper.getSubSkillMasterData();
-        }
-
-        @Override
-        protected void onPostExecute(ArrayList<SubSkillMaster> result) {
-            if (this.dialog.isShowing()) {
-                this.dialog.dismiss();
-            }
-
-            if(result.size() > 0){
-
-                DataBaseHelper helper=new DataBaseHelper(getApplicationContext());
-                long i= helper.setSubSkillMasterData(result);
-
-                subSkillList = helper.getSubSkillMasterList(skillId);
-                setSubSkillSpinner();
-
-                if(i>0) {
-                    Toast.makeText(getApplicationContext(), "Data Synced Successfully",Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    Toast.makeText(getApplicationContext(), "Failed to save Data! Try again",Toast.LENGTH_SHORT).show();
-                }
-            }else{
-                Toast.makeText(getApplicationContext(), "No Data Found!!",Toast.LENGTH_SHORT).show();
-            }
-
-        }
-    }
+//    private class SyncSkillMasterData extends AsyncTask<String, Void, ArrayList<SkillMaster>> {
+//        private final ProgressDialog dialog = new ProgressDialog(JobSearchActivity.this);
+//        int optionType;
+//
+//        @Override
+//        protected void onPreExecute() {
+//            this.dialog.setCanceledOnTouchOutside(false);
+//            this.dialog.setMessage("Syncing Skills Data...");
+//            this.dialog.show();
+//        }
+//
+//        @Override
+//        protected ArrayList<SkillMaster> doInBackground(String...arg) {
+//            return WebserviceHelper.getSkillMasterData();
+//        }
+//
+//        @Override
+//        protected void onPostExecute(ArrayList<SkillMaster> result) {
+//            if (this.dialog.isShowing()) {
+//                this.dialog.dismiss();
+//            }
+//
+//            if(result.size() > 0){
+//
+//                DataBaseHelper helper=new DataBaseHelper(getApplicationContext());
+//                long i= helper.setSkillMasterData(result);
+//
+//                skillList = helper.getSkillMasterList();
+//                setSkillSpinner();
+//
+//                if(i>0) {
+//                    Toast.makeText(getApplicationContext(), "Data Synced Successfully",Toast.LENGTH_SHORT).show();
+//                }
+//                else {
+//                    Toast.makeText(getApplicationContext(), "Failed to save Data! Try again",Toast.LENGTH_SHORT).show();
+//                }
+//            }else{
+//                Toast.makeText(getApplicationContext(), "No Data Found!!",Toast.LENGTH_SHORT).show();
+//            }
+//
+//        }
+//    }
+//
+//    private class SyncSubSkillMasterData extends AsyncTask<String, Void, ArrayList<SubSkillMaster>> {
+//        private final ProgressDialog dialog = new ProgressDialog(JobSearchActivity.this);
+//        int optionType;
+//
+//        @Override
+//        protected void onPreExecute() {
+//            this.dialog.setCanceledOnTouchOutside(false);
+//            this.dialog.setMessage("Syncing Skills Data...");
+//            this.dialog.show();
+//        }
+//
+//        @Override
+//        protected ArrayList<SubSkillMaster> doInBackground(String...arg) {
+//            return WebserviceHelper.getSubSkillMasterData();
+//        }
+//
+//        @Override
+//        protected void onPostExecute(ArrayList<SubSkillMaster> result) {
+//            if (this.dialog.isShowing()) {
+//                this.dialog.dismiss();
+//            }
+//
+//            if(result.size() > 0){
+//
+//                DataBaseHelper helper=new DataBaseHelper(getApplicationContext());
+//                long i= helper.setSubSkillMasterData(result);
+//
+//                subSkillList = helper.getSubSkillMasterList(skillId);
+//                setSubSkillSpinner();
+//
+//                if(i>0) {
+//                    Toast.makeText(getApplicationContext(), "Data Synced Successfully",Toast.LENGTH_SHORT).show();
+//                }
+//                else {
+//                    Toast.makeText(getApplicationContext(), "Failed to save Data! Try again",Toast.LENGTH_SHORT).show();
+//                }
+//            }else{
+//                Toast.makeText(getApplicationContext(), "No Data Found!!",Toast.LENGTH_SHORT).show();
+//            }
+//
+//        }
+//    }
 
     public void showAlertForInternet(){
         AlertDialog.Builder ab = new AlertDialog.Builder(this);

@@ -11,8 +11,8 @@
         <!--android:layout_marginTop="5dp">-->
 
         <LinearLayout
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
             android:layout_marginBottom="8dp"
             android:id="@+id/sblist"
             android:layout_width="match_parent"
@@ -44,7 +44,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textSize="13sp"
-                            android:text="Sl No."/>
+                            android:text="क्रम सं."
+                            android:textStyle="bold"
+                            android:textColor="@color/colorPrimary"/>
 
                         <TextView
                             android:id="@+id/tv_slno"
@@ -74,15 +76,17 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textAlignment="center"
                                 android:textSize="13sp"
-                                android:text="Work Site"
-                                android:textColor="@color/cardview_dark_background"/>
+                                android:text="कार्य स्थल"
+                                android:textStyle="bold"
+                                android:textColor="@color/colorPrimary"/>
 
                             <TextView
                                 android:id="@+id/tv_work_site"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:gravity="center"
+                                android:textAlignment="center"
                                 android:lines="1"
                                 android:textSize="14sp"
                                 android:textStyle="normal"
@@ -96,16 +100,19 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textAlignment="center"
                                 android:textSize="13sp"
-                                android:textColor="@color/cardview_dark_background"
-                                android:text="Skill Category"/>
+                                android:textStyle="bold"
+                                android:textColor="@color/colorPrimary"
+                                android:text="कुशलता श्रेणी"/>
 
                             <TextView
                                 android:id="@+id/tv_skill_cat"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textAlignment="center"
                                 android:lines="1"
                                 android:textSize="14sp"
                                 android:textStyle="normal"
@@ -119,8 +126,8 @@
                 <LinearLayout
                     android:layout_marginTop="2dp"
                     android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="@color/color_white"/>
+                    android:layout_height="1dp"
+                    android:background="@color/colorPrimary"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -135,12 +142,12 @@
                         android:padding="3dp">
 
                         <TextView
-                            android:textStyle="normal"
                             android:layout_width="80dp"
                             android:layout_height="wrap_content"
                             android:textSize="13sp"
-                            android:text="Skill Name"
-                            android:textColor="@color/cardview_dark_background"/>
+                            android:text="कौशल"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorPrimary"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -166,10 +173,11 @@
 
                         <TextView
                             android:textSize="13sp"
-                            android:textStyle="normal"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorPrimary"
                             android:layout_width="80dp"
                             android:layout_height="wrap_content"
-                            android:text="No of Person" />
+                            android:text="लोगों की संख्या" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -195,10 +203,11 @@
 
                         <TextView
                             android:textSize="13sp"
-                            android:textStyle="normal"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorPrimary"
                             android:layout_width="80dp"
                             android:layout_height="wrap_content"
-                            android:text="Gender" />
+                            android:text="लिंग" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -224,10 +233,11 @@
 
                         <TextView
                             android:textSize="13sp"
-                            android:textStyle="normal"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorPrimary"
                             android:layout_width="80dp"
                             android:layout_height="wrap_content"
-                            android:text="Start Date" />
+                            android:text="आरंभ तिथि" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -244,13 +254,43 @@
                             android:text="New Text"
                             android:textColor="@color/color_black" />
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="3dp">
+
+                        <TextView
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorPrimary"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:text="खंड" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="4dp"
+                            android:textStyle="bold"
+                            android:text=":"/>
+
+                        <TextView
+                            android:id="@+id/tv_block"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="6dp"
+                            android:text="New Text"
+                            android:textColor="@color/color_black" />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_marginTop="2dp"
                     android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="@color/color_white"/>
+                    android:layout_height="1dp"
+                    android:background="@color/colorPrimary"/>
 
                 <LinearLayout
                     android:layout_marginTop="4dp"
@@ -268,14 +308,16 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
-                            android:text="Experience"
-                            android:textColor="@color/cardview_dark_background"/>
+                            android:textAlignment="center"
+                            android:text="अनुभव"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorPrimary"/>
 
                         <TextView
                             android:id="@+id/tv_exp"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
+                            android:textAlignment="center"
                             android:lines="1"
                             android:textSize="14sp"
                             android:textStyle="normal"
@@ -292,14 +334,17 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
-                            android:text="Experience Max"
-                            android:textColor="@color/cardview_dark_background"/>
+                            android:lines="1"
+                            android:text="अधिकतम अनुभव"
+                            android:textAlignment="center"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorPrimary"/>
 
                         <TextView
                             android:id="@+id/tv_exp_max"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
+                            android:textAlignment="center"
                             android:lines="1"
                             android:textSize="14sp"
                             android:textStyle="normal"
@@ -315,14 +360,17 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textAlignment="center"
                             android:textSize="12sp"
-                            android:text="Salary"
-                            android:textColor="@color/cardview_dark_background"/>
+                            android:text="वेतन"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorPrimary"/>
 
                         <TextView
                             android:id="@+id/tv_salary"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textAlignment="center"
                             android:lines="1"
                             android:textSize="14sp"
                             android:textStyle="normal"
@@ -338,15 +386,17 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textAlignment="center"
                             android:textSize="12sp"
-                            android:text="Salary Max"
-                            android:textColor="@color/cardview_dark_background"/>
+                            android:text="अधिकतम वेतन"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorPrimary"/>
 
                         <TextView
                             android:id="@+id/tv_salary_max"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
+                            android:textAlignment="center"
                             android:lines="1"
                             android:textSize="14sp"
                             android:textStyle="normal"
