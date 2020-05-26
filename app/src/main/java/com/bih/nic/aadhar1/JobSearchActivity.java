@@ -1,9 +1,10 @@
 package com.bih.nic.aadhar1;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class JobSearchActivity extends AppCompatActivity {
+public class JobSearchActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
