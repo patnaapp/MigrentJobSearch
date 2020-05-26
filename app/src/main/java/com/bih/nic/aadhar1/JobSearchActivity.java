@@ -162,6 +162,7 @@ public class JobSearchActivity extends Activity implements AdapterView.OnItemSel
             case R.id.spn_sub_skill:
                 if (position > 0) {
                     DistId = DistrictList.get(position - 1).get_DistCode();
+                    new SyncJobSearchData().execute();
                 }
                 break;
         }

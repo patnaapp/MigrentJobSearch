@@ -61,6 +61,7 @@ public class Login extends Activity {
                 setvalue();
                 if(isValidInput()){
                     if(Utiilties.isOnline(getApplicationContext())) {
+                        setvalue();
                         new LoginTask(et_reg_no.getText().toString(),et_otp.getText().toString()).execute();
                     }else {
                         Utiilties.internetNotAvailableDialog(Login.this);
@@ -176,6 +177,7 @@ public class Login extends Activity {
                     PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("Mobile",result.getMobileNo()).commit();
                     PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("Age",result.getAge()).commit();
                     PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("Address",result.getAddress()).commit();
+                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("ProfileImg",result.getProfileImg()).commit();
 
 
                     Intent intent=new Intent(Login.this,MainHomeActivity.class);

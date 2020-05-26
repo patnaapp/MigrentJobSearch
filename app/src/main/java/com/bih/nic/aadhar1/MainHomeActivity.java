@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.bih.nic.aadhar1.Model.BenDetails;
 import com.bih.nic.aadhar1.Model.DefaultResponse;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -29,7 +30,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainHomeActivity extends Activity {
     LinearLayout ll_profile,ll_register_Grivance;
-    String Reg_No="",user_name="", mobile="", address="";
+    String Reg_No="",user_name="", mobile="", address="", profileImg = "";
     TextView tv_benname,urole,tv_mobile,tv_address;
     CircleImageView profile_image;
 
@@ -46,6 +47,7 @@ public class MainHomeActivity extends Activity {
         user_name=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserName", "");
         mobile=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("Mobile", "");
         address=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("Address", "");
+        profileImg=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("ProfileImg", "");
 
         ll_profile=(LinearLayout)findViewById(R.id.ll_profile);
         ll_register_Grivance=(LinearLayout)findViewById(R.id.ll_register_Grivance);
@@ -61,6 +63,7 @@ public class MainHomeActivity extends Activity {
         tv_mobile.setText("  मोबाइल नंबर: "+mobile);
         tv_address.setText("  पता: "+address);
 
+        Picasso.with(this).load("http://10.133.20.159/"+profileImg).error(R.drawable.profile).into(profile_image);
 
         ll_profile.setOnClickListener(new View.OnClickListener() {
             @Override
