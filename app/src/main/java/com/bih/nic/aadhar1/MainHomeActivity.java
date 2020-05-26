@@ -51,11 +51,6 @@ public class MainHomeActivity extends Activity {
         BenDetails=new BenDetails();
         dataBaseHelper=new DataBaseHelper(MainHomeActivity.this);
         Utiilties.setStatusBarColor(MainHomeActivity.this);
-        Reg_No=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserId", "");
-        user_name=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserName", "");
-        mobile=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("Mobile", "");
-        address=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("Address", "");
-        DistName=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("DistName", "");
 
         ll_profile=(LinearLayout)findViewById(R.id.ll_profile);
         ll_register_Grivance=(LinearLayout)findViewById(R.id.ll_register_Grivance);
@@ -65,26 +60,6 @@ public class MainHomeActivity extends Activity {
         tv_address=(TextView) findViewById(R.id.tv_address);
 
         profile_image=(CircleImageView) findViewById(R.id.profile_image);
-
-        tv_benname.setText(user_name);
-        urole.setText("  पंजीकरण संख्या: "+Reg_No);
-        tv_mobile.setText("  मोबाइल नंबर: "+mobile);
-        tv_address.setText("  पता: "+address);
-
-        String imagesr=dataBaseHelper.getBenImg(Reg_No);
-
-        if (imagesr!=null) {
-
-            byte[] imgData = Base64.decode(imagesr, Base64.DEFAULT);
-            Bitmap bmp = BitmapFactory.decodeByteArray(imgData, 0, imgData.length);
-            profile_image.setImageBitmap(bmp);
-
-
-            //}
-        }
-        else {
-            Picasso.with(this).load("http://10.133.20.159/"+BenDetails.getVchPhoto()).error(R.drawable.profile).into(profile_image);
-        }
         
         ll_profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,6 +115,37 @@ public class MainHomeActivity extends Activity {
 
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Reg_No=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserId", "");
+        user_name=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserName", "");
+        mobile=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("Mobile", "");
+        address=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("Address", "");
+        DistName=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("DistName", "");
+
+        tv_benname.setText(user_name);
+        urole.setText("  पंजीकरण संख्या: "+Reg_No);
+        tv_mobile.setText("  मोबाइल नंबर: "+mobile);
+        tv_address.setText("  पता: "+address);
+
+        String imagesr=dataBaseHelper.getBenImg(Reg_No);
+
+        if (imagesr!=null) {
+
+            byte[] imgData = Base64.decode(imagesr, Base64.DEFAULT);
+            Bitmap bmp = BitmapFactory.decodeByteArray(imgData, 0, imgData.length);
+            profile_image.setImageBitmap(bmp);
+
+
+            //}
+        }
+        else {
+            Picasso.with(this).load("http://10.133.20.159/"+BenDetails.getVchPhoto()).error(R.drawable.profile).into(profile_image);
+        }
     }
 
     public void onSearchJob(View view){

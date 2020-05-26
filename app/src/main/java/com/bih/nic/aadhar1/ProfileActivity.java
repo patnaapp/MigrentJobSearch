@@ -140,6 +140,8 @@ public class ProfileActivity extends Activity implements View.OnClickListener{
                     img_studphoto.setImageBitmap(Utiilties.GenerateThumbnail(bmp,
                             500, 500));
                     values.put("Img_ben", str_img1);
+                    values.put("Lat1",String.valueOf(imageData1.getStringExtra("Lat")));
+                    values.put("Long1",String.valueOf(imageData1.getStringExtra("Lng")));
                     whereArgs = new String[]{String.valueOf(Reg_No)};
 
                     long c=db.update("UserDetails", values, "UseId=?", whereArgs);
