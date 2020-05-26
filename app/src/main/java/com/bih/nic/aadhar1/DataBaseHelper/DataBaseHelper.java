@@ -331,7 +331,7 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
 
             SQLiteDatabase db = this.getReadableDatabase();
 
-            Cursor cur = db.rawQuery("SELECT * FROM  Districts ", null);
+            Cursor cur = db.rawQuery("SELECT * FROM  Districts ORDER BY DistName", null);
             int x = cur.getCount();
 
             while (cur.moveToNext()) {

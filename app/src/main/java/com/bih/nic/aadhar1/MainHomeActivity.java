@@ -25,10 +25,13 @@ import com.bih.nic.aadhar1.Model.DefaultResponse;
 
 import java.util.ArrayList;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class MainHomeActivity extends Activity {
     LinearLayout ll_profile,ll_register_Grivance;
-    String Reg_No="",user_name="";
-    TextView tv_benname,urole;
+    String Reg_No="",user_name="", mobile="", address="";
+    TextView tv_benname,urole,tv_mobile,tv_address;
+    CircleImageView profile_image;
 
    BenDetails BenDetails;
     @Override
@@ -41,13 +44,22 @@ public class MainHomeActivity extends Activity {
         Utiilties.setStatusBarColor(MainHomeActivity.this);
         Reg_No=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserId", "");
         user_name=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserName", "");
+        mobile=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("Mobile", "");
+        address=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("Address", "");
 
         ll_profile=(LinearLayout)findViewById(R.id.ll_profile);
         ll_register_Grivance=(LinearLayout)findViewById(R.id.ll_register_Grivance);
         tv_benname=(TextView) findViewById(R.id.tv_benname);
         urole=(TextView) findViewById(R.id.urole);
+        tv_mobile=(TextView) findViewById(R.id.tv_mobile);
+        tv_address=(TextView) findViewById(R.id.tv_address);
+
+        profile_image=(CircleImageView) findViewById(R.id.profile_image);
+
         tv_benname.setText(user_name);
-        urole.setText(Reg_No);
+        urole.setText("पंजीकरण संख्या: "+Reg_No);
+        tv_mobile.setText("मोबाइल नंबर: "+mobile);
+        tv_address.setText("पता: "+address);
 
 
         ll_profile.setOnClickListener(new View.OnClickListener() {
@@ -154,7 +166,7 @@ public class MainHomeActivity extends Activity {
         protected void onPreExecute() {
 
             this.dialog.setCanceledOnTouchOutside(false);
-            this.dialog.setMessage("UpLoading...");
+            this.dialog.setMessage("लोड हो रहा है...");
             if (!MainHomeActivity.this.isFinishing()) {
                 this.dialog.show();
             }
@@ -207,7 +219,7 @@ public class MainHomeActivity extends Activity {
         protected void onPreExecute() {
 
             this.dialog.setCanceledOnTouchOutside(false);
-            this.dialog.setMessage("UpLoading...");
+            this.dialog.setMessage("लोड हो रहा है...");
             if (!MainHomeActivity.this.isFinishing()) {
                 this.dialog.show();
             }
