@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -29,7 +31,7 @@ import java.util.ArrayList;
 
 public class JobSearchActivity extends Activity implements AdapterView.OnItemSelectedListener {
 
-    ListView listView;
+    RecyclerView listView;
     TextView tv_Norecord;
     Spinner spn_skill,spn_sub_skill;
 
@@ -89,9 +91,12 @@ public class JobSearchActivity extends Activity implements AdapterView.OnItemSel
             Log.e("data", ""+data.size());
             tv_Norecord.setVisibility(View.GONE);
             listView.setVisibility(View.VISIBLE);
+
+
             adaptor_showedit_listDetail = new JobSearchAdapter(this, data);
+            listView.setLayoutManager(new LinearLayoutManager(this));
             listView.setAdapter(adaptor_showedit_listDetail);
-            adaptor_showedit_listDetail.notifyDataSetChanged();
+
         }else{
             listView.setVisibility(View.GONE);
             tv_Norecord.setVisibility(View.VISIBLE);
@@ -181,7 +186,7 @@ public class JobSearchActivity extends Activity implements AdapterView.OnItemSel
         @Override
         protected void onPreExecute() {
             this.dialog.setCanceledOnTouchOutside(false);
-            this.dialog.setMessage("नौकरी खोजा जा रहा हैं...");
+            this.dialog.setMessage("लोड हो रहा है...");
             this.dialog.show();
         }
 
