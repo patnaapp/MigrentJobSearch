@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.bih.nic.aadhar1.DataBaseHelper.DataBaseHelper;
 import com.bih.nic.aadhar1.Model.BenDetails;
+import com.bih.nic.aadhar1.Model.District;
 import com.bih.nic.aadhar1.Model.JobListEntity;
 import com.bih.nic.aadhar1.Model.SkillMaster;
 import com.bih.nic.aadhar1.Model.SubSkillMaster;
@@ -40,8 +41,10 @@ public class JobSearchActivity extends Activity implements AdapterView.OnItemSel
 
     ArrayList<SkillMaster> skillList, cateogryList;
     ArrayList<SubSkillMaster> subSkillList;
+    ArrayList<District> DistrictList;
 
     String skillId,subSkillId;
+    String DistId="";
 
     DataBaseHelper dataBaseHelper;
 
@@ -65,6 +68,7 @@ public class JobSearchActivity extends Activity implements AdapterView.OnItemSel
         data = new ArrayList<>();
         data.add(info);
         populateData();
+        loadSubSkillSpinnerData();
     }
 
     public void initialise(){
@@ -72,6 +76,7 @@ public class JobSearchActivity extends Activity implements AdapterView.OnItemSel
 
         spn_skill = findViewById(R.id.spn_skill);
         spn_sub_skill = findViewById(R.id.spn_sub_skill);
+        tv_Norecord = findViewById(R.id.tv_Norecord);
 
         listView = findViewById(R.id.listviewshow);
 
@@ -108,10 +113,11 @@ public class JobSearchActivity extends Activity implements AdapterView.OnItemSel
     }
 
     public void setSubSkillSpinner(){
+        DistrictList=dataBaseHelper.getDistDetail();
         ArrayList<String> list = new ArrayList<String>();
         list.add("-Select-");
-        for (SubSkillMaster info: subSkillList){
-            list.add(info.getSkillName());
+        for (District info: DistrictList){
+            list.add(info.get_DistName());
         }
 
         ArrayAdapter adaptor = new ArrayAdapter(this, android.R.layout.simple_spinner_item, list);
@@ -156,7 +162,7 @@ public class JobSearchActivity extends Activity implements AdapterView.OnItemSel
                 break;
             case R.id.spn_sub_skill:
                 if (position > 0) {
-                    subSkillId = subSkillList.get(position - 1).getId();
+                    DistId = DistrictList.get(position - 1).get_DistCode();
                 }
                 break;
         }

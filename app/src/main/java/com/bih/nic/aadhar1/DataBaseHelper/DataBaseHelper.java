@@ -18,6 +18,7 @@ import com.bih.nic.aadhar1.Model.SkillMaster;
 import com.bih.nic.aadhar1.Model.SubSkillMaster;
 import com.bih.nic.aadhar1.Model.UserDetails;
 import com.bih.nic.aadhar1.Model.panchayat;
+import com.bih.nic.aadhar1.Model.qualification;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -338,6 +339,37 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
 
                 distClass.set_DistCode(cur.getString(cur.getColumnIndex("DistCode")));
                 distClass.set_DistName(cur.getString(cur.getColumnIndex("DistName")));
+                DistList.add(distClass);
+            }
+
+
+            cur.close();
+            db.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            // TODO: handle exception
+
+        }
+        return DistList;
+
+    }
+     public ArrayList<qualification> Qualification() {
+
+        ArrayList<qualification> DistList = new ArrayList<qualification>();
+
+        try {
+
+            SQLiteDatabase db = this.getReadableDatabase();
+
+            Cursor cur = db.rawQuery("SELECT * FROM  QualificationMaster ", null);
+            int x = cur.getCount();
+
+            while (cur.moveToNext()) {
+                qualification distClass = new qualification();
+
+                distClass.setQualificationId(cur.getString(cur.getColumnIndex("ID")));
+                distClass.setQualification_name(cur.getString(cur.getColumnIndex("VCHEDUCATION")));
                 DistList.add(distClass);
             }
 

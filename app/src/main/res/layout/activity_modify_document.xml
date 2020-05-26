@@ -477,6 +477,7 @@
                         android:background="@drawable/edittext_box" />
                 </LinearLayout>
                 <LinearLayout
+                    android:visibility="gone"
                     android:id="@+id/lin_no_needofrepair"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -686,7 +687,6 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:visibility="gone"
                     android:id="@+id/lin_type_of_worker"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

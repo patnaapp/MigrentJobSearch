@@ -27,19 +27,22 @@ import com.bih.nic.aadhar1.Model.District;
 import com.bih.nic.aadhar1.Model.SkillMaster;
 import com.bih.nic.aadhar1.Model.SubSkillMaster;
 import com.bih.nic.aadhar1.Model.panchayat;
+import com.bih.nic.aadhar1.Model.qualification;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
 public class ModifyDocumentActivity extends Activity implements AdapterView.OnItemSelectedListener {
-    Spinner spn_panch_name,spn_block_name,spn_dist_name,spn_sub_skill,spn_skill,spn_category;
+    Spinner spn_panch_name,spn_block_name,spn_dist_name,spn_sub_skill,spn_skill,spn_category,spn_type_of_worker;
     EditText edt_exp_year,edt_Qualification,edt_catogery,edt_ifsc_code,edt_ac_name,edt_ac_no,edt_mobileno,edt_aadharno,edt_exp_month;
     BenDetails benDetails;
     DataBaseHelper dataBaseHelper;
 
     ArrayList<SkillMaster> skillList;
     ArrayList<CategoryMaster> cateogryList;
+    ArrayList<qualification> Qualification;
+    ArrayList<com.bih.nic.aadhar1.Model.qualification> emote;
     ArrayList<SubSkillMaster> subSkillList;
     ArrayList<District>DistrictList=new ArrayList<>();
     ArrayList<BlockWeb>BlockList=new ArrayList<>();
@@ -68,6 +71,7 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
         spn_sub_skill=(Spinner)findViewById(R.id.spn_sub_skill);
         spn_skill=(Spinner)findViewById(R.id.spn_skill);
         spn_category=(Spinner)findViewById(R.id.spn_category);
+        spn_type_of_worker=(Spinner)findViewById(R.id.spn_type_of_worker);
 
         edt_exp_year=(EditText)findViewById(R.id.edt_exp_year);
 
@@ -92,6 +96,7 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
         loadSkillSpinnerData();
         loadCategorySpinnerData();
         loadDistrictSpinnerData();
+        loadQualification();
         loadBlockSpinnerData(benDetails.getDistrictCode());
         loadPanchayatSpinnerData(benDetails.getBlockCode());
         spn_panch_name.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -277,6 +282,18 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
         ArrayAdapter adaptor = new ArrayAdapter(this, android.R.layout.simple_spinner_item, list);
         adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spn_category.setAdapter(adaptor);
+    } public void loadQualification(){
+        Qualification = dataBaseHelper.Qualification();
+        ArrayList<String> list = new ArrayList<String>();
+        list.add("-Select-");
+        int index = 0;
+        for (qualification info: Qualification){
+            list.add(info.getQualification_name());
+            //if(benDetails.get)
+        }
+        ArrayAdapter adaptor = new ArrayAdapter(this, android.R.layout.simple_spinner_item, list);
+        adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spn_type_of_worker.setAdapter(adaptor);
     }
     public void loadDistrictSpinnerData(){
         DistrictList = dataBaseHelper.getDistDetail();

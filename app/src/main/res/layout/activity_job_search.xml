@@ -28,6 +28,7 @@
         android:weightSum="2">
 
         <LinearLayout
+            android:visibility="gone"
             android:layout_weight="1"
             android:id="@+id/lin_skill"
             android:layout_width="match_parent"
@@ -79,7 +80,7 @@
                 android:layout_marginLeft="10dp"
                 android:id="@+id/tv_sub_skill"
                 android:layout_marginStart="10dp"
-                android:text="उप शैक्षिक कौशल-"
+                android:text="जिले का नाम -"
                 android:textColor="#222222"
                 android:textSize="13sp"
                 android:textStyle="normal" />

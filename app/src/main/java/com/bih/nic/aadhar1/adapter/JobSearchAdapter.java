@@ -64,7 +64,7 @@ public class JobSearchAdapter extends BaseAdapter {
 
         JobListEntity info = ThrList.get(position);
 
-        holder.tv_slno.setText(position+1);
+       // holder.tv_slno.setText(position+1);
         holder.tv_work_site.setText(info.getWorkSite());
         holder.tv_skill_cat.setText(info.getWorkSite());
         holder.tv_skill_name.setText(info.getWorkSite());
