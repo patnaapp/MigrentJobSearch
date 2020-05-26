@@ -560,14 +560,31 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
                 this.dialog.dismiss();
 
             }
-            Log.d("uploddata",""+result);
+
 
             if (result != null) {
                 String res=result;
                 String substring=res.substring(0,1);
                 Log.d("upldddoddata",""+substring);
               if(substring.equalsIgnoreCase("1")){
+                  new AlertDialog.Builder(ModifyDocumentActivity.this)
+                          .setTitle("सूचना")
+                          .setMessage( res)
+                          .setCancelable(false)
+                          .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                              public void onClick(DialogInterface dialog, int id) {
+                                  finish();
+                              }
+                          })
+                          .show();
+                 // Toast.makeText(getApplicationContext(),res,Toast.LENGTH_LONG).show();
+
+              }else if(substring.equalsIgnoreCase("2")){
                   Toast.makeText(getApplicationContext(),res,Toast.LENGTH_LONG).show();
+
+              }else if(substring.equalsIgnoreCase("4")){
+                  Toast.makeText(getApplicationContext(),res,Toast.LENGTH_LONG).show();
+
               }
 
             }
@@ -598,33 +615,33 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
         boolean validate = true;
 
         if (Dist_id.equalsIgnoreCase("")) {
-                Toast.makeText(getApplicationContext(), "Please Select District Number", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "कृपया जिला नाम चुनें", Toast.LENGTH_LONG).show();
                 validate = false;
 
         }else if(block_id.equalsIgnoreCase("")){
-            Toast.makeText(getApplicationContext(), "Please Select Block Name", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "कृपया ब्लॉक का नाम चुनें", Toast.LENGTH_LONG).show();
             validate = false;
         }else if(panch_id.equalsIgnoreCase("")){
-            Toast.makeText(getApplicationContext(), "Please Select Panchayat Name", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "कृपया पंचायत नाम का चयन करें", Toast.LENGTH_LONG).show();
             validate = false;
         }
         else if (!Verhoeff.validateVerhoeff(str_adhaar)) {
-            Toast.makeText(getApplicationContext(), "Please Enter valid Aadhaar Number", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "कृपया मान्य आधार संख्या दर्ज करें", Toast.LENGTH_LONG).show();
             validate = false;
         }else if(Bank_Ac_no.equalsIgnoreCase("")){
-            Toast.makeText(getApplicationContext(), "Please Enter Bank Account Number", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "कृपया बैंक खाता नंबर दर्ज करें", Toast.LENGTH_LONG).show();
             validate = false;
-        }else if(_Bank_name.equalsIgnoreCase("")){
-            Toast.makeText(getApplicationContext(), "Please Enter Bank Name ", Toast.LENGTH_LONG).show();
+        }else if(Mobile_no.length()!=10){
+            Toast.makeText(getApplicationContext(), "कृपया मोबाइल नंबर दर्ज करें", Toast.LENGTH_LONG).show();
             validate = false;
         }else if(Ifsc_code.equalsIgnoreCase("")){
-            Toast.makeText(getApplicationContext(), "Please Enter IfSc Code  ", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "कृपया IfSc कोड दर्ज करें ", Toast.LENGTH_LONG).show();
             validate = false;
         }else if(skill_id.equalsIgnoreCase("")){
-            Toast.makeText(getApplicationContext(), "Please Choose  Skill   ", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "कृपया कुशलता चुनें ", Toast.LENGTH_LONG).show();
             validate = false;
         }else if(sub_Skill_id.equalsIgnoreCase("")){
-            Toast.makeText(getApplicationContext(), "Please choose sub skill  ", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "कृपया कुशलता चुनें  ", Toast.LENGTH_LONG).show();
             validate = false;
         }
         if(focusView != null && focusView.requestFocus()) {

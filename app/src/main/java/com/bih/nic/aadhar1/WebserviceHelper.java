@@ -51,8 +51,6 @@ public class WebserviceHelper implements KvmSerializable {
     private static final String GET_BEN_DETAILS="getuserDetails";
     private static final String UpdateMobile="updateUserMob";
     private static final String Reques_tOTP="ResendVerifyOtp";
-    // private static final String SEARCADAARBYID="getAadharbyid";
-
     private static final String UpdateAadhar_Status="UpdateAadhar_Status";
     private static final String UpdateAliveCertificate="UpdateAliveCertificate";
     private static final String UPLOAD_METHOD="InsertDetails";

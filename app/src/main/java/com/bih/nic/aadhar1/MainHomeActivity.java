@@ -48,7 +48,7 @@ public class MainHomeActivity extends Activity {
         urole=(TextView) findViewById(R.id.urole);
         tv_benname.setText(user_name);
         urole.setText(Reg_No);
-        new FetchBenData().execute();
+
 
         ll_profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,10 +70,8 @@ public class MainHomeActivity extends Activity {
                     ab.show();
 
                 }else{
-                    Intent i =new Intent(MainHomeActivity.this,ProfileActivity.class);
-                    i.putExtra("data",BenDetails);
-                    startActivity(i);
 
+                    new FetchBenData1().execute();
                     //new ValidateAdhhar(benfiList).execute();
                 }
 
@@ -90,6 +88,7 @@ public class MainHomeActivity extends Activity {
                     ab.setPositiveButton("Turn On Network Connection", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int whichButton) {
+                            new FetchBenData().execute();
                             Intent I = new Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS);
                             startActivity(I);
                         }
@@ -99,10 +98,7 @@ public class MainHomeActivity extends Activity {
                     ab.show();
 
                 }else{
-                    Intent i =new Intent(MainHomeActivity.this,ModifyDocumentActivity.class);
-                    i.putExtra("data",BenDetails);
-                    startActivity(i);
-
+                    new FetchBenData().execute();
                     //new ValidateAdhhar(benfiList).execute();
                 }
 
@@ -183,6 +179,63 @@ public class MainHomeActivity extends Activity {
             Log.d("Responsevalue", "" + result);
             if (result != null) {
                 BenDetails=result;
+                Intent i =new Intent(MainHomeActivity.this,ModifyDocumentActivity.class);
+                i.putExtra("data",BenDetails);
+                startActivity(i);
+
+
+            } else {
+                //chk_msg_OK_networkdata("Uploading failed.Please Try Again Later");
+                Toast.makeText(getApplicationContext(), "Result Null..Please Try Later", Toast.LENGTH_SHORT).show();
+            }
+
+        }
+    } private class FetchBenData1 extends AsyncTask<String, Void, BenDetails> {
+        BenDetails data;
+        String _uid;
+        private final ProgressDialog dialog = new ProgressDialog(MainHomeActivity.this);
+        private final android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(MainHomeActivity.this).create();
+
+//
+//        UPLOADDATA(BarcodeEntity data) {
+//            this.data = data;
+//            this._uid = data.getUniqueNo();
+//
+//        }
+
+        @Override
+        protected void onPreExecute() {
+
+            this.dialog.setCanceledOnTouchOutside(false);
+            this.dialog.setMessage("UpLoading...");
+            if (!MainHomeActivity.this.isFinishing()) {
+                this.dialog.show();
+            }
+        }
+
+        @Override
+        protected BenDetails doInBackground(String... param) {
+
+//
+//            String res = WebServiceHelper.UploadFinalData(data, PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("USERID", ""));
+//            return res;
+
+            return WebserviceHelper.getBen_Details(Reg_No);
+
+        }
+
+        @Override
+        protected void onPostExecute(BenDetails result) {
+            if (this.dialog.isShowing()) {
+                this.dialog.dismiss();
+            }
+            Log.d("Responsevalue", "" + result);
+            if (result != null) {
+                BenDetails=result;
+                Intent i =new Intent(MainHomeActivity.this,ProfileActivity.class);
+                i.putExtra("data",BenDetails);
+                startActivity(i);
+
 
             } else {
                 //chk_msg_OK_networkdata("Uploading failed.Please Try Again Later");

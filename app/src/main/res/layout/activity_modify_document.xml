@@ -401,7 +401,7 @@
 
                         />
                     <EditText
-
+                        android:maxLength="10"
                         android:inputType="number"
                         android:id="@+id/edt_mobileno"
                         android:layout_width="match_parent"
@@ -436,7 +436,7 @@
 
                         />
                     <EditText
-
+                        android:maxLength="12"
                         android:inputType="number"
                         android:id="@+id/edt_aadharno"
                         android:layout_width="match_parent"
@@ -527,6 +527,7 @@
                         android:textStyle="bold" />
 
                     <EditText
+                        android:textAllCaps="true"
                         android:id="@+id/edt_ifsc_code"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
@@ -728,17 +729,36 @@
                     android:clickable="false"
                     android:orientation="vertical"
                     android:paddingTop="0dp">
-
-                    <TextView
+                    <LinearLayout
+                        android:weightSum="1"
+                        android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginStart="10dp"
-                        android:text=" अनुभव :-"
-                        android:textColor="#222222"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_weight="0.5"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginStart="10dp"
+                            android:text=" अनुभव :- वर्ष"
+                            android:textColor="#222222"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_weight="0.5"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginStart="10dp"
+                            android:text=" अनुभव :- महीना"
+                            android:textColor="#222222"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+
                     <LinearLayout
                         android:weightSum="1"
                         android:orientation="horizontal"
@@ -748,8 +768,8 @@
 
                         <EditText
                             android:gravity="center"
-                            android:hint="महीनों की संख्या"
                             android:layout_weight="0.5"
+                            android:hint="वर्षों की संख्या"
                             android:inputType="number"
                             android:id="@+id/edt_exp_year"
                             android:layout_width="match_parent"
@@ -759,8 +779,10 @@
                             android:background="@drawable/edittext_box" />
                         <EditText
                             android:layout_weight="0.5"
-                            android:hint="वर्षों की संख्या"
+                            android:hint="महीनों की संख्या"
+
                             android:gravity="center"
+
                             android:inputType="number"
                             android:id="@+id/edt_exp_month"
                             android:layout_width="match_parent"
