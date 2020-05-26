@@ -7,6 +7,7 @@ import com.bih.nic.aadhar1.Model.BenDetails;
 import com.bih.nic.aadhar1.Model.BlockWeb;
 import com.bih.nic.aadhar1.Model.DefaultResponse;
 import com.bih.nic.aadhar1.Model.District;
+import com.bih.nic.aadhar1.Model.JobListEntity;
 import com.bih.nic.aadhar1.Model.SkillMaster;
 import com.bih.nic.aadhar1.Model.SubSkillMaster;
 import com.bih.nic.aadhar1.Model.UserDetails;
@@ -41,6 +42,7 @@ public class WebserviceHelper implements KvmSerializable {
     private static final String UpdateMobile_UID="UpdateMobile_UID";
     private static final String BLOCK_METHOD="getBlock";
     private static final String SKILL_METHOD="SkilMasterList";
+    private static final String JOB_SEARCH_METHOD="SkilMasterList";
     private static final String SUBSKILL_METHOD="SubSkilMasterList";
     private static final String DISTRICT_METHOD="getDistrict";
     private static final String PANCHAYAT_METHOD="getPanchyat";
@@ -81,6 +83,30 @@ public class WebserviceHelper implements KvmSerializable {
         }
 
 
+
+        return fieldList;
+    }
+
+    public static ArrayList<JobListEntity> searchJobMasterData(String regId, String distId) {
+
+        SoapObject res1;
+        res1=getServerData(JOB_SEARCH_METHOD, JobListEntity.JobListEntity_CLASS, "RegId", "DistCode", regId, distId);
+        int TotalProperty=0;
+        if(res1!=null) TotalProperty= res1.getPropertyCount();
+
+        ArrayList<JobListEntity> fieldList = new ArrayList<JobListEntity>();
+
+        for (int i = 0; i < TotalProperty; i++) {
+            if (res1.getProperty(i) != null) {
+                Object property = res1.getProperty(i);
+                if (property instanceof SoapObject) {
+                    SoapObject final_object = (SoapObject) property;
+                    JobListEntity block= new JobListEntity(final_object);
+                    fieldList.add(block);
+                }
+            } else
+                return fieldList;
+        }
 
         return fieldList;
     }

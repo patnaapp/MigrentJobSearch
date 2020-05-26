@@ -59,6 +59,7 @@ public class JobSearchAdapter extends BaseAdapter {
         holder.tv_exp_max=convertView.findViewById(R.id.tv_exp_max);
         holder.tv_salary=convertView.findViewById(R.id.tv_salary);
         holder.tv_salary_max=convertView.findViewById(R.id.tv_salary_max);
+        holder.tv_block=convertView.findViewById(R.id.tv_block);
 
         convertView.setTag(holder);
 
@@ -75,13 +76,14 @@ public class JobSearchAdapter extends BaseAdapter {
         holder.tv_exp_max.setText(info.getWorkSite());
         holder.tv_salary.setText(info.getWorkSite());
         holder.tv_salary_max.setText(info.getWorkSite());
+        holder.tv_block.setText(info.getBlock());
 
         return convertView;
     }
 
 
     private class ViewHolder {
-        TextView tv_slno,tv_work_site,tv_skill_cat,tv_skill_name,tv_person_no,tv_gendar,tv_start_date,tv_exp,tv_exp_max,tv_salary,tv_salary_max;
+        TextView tv_slno,tv_work_site,tv_skill_cat,tv_skill_name,tv_person_no,tv_gendar,tv_start_date,tv_exp,tv_exp_max,tv_salary,tv_salary_max,tv_block;
     }
 
 
