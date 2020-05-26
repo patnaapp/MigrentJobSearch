@@ -106,4 +106,17 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/ll_skill"
         android:layout_above="@+id/footer"/>
+
+    <TextView
+        android:id="@+id/tv_Norecord"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@android:color/background_light"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#FF4B4B"
+        android:text="No Record Found"
+        android:visibility="visible"
+        android:layout_below="@+id/ll_skill"
+        android:layout_above="@+id/footer"/>
 </RelativeLayout>
