@@ -55,9 +55,9 @@
         </LinearLayout>
 
         <ImageView
-            android:gravity="right"
             android:layout_width="70dp"
-            android:layout_height="70dp"></ImageView>
+            android:layout_height="65dp"
+            android:gravity="right"></ImageView>
     </LinearLayout>
     <LinearLayout
         android:layout_width="fill_parent"
@@ -96,7 +96,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="15sp"
-                            android:text="Registration Number"/>
+                            android:text="पंजीकरण संख्या"/>
 
                         <TextView
                             android:id="@+id/et_reg_num"
@@ -127,7 +127,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="15sp"
-                            android:text="Age"/>
+                            android:text="उम्र"/>
 
 
                         <TextView
@@ -157,7 +157,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="15sp"
-                            android:text="Address"/>
+                            android:text="पता"/>
 
                         <TextView
                             android:id="@+id/tv_address"
@@ -186,7 +186,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="15sp"
-                            android:text="Experience In Years"/>
+                            android:text="अनुभव"/>
 
                         <TextView
                             android:id="@+id/tv_experience"
