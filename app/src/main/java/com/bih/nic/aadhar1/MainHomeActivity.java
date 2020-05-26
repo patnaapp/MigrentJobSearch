@@ -57,9 +57,9 @@ public class MainHomeActivity extends Activity {
         profile_image=(CircleImageView) findViewById(R.id.profile_image);
 
         tv_benname.setText(user_name);
-        urole.setText("पंजीकरण संख्या: "+Reg_No);
-        tv_mobile.setText("मोबाइल नंबर: "+mobile);
-        tv_address.setText("पता: "+address);
+        urole.setText("  पंजीकरण संख्या: "+Reg_No);
+        tv_mobile.setText("  मोबाइल नंबर: "+mobile);
+        tv_address.setText("  पता: "+address);
 
 
         ll_profile.setOnClickListener(new View.OnClickListener() {
@@ -128,7 +128,7 @@ public class MainHomeActivity extends Activity {
 
     public void onLogout(View view){
         new AlertDialog.Builder(this)
-                .setTitle("लॉग आउट??")
+                .setTitle("लॉग आउट ?")
                 .setMessage("क्या आप वाकई एप्लिकेशन से लॉगआउट करना चाहते हैं \n ")
                 .setCancelable(false)
                 .setPositiveButton("हाँ", new DialogInterface.OnClickListener() {
