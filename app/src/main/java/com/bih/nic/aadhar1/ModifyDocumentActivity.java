@@ -51,7 +51,7 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
 
 
     String skillId,subSkillId,CategoryId;
-    String Dist_id="",Dist_name="",block_id="",block_name="",panch_id="",panch_name="",cat_id="",cat_name="";
+    String Dist_id="",Dist_name="",block_id="",block_name="",panch_id="",panch_name="",cat_id="",cat_name="",eduction_id="";
     String Mobile_no="",Bank_Ac_no="",_Bank_name="",Ifsc_code="",catogery="",skill_id="",sub_Skill_id="",Qualificaton="",int_no_year_exp="",str_adhaar="",str_int_no_month_exp="";
 
     @Override
@@ -186,6 +186,28 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
                 cat_name = "";
             }
 
+        });spn_type_of_worker.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position > 0) {
+                    eduction_id = Qualification.get(position-1).getQualificationId();
+                    //cat_name = cateogryList.get(position).getCat_name_HinDi();
+
+
+
+                } else {
+                    eduction_id = "";
+
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                eduction_id = "";
+
+            }
+
         });
 
         save_button.setOnClickListener(new View.OnClickListener() {
@@ -208,6 +230,7 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
                     benDetails.setSkill_Id(skill_id);
                     benDetails.setSubSkillId(sub_Skill_id);
                     benDetails.setVchAadhaar(str_adhaar);
+                    benDetails.setIntQualification(eduction_id);
                     benDetails.setIntExpYears(edt_exp_year.getText().toString());
                     benDetails.setIntExpMonths(edt_exp_month.getText().toString());
 
@@ -296,8 +319,7 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
         spn_type_of_worker.setAdapter(adaptor);
         if(benDetails.getIntQualification()!=null){
             //if(!benDetails.getIntCategory().equalsIgnoreCase("NA"))
-          //  spn_type_of_worker.setSelection());
-
+            spn_type_of_worker.setSelection(((ArrayAdapter<String>) spn_type_of_worker.getAdapter()).getPosition(benDetails.getIntQualification_name()));
         }
     }
     public void loadDistrictSpinnerData(){

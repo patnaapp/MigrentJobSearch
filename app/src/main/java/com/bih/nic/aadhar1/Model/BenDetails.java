@@ -52,6 +52,7 @@ public class BenDetails implements KvmSerializable, Serializable {
     private String vchIfsc="";
     private String intCategory="";
     private String intQualification="";
+    private String intQualification_name="";
     private String intTestingLab="";
     private String intPatientKept="";
     private String intHstatusCreatedBy="";
@@ -126,11 +127,12 @@ public class BenDetails implements KvmSerializable, Serializable {
         this.intSyncId=res1.getProperty("intSyncId").toString();
       */  this.vchOtherWorkerType=res1.getProperty("vchOtherWorkerType").toString();
         this.vchAadhaar=res1.getProperty("vchAadhaar").toString();
+        this.vchAadhaar=res1.getProperty("vchAadhaar").toString();
         this.vchBankAccount=res1.getProperty("vchBankAccount").toString();
         this.vchBankName=res1.getProperty("vchBankName").toString();
         this.vchIfsc=res1.getProperty("vchIfsc").toString();
         this.intCategory=res1.getProperty("intCategory").toString();
-        this.intQualification=res1.getProperty("intQualification").toString();
+        this.intQualification_name=res1.getProperty("VCHEDUCATION").toString();
        /* this.intTestingLab=res1.getProperty("intTestingLab").toString();
         this.intPatientKept=res1.getProperty("intPatientKept").toString();
         this.intHstatusCreatedBy=res1.getProperty("intHstatusCreatedBy").toString();
@@ -674,5 +676,13 @@ public class BenDetails implements KvmSerializable, Serializable {
 
     public void setUser_RegId(String user_RegId) {
         User_RegId = user_RegId;
+    }
+
+    public String getIntQualification_name() {
+        return intQualification_name;
+    }
+
+    public void setIntQualification_name(String intQualification_name) {
+        this.intQualification_name = intQualification_name;
     }
 }

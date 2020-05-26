@@ -82,7 +82,7 @@ public class MainHomeActivity extends Activity {
             //}
         }
         else {
-            Picasso.get().load(BenDetails.getVchPhoto()).into(profile_image);
+            Picasso.with(this).load(BenDetails.getVchPhoto()).into(profile_image);
         }
         
         ll_profile.setOnClickListener(new View.OnClickListener() {

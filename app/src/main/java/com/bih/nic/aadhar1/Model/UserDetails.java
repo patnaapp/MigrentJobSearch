@@ -26,6 +26,7 @@ public class UserDetails implements KvmSerializable {
     private String Message="";
     private String EMEI;
     private String AadhaarNo;
+    private String profileImg="";
 
     public UserDetails() {
 
@@ -83,6 +84,14 @@ public class UserDetails implements KvmSerializable {
     @Override
     public void getPropertyInfo(int index, Hashtable properties, PropertyInfo info) {
 
+    }
+
+    public String getProfileImg() {
+        return profileImg;
+    }
+
+    public void setProfileImg(String profileImg) {
+        this.profileImg = profileImg;
     }
 
     public String getPanchayatName() {

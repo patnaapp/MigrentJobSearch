@@ -89,7 +89,7 @@ public class ProfileActivity extends Activity implements View.OnClickListener{
         tv_user_name.setText(benDetails.getVchName());
         tv_mobile.setText(benDetails.getVchMobile());
         et_reg_num.setText(benDetails.getVchRegNum());
-        tv_qualification.setText(benDetails.getIntQualification());
+        tv_qualification.setText(benDetails.getIntQualification_name());
         tv_age.setText(benDetails.getIntAge());
         tv_age.setText(benDetails.getIntAge());
         tv_address.setText(benDetails.getVchAddress());
