@@ -83,15 +83,15 @@ public class CameraActivity extends Activity {
             if (!init) initializeCamera(camType);
         }
 
-        permission = new MarshmallowPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
-        if (permission.result == -1 || permission.result == 0) {
-            try {
-                if (!init) initializeCamera(camType);
-            } catch (Exception e) {
-            }
-        } else if (permission.result == 1) {
-            if (!init) initializeCamera(camType);
-        }
+//        permission = new MarshmallowPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
+//        if (permission.result == -1 || permission.result == 0) {
+//            try {
+//                if (!init) initializeCamera(camType);
+//            } catch (Exception e) {
+//            }
+//        } else if (permission.result == 1) {
+//            if (!init) initializeCamera(camType);
+//        }
 
         super.onResume();
 
@@ -129,7 +129,7 @@ public class CameraActivity extends Activity {
         if (Utiilties.isfrontCameraAvalable() && getIntent().getStringExtra("KEY_PIC").equals("2")) {
             camType = CameraInfo.CAMERA_FACING_BACK;
         } else {
-            camType = CameraInfo.CAMERA_FACING_BACK;
+            camType = CameraInfo.CAMERA_FACING_FRONT;
         }
         preview = (FrameLayout) findViewById(R.id.camera_preview);
 
@@ -182,27 +182,27 @@ public class CameraActivity extends Activity {
     }
 
     private void locationManager() {
-        if(GlobalVariables.glocation==null){
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return;
-            }
-            takePhoto.setEnabled(false);
-            mlocManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-            mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, (float) 0.01, mlistener);
-            mlocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, (float) 0.01, mlistener);
-        }
-        else {
-            takePhoto.setEnabled(true);
-            progress_finding_location.setVisibility(View.GONE);
-            takePhoto.setText(" Take Photo ");
-        }
+//        if(GlobalVariables.glocation==null){
+//            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//                // TODO: Consider calling
+//                //    ActivityCompat#requestPermissions
+//                // here to request the missing permissions, and then overriding
+//                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+//                //                                          int[] grantResults)
+//                // to handle the case where the user grants the permission. See the documentation
+//                // for ActivityCompat#requestPermissions for more details.
+//                return;
+//            }
+//            takePhoto.setEnabled(false);
+//            mlocManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+//            mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, (float) 0.01, mlistener);
+//            mlocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, (float) 0.01, mlistener);
+//        }
+        //else {
+        takePhoto.setEnabled(true);
+        progress_finding_location.setVisibility(View.GONE);
+        takePhoto.setText(" Take Photo ");
+        // }
     }
 
     private void initializeCamera(int camType) {
@@ -275,7 +275,10 @@ public class CameraActivity extends Activity {
             } catch (Exception e) {
                 finish();
             }
-                locationManager();
+            //locationManager();
+            takePhoto.setEnabled(true);
+            progress_finding_location.setVisibility(View.GONE);
+            takePhoto.setText(" Take Photo ");
         }
 
     }
@@ -342,12 +345,12 @@ public class CameraActivity extends Activity {
                 Bitmap bMapRotate = Bitmap.createBitmap(bmp, 0, 0, bmp.getWidth(), bmp.getHeight(), mat, true);
                 //changing
                 Bitmap bmapBitmap2 = bMapRotate;
-                Date d = new Date(GlobalVariables.glocation.getTime());
-                String dat = d.toLocaleString();
+//                Date d = new Date(GlobalVariables.glocation.getTime());
+//                String dat = d.toLocaleString();
                /* Bitmap bitmap2 = Utiilties.DrawText(CameraActivity.this, bmapBitmap2, "Lat:" + Double.toString(GlobalVariables.glocation.getLatitude()), "Long:" + Double.toString(GlobalVariables.glocation.getLongitude())
                         , "Accurecy:" + Float.toString(GlobalVariables.glocation.getAccuracy()), "GpsTime:" + dat);*/
                 setCameraImage(Utiilties.GenerateThumbnail(bmapBitmap2, 500, 500));
-               // new CustomeDialogClass(CameraActivity.this,bmapBitmap2,Integer.parseInt(getIntent().getStringExtra("KEY_PIC"))).show();
+                // new CustomeDialogClass(CameraActivity.this,bmapBitmap2,Integer.parseInt(getIntent().getStringExtra("KEY_PIC"))).show();
             } catch (Exception ex) {
                 Log.e(TAG, ex.getMessage());
             }
@@ -398,18 +401,18 @@ public class CameraActivity extends Activity {
 
         Intent returnIntent = new Intent();
         returnIntent.putExtra("CapturedImage", CompressedImageByteArray);
-        returnIntent.putExtra("Lat", new DecimalFormat("#.0000000")
-                .format(GlobalVariables.glocation.getLatitude()));
-        returnIntent.putExtra("Lng", new DecimalFormat("#.0000000")
-                .format(GlobalVariables.glocation.getLongitude()));
-        try {
-            returnIntent.putExtra("CapturedTime", Utiilties.getCurrentDateWithTime());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        Date d = new Date(GlobalVariables.glocation.getTime());
-        String dat = d.toLocaleString();
-        returnIntent.putExtra("GPSTime", dat);
+//        returnIntent.putExtra("Lat", new DecimalFormat("#.0000000")
+//                .format(GlobalVariables.glocation.getLatitude()));
+//        returnIntent.putExtra("Lng", new DecimalFormat("#.0000000")
+////                .format(GlobalVariables.glocation.getLongitude()));
+//        try {
+//            returnIntent.putExtra("CapturedTime", Utiilties.getCurrentDateWithTime());
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//        Date d = new Date(GlobalVariables.glocation.getTime());
+//        String dat = d.toLocaleString();
+//        returnIntent.putExtra("GPSTime", dat);
         returnIntent.putExtra("KEY_PIC",
                 Integer.parseInt(getIntent().getStringExtra("KEY_PIC")));
         // returnIntent.putExtra("ss", 0);
@@ -514,49 +517,49 @@ public class CameraActivity extends Activity {
             //A new location update is received. Do something useful with it.
             //Update the UI with
             //the location update.
-            if (Utiilties.isGPSEnabled(CameraActivity.this)) {
-                LastLocation = location;
-                GlobalVariables.glocation = location;
-                updateUILocation(GlobalVariables.glocation);
-                if (getIntent().getStringExtra("KEY_PIC").equals("1")) {
-                    if (location.getLatitude() > 0.0) {
-                        //long elapsedMillis = SystemClock.elapsedRealtime() - chronometer.getBase();
-                        if (location.getAccuracy() > 0 && location.getAccuracy() < 150) {
+            // if (Utiilties.isGPSEnabled(CameraActivity.this)) {
+            LastLocation = location;
+            GlobalVariables.glocation = location;
+            updateUILocation(GlobalVariables.glocation);
+            //  if (getIntent().getStringExtra("KEY_PIC").equals("1")) {
+            //  if (location.getLatitude() > 0.0) {
+            //long elapsedMillis = SystemClock.elapsedRealtime() - chronometer.getBase();
+            //if (location.getAccuracy() > 0 && location.getAccuracy() < 150) {
 
-                            takePhoto.setText(" Take Photo ");
-                            progress_finding_location.setVisibility(View.GONE);
-                            takePhoto.setEnabled(true);
-                        } else {
+            takePhoto.setText(" Take Photo ");
+            progress_finding_location.setVisibility(View.GONE);
+            takePhoto.setEnabled(true);
+//                        } else {
+//
+//                            takePhoto.setText(" Wait for GPS to Stable ");
+//                            progress_finding_location.setVisibility(View.VISIBLE);
+//                            takePhoto.setEnabled(false);
+//
+//                        }
 
-                            takePhoto.setText(" Wait for GPS to Stable ");
-                            progress_finding_location.setVisibility(View.VISIBLE);
-                            takePhoto.setEnabled(false);
+            // }
 
-                        }
-
-                    }
-
-                } else {
-                    GlobalVariables.glocation.setLatitude(0.0);
-                    GlobalVariables.glocation.setLongitude(0.0);
-                    GlobalVariables.glocation.setTime(0);
-                    updateUILocation(GlobalVariables.glocation);
-                    takePhoto.setText(" Take Photo ");
-                    progress_finding_location.setVisibility(View.GONE);
-                    takePhoto.setEnabled(true);
-                }
-            } else {
-                Message.obtain(
-                        mHandler,
-                        UPDATE_LATLNG,
-                        new DecimalFormat("#.0000000").format(location.getLatitude())
-                                + "-"
-                                + new DecimalFormat("#.0000000").format(location
-                                .getLongitude()) + "-" + location.getAccuracy() + "-" + location.getTime())
-                        .sendToTarget();
-                takePhoto.setText(" Take Photo ");
-                progress_finding_location.setVisibility(View.GONE);
-            }
+//                } else {
+//                    GlobalVariables.glocation.setLatitude(0.0);
+//                    GlobalVariables.glocation.setLongitude(0.0);
+//                    GlobalVariables.glocation.setTime(0);
+//                    updateUILocation(GlobalVariables.glocation);
+//                    takePhoto.setText(" Take Photo ");
+//                    progress_finding_location.setVisibility(View.GONE);
+//                    takePhoto.setEnabled(true);
+//                }
+//            } else {
+//                Message.obtain(
+//                        mHandler,
+//                        UPDATE_LATLNG,
+//                        new DecimalFormat("#.0000000").format(location.getLatitude())
+//                                + "-"
+//                                + new DecimalFormat("#.0000000").format(location
+//                                .getLongitude()) + "-" + location.getAccuracy() + "-" + location.getTime())
+//                        .sendToTarget();
+//                takePhoto.setText(" Take Photo ");
+//                progress_finding_location.setVisibility(View.GONE);
+//            }
             //Toast.makeText(getApplicationContext(), latitude + " WORKS offline " + longitude + "", Toast.LENGTH_LONG).show();
 
         }

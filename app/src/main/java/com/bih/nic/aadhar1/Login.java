@@ -58,7 +58,7 @@ public class Login extends Activity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                setvalue();
                 if(isValidInput()){
                     if(Utiilties.isOnline(getApplicationContext())) {
                         new LoginTask(et_reg_no.getText().toString(),et_otp.getText().toString()).execute();

@@ -208,12 +208,7 @@ public class MainHomeActivity extends Activity {
         private final ProgressDialog dialog = new ProgressDialog(MainHomeActivity.this);
         private final android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(MainHomeActivity.this).create();
 
-//
-//        UPLOADDATA(BarcodeEntity data) {
-//            this.data = data;
-//            this._uid = data.getUniqueNo();
-//
-//        }
+
 
         @Override
         protected void onPreExecute() {

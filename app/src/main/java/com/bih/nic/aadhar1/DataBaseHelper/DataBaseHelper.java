@@ -555,7 +555,7 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
 
             ContentValues values = new ContentValues();
 
-            values.put("UseId", result.get_UserId());
+            values.put("UseId", userid);
             values.put("password", result.get_Passwoed());
             values.put("distcode", result.getDistCode());
             values.put("distname", result.getDistName());
