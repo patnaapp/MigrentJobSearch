@@ -107,7 +107,7 @@ public class ProfileActivity extends Activity implements View.OnClickListener{
             //}
         }
         else {
-            Picasso.get().load(benDetails.getVchPhoto()).into(img_studphoto);
+            Picasso.with(this).load(benDetails.getVchPhoto()).into(img_studphoto);
         }
 
 

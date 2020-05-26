@@ -103,6 +103,10 @@ public class SplashActivity extends Activity {
         if(isColumnExists(UserTable, "Address") == false){
             AlterTable(UserTable, "Address");
         }
+
+        if(isColumnExists(UserTable, "Img_ben") == false){
+            AlterTable(UserTable, "Img_ben");
+        }
     }
 
     public void AlterTable(String tableName,String columnName)
