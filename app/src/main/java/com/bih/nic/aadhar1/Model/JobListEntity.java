@@ -26,7 +26,18 @@ public class JobListEntity implements KvmSerializable, Serializable {
 
     public JobListEntity(SoapObject obj) {
 
-        this.id = obj.getProperty("id").toString();
+        this.district = obj.getProperty("DistrictName").toString();
+        this.block = obj.getProperty("BlockName").toString();
+        this.skillCategory = obj.getProperty("SkillCategoryHn").toString();
+        this.skillName = obj.getProperty("SkillNameHn").toString();
+        this.experience = obj.getProperty("Experiance").toString();
+        this.experienceMax = obj.getProperty("ExperianceMax").toString();
+        this.salary = obj.getProperty("Salary1").toString();
+        this.salaryMax = obj.getProperty("SalaryMax").toString();
+        this.startDate = obj.getProperty("StartDate").toString();
+        this.gendar = obj.getProperty("Gender").toString();
+        this.numberOfPerson = obj.getProperty("NoOfPerson").toString();
+        this.workSite = obj.getProperty("WorkSiteNameHn1").toString();
 
     }
 

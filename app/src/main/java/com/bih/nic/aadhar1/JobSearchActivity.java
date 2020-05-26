@@ -62,12 +62,13 @@ public class JobSearchActivity extends Activity implements AdapterView.OnItemSel
 
         setDistrictSpinner();
 
+        new SyncJobSearchData().execute();
         //For Testing
-        JobListEntity info = new JobListEntity();
-        info.setWorkSite("Test");
-        data = new ArrayList<>();
-        data.add(info);
-        populateData();
+//        JobListEntity info = new JobListEntity();
+//        info.setWorkSite("Test");
+//        data = new ArrayList<>();
+//        data.add(info);
+//        populateData();
     }
 
     public void initialise(){

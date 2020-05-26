@@ -67,15 +67,15 @@ public class JobSearchAdapter extends BaseAdapter {
 
        // holder.tv_slno.setText(position+1);
         holder.tv_work_site.setText(info.getWorkSite());
-        holder.tv_skill_cat.setText(info.getWorkSite());
-        holder.tv_skill_name.setText(info.getWorkSite());
-        holder.tv_person_no.setText(info.getWorkSite());
-        holder.tv_gendar.setText(info.getWorkSite());
-        holder.tv_start_date.setText(info.getWorkSite());
-        holder.tv_exp.setText(info.getWorkSite());
-        holder.tv_exp_max.setText(info.getWorkSite());
-        holder.tv_salary.setText(info.getWorkSite());
-        holder.tv_salary_max.setText(info.getWorkSite());
+        holder.tv_skill_cat.setText(info.getSkillCategory());
+        holder.tv_skill_name.setText(info.getSkillName());
+        holder.tv_person_no.setText(info.getNumberOfPerson());
+        holder.tv_gendar.setText(info.getGendar());
+        holder.tv_start_date.setText(info.getStartDate());
+        holder.tv_exp.setText(info.getExperience());
+        holder.tv_exp_max.setText(info.getExperienceMax());
+        holder.tv_salary.setText(info.getSalary());
+        holder.tv_salary_max.setText(info.getSalaryMax());
         holder.tv_block.setText(info.getBlock());
 
         return convertView;

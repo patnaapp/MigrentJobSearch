@@ -42,7 +42,7 @@ public class WebserviceHelper implements KvmSerializable {
     private static final String UpdateMobile_UID="UpdateMobile_UID";
     private static final String BLOCK_METHOD="getBlock";
     private static final String SKILL_METHOD="SkilMasterList";
-    private static final String JOB_SEARCH_METHOD="SkilMasterList";
+    private static final String JOB_SEARCH_METHOD="JobSearchDetails1";
     private static final String SUBSKILL_METHOD="SubSkilMasterList";
     private static final String DISTRICT_METHOD="getDistrict";
     private static final String PANCHAYAT_METHOD="getPanchyat";
@@ -90,7 +90,7 @@ public class WebserviceHelper implements KvmSerializable {
     public static ArrayList<JobListEntity> searchJobMasterData(String regId, String distId) {
 
         SoapObject res1;
-        res1=getServerData(JOB_SEARCH_METHOD, JobListEntity.JobListEntity_CLASS, "RegId", "DistCode", regId, distId);
+        res1=getServerData(JOB_SEARCH_METHOD, JobListEntity.JobListEntity_CLASS, "UserId", "Districtcode", regId, distId);
         int TotalProperty=0;
         if(res1!=null) TotalProperty= res1.getPropertyCount();
 
