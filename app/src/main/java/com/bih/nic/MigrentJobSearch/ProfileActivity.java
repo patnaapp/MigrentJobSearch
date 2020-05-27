@@ -15,6 +15,7 @@ import android.preference.PreferenceManager;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,12 +37,13 @@ public class ProfileActivity extends Activity implements View.OnClickListener{
     Intent imageData1;
     String str_img1="",Reg_No="";
     DataBaseHelper dataBaseHelper;
+    ImageView back_arrow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-
+        back_arrow=(ImageView)findViewById(R.id.back_arrow);
         getActionBar().hide();
         Utiilties.setStatusBarColor(this);
 
@@ -77,7 +79,12 @@ public class ProfileActivity extends Activity implements View.OnClickListener{
 
         benDetails = new BenDetails();
         extractFrom_Data();
-
+        back_arrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
 
     }
@@ -106,7 +113,8 @@ public class ProfileActivity extends Activity implements View.OnClickListener{
             //}
         }
         else {
-            Picasso.with(this).load(benDetails.getVchPhoto()).into(img_studphoto);
+            Picasso.with(this).load("http://10.133.20.159/"+benDetails.getVchPhoto()).error(R.drawable.profile).into(img_studphoto);
+           // Picasso.with(this).load(benDetails.getVchPhoto()).into(img_studphoto);
         }
 
     }

@@ -48,7 +48,7 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
     ArrayList<panchayat>PanchayatList=new ArrayList<>();
     Button save_button,valAdhaar;
     EditText edt_aadharn_name;
-    boolean check=false;
+    boolean check=true;
 
 
     String skillId,subSkillId,CategoryId;
@@ -106,6 +106,10 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
         loadQualification();
         loadBlockSpinnerData(benDetails.getDistrictCode());
         loadPanchayatSpinnerData(benDetails.getBlockCode());
+        loadSubSkillSpinnerData(benDetails.getSkill_Id());
+        if(check){
+            valAdhaar.setVisibility(View.GONE);
+        }
         spn_panch_name.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -125,9 +129,11 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
             public void onNothingSelected(AdapterView<?> parent) {
                 panch_id = "";
                 panch_name = "";
+
             }
 
-        });spn_block_name.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        });
+        spn_block_name.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position > 0) {
@@ -149,7 +155,8 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
                 block_name = "";
             }
 
-        });spn_dist_name.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        });
+        spn_dist_name.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position > 0) {
@@ -171,7 +178,8 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
                 block_name = "";
             }
 
-        });spn_category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        });
+        spn_category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position > 0) {
@@ -193,7 +201,8 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
                 cat_name = "";
             }
 
-        });spn_type_of_worker.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        });
+        spn_type_of_worker.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position > 0) {
@@ -667,10 +676,23 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
         View focusView = null;
         boolean validate = true;
 
+        try {
+            if (!benDetails.getVchName().equalsIgnoreCase(edt_aadharn_name.getText().toString())) {
+                check = false;
+                valAdhaar.setVisibility(View.VISIBLE);
+            }
+        }catch (NullPointerException e){e.printStackTrace();}
+        try {
+            if(!benDetails.getVchAadhaar().equalsIgnoreCase(edt_aadharno.getText().toString())){
+                check=false;
+                valAdhaar.setVisibility(View.VISIBLE);
+            }
+        }catch (NullPointerException e){e.printStackTrace();}
+
+
         if (Dist_id.equalsIgnoreCase("")) {
                 Toast.makeText(getApplicationContext(), "कृपया जिला नाम चुनें", Toast.LENGTH_LONG).show();
                 validate = false;
-
         } if(block_id.equalsIgnoreCase("")){
             Toast.makeText(getApplicationContext(), "कृपया ब्लॉक का नाम चुनें", Toast.LENGTH_LONG).show();
             validate = false;
