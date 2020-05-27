@@ -689,10 +689,14 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
             Toast.makeText(getApplicationContext(), "कृपया पंचायत नाम का चयन करें", Toast.LENGTH_LONG).show();
             validate = false;
         }
-         if (!Verhoeff.validateVerhoeff(str_adhaar)) {
+        if(str_adhaar.equals("") || str_adhaar.equals("NA")){
             Toast.makeText(getApplicationContext(), "कृपया मान्य आधार संख्या दर्ज करें", Toast.LENGTH_LONG).show();
             validate = false;
-        } if(Bank_Ac_no.equalsIgnoreCase("")){
+        }else if (!Verhoeff.validateVerhoeff(str_adhaar)) {
+            Toast.makeText(getApplicationContext(), "कृपया मान्य आधार संख्या दर्ज करें", Toast.LENGTH_LONG).show();
+            validate = false;
+        }
+        if(Bank_Ac_no.equalsIgnoreCase("")){
             Toast.makeText(getApplicationContext(), "कृपया बैंक खाता नंबर दर्ज करें", Toast.LENGTH_LONG).show();
             validate = false;
         } if(Mobile_no.length()!=10){

@@ -14,6 +14,7 @@ public class District implements KvmSerializable, Serializable {
 	public static Class<District> DISTRICT_CLASS = District.class;
 	private String _DistCode = "";
 	private String _DistName = "";
+	private String _DistNameHN = "";
 	private String _StateCode = "";
 
 	public District(SoapObject obj) {
@@ -26,6 +27,8 @@ public class District implements KvmSerializable, Serializable {
 	public District() {
 
 	}
+
+
 
 	@Override
 	public Object getProperty(int arg0) {
@@ -51,13 +54,14 @@ public class District implements KvmSerializable, Serializable {
 
 	}
 
-	
-	
-	
-	
-	
-	
-	
+	public String get_DistNameHN() {
+		return _DistNameHN;
+	}
+
+	public void set_DistNameHN(String _DistNameHN) {
+		this._DistNameHN = _DistNameHN;
+	}
+
 	public String get_DistCode() {
 		return _DistCode;
 	}

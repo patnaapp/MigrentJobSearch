@@ -14,7 +14,7 @@
         android:id="@+id/iv_logo"
         android:layout_width="42dp"
         android:layout_height="42dp"
-        android:src="@drawable/labour1"/>
+        android:src="@drawable/bihar_logo"/>
 
     <LinearLayout
         android:layout_toRightOf="@+id/iv_logo"
@@ -30,7 +30,7 @@
             android:layout_width="match_parent"
             android:textAlignment="center"
             android:layout_height="24dp"
-            android:text="श्रम शाधन"
+            android:text="श्रम साधन"
             android:textSize="22sp"
             android:textColor="@color/holo_red_dark"
             android:textStyle="bold" />
@@ -69,6 +69,6 @@
         android:layout_width="42dp"
         android:layout_height="42dp"
         android:layout_alignParentRight="true"
-        android:src="@drawable/bihar_logo"/>
+        android:src="@drawable/digital1"/>
 
 </RelativeLayout>

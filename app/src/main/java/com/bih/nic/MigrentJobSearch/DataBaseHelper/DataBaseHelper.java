@@ -338,6 +338,7 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
 
                 distClass.set_DistCode(cur.getString(cur.getColumnIndex("DistCode")));
                 distClass.set_DistName(cur.getString(cur.getColumnIndex("DistName")));
+                distClass.set_DistNameHN(cur.getString(cur.getColumnIndex("DistNameHN")));
                 DistList.add(distClass);
             }
 

@@ -333,7 +333,9 @@
 
                         </LinearLayout>
                     </LinearLayout>
+
                     <LinearLayout
+                        android:visibility="gone"
                         android:weightSum="1"
                         android:layout_margin="12dp"
                         android:layout_width="match_parent"

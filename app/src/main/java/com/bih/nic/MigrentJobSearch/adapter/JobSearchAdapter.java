@@ -105,5 +105,8 @@ public class JobSearchAdapter extends RecyclerView.Adapter<JobSearchAdapter.View
     }
 
 
+    public String getGenderHindi(String gender){
 
+        return gender;
+    }
 }
