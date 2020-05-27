@@ -61,10 +61,11 @@ public class JobSearchActivity extends Activity implements AdapterView.OnItemSel
         initialise();
 
         RegNo = getIntent().getStringExtra("data");
+        String distName = getIntent().getStringExtra("DistName");
 
-        setDistrictSpinner();
+        setDistrictSpinner(distName);
 
-        new SyncJobSearchData().execute();
+        //new SyncJobSearchData().execute();
         //For Testing
 //        JobListEntity info = new JobListEntity();
 //        info.setWorkSite("Test");
@@ -117,7 +118,7 @@ public class JobSearchActivity extends Activity implements AdapterView.OnItemSel
 //
 //    }
 
-    public void setDistrictSpinner(){
+    public void setDistrictSpinner(String DistName){
         DistrictList=dataBaseHelper.getDistDetail();
         ArrayList<String> list = new ArrayList<String>();
         list.add("-Select-");
@@ -128,6 +129,15 @@ public class JobSearchActivity extends Activity implements AdapterView.OnItemSel
         ArrayAdapter adaptor = new ArrayAdapter(this, android.R.layout.simple_spinner_item, list);
         adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spn_sub_skill.setAdapter(adaptor);
+
+        try{
+            if(!DistName.isEmpty()){
+                spn_sub_skill.setSelection(list.indexOf(DistName));
+            }
+        }catch (Exception e){
+            new SyncJobSearchData().execute();
+        }
+
     }
 
 //    public void loadSkillSpinnerData(){

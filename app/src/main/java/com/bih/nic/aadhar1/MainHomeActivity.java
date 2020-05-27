@@ -35,7 +35,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainHomeActivity extends Activity {
     LinearLayout ll_profile,ll_register_Grivance;
-    String Reg_No="",user_name="", mobile="", address="";
+    String Reg_No="",user_name="", mobile="", address="", DistName="";
     TextView tv_benname,urole,tv_mobile,tv_address;
     CircleImageView profile_image;
 
@@ -55,6 +55,7 @@ public class MainHomeActivity extends Activity {
         user_name=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserName", "");
         mobile=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("Mobile", "");
         address=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("Address", "");
+        DistName=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("DistName", "");
 
         ll_profile=(LinearLayout)findViewById(R.id.ll_profile);
         ll_register_Grivance=(LinearLayout)findViewById(R.id.ll_register_Grivance);
@@ -144,6 +145,7 @@ public class MainHomeActivity extends Activity {
     public void onSearchJob(View view){
         Intent i =new Intent(MainHomeActivity.this,JobSearchActivity.class);
         i.putExtra("data",Reg_No);
+        i.putExtra("DistName",DistName);
         startActivity(i);
     }
 
