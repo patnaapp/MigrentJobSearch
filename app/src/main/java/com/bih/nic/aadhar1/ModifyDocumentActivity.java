@@ -711,7 +711,7 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
             this._adhaar=adhaar;
             this._name=name;
 
-            Log.e("Pid  ", pid + " ");
+           // Log.e("Pid  ", pid + " ");
         }
 
         @Override
