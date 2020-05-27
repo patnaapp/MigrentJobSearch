@@ -77,11 +77,10 @@
         <activity android:name="com.bih.nic.MigrentJobSearch.HomeActivity" />
         <activity android:name="com.bih.nic.MigrentJobSearch.VerifyAadhaar1" />
         <activity
-            android:name="com.bih.nic.MigrentJobSearch.SplashActivity"
+            android:name="SplashActivity"
             android:theme="@style/NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

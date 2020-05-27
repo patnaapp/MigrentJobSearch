@@ -63,7 +63,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:weightSum="2">
+                        android:weightSum="3">
 
                         <LinearLayout
                             android:layout_weight="1"
@@ -117,6 +117,32 @@
                                 android:textColor="@android:color/black" />
                         </LinearLayout>
 
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textAlignment="center"
+                                android:textSize="13sp"
+                                android:text="लिंग"
+                                android:textStyle="bold"
+                                android:textColor="@color/colorPrimary"/>
+
+                            <TextView
+                                android:id="@+id/tv_gendar"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textAlignment="center"
+                                android:lines="1"
+                                android:textSize="14sp"
+                                android:textStyle="normal"
+                                android:text="New Text"
+                                android:textColor="@android:color/black" />
+                        </LinearLayout>
+
                     </LinearLayout>
                 </RelativeLayout>
 
@@ -132,6 +158,36 @@
                     android:orientation="vertical">
 
                     <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="3dp">
+
+                        <TextView
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorPrimary"
+                            android:layout_width="88dp"
+                            android:layout_height="wrap_content"
+                            android:text="खंड" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="4dp"
+                            android:textStyle="bold"
+                            android:text=":"/>
+
+                        <TextView
+                            android:id="@+id/tv_block"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="6dp"
+                            android:text="New Text"
+                            android:textColor="@color/color_black" />
+                    </LinearLayout>
+
+                    <LinearLayout
 
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -139,7 +195,7 @@
                         android:padding="3dp">
 
                         <TextView
-                            android:layout_width="80dp"
+                            android:layout_width="88dp"
                             android:layout_height="wrap_content"
                             android:textSize="13sp"
                             android:text="कार्य स्थल"
@@ -172,7 +228,7 @@
                             android:textSize="13sp"
                             android:textStyle="bold"
                             android:textColor="@color/colorPrimary"
-                            android:layout_width="80dp"
+                            android:layout_width="88dp"
                             android:layout_height="wrap_content"
                             android:text="लोगों की संख्या" />
 
@@ -202,37 +258,7 @@
                             android:textSize="13sp"
                             android:textStyle="bold"
                             android:textColor="@color/colorPrimary"
-                            android:layout_width="80dp"
-                            android:layout_height="wrap_content"
-                            android:text="लिंग" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="4dp"
-                            android:textStyle="bold"
-                            android:text=":"/>
-
-                        <TextView
-                            android:id="@+id/tv_gendar"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="6dp"
-                            android:text="New Text"
-                            android:textColor="@color/color_black" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="3dp">
-
-                        <TextView
-                            android:textSize="13sp"
-                            android:textStyle="bold"
-                            android:textColor="@color/colorPrimary"
-                            android:layout_width="80dp"
+                            android:layout_width="88dp"
                             android:layout_height="wrap_content"
                             android:text="आरंभ तिथि" />
 
@@ -262,9 +288,9 @@
                             android:textSize="13sp"
                             android:textStyle="bold"
                             android:textColor="@color/colorPrimary"
-                            android:layout_width="80dp"
+                            android:layout_width="88dp"
                             android:layout_height="wrap_content"
-                            android:text="खंड" />
+                            android:text="सुपरवाइज़र" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -274,13 +300,52 @@
                             android:text=":"/>
 
                         <TextView
-                            android:id="@+id/tv_block"
+                            android:id="@+id/tv_supervisor_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="6dp"
                             android:text="New Text"
                             android:textColor="@color/color_black" />
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="3dp">
+
+                        <TextView
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorPrimary"
+                            android:layout_width="88dp"
+                            android:layout_height="wrap_content"
+                            android:text="सुपरवाइज़र नंबर" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="4dp"
+                            android:textStyle="bold"
+                            android:text=":"/>
+
+                        <TextView
+                            android:id="@+id/tv_super_no"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="6dp"
+                            android:text="New Text"
+                            android:textColor="@color/color_black" />
+
+                        <ImageView
+                            android:id="@+id/iv_call"
+                            android:layout_width="22dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_call_black"
+                            android:layout_marginLeft="4dp"
+                            android:tint="@color/holo_green_dark"/>
+                    </LinearLayout>
+
                 </LinearLayout>
 
                 <LinearLayout

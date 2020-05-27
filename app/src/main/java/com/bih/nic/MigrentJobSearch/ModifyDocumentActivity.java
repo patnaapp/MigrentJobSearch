@@ -62,11 +62,7 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
 
         getActionBar().hide();
 
-
-
-
         Utiilties.setStatusBarColor(this);
-
 
         benDetails=(BenDetails)getIntent().getSerializableExtra("data");
         dataBaseHelper=new DataBaseHelper(this);
@@ -117,11 +113,9 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
                     panch_id = PanchayatList.get(position-1).getPanchayatId();
                     panch_name = PanchayatList.get(position-1).getPanchayatName();
 
-
                 } else {
                     panch_id = "";
                     panch_name = "";
-
                 }
             }
 
@@ -141,11 +135,9 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
                     block_name = BlockList.get(position-1).getBlockName();
                     loadPanchayatSpinnerData(block_id);
 
-
                 } else {
                     block_id = "";
                     block_name = "";
-
                 }
             }
 
@@ -185,9 +177,6 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
                 if (position > 0) {
                     cat_id = cateogryList.get(position).getCat_id();
                     cat_name = cateogryList.get(position).getCat_name_HinDi();
-
-
-
                 } else {
                     cat_id = "";
                     cat_name = "";
