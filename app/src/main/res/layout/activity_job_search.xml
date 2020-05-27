@@ -100,7 +100,7 @@
         </LinearLayout>
     </LinearLayout>
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/listviewshow"
         android:layout_margin="8dp"
         android:layout_width="match_parent"
