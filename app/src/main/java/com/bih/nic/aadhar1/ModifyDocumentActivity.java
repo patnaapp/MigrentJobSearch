@@ -62,6 +62,10 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
         setContentView(R.layout.activity_modify_document);
 
         getActionBar().hide();
+
+
+
+
         Utiilties.setStatusBarColor(this);
 
 
