@@ -617,7 +617,9 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
                 String res=result;
                 String substring=res.substring(0,1);
                 Log.d("upldddoddata",""+substring);
+
               if(substring.equalsIgnoreCase("1")){
+                  PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("UserName",edt_aadharn_name.getText().toString().trim()).commit();
                   new AlertDialog.Builder(ModifyDocumentActivity.this)
                           .setTitle("सूचना")
                           .setMessage( res)

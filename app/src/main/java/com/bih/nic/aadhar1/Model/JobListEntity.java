@@ -23,6 +23,8 @@ public class JobListEntity implements KvmSerializable, Serializable {
     private String gendar = "";
     private String district = "";
     private String block = "";
+    private String contactNumber = "";
+    private String contactName = "";
 
     public JobListEntity(SoapObject obj) {
 
@@ -38,6 +40,8 @@ public class JobListEntity implements KvmSerializable, Serializable {
         this.gendar = obj.getProperty("Gender").toString();
         this.numberOfPerson = obj.getProperty("NoOfPerson").toString();
         this.workSite = obj.getProperty("WorkSiteNameHn1").toString();
+        this.contactNumber = obj.getProperty("CPMobileNo").toString();
+        this.contactName = obj.getProperty("ContactPersonHn").toString();
 
     }
 
@@ -47,6 +51,22 @@ public class JobListEntity implements KvmSerializable, Serializable {
 
     public static void setJobListEntity_CLASS(Class<JobListEntity> jobListEntity_CLASS) {
         JobListEntity_CLASS = jobListEntity_CLASS;
+    }
+
+    public String getContactNumber() {
+        return contactNumber;
+    }
+
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
+    }
+
+    public String getContactName() {
+        return contactName;
+    }
+
+    public void setContactName(String contactName) {
+        this.contactName = contactName;
     }
 
     public String getWorkSite() {

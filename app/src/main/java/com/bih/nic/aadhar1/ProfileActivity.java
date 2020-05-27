@@ -1,8 +1,11 @@
 package com.bih.nic.aadhar1;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,6 +13,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.LocationManager;
 import android.media.Image;
+import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,9 +26,12 @@ import android.widget.Toast;
 
 import com.bih.nic.aadhar1.DataBaseHelper.DataBaseHelper;
 import com.bih.nic.aadhar1.Model.BenDetails;
+import com.bih.nic.aadhar1.Model.DefaultResponse;
+import com.bih.nic.aadhar1.Model.JobListEntity;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -110,7 +117,28 @@ public class ProfileActivity extends Activity implements View.OnClickListener{
             Picasso.with(this).load(benDetails.getVchPhoto()).into(img_studphoto);
         }
 
+    }
 
+    public void saveImgaetoLocal(){
+        DataBaseHelper placeData = new DataBaseHelper(ProfileActivity.this);
+        SQLiteDatabase db = placeData.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        String[] whereArgs;
+
+        values.put("Img_ben", str_img1);
+        values.put("Lat1",String.valueOf(imageData1.getStringExtra("Lat")));
+        values.put("Long1",String.valueOf(imageData1.getStringExtra("Lng")));
+        whereArgs = new String[]{String.valueOf(Reg_No)};
+
+        long c=db.update("UserDetails", values, "UseId=?", whereArgs);
+        if(c>0)
+        {
+            Toast.makeText(ProfileActivity.this, "Ben Image saved successfully", Toast.LENGTH_LONG).show();
+        }
+        else
+        {
+            Toast.makeText(ProfileActivity.this, "Ben Image 1 not saved ", Toast.LENGTH_LONG).show();
+        }
     }
 
 
@@ -122,16 +150,6 @@ public class ProfileActivity extends Activity implements View.OnClickListener{
                     byte[] imgData = data.getByteArrayExtra("CapturedImage");
 
 
-                    //imageData.add(data);
-
-
-                    //switch (data.getIntExtra("KEY_PIC", 0)) {
-                    //  case 1:
-                    DataBaseHelper placeData = new DataBaseHelper(
-                            ProfileActivity.this);
-                    SQLiteDatabase db = placeData.getWritableDatabase();
-                    ContentValues values = new ContentValues();
-                    String[] whereArgs;
                     str_img1= org.kobjects.base64.Base64.encode(imgData);
                     imageData1=data;
                     Bitmap bmp = BitmapFactory.decodeByteArray(imgData, 0,
@@ -139,18 +157,16 @@ public class ProfileActivity extends Activity implements View.OnClickListener{
                     //img_studphoto.setScaleType(ImageView.ScaleType.FIT_XY);
                     img_studphoto.setImageBitmap(Utiilties.GenerateThumbnail(bmp,
                             500, 500));
-                    values.put("Img_ben", str_img1);
-                    whereArgs = new String[]{String.valueOf(Reg_No)};
 
-                    long c=db.update("UserDetails", values, "UseId=?", whereArgs);
-                    if(c>0)
-                    {
-                        Toast.makeText(ProfileActivity.this, "Ben Image saved successfully", Toast.LENGTH_LONG).show();
-                    }
-                    else
-                    {
-                        Toast.makeText(ProfileActivity.this, "Ben Image 1 not saved ", Toast.LENGTH_LONG).show();
-                    }
+                    new UplaodImageData(Reg_No, String.valueOf(imageData1.getStringExtra("Lat")), String.valueOf(imageData1.getStringExtra("Lng")), str_img1).execute();
+//                    if(c>0)
+//                    {
+//                        Toast.makeText(ProfileActivity.this, "Ben Image saved successfully", Toast.LENGTH_LONG).show();
+//                    }
+//                    else
+//                    {
+//                        Toast.makeText(ProfileActivity.this, "Ben Image 1 not saved ", Toast.LENGTH_LONG).show();
+//                    }
                     //img1.setOnClickListener(null);
                     //img2.setEnabled(true);
 
@@ -165,11 +181,59 @@ public class ProfileActivity extends Activity implements View.OnClickListener{
 
 
                 }
-
         }
 
     }
 
+    private class UplaodImageData extends AsyncTask<String, Void, DefaultResponse> {
+        private final ProgressDialog dialog = new ProgressDialog(ProfileActivity.this);
+        String regId, latitude, longitude, imageStr;
+
+        public UplaodImageData(String regId, String latitude, String longitude, String imageStr) {
+            this.regId = regId;
+            this.latitude = latitude;
+            this.longitude = longitude;
+            this.imageStr = imageStr;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            this.dialog.setCanceledOnTouchOutside(false);
+            this.dialog.setMessage("अप्लोड हो रहा है...");
+            this.dialog.show();
+        }
+
+        @Override
+        protected DefaultResponse doInBackground(String...arg) {
+            return WebserviceHelper.updateProfileImage(regId, latitude, longitude, imageStr);
+        }
+
+        @Override
+        protected void onPostExecute(DefaultResponse result) {
+            if (this.dialog.isShowing()) {
+                this.dialog.dismiss();
+            }
+
+            if(result.getStatus()){
+                saveImgaetoLocal();
+                Toast.makeText(ProfileActivity.this, "प्रोफ़ाइल फ़ोटो सफलतापूर्वक अपडेट हों गया", Toast.LENGTH_SHORT).show();
+            }else{
+                AlertDialog.Builder ab = new AlertDialog.Builder(ProfileActivity.this);
+                ab.setCancelable(false);
+                ab.setTitle("Failed");
+                ab.setMessage(result.getMessage());
+                ab.setPositiveButton("[OK]", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        dialog.dismiss();
+                    }
+                });
+
+                ab.create().getWindow().getAttributes().windowAnimations = R.style.alert_animation;
+                ab.show();
+            }
+        }
+    }
 
     @Override
     public void onClick(View view) {
