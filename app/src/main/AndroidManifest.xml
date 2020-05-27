@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.bih.nic.aadhar1">
+    package="com.bih.nic.MigrentJobSearch">
 
     <uses-feature
         android:name="android.hardware.usb.host"
@@ -69,15 +69,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".JobSearchActivity"></activity>
-        <activity android:name=".ModifyDocumentActivity" />
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".RequestOtpActivity" />
-        <activity android:name=".MainHomeActivity" />
-        <activity android:name=".HomeActivity" />
-        <activity android:name=".VerifyAadhaar1" />
+        <activity android:name="com.bih.nic.MigrentJobSearch.JobSearchActivity"></activity>
+        <activity android:name="com.bih.nic.MigrentJobSearch.ModifyDocumentActivity" />
+        <activity android:name="com.bih.nic.MigrentJobSearch.ProfileActivity" />
+        <activity android:name="com.bih.nic.MigrentJobSearch.RequestOtpActivity" />
+        <activity android:name="com.bih.nic.MigrentJobSearch.MainHomeActivity" />
+        <activity android:name="com.bih.nic.MigrentJobSearch.HomeActivity" />
+        <activity android:name="com.bih.nic.MigrentJobSearch.VerifyAadhaar1" />
         <activity
-            android:name=".SplashActivity"
+            android:name="com.bih.nic.MigrentJobSearch.SplashActivity"
             android:theme="@style/NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -85,9 +85,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Login" />
+        <activity android:name="com.bih.nic.MigrentJobSearch.Login" />
         <activity
-            android:name=".UpdateAdhaar"
+            android:name="com.bih.nic.MigrentJobSearch.UpdateAdhaar"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.example.nic.aadhar1.UpdateAdhaar" />
@@ -95,19 +95,19 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".UpdateAdhaarMobile" />
-        <activity android:name=".ChooseCenter" />
-        <activity android:name=".VerifyAadhaar" />
-        <activity android:name=".MultiplePhotoActivity" />
-        <activity android:name=".ChangeMobileNumberActivity" />
-        <activity android:name=".CameraActivity" />
-        <activity android:name=".UpdateMobileNumberActivity" />
+        <activity android:name="com.bih.nic.MigrentJobSearch.UpdateAdhaarMobile" />
+        <activity android:name="com.bih.nic.MigrentJobSearch.ChooseCenter" />
+        <activity android:name="com.bih.nic.MigrentJobSearch.VerifyAadhaar" />
+        <activity android:name="com.bih.nic.MigrentJobSearch.MultiplePhotoActivity" />
+        <activity android:name="com.bih.nic.MigrentJobSearch.ChangeMobileNumberActivity" />
+        <activity android:name="com.bih.nic.MigrentJobSearch.CameraActivity" />
+        <activity android:name="com.bih.nic.MigrentJobSearch.UpdateMobileNumberActivity" />
 
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-        <activity android:name=".VerifyAadhaarGlobally" />
+        <activity android:name="com.bih.nic.MigrentJobSearch.VerifyAadhaarGlobally" />
     </application>
 
 </manifest>

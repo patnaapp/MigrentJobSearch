@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.bih.nic.aadhar1"
+        applicationId "com.bih.nic.MigrentJobSearch"
         minSdkVersion 17
         targetSdkVersion 28
         versionCode 4
@@ -27,7 +27,7 @@ android {
 
 }
 
-dependencies {
+   dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     testImplementation 'junit:junit:4.12'
