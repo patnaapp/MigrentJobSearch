@@ -412,6 +412,39 @@
                 </LinearLayout>
                 <LinearLayout
 
+                    android:id="@+id/lin_aadhar_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+
+                    android:clickable="false"
+                    android:orientation="vertical"
+                    android:paddingTop="0dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/tv_aadhar_name"
+                        android:layout_marginStart="10dp"
+                        android:text=" आधार के अनुसार नाम:-"
+                        android:textColor="#222222"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+
+                        />
+                    <EditText
+                        android:id="@+id/edt_aadharn_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:background="@drawable/edittext_box" />
+
+                </LinearLayout>
+                <LinearLayout
+
                     android:id="@+id/lin_aadharno"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -434,15 +467,32 @@
                         android:textStyle="bold"
 
                         />
-                    <EditText
-                        android:maxLength="12"
-                        android:inputType="number"
-                        android:id="@+id/edt_aadharno"
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="45dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="2dp"
-                        android:background="@drawable/edittext_box" />
+                        android:layout_height="wrap_content">
+
+
+
+                        <EditText
+                            android:id="@+id/edt_aadharno"
+                            android:layout_width="238dp"
+                            android:layout_height="45dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="2dp"
+                            android:background="@drawable/edittext_box"
+                            android:inputType="number"
+                            android:maxLength="12" />
+                        <Button
+                            android:textColor="#ffffff"
+                            android:background="@drawable/buttonbackshape1"
+                            android:layout_marginLeft="10dp"
+                            android:text="Validate"
+                            android:id="@+id/valAdhaar"
+                            android:layout_width="100dp"
+                            android:layout_height="50dp"></Button>
+                    </LinearLayout>
+
 
                 </LinearLayout>
 

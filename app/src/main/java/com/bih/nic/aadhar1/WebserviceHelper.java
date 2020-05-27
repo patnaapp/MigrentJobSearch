@@ -852,6 +852,7 @@ public class WebserviceHelper implements KvmSerializable {
             request.addProperty("_SubSkillId",benDetails.getSubSkillId());
             request.addProperty("_Qualification",benDetails.getIntQualification());
             request.addProperty("_Aadhaar",benDetails.getVchAadhaar());
+            request.addProperty("_vchName",benDetails.getVchName());
             request.addProperty("_NoofExperienceYear",benDetails.getIntExpYears());
             request.addProperty("_NoofExperienceMonth",benDetails.getIntExpMonths());
 
@@ -874,6 +875,36 @@ public class WebserviceHelper implements KvmSerializable {
         }
 
     }
+    public static String VerifyAdhaar(String adhaar,String name) {
+        try {
+            SoapObject request = new SoapObject("http://tempuri.org/", "DemographicUIDAuth");
 
+            request.addProperty("mobile_auth_aadhaar",adhaar);
+            request.addProperty("name",name);
+            request.addProperty("dob","");
+
+
+
+
+
+            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
+                    SoapEnvelope.VER11);
+            envelope.dotNet = true;
+
+            envelope.setOutputSoapObject(request);
+            HttpTransportSE androidHttpTransport = new HttpTransportSE("http://164.100.37.11/UIDAuthService/UIDAuth.asmx");
+            androidHttpTransport.call("http://tempuri.org/" + "DemographicUIDAuth", envelope);
+            Object result = envelope.getResponse();
+            if (result != null) {
+                return result.toString();
+            } else
+                return null;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
 
 }

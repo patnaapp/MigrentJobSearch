@@ -29,6 +29,8 @@ import com.bih.nic.aadhar1.Model.BenDetails;
 import com.bih.nic.aadhar1.Model.DefaultResponse;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
+
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -82,7 +84,9 @@ public class MainHomeActivity extends Activity {
             //}
         }
         else {
-            Picasso.with(this).load(BenDetails.getVchPhoto()).into(profile_image);
+            if (!profile_image.equals("")){
+               Picasso.with(this).load("http://10.133.20.159/"+BenDetails.getVchPhoto()).into(profile_image);
+        }
         }
         
         ll_profile.setOnClickListener(new View.OnClickListener() {

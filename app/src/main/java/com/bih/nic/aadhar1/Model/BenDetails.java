@@ -73,7 +73,7 @@ public class BenDetails implements KvmSerializable, Serializable {
     private String Skill_Name;
     private String SubSkillId;
     private String SubSkillName;
-    private String User_RegId;
+    private String User_RegId;private String NameAsPerAdhaar;
 
 
     public BenDetails() {
@@ -684,5 +684,13 @@ public class BenDetails implements KvmSerializable, Serializable {
 
     public void setIntQualification_name(String intQualification_name) {
         this.intQualification_name = intQualification_name;
+    }
+
+    public String getNameAsPerAdhaar() {
+        return NameAsPerAdhaar;
+    }
+
+    public void setNameAsPerAdhaar(String nameAsPerAdhaar) {
+        NameAsPerAdhaar = nameAsPerAdhaar;
     }
 }

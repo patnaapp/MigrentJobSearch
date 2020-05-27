@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -47,8 +48,9 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
     ArrayList<District>DistrictList=new ArrayList<>();
     ArrayList<BlockWeb>BlockList=new ArrayList<>();
     ArrayList<panchayat>PanchayatList=new ArrayList<>();
-    Button save_button;
-
+    Button save_button,valAdhaar;
+    EditText edt_aadharn_name;
+    boolean check=false;
 
     String skillId,subSkillId,CategoryId;
     String Dist_id="",Dist_name="",block_id="",block_name="",panch_id="",panch_name="",cat_id="",cat_name="",eduction_id="";
@@ -82,6 +84,8 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
         edt_aadharno=(EditText)findViewById(R.id.edt_aadharno);
         edt_exp_month=(EditText)findViewById(R.id.edt_exp_month);
         save_button=(Button)findViewById(R.id.save_button) ;
+        valAdhaar=(Button)findViewById(R.id.valAdhaar) ;
+        edt_aadharn_name=(EditText)findViewById(R.id.edt_aadharn_name) ;
 
         spn_panch_name.setOnItemSelectedListener(this);
         spn_block_name.setOnItemSelectedListener(this);
@@ -216,27 +220,42 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
                 setDataTOUpload();
                 Boolean value = Utiilties.isOnline(ModifyDocumentActivity.this);
                 if (value.equals(true)) {
-                    if(validateData())
-                        benDetails=new BenDetails();
-                    benDetails.setDistrictCode(Dist_id);
-                    benDetails.setBlockCode(block_id);
-                    benDetails.setPanchayatCode(panch_id);
-                    benDetails.setVchMobile(Mobile_no);
-                    benDetails.setVchBankAccount(Bank_Ac_no);
-                    benDetails.setVchBankName(_Bank_name);
+                    if(validateData()) {
+                        benDetails = new BenDetails();
+                        benDetails.setDistrictCode(Dist_id);
+                        benDetails.setBlockCode(block_id);
+                        benDetails.setPanchayatCode(panch_id);
+                        benDetails.setVchMobile(Mobile_no);
+                        benDetails.setVchBankAccount(Bank_Ac_no);
+                        benDetails.setVchBankName(_Bank_name);
+                        benDetails.setVchName(edt_aadharn_name.getText().toString());
+                        benDetails.setVchIfsc(Ifsc_code);
+                        benDetails.setIntCategory(Dist_id);
+                        benDetails.setSkill_Id(skill_id);
+                        benDetails.setSubSkillId(sub_Skill_id);
+                        benDetails.setVchAadhaar(str_adhaar);
+                        benDetails.setIntQualification(eduction_id);
+                        benDetails.setIntExpYears(edt_exp_year.getText().toString());
+                        benDetails.setIntExpMonths(edt_exp_month.getText().toString());
 
-                    benDetails.setVchIfsc(Ifsc_code);
-                    benDetails.setIntCategory(Dist_id);
-                    benDetails.setSkill_Id(skill_id);
-                    benDetails.setSubSkillId(sub_Skill_id);
-                    benDetails.setVchAadhaar(str_adhaar);
-                    benDetails.setIntQualification(eduction_id);
-                    benDetails.setIntExpYears(edt_exp_year.getText().toString());
-                    benDetails.setIntExpMonths(edt_exp_month.getText().toString());
-
-                    new UploadPendingTask(benDetails).execute();
+                        new UploadPendingTask(benDetails).execute();
+                    }
                 }else {
                     Toast.makeText(getApplicationContext(),"Please Turn On Internet Coneection First",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        valAdhaar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(edt_aadharn_name.getText().length()!=0) {
+                    if(edt_aadharno.getText().length()!=0) {
+                        new ValidateAdhhar(edt_aadharno.getText().toString(),edt_aadharn_name.getText().toString()).execute();
+                    }else {
+                        Toast.makeText(getApplicationContext(),"आधार नंबर दर्ज करेंं",Toast.LENGTH_LONG).show();
+                    }
+                }else {
+                    Toast.makeText(getApplicationContext(),"आधार के अनुसार नाम दर्ज करें",Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -244,7 +263,7 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
 
     public void extractFrom_Data(){
 
-
+        edt_aadharn_name.setText(benDetails.getVchName());
         edt_exp_year.setText(benDetails.getIntExpMonths());
         edt_exp_month.setText(benDetails.getIntExpYears());
         edt_aadharno.setText(benDetails.getVchAadhaar());
@@ -538,6 +557,7 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
     }
 
     public void setDataTOUpload(){
+
         Mobile_no=edt_mobileno.getText().toString();
         Bank_Ac_no=edt_ac_no.getText().toString();
         _Bank_name=edt_ac_name.getText().toString();
@@ -645,30 +665,33 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
                 Toast.makeText(getApplicationContext(), "कृपया जिला नाम चुनें", Toast.LENGTH_LONG).show();
                 validate = false;
 
-        }else if(block_id.equalsIgnoreCase("")){
+        } if(block_id.equalsIgnoreCase("")){
             Toast.makeText(getApplicationContext(), "कृपया ब्लॉक का नाम चुनें", Toast.LENGTH_LONG).show();
             validate = false;
-        }else if(panch_id.equalsIgnoreCase("")){
+        } if(panch_id.equalsIgnoreCase("")){
             Toast.makeText(getApplicationContext(), "कृपया पंचायत नाम का चयन करें", Toast.LENGTH_LONG).show();
             validate = false;
         }
-        else if (!Verhoeff.validateVerhoeff(str_adhaar)) {
+         if (!Verhoeff.validateVerhoeff(str_adhaar)) {
             Toast.makeText(getApplicationContext(), "कृपया मान्य आधार संख्या दर्ज करें", Toast.LENGTH_LONG).show();
             validate = false;
-        }else if(Bank_Ac_no.equalsIgnoreCase("")){
+        } if(Bank_Ac_no.equalsIgnoreCase("")){
             Toast.makeText(getApplicationContext(), "कृपया बैंक खाता नंबर दर्ज करें", Toast.LENGTH_LONG).show();
             validate = false;
-        }else if(Mobile_no.length()!=10){
+        } if(Mobile_no.length()!=10){
             Toast.makeText(getApplicationContext(), "कृपया मोबाइल नंबर दर्ज करें", Toast.LENGTH_LONG).show();
             validate = false;
-        }else if(Ifsc_code.equalsIgnoreCase("")){
+        } if(Ifsc_code.equalsIgnoreCase("")){
             Toast.makeText(getApplicationContext(), "कृपया IfSc कोड दर्ज करें ", Toast.LENGTH_LONG).show();
             validate = false;
-        }else if(skill_id.equalsIgnoreCase("")){
+        } if(skill_id.equalsIgnoreCase("")){
             Toast.makeText(getApplicationContext(), "कृपया कुशलता चुनें ", Toast.LENGTH_LONG).show();
             validate = false;
-        }else if(sub_Skill_id.equalsIgnoreCase("")){
+        } if(sub_Skill_id.equalsIgnoreCase("")){
             Toast.makeText(getApplicationContext(), "कृपया कुशलता चुनें  ", Toast.LENGTH_LONG).show();
+            validate = false;
+        } if(!check){
+            Toast.makeText(getApplicationContext(), "आधार के अनुसार नाम दर्ज करें  ", Toast.LENGTH_LONG).show();
             validate = false;
         }
         if(focusView != null && focusView.requestFocus()) {
@@ -677,4 +700,50 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
         return validate;
 
     }
+    private class ValidateAdhhar extends AsyncTask<String, Void, String> {
+
+        String pid = "-1";
+
+        private final ProgressDialog dialog = new ProgressDialog(
+                ModifyDocumentActivity.this);
+        String _adhaar="",_name="";
+        ValidateAdhhar(String adhaar ,String name) {
+            this._adhaar=adhaar;
+            this._name=name;
+
+            Log.e("Pid  ", pid + " ");
+        }
+
+        @Override
+        protected void onPreExecute() {
+
+            this.dialog.setCanceledOnTouchOutside(false);
+            this.dialog.setMessage(getResources().getString(R.string.uploading));
+            this.dialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... param) {
+
+
+
+            String res = WebserviceHelper.VerifyAdhaar(_adhaar,_name);
+
+            return res;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            if (this.dialog.isShowing()) {
+                this.dialog.dismiss();
+                Log.d("gdfgggv",result);
+                valAdhaar.setBackground(ContextCompat.getDrawable(ModifyDocumentActivity.this, R.drawable.buttonshape));
+                check=true;
+
+
+            }
+        }
+
+    }
+
 }
