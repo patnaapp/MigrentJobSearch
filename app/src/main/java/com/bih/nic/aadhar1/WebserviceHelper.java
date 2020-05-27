@@ -43,6 +43,7 @@ public class WebserviceHelper implements KvmSerializable {
     private static final String BLOCK_METHOD="getBlock";
     private static final String SKILL_METHOD="SkilMasterList";
     private static final String JOB_SEARCH_METHOD="JobSearchDetails1";
+    private static final String UPDATE_PROFILE_IMAGE_METHOD="UpdateImage";
     private static final String SUBSKILL_METHOD="SubSkilMasterList";
     private static final String DISTRICT_METHOD="getDistrict";
     private static final String PANCHAYAT_METHOD="getPanchyat";
@@ -85,6 +86,38 @@ public class WebserviceHelper implements KvmSerializable {
 
 
         return fieldList;
+    }
+
+    public static DefaultResponse updateProfileImage(String regId, String lat, String longi, String img) {
+
+        SoapObject request = new SoapObject(SERVICENAMESPACE, UPDATE_PROFILE_IMAGE_METHOD);
+
+        request.addProperty("_RegistrationNo",regId);
+        request.addProperty("_Latlong", lat);
+        request.addProperty("_Longitude",longi);
+        request.addProperty("_Image",img);
+        DefaultResponse userDetails;
+        SoapObject res1;
+
+        try {
+            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+            envelope.dotNet = true;
+            envelope.setOutputSoapObject(request);
+            envelope.addMapping(SERVICENAMESPACE, DefaultResponse.DefaultResponse_CLASS.getSimpleName(), DefaultResponse.DefaultResponse_CLASS);
+            HttpTransportSE androidHttpTransport = new HttpTransportSE(SERVICEURL);
+            androidHttpTransport.call(SERVICENAMESPACE + UPDATE_PROFILE_IMAGE_METHOD, envelope);
+
+            res1 = (SoapObject) envelope.getResponse();
+
+            int TotalProperty = res1.getPropertyCount();
+
+            userDetails = new DefaultResponse(res1);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return userDetails;
     }
 
     public static ArrayList<JobListEntity> searchJobMasterData(String regId, String distId) {
