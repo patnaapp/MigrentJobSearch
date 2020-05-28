@@ -260,8 +260,6 @@ public class ProfileActivity extends Activity implements View.OnClickListener
             }else{
                 Toast.makeText(ProfileActivity.this, "Update Failed, Null Record", Toast.LENGTH_SHORT).show();
             }
-
-
         }
     }
 
