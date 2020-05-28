@@ -31,7 +31,7 @@ import java.io.IOException;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileActivity extends Activity implements View.OnClickListener
-       // GoogleApiClient.ConnectionCallbacks,GoogleApiClient.OnConnectionFailedListener
+        // GoogleApiClient.ConnectionCallbacks,GoogleApiClient.OnConnectionFailedListener
 {
 
     BenDetails benDetails;
@@ -115,7 +115,7 @@ public class ProfileActivity extends Activity implements View.OnClickListener
             // if (benDetails.getVchPhoto() == null) {
             byte[] imgData = Base64.decode(imagesr, Base64.DEFAULT);
             Bitmap bmp = BitmapFactory.decodeByteArray(imgData, 0, imgData.length);
-          //  img_studphoto.setScaleType(ImageView.ScaleType.FIT_XY);
+            //  img_studphoto.setScaleType(ImageView.ScaleType.FIT_XY);
             img_studphoto.setImageBitmap(bmp);
 
 
@@ -123,7 +123,7 @@ public class ProfileActivity extends Activity implements View.OnClickListener
         }
         else {
             Picasso.with(this).load("http://10.133.20.159/"+benDetails.getVchPhoto()).error(R.drawable.profile).into(img_studphoto);
-           // Picasso.with(this).load(benDetails.getVchPhoto()).into(img_studphoto);
+            // Picasso.with(this).load(benDetails.getVchPhoto()).into(img_studphoto);
         }
 
     }
@@ -274,13 +274,33 @@ public class ProfileActivity extends Activity implements View.OnClickListener
                 iCamera.putExtra("KEY_PIC", "1");
             startActivityForResult(iCamera, CAMERA_PIC);
         }else{
-//            mGoogleApiClient = new GoogleApiClient.Builder(ProfileActivity.this)
-//                    .addApi(LocationServices.API)
-//                    .addConnectionCallbacks(ProfileActivity.this)
-//                    .addOnConnectionFailedListener(ProfileActivity.this).build();
-//            mGoogleApiClient.connect();
-            //buildAlertMessageNoGps();
-        }
-    }
 
+            if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+
+
+                buildAlertMessageNoGps();
+            }
+        }
+
+
+    }
+    private void buildAlertMessageNoGps() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("GPS");
+        builder.setMessage("GPS is turned OFF...\nDo U Want Turn On GPS..")
+//		builder.setMessage("Your GPS seems to be disabled, do you want to enable it?")
+                .setCancelable(false)
+                .setPositiveButton("Turn on GPS", new DialogInterface.OnClickListener() {
+                    public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        dialog.cancel();
+                    }
+                });
+        final AlertDialog alert = builder.create();
+        alert.show();
+    }
 }
