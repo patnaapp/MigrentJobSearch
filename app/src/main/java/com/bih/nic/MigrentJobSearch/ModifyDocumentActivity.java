@@ -254,6 +254,7 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
                 }
             }
         });
+
         valAdhaar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -768,10 +769,25 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
             if (this.dialog.isShowing()) {
                 this.dialog.dismiss();
                // Log.d("gdfgggv",result);
-                valAdhaar.setBackground(ContextCompat.getDrawable(ModifyDocumentActivity.this, R.drawable.buttonshape));
-                check=true;
 
+                try {
+                    if (result != null) {
+                        if (result.equalsIgnoreCase("Authentication Success")) {
 
+                            valAdhaar.setBackground(ContextCompat.getDrawable(ModifyDocumentActivity.this, R.drawable.buttonshape));
+                            check=true;
+                            //showSuccessMessageDialogue(result.toString());
+
+                        } else {
+                            Toast.makeText(getApplicationContext(), "आधार और नाम सही नहीं, कृपया सही नाम और आधार संख्या डालें", Toast.LENGTH_LONG).show();
+                            //showMessageDialogue();
+                        }
+                    } else {
+                        Toast.makeText(getApplicationContext(), "इंटरनेट की स्पीड स्लो है | कृपया कुछ समय बाद प्रयास करे", Toast.LENGTH_LONG).show();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
 

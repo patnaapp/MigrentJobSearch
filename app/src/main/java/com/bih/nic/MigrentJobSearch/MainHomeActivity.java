@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.bih.nic.MigrentJobSearch.DataBaseHelper.DataBaseHelper;
 import com.bih.nic.MigrentJobSearch.Model.BenDetails;
+import com.bih.nic.MigrentJobSearch.Model.PaymentStatusEntity;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -27,7 +28,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MainHomeActivity extends Activity {
     LinearLayout ll_profile,ll_register_Grivance;
     String Reg_No="",user_name="", mobile="", address="", DistName="";
-    TextView tv_benname,urole,tv_mobile,tv_address;
+    TextView tv_benname,urole,tv_mobile,tv_address,tv_version;
     CircleImageView profile_image;
 
    BenDetails BenDetails;
@@ -49,8 +50,16 @@ public class MainHomeActivity extends Activity {
         urole=(TextView) findViewById(R.id.urole);
         tv_mobile=(TextView) findViewById(R.id.tv_mobile);
         tv_address=(TextView) findViewById(R.id.tv_address);
+        tv_version=(TextView) findViewById(R.id.tv_version);
 
         profile_image=(CircleImageView) findViewById(R.id.profile_image);
+
+        String version = Utiilties.getAppVersion(this);
+        if(version != null){
+            tv_version.setText("ऐप वर्ज़न "+version);
+        }else{
+            tv_version.setText("");
+        }
         
         ll_profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,6 +153,10 @@ public class MainHomeActivity extends Activity {
         i.putExtra("data",Reg_No);
         i.putExtra("DistName",DistName);
         startActivity(i);
+    }
+
+    public void onCheckPaymentStatus(View view){
+        new SyncPaymentStatus().execute();
     }
 
     public void onLogout(View view){
@@ -262,5 +275,61 @@ public class MainHomeActivity extends Activity {
         }
     }
 
+    private class SyncPaymentStatus extends AsyncTask<String, Void, PaymentStatusEntity> {
+        BenDetails data;
+        String _uid;
+        private final ProgressDialog dialog = new ProgressDialog(MainHomeActivity.this);
+        private final android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(MainHomeActivity.this).create();
 
+
+
+        @Override
+        protected void onPreExecute() {
+
+            this.dialog.setCanceledOnTouchOutside(false);
+            this.dialog.setMessage("लोड हो रहा है...");
+            if (!MainHomeActivity.this.isFinishing()) {
+                this.dialog.show();
+            }
+        }
+
+        @Override
+        protected PaymentStatusEntity doInBackground(String... param) {
+
+            return WebserviceHelper.getPaymentDetail(Reg_No);
+
+        }
+
+        @Override
+        protected void onPostExecute(PaymentStatusEntity result) {
+            if (this.dialog.isShowing()) {
+                this.dialog.dismiss();
+            }
+            //Log.d("Responsevalue", "" + result);
+            if (result != null) {
+                if(result.getStatus()){
+                    Intent i =new Intent(MainHomeActivity.this,PaymentStatusActivity.class);
+                    i.putExtra("data",result);
+                    startActivity(i);
+                }else{
+                    new AlertDialog.Builder(MainHomeActivity.this)
+                            .setTitle("Failed")
+                            .setMessage(result.getMsg())
+                            .setCancelable(false)
+                            .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.dismiss();
+                                }
+                            })
+                            .show();
+                }
+
+
+            } else {
+
+                Toast.makeText(getApplicationContext(), "Result Null!!, OR Payment Status not found!!", Toast.LENGTH_SHORT).show();
+            }
+
+        }
+    }
 }

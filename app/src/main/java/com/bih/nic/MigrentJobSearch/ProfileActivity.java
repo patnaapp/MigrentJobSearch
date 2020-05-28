@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.os.Bundle;
@@ -28,7 +30,9 @@ import java.io.IOException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class ProfileActivity extends Activity implements View.OnClickListener{
+public class ProfileActivity extends Activity implements View.OnClickListener
+       // GoogleApiClient.ConnectionCallbacks,GoogleApiClient.OnConnectionFailedListener
+{
 
     BenDetails benDetails;
     TextView tv_user_name,tv_mobile,tv_qualification,tv_age,tv_address,tv_experience,et_reg_num;
@@ -38,6 +42,11 @@ public class ProfileActivity extends Activity implements View.OnClickListener{
     String str_img1="",Reg_No="";
     DataBaseHelper dataBaseHelper;
     ImageView back_arrow;
+
+//    LocationRequest mLocationRequest;
+//    GoogleApiClient mGoogleApiClient;
+//    PendingResult<LocationSettingsResult> result;
+//    final static int REQUEST_LOCATION = 199;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -185,6 +194,21 @@ public class ProfileActivity extends Activity implements View.OnClickListener{
 
     }
 
+//    @Override
+//    public void onConnected(@Nullable Bundle bundle) {
+//
+//    }
+//
+//    @Override
+//    public void onConnectionSuspended(int i) {
+//
+//    }
+//
+//    @Override
+//    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+//
+//    }
+
     private class UplaodImageData extends AsyncTask<String, Void, DefaultResponse> {
         private final ProgressDialog dialog = new ProgressDialog(ProfileActivity.this);
         String regId, latitude, longitude, imageStr;
@@ -214,23 +238,27 @@ public class ProfileActivity extends Activity implements View.OnClickListener{
                 this.dialog.dismiss();
             }
 
-            if(result.getStatus()){
-                saveImgaetoLocal();
-                Toast.makeText(ProfileActivity.this, "प्रोफ़ाइल फ़ोटो सफलतापूर्वक अपडेट हों गया", Toast.LENGTH_SHORT).show();
-            }else{
-                AlertDialog.Builder ab = new AlertDialog.Builder(ProfileActivity.this);
-                ab.setCancelable(false);
-                ab.setTitle("Failed");
-                ab.setMessage(result.getMessage());
-                ab.setPositiveButton("[OK]", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        dialog.dismiss();
-                    }
-                });
+            if(result != null){
+                if(result.getStatus()){
+                    saveImgaetoLocal();
+                    Toast.makeText(ProfileActivity.this, "प्रोफ़ाइल फ़ोटो सफलतापूर्वक अपडेट हों गया", Toast.LENGTH_SHORT).show();
+                }else{
+                    AlertDialog.Builder ab = new AlertDialog.Builder(ProfileActivity.this);
+                    ab.setCancelable(false);
+                    ab.setTitle("Failed");
+                    ab.setMessage(result.getMessage());
+                    ab.setPositiveButton("[OK]", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            dialog.dismiss();
+                        }
+                    });
 
-                ab.create().getWindow().getAttributes().windowAnimations = R.style.alert_animation;
-                ab.show();
+                    ab.create().getWindow().getAttributes().windowAnimations = R.style.alert_animation;
+                    ab.show();
+                }
+            }else{
+                Toast.makeText(ProfileActivity.this, "Update Failed, Null Record", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -238,12 +266,21 @@ public class ProfileActivity extends Activity implements View.OnClickListener{
     @Override
     public void onClick(View view) {
 
-        Intent iCamera = new Intent(getApplicationContext(),CameraActivity.class);
-        if (view.equals(img_studphoto))
-            iCamera.putExtra("KEY_PIC", "1");
-        startActivityForResult(iCamera, CAMERA_PIC);
+        final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-
+        if (manager.isProviderEnabled(LocationManager.GPS_PROVIDER) == true){
+            Intent iCamera = new Intent(getApplicationContext(),CameraActivity.class);
+            if (view.equals(img_studphoto))
+                iCamera.putExtra("KEY_PIC", "1");
+            startActivityForResult(iCamera, CAMERA_PIC);
+        }else{
+//            mGoogleApiClient = new GoogleApiClient.Builder(ProfileActivity.this)
+//                    .addApi(LocationServices.API)
+//                    .addConnectionCallbacks(ProfileActivity.this)
+//                    .addOnConnectionFailedListener(ProfileActivity.this).build();
+//            mGoogleApiClient.connect();
+            //buildAlertMessageNoGps();
+        }
     }
 
 }
