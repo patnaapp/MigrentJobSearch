@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -49,7 +50,7 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
     Button save_button,valAdhaar;
     EditText edt_aadharn_name;
     boolean check=true;
-
+    ImageView img_back;
 
     String skillId,subSkillId,CategoryId;
     String Dist_id="",Dist_name="",block_id="",block_name="",panch_id="",panch_name="",cat_id="",cat_name="",eduction_id="";
@@ -69,6 +70,7 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
 
 
         benDetails=(BenDetails)getIntent().getSerializableExtra("data");
+        img_back=(ImageView) findViewById(R.id.img);
         dataBaseHelper=new DataBaseHelper(this);
         spn_panch_name=(Spinner)findViewById(R.id.spn_panch_name);
         spn_block_name=(Spinner)findViewById(R.id.spn_block_name);
@@ -110,6 +112,12 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
         if(check){
             valAdhaar.setVisibility(View.GONE);
         }
+        img_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         spn_panch_name.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
