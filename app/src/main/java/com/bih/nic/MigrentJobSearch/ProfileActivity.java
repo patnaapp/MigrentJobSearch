@@ -214,24 +214,30 @@ public class ProfileActivity extends Activity implements View.OnClickListener{
                 this.dialog.dismiss();
             }
 
-            if(result.getStatus()){
-                saveImgaetoLocal();
-                Toast.makeText(ProfileActivity.this, "प्रोफ़ाइल फ़ोटो सफलतापूर्वक अपडेट हों गया", Toast.LENGTH_SHORT).show();
-            }else{
-                AlertDialog.Builder ab = new AlertDialog.Builder(ProfileActivity.this);
-                ab.setCancelable(false);
-                ab.setTitle("Failed");
-                ab.setMessage(result.getMessage());
-                ab.setPositiveButton("[OK]", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        dialog.dismiss();
-                    }
-                });
+            if(result != null){
+                if(result.getStatus()){
+                    saveImgaetoLocal();
+                    Toast.makeText(ProfileActivity.this, "प्रोफ़ाइल फ़ोटो सफलतापूर्वक अपडेट हों गया", Toast.LENGTH_SHORT).show();
+                }else{
+                    AlertDialog.Builder ab = new AlertDialog.Builder(ProfileActivity.this);
+                    ab.setCancelable(false);
+                    ab.setTitle("Failed");
+                    ab.setMessage(result.getMessage());
+                    ab.setPositiveButton("[OK]", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            dialog.dismiss();
+                        }
+                    });
 
-                ab.create().getWindow().getAttributes().windowAnimations = R.style.alert_animation;
-                ab.show();
+                    ab.create().getWindow().getAttributes().windowAnimations = R.style.alert_animation;
+                    ab.show();
+                }
+            }else{
+                Toast.makeText(ProfileActivity.this, "Update Failed, Null Record", Toast.LENGTH_SHORT).show();
             }
+
+
         }
     }
 

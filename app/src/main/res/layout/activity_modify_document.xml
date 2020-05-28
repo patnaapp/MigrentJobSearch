@@ -471,8 +471,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-
-
                         <EditText
                             android:id="@+id/edt_aadharno"
                             android:layout_width="238dp"
@@ -482,6 +480,7 @@
                             android:background="@drawable/edittext_box"
                             android:inputType="number"
                             android:maxLength="12" />
+
                         <Button
                             android:textColor="#ffffff"
                             android:background="@drawable/buttonbackshape1"

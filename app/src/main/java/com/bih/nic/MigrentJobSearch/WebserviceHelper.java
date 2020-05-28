@@ -8,6 +8,7 @@ import com.bih.nic.MigrentJobSearch.Model.BlockWeb;
 import com.bih.nic.MigrentJobSearch.Model.DefaultResponse;
 import com.bih.nic.MigrentJobSearch.Model.District;
 import com.bih.nic.MigrentJobSearch.Model.JobListEntity;
+import com.bih.nic.MigrentJobSearch.Model.PaymentStatusEntity;
 import com.bih.nic.MigrentJobSearch.Model.SkillMaster;
 import com.bih.nic.MigrentJobSearch.Model.SubSkillMaster;
 import com.bih.nic.MigrentJobSearch.Model.UserDetails;
@@ -33,10 +34,13 @@ public class WebserviceHelper implements KvmSerializable {
 
 
     private Context ctx;
+
     public static final String SERVICENAMESPACE = "http://shramsadhan.bih.nic.in/";
-    // public static final String SERVICENAMESPACE = "http://164.100.251.15/";
-    //public static final String SERVICEURL = "http://elabharthi.bih.nic.in/elabhwebservice.asmx";
     public static final String SERVICEURL = "http://shramsadhan.bih.nic.in/MigrantJobSearchWebservice.asmx";
+
+//    public static final String SERVICENAMESPACE = "http://10.133.20.159/";
+    //public static final String SERVICEURL = "http://10.133.20.159/TestService/MigrantJobSearchWebservice.asmx";
+
     private static final String AuthenticateUser = "Authenticate";
     private static final String GETBENEFICIARYLIST="getAadhaar";
     private static final String UpdateMobile_UID="UpdateMobile_UID";
@@ -52,6 +56,7 @@ public class WebserviceHelper implements KvmSerializable {
     private static final String GETAADHAARUSERDETAIL="getAadharUserDetail";
     private static final String UploadDataForMobNo_chng="VerifyDetail";
     private static final String GET_BEN_DETAILS="getuserDetails";
+    private static final String GET_PAYMENT_DETAILS="GetPaymentDtls";
     private static final String UpdateMobile="updateUserMob";
     private static final String Reques_tOTP="ResendVerifyOtp";
     private static final String UpdateAadhar_Status="UpdateAadhar_Status";
@@ -768,8 +773,39 @@ public class WebserviceHelper implements KvmSerializable {
 
     }
 
-    public static BenDetails getBen_Details(String regno)
-    {
+    public static PaymentStatusEntity getPaymentDetail(String regno) {
+
+        SoapObject request = new SoapObject(SERVICENAMESPACE, GET_PAYMENT_DETAILS);
+
+        request.addProperty("RegistrationNo",regno);
+
+        PaymentStatusEntity userDetails;
+        SoapObject res1;
+        try {
+
+            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+            envelope.dotNet = true;
+            envelope.setOutputSoapObject(request);
+            envelope.addMapping(SERVICENAMESPACE, PaymentStatusEntity.PaymentStatusEntity_CLASS.getSimpleName(), PaymentStatusEntity.PaymentStatusEntity_CLASS);
+            HttpTransportSE androidHttpTransport = new HttpTransportSE(SERVICEURL);
+            androidHttpTransport.call(SERVICENAMESPACE + GET_PAYMENT_DETAILS, envelope);
+
+            res1 = (SoapObject) envelope.getResponse();
+
+            int TotalProperty = res1.getPropertyCount();
+
+            userDetails = new PaymentStatusEntity(res1);
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return userDetails;
+
+    }
+
+    public static BenDetails getBen_Details(String regno) {
 
         SoapObject request = new SoapObject(SERVICENAMESPACE, GET_BEN_DETAILS);
 

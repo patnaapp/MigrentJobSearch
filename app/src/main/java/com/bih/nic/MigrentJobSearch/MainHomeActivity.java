@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.bih.nic.MigrentJobSearch.DataBaseHelper.DataBaseHelper;
 import com.bih.nic.MigrentJobSearch.Model.BenDetails;
+import com.bih.nic.MigrentJobSearch.Model.PaymentStatusEntity;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -146,6 +147,10 @@ public class MainHomeActivity extends Activity {
         startActivity(i);
     }
 
+    public void onCheckPaymentStatus(View view){
+        new SyncPaymentStatus().execute();
+    }
+
     public void onLogout(View view){
         new AlertDialog.Builder(this)
                 .setTitle("लॉग आउट ?")
@@ -262,5 +267,61 @@ public class MainHomeActivity extends Activity {
         }
     }
 
+    private class SyncPaymentStatus extends AsyncTask<String, Void, PaymentStatusEntity> {
+        BenDetails data;
+        String _uid;
+        private final ProgressDialog dialog = new ProgressDialog(MainHomeActivity.this);
+        private final android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(MainHomeActivity.this).create();
 
+
+
+        @Override
+        protected void onPreExecute() {
+
+            this.dialog.setCanceledOnTouchOutside(false);
+            this.dialog.setMessage("लोड हो रहा है...");
+            if (!MainHomeActivity.this.isFinishing()) {
+                this.dialog.show();
+            }
+        }
+
+        @Override
+        protected PaymentStatusEntity doInBackground(String... param) {
+
+            return WebserviceHelper.getPaymentDetail(Reg_No);
+
+        }
+
+        @Override
+        protected void onPostExecute(PaymentStatusEntity result) {
+            if (this.dialog.isShowing()) {
+                this.dialog.dismiss();
+            }
+            //Log.d("Responsevalue", "" + result);
+            if (result != null) {
+                if(result.getStatus()){
+                    Intent i =new Intent(MainHomeActivity.this,PaymentStatusActivity.class);
+                    i.putExtra("data",result);
+                    startActivity(i);
+                }else{
+                    new AlertDialog.Builder(MainHomeActivity.this)
+                            .setTitle("Failed")
+                            .setMessage(result.getMsg())
+                            .setCancelable(false)
+                            .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.dismiss();
+                                }
+                            })
+                            .show();
+                }
+
+
+            } else {
+
+                Toast.makeText(getApplicationContext(), "Result Null!!, OR Payment Status not found!!", Toast.LENGTH_SHORT).show();
+            }
+
+        }
+    }
 }
