@@ -53,6 +53,8 @@ public class JobListEntity implements KvmSerializable, Serializable {
         JobListEntity_CLASS = jobListEntity_CLASS;
     }
 
+
+
     public String getContactNumber() {
         return contactNumber;
     }

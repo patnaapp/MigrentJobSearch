@@ -63,11 +63,7 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
 
         getActionBar().hide();
 
-
-
-
         Utiilties.setStatusBarColor(this);
-
 
         benDetails=(BenDetails)getIntent().getSerializableExtra("data");
         img_back=(ImageView) findViewById(R.id.img);
@@ -125,11 +121,9 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
                     panch_id = PanchayatList.get(position-1).getPanchayatId();
                     panch_name = PanchayatList.get(position-1).getPanchayatName();
 
-
                 } else {
                     panch_id = "";
                     panch_name = "";
-
                 }
             }
 
@@ -149,11 +143,9 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
                     block_name = BlockList.get(position-1).getBlockName();
                     loadPanchayatSpinnerData(block_id);
 
-
                 } else {
                     block_id = "";
                     block_name = "";
-
                 }
             }
 
@@ -193,9 +185,6 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
                 if (position > 0) {
                     cat_id = cateogryList.get(position).getCat_id();
                     cat_name = cateogryList.get(position).getCat_name_HinDi();
-
-
-
                 } else {
                     cat_id = "";
                     cat_name = "";
@@ -710,10 +699,14 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
             Toast.makeText(getApplicationContext(), "कृपया पंचायत नाम का चयन करें", Toast.LENGTH_LONG).show();
             validate = false;
         }
-         if (!Verhoeff.validateVerhoeff(str_adhaar)) {
+        if(str_adhaar.equals("") || str_adhaar.equals("NA")){
             Toast.makeText(getApplicationContext(), "कृपया मान्य आधार संख्या दर्ज करें", Toast.LENGTH_LONG).show();
             validate = false;
-        } if(Bank_Ac_no.equalsIgnoreCase("")){
+        }else if (!Verhoeff.validateVerhoeff(str_adhaar)) {
+            Toast.makeText(getApplicationContext(), "कृपया मान्य आधार संख्या दर्ज करें", Toast.LENGTH_LONG).show();
+            validate = false;
+        }
+        if(Bank_Ac_no.equalsIgnoreCase("")){
             Toast.makeText(getApplicationContext(), "कृपया बैंक खाता नंबर दर्ज करें", Toast.LENGTH_LONG).show();
             validate = false;
         } if(Mobile_no.length()!=10){

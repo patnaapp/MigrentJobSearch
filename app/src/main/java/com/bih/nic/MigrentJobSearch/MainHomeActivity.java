@@ -119,8 +119,8 @@ public class MainHomeActivity extends Activity {
         DistName=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("DistName", "");
 
         tv_benname.setText(user_name);
-        urole.setText("  पंजीकरण संख्या: "+Reg_No);
-        tv_mobile.setText("  मोबाइल नंबर: "+mobile);
+        urole.setText("पंजीकरण संख्या: \n"+Reg_No);
+        tv_mobile.setText("मोबाइल नंबर: \n"+mobile);
         tv_address.setText("  पता: "+address);
 
         String imagesr=dataBaseHelper.getBenImg(Reg_No);
