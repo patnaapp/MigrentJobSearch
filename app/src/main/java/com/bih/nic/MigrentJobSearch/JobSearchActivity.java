@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -31,7 +32,7 @@ public class JobSearchActivity extends Activity implements AdapterView.OnItemSel
     RecyclerView listView;
     TextView tv_Norecord;
     Spinner spn_skill,spn_sub_skill;
-
+    ImageView img_back;
     JobSearchAdapter adaptor_showedit_listDetail;
 
     ProgressDialog dialog;
@@ -62,6 +63,12 @@ public class JobSearchActivity extends Activity implements AdapterView.OnItemSel
 
         setDistrictSpinner(distName);
 
+        img_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         //new SyncJobSearchData().execute();
         //For Testing
 //        JobListEntity info = new JobListEntity();
@@ -79,6 +86,7 @@ public class JobSearchActivity extends Activity implements AdapterView.OnItemSel
         tv_Norecord = findViewById(R.id.tv_Norecord);
 
         listView = findViewById(R.id.listviewshow);
+        img_back=(ImageView) findViewById(R.id.img);
 
         spn_sub_skill.setOnItemSelectedListener(this);
         spn_skill.setOnItemSelectedListener(this);
@@ -89,7 +97,6 @@ public class JobSearchActivity extends Activity implements AdapterView.OnItemSel
             Log.e("data", ""+data.size());
             tv_Norecord.setVisibility(View.GONE);
             listView.setVisibility(View.VISIBLE);
-
 
             adaptor_showedit_listDetail = new JobSearchAdapter(this, data);
             listView.setLayoutManager(new LinearLayoutManager(this));

@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -15,6 +16,7 @@ public class PaymentStatusActivity extends Activity {
 
     TextView tv_district,tv_block,tv_panchayat,tv_qrt_14,tv_name,tv_account,tv_ifsc,tv_bank_name,tv_paymentstatus,tv_eupi_status,tv_rjct_reason;
     LinearLayout ll_rjct_remarks;
+    ImageView img_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +39,18 @@ public class PaymentStatusActivity extends Activity {
         tv_eupi_status = findViewById(R.id.tv_eupi_status);
         tv_rjct_reason = findViewById(R.id.tv_rjct_reason);
         ll_rjct_remarks = findViewById(R.id.ll_rjct_remarks);
+        img_back=(ImageView) findViewById(R.id.img);
         ll_rjct_remarks.setVisibility(View.GONE);
 
         PaymentStatusEntity info = (PaymentStatusEntity)getIntent().getSerializableExtra("data");
         setData(info);
+
+        img_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     public void setData(PaymentStatusEntity info)

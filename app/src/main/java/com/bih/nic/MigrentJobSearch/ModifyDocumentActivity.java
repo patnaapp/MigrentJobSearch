@@ -103,9 +103,11 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
         loadBlockSpinnerData(benDetails.getDistrictCode());
         loadPanchayatSpinnerData(benDetails.getBlockCode());
         loadSubSkillSpinnerData(benDetails.getSkill_Id());
+
         if(check){
             valAdhaar.setVisibility(View.GONE);
         }
+
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
