@@ -11,8 +11,9 @@
         android:id="@+id/img"
         android:tint="@color/color_white"
         android:src="@drawable/back_arrow"
+        android:layout_centerVertical="true"
         android:layout_width="30dp"
-        android:layout_height="50dp"></ImageView>
+        android:layout_height="40dp"></ImageView>
 
     <ImageView
         android:layout_toRightOf="@+id/img"
