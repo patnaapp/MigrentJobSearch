@@ -343,6 +343,36 @@
                         android:textColor="@color/color_black"/>
                 </LinearLayout>
 
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:id="@+id/ll_rjct_remarks"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:text="अस्वीकृति का कारन"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:textStyle="bold"
+                        android:text=":"/>
+
+                    <TextView
+                        android:id="@+id/tv_rjct_reason"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="6dp"
+                        android:text="New Text"
+                        android:textColor="@color/color_black"/>
+                </LinearLayout>
+
             </LinearLayout>
             </android.support.v7.widget.CardView>
         </LinearLayout>

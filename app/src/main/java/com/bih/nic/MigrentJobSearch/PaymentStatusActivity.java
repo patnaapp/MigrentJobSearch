@@ -4,13 +4,17 @@ import android.app.Activity;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bih.nic.MigrentJobSearch.Model.PaymentStatusEntity;
 
 public class PaymentStatusActivity extends Activity {
 
-    TextView tv_district,tv_block,tv_panchayat,tv_qrt_14,tv_name,tv_account,tv_ifsc,tv_bank_name,tv_paymentstatus,tv_eupi_status;
+    TextView tv_district,tv_block,tv_panchayat,tv_qrt_14,tv_name,tv_account,tv_ifsc,tv_bank_name,tv_paymentstatus,tv_eupi_status,tv_rjct_reason;
+    LinearLayout ll_rjct_remarks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +22,7 @@ public class PaymentStatusActivity extends Activity {
         setContentView(R.layout.activity_payment_status);
 
         getActionBar().hide();
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,WindowManager.LayoutParams.FLAG_SECURE);
         Utiilties.setStatusBarColor(this);
 
         tv_district = findViewById(R.id.tv_district);
@@ -30,12 +35,16 @@ public class PaymentStatusActivity extends Activity {
         tv_bank_name = findViewById(R.id.tv_bank_name);
         tv_paymentstatus = findViewById(R.id.tv_paymentstatus);
         tv_eupi_status = findViewById(R.id.tv_eupi_status);
+        tv_rjct_reason = findViewById(R.id.tv_rjct_reason);
+        ll_rjct_remarks = findViewById(R.id.ll_rjct_remarks);
+        ll_rjct_remarks.setVisibility(View.GONE);
 
         PaymentStatusEntity info = (PaymentStatusEntity)getIntent().getSerializableExtra("data");
         setData(info);
     }
 
-    public void setData(PaymentStatusEntity info){
+    public void setData(PaymentStatusEntity info)
+    {
         tv_district.setText(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("DistName", ""));
         tv_block.setText(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("BlockName", ""));
         tv_panchayat.setText(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("PanchayatName", ""));
@@ -46,5 +55,11 @@ public class PaymentStatusActivity extends Activity {
         tv_bank_name.setText(info.getBankName());
         tv_paymentstatus.setText(info.getPaymentStatus());
         tv_eupi_status.setText(info.getEupi_UTR_Status());
+
+        if (info.getEupi_UTR_Status().equals("RJCT")){
+            ll_rjct_remarks.setVisibility(View.GONE);
+            tv_rjct_reason.setText(info.getEupi_StatusRemarks());
+
+        }
     }
 }

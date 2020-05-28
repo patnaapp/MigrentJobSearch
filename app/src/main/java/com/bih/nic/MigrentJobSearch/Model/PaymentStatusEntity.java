@@ -28,6 +28,7 @@ public class PaymentStatusEntity implements KvmSerializable, Serializable {
     private String BankName = "";
     private String eupi_UTR_Status = "";
     private String PaymentStatus = "";
+    private String eupi_StatusRemarks = "";
 
     public PaymentStatusEntity(SoapObject obj) {
         this.Status = Boolean.parseBoolean(obj.getProperty("Status").toString());
@@ -48,6 +49,7 @@ public class PaymentStatusEntity implements KvmSerializable, Serializable {
         this.BankName = obj.getProperty("BankName").toString();
         this.eupi_UTR_Status = obj.getProperty("eupi_UTR_Status").toString();
         this.PaymentStatus = obj.getProperty("PaymentStatus").toString();
+        this.eupi_StatusRemarks = obj.getProperty("eupi_StatusRemarks").toString();
     }
 
     public PaymentStatusEntity() {
@@ -187,6 +189,14 @@ public class PaymentStatusEntity implements KvmSerializable, Serializable {
 
     public void setEupi_UTR_Status(String eupi_UTR_Status) {
         this.eupi_UTR_Status = eupi_UTR_Status;
+    }
+
+    public String getEupi_StatusRemarks() {
+        return eupi_StatusRemarks;
+    }
+
+    public void setEupi_StatusRemarks(String eupi_StatusRemarks) {
+        this.eupi_StatusRemarks = eupi_StatusRemarks;
     }
 
     public String getPaymentStatus() {
