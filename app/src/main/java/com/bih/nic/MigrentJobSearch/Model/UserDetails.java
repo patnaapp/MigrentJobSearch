@@ -63,6 +63,7 @@ public class UserDetails implements KvmSerializable {
         this.Age=res1.getProperty("intAge").toString();
         this.MobileNo=res1.getProperty("vchMobile").toString();
         this.Address=res1.getProperty("vchAddress").toString();
+        this.profileImg=res1.getProperty("vchPhoto").toString();
 
     }
 

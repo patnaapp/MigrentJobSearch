@@ -16,6 +16,7 @@ import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.os.Bundle;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -122,7 +123,10 @@ public class ProfileActivity extends Activity implements View.OnClickListener
             //}
         }
         else {
-            Picasso.with(this).load("http://10.133.20.159/"+benDetails.getVchPhoto()).error(R.drawable.profile).into(img_studphoto);
+            String url = "http://shramsadhan.bih.nic.in"+benDetails.getVchPhoto().replace("~","");
+            Log.e("imgUrl", url);
+            Picasso.with(this).load(url).into(img_studphoto);
+            //Picasso.with(this).load("http://10.133.20.159/"+benDetails.getVchPhoto()).error(R.drawable.profile).into(img_studphoto);
             // Picasso.with(this).load(benDetails.getVchPhoto()).into(img_studphoto);
         }
 

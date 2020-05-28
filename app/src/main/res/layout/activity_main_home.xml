@@ -336,7 +336,6 @@
 
                     <LinearLayout
                         android:visibility="visible"
-                        android:weightSum="1"
                         android:layout_margin="12dp"
                         android:layout_width="match_parent"
                         android:layout_height="110dp"
@@ -344,10 +343,10 @@
 
                         <LinearLayout
                             android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
                             android:onClick="onCheckPaymentStatus"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_weight="0.4"
                             android:orientation="vertical"
                             android:padding="5dp"
                             android:gravity="center"

@@ -14,6 +14,7 @@ import android.text.Html;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,9 +28,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainHomeActivity extends Activity {
     LinearLayout ll_profile,ll_register_Grivance;
-    String Reg_No="",user_name="", mobile="", address="", DistName="";
+    String Reg_No="",user_name="", mobile="", address="", DistName="", ProfileImg="";
     TextView tv_benname,urole,tv_mobile,tv_address,tv_version;
     CircleImageView profile_image;
+    //ImageView profile_image;
 
    BenDetails BenDetails;
     DataBaseHelper dataBaseHelper;
@@ -126,6 +128,8 @@ public class MainHomeActivity extends Activity {
         mobile=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("Mobile", "");
         address=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("Address", "");
         DistName=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("DistName", "");
+        ProfileImg=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("Photo", "");
+
 
         tv_benname.setText(user_name);
         urole.setText("पंजीकरण संख्या: \n"+Reg_No);
@@ -144,7 +148,9 @@ public class MainHomeActivity extends Activity {
             //}
         }
         else {
-            Picasso.with(this).load("http://10.133.20.159/"+BenDetails.getVchPhoto()).error(R.drawable.profile).into(profile_image);
+            String url = "http://shramsadhan.bih.nic.in"+ProfileImg.replace("~","");
+            Log.e("imgUrl", url);
+            Picasso.with(this).load(url).into(profile_image);
         }
     }
 

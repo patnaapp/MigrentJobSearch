@@ -169,6 +169,7 @@ public class Login extends Activity {
                     PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("DistName",result.getDistName()).commit();
                     PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("BlockName",result.getBlockName()).commit();
                     PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("PanchayatName",result.getPanchayatName()).commit();
+                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("Photo",result.getProfileImg()).commit();
 
 
                     Intent intent=new Intent(Login.this,MainHomeActivity.class);
