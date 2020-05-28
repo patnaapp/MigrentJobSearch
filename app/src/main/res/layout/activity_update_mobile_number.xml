@@ -49,11 +49,26 @@
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
+    <ImageView
+        android:id="@+id/iv_footer"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:src="@drawable/nic"
+        android:layout_alignParentBottom="true"/>
+
+    <TextView
+        android:id="@+id/tv_version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ऐप वर्ज़न 1.0"
+        android:layout_above="@+id/iv_footer"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/colorPrimary"/>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/ll_header"
-        android:layout_above="@+id/tv_version">
+        android:layout_below="@+id/ll_header">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -248,19 +263,4 @@
         </RelativeLayout>
     </ScrollView>
 
-    <ImageView
-        android:id="@+id/iv_footer"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:src="@drawable/nic"
-        android:layout_alignParentBottom="true"/>
-
-    <TextView
-        android:id="@+id/tv_version"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ऐप वर्ज़न 1.0"
-        android:layout_above="@+id/iv_footer"
-        android:layout_centerHorizontal="true"
-        android:textColor="@color/colorPrimary"/>
 </RelativeLayout>

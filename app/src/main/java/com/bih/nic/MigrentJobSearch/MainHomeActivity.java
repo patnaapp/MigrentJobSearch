@@ -188,6 +188,26 @@ public class MainHomeActivity extends Activity {
         finish();
     }
 
+    public void onExit(){
+        new AlertDialog.Builder(this)
+                .setTitle("अलर्ट!!")
+                .setMessage("क्या आप ऐप बन्द करना चाहते हैं??\n ")
+                .setCancelable(false)
+                .setPositiveButton("हाँ", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        finish();
+                    }
+                })
+                .setNegativeButton("नहीं", null)
+                .show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        onExit();
+    }
+
     private class FetchBenData extends AsyncTask<String, Void, BenDetails> {
         BenDetails data;
         String _uid;

@@ -48,7 +48,7 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
     ArrayList<panchayat>PanchayatList=new ArrayList<>();
     Button save_button,valAdhaar;
     EditText edt_aadharn_name;
-    boolean check=true;
+    boolean check=true, isVerified = false;
     ImageView img_back;
 
     String skillId,subSkillId,CategoryId;
@@ -677,13 +677,13 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
         boolean validate = true;
 
         try {
-            if (!benDetails.getVchName().equalsIgnoreCase(edt_aadharn_name.getText().toString())) {
+            if (!benDetails.getVchName().equalsIgnoreCase(edt_aadharn_name.getText().toString()) && !isVerified) {
                 check = false;
                 valAdhaar.setVisibility(View.VISIBLE);
             }
         }catch (NullPointerException e){e.printStackTrace();}
         try {
-            if(!benDetails.getVchAadhaar().equalsIgnoreCase(edt_aadharno.getText().toString())){
+            if(!benDetails.getVchAadhaar().equalsIgnoreCase(edt_aadharno.getText().toString()) && !isVerified){
                 check=false;
                 valAdhaar.setVisibility(View.VISIBLE);
             }
@@ -776,6 +776,7 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
 
                             valAdhaar.setBackground(ContextCompat.getDrawable(ModifyDocumentActivity.this, R.drawable.buttonshape));
                             check=true;
+                            isVerified = true;
                             //showSuccessMessageDialogue(result.toString());
 
                         } else {
