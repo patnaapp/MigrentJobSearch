@@ -42,7 +42,6 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
     ArrayList<SkillMaster> skillList;
     ArrayList<CategoryMaster> cateogryList;
     ArrayList<qualification> Qualification;
-    ArrayList<com.bih.nic.MigrentJobSearch.Model.qualification> emote;
     ArrayList<SubSkillMaster> subSkillList;
     ArrayList<District>DistrictList=new ArrayList<>();
     ArrayList<BlockWeb>BlockList=new ArrayList<>();
@@ -75,9 +74,7 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
         spn_skill=(Spinner)findViewById(R.id.spn_skill);
         spn_category=(Spinner)findViewById(R.id.spn_category);
         spn_type_of_worker=(Spinner)findViewById(R.id.spn_type_of_worker);
-
         edt_exp_year=(EditText)findViewById(R.id.edt_exp_year);
-
         edt_ifsc_code=(EditText)findViewById(R.id.edt_ifsc_code);
         edt_ac_name=(EditText)findViewById(R.id.edt_ac_name);
         edt_ac_no=(EditText)findViewById(R.id.edt_ac_no);
@@ -86,6 +83,7 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
         edt_exp_month=(EditText)findViewById(R.id.edt_exp_month);
         save_button=(Button)findViewById(R.id.save_button) ;
         valAdhaar=(Button)findViewById(R.id.valAdhaar) ;
+
         edt_aadharn_name=(EditText)findViewById(R.id.edt_aadharn_name) ;
 
         spn_panch_name.setOnItemSelectedListener(this);
