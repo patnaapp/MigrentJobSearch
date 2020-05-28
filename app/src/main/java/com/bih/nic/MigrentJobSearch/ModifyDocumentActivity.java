@@ -509,7 +509,9 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
 
     private class SyncSubSkillMasterData extends AsyncTask<String, Void, ArrayList<SubSkillMaster>> {
         private final ProgressDialog dialog = new ProgressDialog(ModifyDocumentActivity.this);
-        int optionType;
+
+
+       // int optionType;
 
         @Override
         protected void onPreExecute() {
