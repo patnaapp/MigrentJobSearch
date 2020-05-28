@@ -28,7 +28,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MainHomeActivity extends Activity {
     LinearLayout ll_profile,ll_register_Grivance;
     String Reg_No="",user_name="", mobile="", address="", DistName="";
-    TextView tv_benname,urole,tv_mobile,tv_address;
+    TextView tv_benname,urole,tv_mobile,tv_address,tv_version;
     CircleImageView profile_image;
 
    BenDetails BenDetails;
@@ -50,8 +50,16 @@ public class MainHomeActivity extends Activity {
         urole=(TextView) findViewById(R.id.urole);
         tv_mobile=(TextView) findViewById(R.id.tv_mobile);
         tv_address=(TextView) findViewById(R.id.tv_address);
+        tv_version=(TextView) findViewById(R.id.tv_version);
 
         profile_image=(CircleImageView) findViewById(R.id.profile_image);
+
+        String version = Utiilties.getAppVersion(this);
+        if(version != null){
+            tv_version.setText("ऐप वर्ज़न "+version);
+        }else{
+            tv_version.setText("");
+        }
         
         ll_profile.setOnClickListener(new View.OnClickListener() {
             @Override
