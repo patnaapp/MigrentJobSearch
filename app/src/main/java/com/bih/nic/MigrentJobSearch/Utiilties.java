@@ -436,4 +436,15 @@ public class Utiilties {
 
 		return version;
 	}
+
+	public static boolean isIfscCodeValid(String email)
+	{
+		String regExp = "^[A-Z]{4}[0][A-Z0-9]{6}$";
+		boolean isvalid = false;
+
+		if (email.length() > 0) {
+			isvalid = email.matches(regExp);
+		}
+		return isvalid;
+	}
 }

@@ -48,7 +48,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="10dp"
-                        android:text=" जिला का नाम :-"
+                        android:text=" जिला :-"
                         android:textColor="#222222"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -81,7 +81,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginStart="10dp"
 
-                        android:text="ब्लॉक का नाम :-"
+                        android:text="प्रखंद :-"
                         android:textColor="#222222"
                         android:textSize="16sp"
                         android:textStyle="bold"/>
@@ -98,29 +98,25 @@
                 </LinearLayout>
 
                 <LinearLayout
-
                     android:id="@+id/lin_conBuild"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-
                     android:clickable="false"
                     android:orientation="vertical"
                     android:paddingTop="0dp">
 
                     <TextView
-
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:id="@+id/tv_Condition_Build"
                         android:layout_marginLeft="10dp"
                         android:layout_marginStart="10dp"
-                        android:text="पंचायत का नाम  :-"
+                        android:text="पंचायत  :-"
                         android:textColor="#222222"
                         android:textSize="16sp"
                         android:textStyle="bold"
-
                         />
 
                     <Spinner
@@ -372,41 +368,7 @@
                         android:textSize="14sp"
                         android:textStyle="bold" />
                 </LinearLayout>
-                <LinearLayout
 
-                    android:id="@+id/lin_cctv_camera_no"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-
-                    android:clickable="false"
-                    android:orientation="vertical"
-                    android:paddingTop="0dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="10dp"
-                        android:id="@+id/tv_cctvCamera_no"
-                        android:layout_marginStart="10dp"
-                        android:text=" मोबाइल नंबर :-"
-                        android:textColor="#222222"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-
-                        />
-                    <EditText
-                        android:maxLength="10"
-                        android:inputType="number"
-                        android:id="@+id/edt_mobileno"
-                        android:layout_width="match_parent"
-                        android:layout_height="45dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="2dp"
-                        android:background="@drawable/edittext_box" />
-
-                </LinearLayout>
                 <LinearLayout
 
                     android:id="@+id/lin_aadhar_name"
@@ -440,8 +402,8 @@
                         android:background="@drawable/edittext_box" />
 
                 </LinearLayout>
-                <LinearLayout
 
+                <LinearLayout
                     android:id="@+id/lin_aadharno"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -482,17 +444,228 @@
                         <Button
                             android:textColor="#ffffff"
                             android:background="@drawable/buttonbackshape1"
-                            android:layout_marginLeft="10dp"
-                            android:text="Validate"
+                            android:layout_marginLeft="4dp"
+                            android:padding="8dp"
+                            android:text="सत्यापित करें"
+                            android:textSize="15dp"
                             android:id="@+id/valAdhaar"
-                            android:layout_width="100dp"
-                            android:layout_height="50dp"></Button>
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"></Button>
                     </LinearLayout>
 
 
                 </LinearLayout>
 
                 <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+
+                    android:clickable="false"
+                    android:orientation="vertical"
+                    android:paddingTop="0dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/tv_age"
+                        android:layout_marginStart="10dp"
+                        android:text=" आयु :-"
+                        android:textColor="#222222"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+
+                        />
+                    <EditText
+                        android:maxLength="2"
+                        android:inputType="number"
+                        android:id="@+id/edt_age"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:background="@drawable/edittext_box" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lin_cctv_camera_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+
+                    android:clickable="false"
+                    android:orientation="vertical"
+                    android:paddingTop="0dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/tv_cctvCamera_no"
+                        android:layout_marginStart="10dp"
+                        android:text=" मोबाइल नंबर :-"
+                        android:textColor="#222222"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+
+                        />
+                    <EditText
+                        android:maxLength="10"
+                        android:inputType="number"
+                        android:id="@+id/edt_mobileno"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:background="@drawable/edittext_box" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+
+                    android:clickable="false"
+                    android:orientation="vertical"
+                    android:paddingTop="0dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/tv_gaurdian"
+                        android:layout_marginStart="10dp"
+                        android:text=" अभिभावक का नाम :-"
+                        android:textColor="#222222"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+
+                        />
+                    <EditText
+                        android:inputType="textCapWords"
+                        android:id="@+id/edt_gaurdian"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:background="@drawable/edittext_box" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+
+                    android:clickable="false"
+                    android:orientation="vertical"
+                    android:paddingTop="0dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/tv_gaurdian_no"
+                        android:layout_marginStart="10dp"
+                        android:text="अभिभावक का मोबाइल नंबर :-"
+                        android:textColor="#222222"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+
+                        />
+                    <EditText
+                        android:maxLength="10"
+                        android:inputType="number"
+                        android:id="@+id/edt_gaurdian_no"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:background="@drawable/edittext_box" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+
+                    android:clickable="false"
+                    android:orientation="vertical"
+                    android:paddingTop="0dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/tv_address"
+                        android:layout_marginStart="10dp"
+                        android:text="पता :-"
+                        android:textColor="#222222"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+
+                        />
+                    <EditText
+                        android:maxLength="150"
+                        android:inputType="textMultiLine"
+                        android:maxLines="3"
+                        android:minLines="3"
+                        android:id="@+id/edt_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:background="@drawable/edittext_box" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:clickable="false"
+                    android:orientation="vertical"
+                    android:paddingTop="0dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:id="@+id/tv_gender"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
+                        android:text="लिंग  :-"
+                        android:textColor="#222222"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        />
+
+                    <Spinner
+                        android:background="@drawable/spinner_bg"
+                        style="@style/spinner"
+                        android:id="@+id/spn_gender"
+                        android:layout_width="fill_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
+                        android:paddingBottom="0dp"
+                        android:paddingTop="0dp"
+                        android:textColor="#222222"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:visibility="visible"
                     android:id="@+id/lin_no_classroom"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -552,6 +725,7 @@
                         android:background="@drawable/edittext_box" />
                 </LinearLayout>
                 <LinearLayout
+                    android:visibility="visible"
                     android:id="@+id/lin_no_noneofrepair"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -572,6 +746,7 @@
                         android:textStyle="bold" />
 
                     <EditText
+                        android:maxLength="11"
                         android:textAllCaps="true"
                         android:id="@+id/edt_ifsc_code"
                         android:layout_width="match_parent"
@@ -675,7 +850,7 @@
                         android:layout_marginLeft="10dp"
                         android:id="@+id/tv_skill"
                         android:layout_marginStart="10dp"
-                        android:text="कौशल का नाम:-"
+                        android:text="कौशल श्रेणी:-"
                         android:textColor="#222222"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -711,7 +886,7 @@
                         android:layout_marginLeft="10dp"
                         android:id="@+id/tv_sub_skill"
                         android:layout_marginStart="10dp"
-                        android:text="उप कौशल नाम -"
+                        android:text="उप कौशल श्रेणी :-"
                         android:textColor="#222222"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -746,7 +921,7 @@
                         android:layout_marginLeft="10dp"
                         android:id="@+id/tv_type_of_worker"
                         android:layout_marginStart="10dp"
-                        android:text="शिक्षा का स्तर :-"
+                        android:text="योग्यता :-"
                         android:textColor="#222222"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -764,6 +939,38 @@
                         android:textSize="14sp"
                         android:textStyle="bold" />
                 </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:clickable="false"
+                    android:orientation="vertical"
+                    android:paddingTop="0dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/tv_prev_address"
+                        android:layout_marginStart="10dp"
+                        android:text="पिछला काम का पता :-"
+                        android:textColor="#222222"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+
+                        />
+                    <EditText
+                        android:id="@+id/edt_prev_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:background="@drawable/edittext_box" />
+
+                </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/lin_no_adminroom"
                     android:layout_width="match_parent"

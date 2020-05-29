@@ -909,9 +909,8 @@ public class WebserviceHelper implements KvmSerializable {
         try {
             SoapObject request = new SoapObject(SERVICENAMESPACE,
                     UpdateUserDetails);
-            request.addProperty("_Reg",RegId);
-            request.addProperty("_Dist",benDetails.getDistrictCode());
-            request.addProperty("_Block",benDetails.getBlockCode());
+//            request.addProperty("_Dist",benDetails.getDistrictCode());
+//            request.addProperty("_Block",benDetails.getBlockCode());
             request.addProperty("_Panchayat",benDetails.getPanchayatCode());
             request.addProperty("_Mobile",benDetails.getVchMobile());
             request.addProperty("_Account",benDetails.getVchBankAccount());
@@ -922,8 +921,19 @@ public class WebserviceHelper implements KvmSerializable {
             request.addProperty("_Qualification",benDetails.getIntQualification());
             request.addProperty("_Aadhaar",benDetails.getVchAadhaar());
             request.addProperty("_vchName",benDetails.getVchName());
+            request.addProperty("_Reg",RegId);
             request.addProperty("_NoofExperienceYear",benDetails.getIntExpYears());
             request.addProperty("_NoofExperienceMonth",benDetails.getIntExpMonths());
+
+            request.addProperty("_tQualificationId","");
+
+            request.addProperty("_vchWorkAddress",benDetails.getVchWorkAddress());
+            request.addProperty("_vchGuardian_name",benDetails.getVchGuardian_name());
+            request.addProperty("_vchGuardian_number",benDetails.getVchGuardian_number());
+            request.addProperty("_intAge",benDetails.getIntAge());
+            request.addProperty("_vchAddress",benDetails.getVchAddress());
+            request.addProperty("_intGender",benDetails.getIntGender());
+
 
 
             SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(

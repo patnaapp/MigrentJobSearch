@@ -45,6 +45,7 @@ public class BenDetails implements KvmSerializable, Serializable {
     private String intRegistrationType="";
     private String intCovidSymptom="";
     private String intSyncId="";
+    private String intGender="";
     private String vchOtherWorkerType="";
     private String vchAadhaar="";
     private String vchBankAccount="";
@@ -69,6 +70,8 @@ public class BenDetails implements KvmSerializable, Serializable {
     private String is_having_cold="";
     private String intBloodTest="";
     private String intBloodTest1="";
+    private String vchGuardian_name="";
+    private String vchGuardian_number="";
     private String Skill_Id;
     private String Skill_Name;
     private String SubSkillId;
@@ -95,6 +98,9 @@ public class BenDetails implements KvmSerializable, Serializable {
         this.vchName=res1.getProperty("vchName").toString();
         this.intAge=res1.getProperty("intAge").toString();
         this.vchMobile=res1.getProperty("vchMobile").toString();
+        this.vchGuardian_name=res1.getProperty("vchGuardian_name").toString();
+        this.vchGuardian_number=res1.getProperty("vchGuardian_number").toString();
+        this.intGender=res1.getProperty("intGender").toString();
 
 
         this.SubSkillId=res1.getProperty("intTypeOfWorker").toString();
@@ -164,6 +170,30 @@ public class BenDetails implements KvmSerializable, Serializable {
     @Override
     public void getPropertyInfo(int index, Hashtable properties, PropertyInfo info) {
 
+    }
+
+    public String getIntGender() {
+        return intGender;
+    }
+
+    public void setIntGender(String intGender) {
+        this.intGender = intGender;
+    }
+
+    public String getVchGuardian_name() {
+        return vchGuardian_name;
+    }
+
+    public void setVchGuardian_name(String vchGuardian_name) {
+        this.vchGuardian_name = vchGuardian_name;
+    }
+
+    public String getVchGuardian_number() {
+        return vchGuardian_number;
+    }
+
+    public void setVchGuardian_number(String vchGuardian_number) {
+        this.vchGuardian_number = vchGuardian_number;
     }
 
     public String getPassword() {

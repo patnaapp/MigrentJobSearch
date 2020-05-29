@@ -5,10 +5,13 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -34,8 +37,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class ModifyDocumentActivity extends Activity implements AdapterView.OnItemSelectedListener {
-    Spinner spn_panch_name,spn_block_name,spn_dist_name,spn_sub_skill,spn_skill,spn_category,spn_type_of_worker;
-    EditText edt_exp_year,edt_Qualification,edt_catogery,edt_ifsc_code,edt_ac_name,edt_ac_no,edt_mobileno,edt_aadharno,edt_exp_month;
+    Spinner spn_panch_name,spn_block_name,spn_dist_name,spn_sub_skill,spn_skill,spn_category,spn_type_of_worker,spn_gender;
+    EditText edt_exp_year,edt_Qualification,edt_catogery,edt_ifsc_code,edt_ac_name,edt_ac_no,edt_mobileno,edt_aadharno,edt_exp_month,edt_age,edt_gaurdian,edt_gaurdian_no,edt_address,edt_prev_address;
     BenDetails benDetails;
     DataBaseHelper dataBaseHelper;
 
@@ -48,13 +51,16 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
     ArrayList<panchayat>PanchayatList=new ArrayList<>();
     Button save_button,valAdhaar;
     EditText edt_aadharn_name;
-    boolean check=true, isVerified = false;
+    boolean check=true, isVerified = false, validIfsc= false;
     ImageView img_back;
 
     String skillId,subSkillId,CategoryId;
     String Dist_id="",Dist_name="",block_id="",block_name="",panch_id="",panch_name="",cat_id="",cat_name="",eduction_id="";
     String Mobile_no="",Bank_Ac_no="",_Bank_name="",Ifsc_code="",catogery="",skill_id="",sub_Skill_id="",Qualificaton="",int_no_year_exp="",str_adhaar="",str_int_no_month_exp="";
 
+    String ben_type_aangan[] = {"-चयन करे-","पुरुष","महिला","ट्रांसजेंडर"};
+    String Gender_Name="",Gender_Code="";
+    ArrayAdapter ben_type_aangan_aaray;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +80,7 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
         spn_skill=(Spinner)findViewById(R.id.spn_skill);
         spn_category=(Spinner)findViewById(R.id.spn_category);
         spn_type_of_worker=(Spinner)findViewById(R.id.spn_type_of_worker);
+        spn_gender=(Spinner)findViewById(R.id.spn_gender);
         edt_exp_year=(EditText)findViewById(R.id.edt_exp_year);
         edt_ifsc_code=(EditText)findViewById(R.id.edt_ifsc_code);
         edt_ac_name=(EditText)findViewById(R.id.edt_ac_name);
@@ -81,6 +88,13 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
         edt_mobileno=(EditText)findViewById(R.id.edt_mobileno);
         edt_aadharno=(EditText)findViewById(R.id.edt_aadharno);
         edt_exp_month=(EditText)findViewById(R.id.edt_exp_month);
+
+        edt_age=(EditText)findViewById(R.id.edt_age);
+        edt_gaurdian=(EditText)findViewById(R.id.edt_gaurdian);
+        edt_gaurdian_no=(EditText)findViewById(R.id.edt_gaurdian_no);
+        edt_address=(EditText)findViewById(R.id.edt_address);
+        edt_prev_address=(EditText)findViewById(R.id.edt_prev_address);
+
         save_button=(Button)findViewById(R.id.save_button) ;
         valAdhaar=(Button)findViewById(R.id.valAdhaar) ;
 
@@ -94,7 +108,21 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
         spn_skill.setOnItemSelectedListener(this);
         spn_category.setOnItemSelectedListener(this);
 
+        //spn_gender=findViewById(R.id.spin_gender);
+        ben_type_aangan_aaray = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, ben_type_aangan);
+        spn_gender.setAdapter(ben_type_aangan_aaray);
+
+        edt_ifsc_code.addTextChangedListener(inputTextWatcher1);
+
         extractFrom_Data();
+
+        try{
+            int index = Integer.parseInt(benDetails.getIntGender());
+            spn_gender.setSelection(index);
+        }catch (Exception e){
+
+        }
+
 
         loadSkillSpinnerData();
         loadCategorySpinnerData();
@@ -104,7 +132,7 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
         loadPanchayatSpinnerData(benDetails.getBlockCode());
         loadSubSkillSpinnerData(benDetails.getSkill_Id());
 
-        if(check){
+        if(check && isVerified){
             valAdhaar.setVisibility(View.GONE);
         }
 
@@ -244,8 +272,16 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
                         benDetails.setSubSkillId(sub_Skill_id);
                         benDetails.setVchAadhaar(str_adhaar);
                         benDetails.setIntQualification(eduction_id);
+                        benDetails.setIntGender(Gender_Code);
+                        benDetails.setIntAge(edt_age.getText().toString());
+                        benDetails.setVchGuardian_name(edt_gaurdian.getText().toString());
+                        benDetails.setVchGuardian_number(edt_gaurdian_no.getText().toString());
+                        benDetails.setVchAddress(edt_address.getText().toString());
+                        benDetails.setVchWorkAddress(edt_prev_address.getText().toString());
+
                         benDetails.setIntExpYears(edt_exp_year.getText().toString());
                         benDetails.setIntExpMonths(edt_exp_month.getText().toString());
+
 
                         new UploadPendingTask(benDetails).execute();
                     }
@@ -269,7 +305,77 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
                 }
             }
         });
+
+        spn_gender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Log.e("arg2",""+position);
+                if (position > 0) {
+                    Gender_Name = ben_type_aangan[position].toString();
+
+                    if (Gender_Name.equals("पुरुष")) {
+
+                        Gender_Code = "1";
+                    } else if (Gender_Name.equals("महिला")) {
+
+                        Gender_Code = "2";
+                    }
+                    else if (Gender_Name.equals("ट्रांसजेंडर")) {
+
+                        Gender_Code = "3";
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // TODO Auto-generated method stub
+
+            }
+
+        });
     }
+
+    private TextWatcher inputTextWatcher1 = new TextWatcher() {
+
+        public void beforeTextChanged(CharSequence s, int start, int count,
+                                      int after) {
+
+        }
+
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            if (edt_ifsc_code.getText().length() <= 12) {
+                try {
+                    if (Utiilties.isIfscCodeValid(edt_ifsc_code.getText().toString())) {
+                        edt_ifsc_code.setTextColor(Color.parseColor("#0B610B"));
+                        validIfsc = true;
+                    } else {
+                        //showMessageDialogue("Invalid Aadhaar Number");
+                        //Toast.makeText(getApplicationContext(),"Invalid Aadhaar Number",Toast.LENGTH_LONG).show();
+                        edt_ifsc_code.setTextColor(Color.parseColor("#ff0000"));
+                        validIfsc = false;
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {
+                edt_ifsc_code.setTextColor(Color.parseColor("#000000"));
+                validIfsc = false;
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+//            if (!validAadhaar && et_father_aadhar_number_new.getText().toString().length() == 12) {
+////                CommonMethods.showErrorDialog(getResources().getString(R.string.invalid_value),
+////                        getResources().getString(R.string.check_aadhaar_no));
+//            }
+        }
+    };
 
     public void extractFrom_Data(){
 
@@ -283,6 +389,17 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
         edt_ac_name.setText(benDetails.getVchBankName());
         edt_ac_no.setText(benDetails.getVchBankAccount());
         edt_mobileno.setText(benDetails.getVchMobile());
+
+        edt_age.setText(benDetails.getIntAge());
+        edt_gaurdian.setText(benDetails.getVchGuardian_name());
+        edt_gaurdian_no.setText(benDetails.getVchGuardian_number());
+        edt_address.setText(benDetails.getVchAddress());
+        if(benDetails.getVchWorkAddress().equals("anyType{}")){
+            edt_prev_address.setText("");
+        }else{
+            edt_prev_address.setText(benDetails.getVchWorkAddress());
+        }
+
 
 
     }
@@ -368,6 +485,7 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
             spn_dist_name.setSelection(((ArrayAdapter<String>) spn_dist_name.getAdapter()).getPosition(benDetails.getDistrictName()));
 
         }
+        spn_dist_name.setEnabled(false);
     }
     public void loadBlockSpinnerData(String district){
         BlockList.clear();
@@ -386,6 +504,8 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
             spn_block_name.setSelection(((ArrayAdapter<String>) spn_block_name.getAdapter()).getPosition(benDetails.getBlockName()));
 
         }
+
+        spn_block_name.setEnabled(false);
     }
     public void loadPanchayatSpinnerData(String panchayt){
         PanchayatList = dataBaseHelper.getpanchayatDetail(panchayt);
@@ -690,13 +810,14 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
         }catch (NullPointerException e){e.printStackTrace();}
 
 
-        if (Dist_id.equalsIgnoreCase("")) {
-                Toast.makeText(getApplicationContext(), "कृपया जिला नाम चुनें", Toast.LENGTH_LONG).show();
-                validate = false;
-        } if(block_id.equalsIgnoreCase("")){
-            Toast.makeText(getApplicationContext(), "कृपया ब्लॉक का नाम चुनें", Toast.LENGTH_LONG).show();
-            validate = false;
-        } if(panch_id.equalsIgnoreCase("")){
+//        if (Dist_id.equalsIgnoreCase("")) {
+//                Toast.makeText(getApplicationContext(), "कृपया जिला नाम चुनें", Toast.LENGTH_LONG).show();
+//                validate = false;
+//        } if(block_id.equalsIgnoreCase("")){
+//            Toast.makeText(getApplicationContext(), "कृपया ब्लॉक का नाम चुनें", Toast.LENGTH_LONG).show();
+//            validate = false;
+//        }
+        if(panch_id.equalsIgnoreCase("")){
             Toast.makeText(getApplicationContext(), "कृपया पंचायत नाम का चयन करें", Toast.LENGTH_LONG).show();
             validate = false;
         }
@@ -713,10 +834,38 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
         } if(Mobile_no.length()!=10){
             Toast.makeText(getApplicationContext(), "कृपया मोबाइल नंबर दर्ज करें", Toast.LENGTH_LONG).show();
             validate = false;
-        } if(Ifsc_code.equalsIgnoreCase("")){
+        }
+        if(Ifsc_code.equalsIgnoreCase("")){
             Toast.makeText(getApplicationContext(), "कृपया IfSc कोड दर्ज करें ", Toast.LENGTH_LONG).show();
             validate = false;
-        } if(skill_id.equalsIgnoreCase("")){
+        }
+        if(edt_age.getText().toString().equalsIgnoreCase("")){
+            Toast.makeText(getApplicationContext(), "कृपया आयु दर्ज करें", Toast.LENGTH_LONG).show();
+            validate = false;
+        }
+
+        if(edt_gaurdian.getText().toString().equalsIgnoreCase("")){
+            Toast.makeText(getApplicationContext(), "कृपया अभिभावक का नाम दर्ज करें", Toast.LENGTH_LONG).show();
+            validate = false;
+        }
+
+        if(edt_gaurdian_no.getText().toString().equalsIgnoreCase("")){
+            Toast.makeText(getApplicationContext(), "कृपया अभिभावक का मोबाइल नंबर दर्ज करें", Toast.LENGTH_LONG).show();
+            validate = false;
+        }
+        if(edt_address.getText().toString().equalsIgnoreCase("")){
+            Toast.makeText(getApplicationContext(), "कृपया पता दर्ज करें", Toast.LENGTH_LONG).show();
+            validate = false;
+        }
+        if(edt_prev_address.getText().toString().equalsIgnoreCase("")){
+            Toast.makeText(getApplicationContext(), "कृपया पिछला काम का पता दर्ज करें", Toast.LENGTH_LONG).show();
+            validate = false;
+        }
+        if(Gender_Code.equalsIgnoreCase("")){
+            Toast.makeText(getApplicationContext(), "कृपया लिंग का चयन करें ", Toast.LENGTH_LONG).show();
+            validate = false;
+        }
+        if(skill_id.equalsIgnoreCase("")){
             Toast.makeText(getApplicationContext(), "कृपया कुशलता चुनें ", Toast.LENGTH_LONG).show();
             validate = false;
         } if(sub_Skill_id.equalsIgnoreCase("")){
@@ -725,7 +874,11 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
         } if(!check){
             Toast.makeText(getApplicationContext(), "आधार के अनुसार नाम दर्ज करें  ", Toast.LENGTH_LONG).show();
             validate = false;
+        }if(!validIfsc){
+            Toast.makeText(getApplicationContext(), "कृपया सही IFSC कोड दर्ज करें  ", Toast.LENGTH_LONG).show();
+            validate = false;
         }
+
         if(focusView != null && focusView.requestFocus()) {
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         }
