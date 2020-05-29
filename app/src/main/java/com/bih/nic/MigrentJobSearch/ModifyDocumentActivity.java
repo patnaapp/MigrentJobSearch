@@ -61,6 +61,7 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
     String ben_type_aangan[] = {"-चयन करे-","पुरुष","महिला","ट्रांसजेंडर"};
     String Gender_Name="",Gender_Code="";
     ArrayAdapter ben_type_aangan_aaray;
+    EditText edt_reg_name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +89,7 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
         edt_mobileno=(EditText)findViewById(R.id.edt_mobileno);
         edt_aadharno=(EditText)findViewById(R.id.edt_aadharno);
         edt_exp_month=(EditText)findViewById(R.id.edt_exp_month);
+        edt_reg_name=(EditText)findViewById(R.id.edt_reg_name);
 
         edt_age=(EditText)findViewById(R.id.edt_age);
         edt_gaurdian=(EditText)findViewById(R.id.edt_gaurdian);
@@ -384,6 +386,8 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
         edt_exp_month.setText(benDetails.getIntExpYears());
         edt_aadharno.setText(benDetails.getVchAadhaar());
 
+
+        edt_reg_name.setText(benDetails.getVchName());
         //   spn_category
         edt_ifsc_code.setText(benDetails.getVchIfsc());
         edt_ac_name.setText(benDetails.getVchBankName());
@@ -808,7 +812,6 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
                 valAdhaar.setVisibility(View.VISIBLE);
             }
         }catch (NullPointerException e){e.printStackTrace();}
-
 
 //        if (Dist_id.equalsIgnoreCase("")) {
 //                Toast.makeText(getApplicationContext(), "कृपया जिला नाम चुनें", Toast.LENGTH_LONG).show();

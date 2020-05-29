@@ -23,12 +23,10 @@
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
         <RelativeLayout
             android:layout_margin="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-
 
             <LinearLayout
                 android:id="@+id/spinner_Layout"
@@ -370,6 +368,38 @@
                 </LinearLayout>
 
                 <LinearLayout
+
+                    android:id="@+id/lin_reg_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+
+                    android:clickable="false"
+                    android:orientation="vertical"
+                    android:paddingTop="0dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/tv_reg_name"
+                        android:layout_marginStart="10dp"
+                        android:text="  नाम:-"
+                        android:textColor="#222222"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+
+                        />
+                    <EditText
+                        android:id="@+id/edt_reg_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:background="@drawable/edittext_box" />
+
+                </LinearLayout><LinearLayout
 
                     android:id="@+id/lin_aadhar_name"
                     android:layout_width="match_parent"
