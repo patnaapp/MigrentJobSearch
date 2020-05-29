@@ -148,9 +148,14 @@ public class MainHomeActivity extends Activity {
             //}
         }
         else {
-            String url = "http://shramsadhan.bih.nic.in"+ProfileImg.replace("~","");
-            Log.e("imgUrl", url);
-            Picasso.with(this).load(url).into(profile_image);
+            if(!ProfileImg.equalsIgnoreCase("NA")) {
+                String url = "http://shramsadhan.bih.nic.in" + ProfileImg.replace("~", "");
+                Log.e("imgUrl", url);
+                Picasso.with(this).load(url).into(profile_image);
+            }else {
+               // profile_image.setBackgroundResource(R.drawable.profile);
+
+            }
         }
     }
 

@@ -123,11 +123,14 @@ public class ProfileActivity extends Activity implements View.OnClickListener
             //}
         }
         else {
-            String url = "http://shramsadhan.bih.nic.in"+benDetails.getVchPhoto().replace("~","");
-            Log.e("imgUrl", url);
-            Picasso.with(this).load(url).into(img_studphoto);
-            //Picasso.with(this).load("http://10.133.20.159/"+benDetails.getVchPhoto()).error(R.drawable.profile).into(img_studphoto);
-            // Picasso.with(this).load(benDetails.getVchPhoto()).into(img_studphoto);
+            Log.d("gdvhbvhbh",benDetails.getVchPhoto());
+            if(!benDetails.getVchPhoto().equalsIgnoreCase("NA")) {
+                String url = "http://shramsadhan.bih.nic.in" + benDetails.getVchPhoto().replace("~", "");
+                Log.e("imgUrl", url);
+                Picasso.with(this).load(url).into(img_studphoto);
+                //Picasso.with(this).load("http://10.133.20.159/"+benDetails.getVchPhoto()).error(R.drawable.profile).into(img_studphoto);
+                // Picasso.with(this).load(benDetails.getVchPhoto()).into(img_studphoto);
+            }
         }
 
     }

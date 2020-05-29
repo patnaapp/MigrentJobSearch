@@ -76,6 +76,7 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
         dataBaseHelper=new DataBaseHelper(this);
         spn_panch_name=(Spinner)findViewById(R.id.spn_panch_name);
         spn_block_name=(Spinner)findViewById(R.id.spn_block_name);
+
         spn_dist_name=(Spinner)findViewById(R.id.spn_dist_name);
         spn_sub_skill=(Spinner)findViewById(R.id.spn_sub_skill);
         spn_skill=(Spinner)findViewById(R.id.spn_skill);
@@ -101,6 +102,7 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
         valAdhaar=(Button)findViewById(R.id.valAdhaar) ;
 
         edt_aadharn_name=(EditText)findViewById(R.id.edt_aadharn_name) ;
+
 
         spn_panch_name.setOnItemSelectedListener(this);
         spn_block_name.setOnItemSelectedListener(this);
@@ -267,7 +269,7 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
                         benDetails.setVchMobile(Mobile_no);
                         benDetails.setVchBankAccount(Bank_Ac_no);
                         benDetails.setVchBankName(_Bank_name);
-                        benDetails.setVchName(edt_aadharn_name.getText().toString());
+                        benDetails.setVchName(edt_reg_name.getText().toString());
                         benDetails.setVchIfsc(Ifsc_code);
                         benDetails.setIntCategory(Dist_id);
                         benDetails.setSkill_Id(skill_id);
@@ -280,6 +282,7 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
                         benDetails.setVchGuardian_number(edt_gaurdian_no.getText().toString());
                         benDetails.setVchAddress(edt_address.getText().toString());
                         benDetails.setVchWorkAddress(edt_prev_address.getText().toString());
+                        benDetails.setNameAsPerAdhaar(edt_aadharn_name.getText().toString());
 
                         benDetails.setIntExpYears(edt_exp_year.getText().toString());
                         benDetails.setIntExpMonths(edt_exp_month.getText().toString());
@@ -372,16 +375,13 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
 
         @Override
         public void afterTextChanged(Editable s) {
-//            if (!validAadhaar && et_father_aadhar_number_new.getText().toString().length() == 12) {
-////                CommonMethods.showErrorDialog(getResources().getString(R.string.invalid_value),
-////                        getResources().getString(R.string.check_aadhaar_no));
-//            }
+
         }
     };
 
     public void extractFrom_Data(){
 
-        edt_aadharn_name.setText(benDetails.getVchName());
+        edt_aadharn_name.setText(benDetails.getNameAsPerAdhaar());
         edt_exp_year.setText(benDetails.getIntExpMonths());
         edt_exp_month.setText(benDetails.getIntExpYears());
         edt_aadharno.setText(benDetails.getVchAadhaar());
@@ -437,7 +437,7 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
         ArrayAdapter adaptor = new ArrayAdapter(this, android.R.layout.simple_spinner_item, list);
         adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spn_sub_skill.setAdapter(adaptor);
-        if(benDetails.getSubSkillId()!=null){
+        if(benDetails.getSubSkillName()!=null){
             spn_sub_skill.setSelection(((ArrayAdapter<String>) spn_sub_skill.getAdapter()).getPosition(benDetails.getSubSkillName()));
 
         }

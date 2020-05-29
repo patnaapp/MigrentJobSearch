@@ -103,14 +103,13 @@ public class BenDetails implements KvmSerializable, Serializable {
         this.intGender=res1.getProperty("intGender").toString();
 
 
-        this.SubSkillId=res1.getProperty("intTypeOfWorker").toString();
-        this.Skill_Id=res1.getProperty("SkillCategoryId").toString();
+        this.SubSkillId=res1.getProperty("SkillCategoryId").toString();
+        this.Skill_Id=res1.getProperty("intTypeOfWorker").toString();
         this.Skill_Name=res1.getProperty("SkillCategory").toString();
         this.SubSkillName=res1.getProperty("SkillName").toString();
 
         this.vchAddress=res1.getProperty("vchAddress").toString();
-        this.vchPhoto=res1.getProperty("vchPhoto").toString();
-        this.vchPhoto=res1.getProperty("vchPhoto").toString();
+        this.vchPhoto=res1.getProperty("Photo").toString();
         this.is_Dignity_Kit=res1.getProperty("is_Dignity_Kit").toString();
         this.is_having_fever=res1.getProperty("is_having_fever").toString();
         this.is_having_cough=res1.getProperty("is_having_cough").toString();
@@ -148,6 +147,9 @@ public class BenDetails implements KvmSerializable, Serializable {
       */  this.intExpYears=res1.getProperty("intExpYears").toString();
         this.vchWorkAddress=res1.getProperty("vchWorkAddress").toString();
         this.intExpMonths=res1.getProperty("intExpMonths").toString();
+
+        //Aadhaar
+        this.NameAsPerAdhaar=res1.getProperty("NameAsPerAadhar").toString();
 
 
     }

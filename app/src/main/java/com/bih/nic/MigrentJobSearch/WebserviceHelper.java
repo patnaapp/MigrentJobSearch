@@ -911,6 +911,7 @@ public class WebserviceHelper implements KvmSerializable {
                     UpdateUserDetails);
 //            request.addProperty("_Dist",benDetails.getDistrictCode());
 //            request.addProperty("_Block",benDetails.getBlockCode());
+
             request.addProperty("_Panchayat",benDetails.getPanchayatCode());
             request.addProperty("_Mobile",benDetails.getVchMobile());
             request.addProperty("_Account",benDetails.getVchBankAccount());
@@ -933,6 +934,7 @@ public class WebserviceHelper implements KvmSerializable {
             request.addProperty("_intAge",benDetails.getIntAge());
             request.addProperty("_vchAddress",benDetails.getVchAddress());
             request.addProperty("_intGender",benDetails.getIntGender());
+            request.addProperty("_NameAsPerAadhar",benDetails.getNameAsPerAdhaar());
 
 
 
