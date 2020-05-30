@@ -150,6 +150,7 @@
     </android.support.v7.widget.CardView>
 
     <RelativeLayout
+        android:visibility="gone"
         android:onClick="onSearchJob"
         android:padding="8dp"
         android:id="@+id/rl_search"
