@@ -93,7 +93,7 @@ public class VerifyAadhaar extends Activity implements NavigationDrawerFragment.
     }
 
 
-   
+
     @Override
     public void onBackPressed() {
         finish();
@@ -354,7 +354,7 @@ public class VerifyAadhaar extends Activity implements NavigationDrawerFragment.
                     }*/
                     setDataTOEnter();
                     if(NameAsPerAdhhar.equalsIgnoreCase("")){
-                     Toast.makeText(getActivity(),"Please Enter Name As Per Adhaar",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(),"Please Enter Name As Per Adhaar",Toast.LENGTH_LONG).show();
                     }else if(BenMobileNo.equalsIgnoreCase("")){
                         Toast.makeText(getActivity(),"Please Enter Mobile Number",Toast.LENGTH_LONG).show();
                     }else if(Ben_YearOfBirth.equalsIgnoreCase("")){
@@ -401,7 +401,7 @@ public class VerifyAadhaar extends Activity implements NavigationDrawerFragment.
             if (z == 0) {
                 new loadBenefiaryData().execute();
             }
-           // setPanchayatList(PreferenceManager.getDefaultSharedPreferences(getActivity()).getString("Block", ""));
+            // setPanchayatList(PreferenceManager.getDefaultSharedPreferences(getActivity()).getString("Block", ""));
 
             return rootView;
         }
@@ -585,8 +585,9 @@ public class VerifyAadhaar extends Activity implements NavigationDrawerFragment.
                             lin_modified.setVisibility(View.VISIBLE);
                             flag = 1;
 
-                        } else {
-
+                        }
+                        else
+                        {
                             showSuccessMessageDialogue(message);
                             btn_upload.setVisibility(View.VISIBLE);
                             capturelife.setVisibility(View.VISIBLE);
@@ -604,27 +605,33 @@ public class VerifyAadhaar extends Activity implements NavigationDrawerFragment.
                             benfiList1.setModifiedName(str_mod_Aadhaar);
                             benfiList1.setAadharNumber(edt_Bene_aadhaarNo.getText().toString());
 
-
                             long i = dataBaseHelper.insertCheckedBeneficiary(benfiList1, Userid);
-                            if (i > 0) {
+                            if (i > 0)
+                            {
                                 Toast.makeText(getActivity(), "Successfully updated", Toast.LENGTH_LONG).show();
                             }
                             setData1();
 
                             ArrayList<BenfiList> dataProgress = dataBaseHelper.getAllVoucher(benfiList.getBeneficiary_id());
-                            if (dataProgress.size() > 0) {
-                                for (BenfiList data : dataProgress) {
+                            if (dataProgress.size() > 0)
+                            {
+                                for (BenfiList data : dataProgress)
+                                {
                                     new UploadPendingTask(data).execute();
 
                                 }
-                            } else {
+                            }
+                            else
+                            {
                                 Toast.makeText(getActivity(), "No Data to upload", Toast.LENGTH_LONG).show();
                             }
                         }
                     }
 
 
-                } catch (JSONException e) {
+                }
+                catch (JSONException e)
+                {
                     e.printStackTrace();
                 }
 
@@ -632,15 +639,17 @@ public class VerifyAadhaar extends Activity implements NavigationDrawerFragment.
             }
         }
 
-        private void setData1() {
+        private void setData1()
+        {
             right.setVisibility(View.GONE);
             String str_filter = filterText.getText().toString();
             benfiList = dataBaseHelper.getDataFilter(str_filter);
-            if (benfiList.getBeneficiery_name() != null) {
+            if (benfiList.getBeneficiery_name() != null)
+            {
                 BenId = benfiList.getBeneficiary_id();
                 edt_Bene_No.setText(benfiList.getBeneficiary_id());
                 edt_Bene_name.setText(benfiList.getBeneficiery_name());
-                  // edt_Bene_ac_no.setText(benfiList.getAccountNo());
+                // edt_Bene_ac_no.setText(benfiList.getAccountNo());
                 edt_Bene_ac_no.setText(Utiilties.MaskEditText(benfiList.getAccountNo()));
                 edt_Bene_uid_status.setText(benfiList.getUidStatus());
                 edt_Bene_aadhaarNo.setText(Utiilties.MaskEditText(benfiList.getAadharNumber()));
@@ -648,12 +657,14 @@ public class VerifyAadhaar extends Activity implements NavigationDrawerFragment.
                 edt_Bene_nameInPass.setText(benfiList.getNameInPass());
                 btn_verify.setVisibility(View.VISIBLE);
                 lin_data.setVisibility(View.VISIBLE);
-                if (benfiList.getUidStatus().equalsIgnoreCase("Y")) {
+                if (benfiList.getUidStatus().equalsIgnoreCase("Y"))
+                {
                     right.setVisibility(View.VISIBLE);
                     btn_verify.setVisibility(View.GONE);
                     btn_upload.setVisibility(View.GONE);
 
-                } else {
+                }
+                else {
                     right.setVisibility(View.GONE);
                     btn_verify.setVisibility(View.VISIBLE);
 
@@ -666,7 +677,8 @@ public class VerifyAadhaar extends Activity implements NavigationDrawerFragment.
 
         }
 
-        public void showMessageDialogue(String messageTxt) {
+        public void showMessageDialogue(String messageTxt)
+        {
             // MainActi.this.runOnUiThread(new Runnable() {
             // @Override
             //  public void run() {
@@ -674,7 +686,8 @@ public class VerifyAadhaar extends Activity implements NavigationDrawerFragment.
                     .setCancelable(false)
                     .setTitle("Message")
                     .setMessage(messageTxt)
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener()
+                    {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.cancel();
@@ -735,7 +748,9 @@ public class VerifyAadhaar extends Activity implements NavigationDrawerFragment.
                 }
                 return_text = sb.toString();
                 Log.d("return_text", "" + return_text);
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
 
             }
             return return_text;
@@ -768,9 +783,12 @@ public class VerifyAadhaar extends Activity implements NavigationDrawerFragment.
                 benfiList = dataBaseHelper.getDataFilter(str_filter);
                 if (benfiList.getBeneficiery_name() != null) {
                     BenId = benfiList.getBeneficiary_id();
-                    if(Utiilties.isOnline(getActivity())) {
+                    if(Utiilties.isOnline(getActivity()))
+                    {
                         new loadBlockData(BenId).execute();
-                    }else {
+                    }
+                    else
+                    {
 
                     }
                     edt_Bene_No.setText(benfiList.getBeneficiary_id());
@@ -784,24 +802,31 @@ public class VerifyAadhaar extends Activity implements NavigationDrawerFragment.
                     edt_Bene_nameInPass.setText(benfiList.getNameInPass());
                     btn_verify.setVisibility(View.VISIBLE);
                     lin_data.setVisibility(View.VISIBLE);
-                    if (benfiList.getUidStatus().equalsIgnoreCase("Y")) {
+                    if (benfiList.getUidStatus().equalsIgnoreCase("Y"))
+                    {
                         right.setVisibility(View.VISIBLE);
                         btn_verify.setVisibility(View.VISIBLE);
                         btn_upload.setVisibility(View.GONE);
                         capturelife.setVisibility(View.GONE);
-                    } else {
+                    }
+                    else
+                    {
                         right.setVisibility(View.GONE);
                         btn_verify.setVisibility(View.VISIBLE);
 
                     }
-                } else {
+                }
+                else
+                {
 
                     btn_verify.setVisibility(View.GONE);
                     lin_data.setVisibility(View.GONE);
                     showMessageDialogue("Beneficiary either already submitted Jivan parman ,Physical Verification or not exist");
 
                 }
-            } else {
+            }
+            else
+            {
                 Toast.makeText(getActivity(), "Please Enter Minimum 4 character to search", Toast.LENGTH_LONG).show();
             }
 

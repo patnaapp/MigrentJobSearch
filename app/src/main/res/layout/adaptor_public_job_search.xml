@@ -310,6 +310,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
+                        android:visibility="gone"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:padding="3dp">
@@ -490,50 +491,6 @@
                     android:orientation="horizontal"
                     android:weightSum="2">
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_marginTop="2dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/colorPrimary"/>
-
-                <LinearLayout
-                    android:id="@+id/linearlay_mill"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-
-                    android:layout_margin="5dp"
-                    android:orientation="horizontal"
-                    android:padding="5dp"
-                    android:weightSum="2">
-
-                    <Button
-                        android:id="@+id/btn_accpt"
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:layout_margin="2dp"
-                        android:layout_weight="1"
-                        android:textColor="@color/color_white"
-                        android:textStyle="bold"
-                        android:textSize="18sp"
-                        android:onClick="acceptRecord"
-                        android:background="@drawable/buttonshapeaccept"
-                        android:text="Accept" />
-
-                    <Button
-                        android:id="@+id/btn_rjct"
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:layout_margin="2dp"
-                        android:layout_weight="1"
-                        android:text="Remove"
-                        android:textColor="@color/color_white"
-                        android:textStyle="bold"
-                        android:textSize="18sp"
-                        android:onClick="rejectRecords"
-                        android:background="@drawable/buttonbackshape1"
-                        />
                 </LinearLayout>
             </LinearLayout>
 

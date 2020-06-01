@@ -66,10 +66,10 @@ public class PaymentStatusActivity extends Activity {
         tv_paymentstatus.setText(info.getPaymentStatus());
         tv_eupi_status.setText(info.getEupi_UTR_Status());
 
-        if (info.getEupi_UTR_Status().equals("RJCT")){
+        if (info.getEupi_UTR_Status().equals("RJCT"))
+        {
             ll_rjct_remarks.setVisibility(View.GONE);
             tv_rjct_reason.setText(info.getEupi_StatusRemarks());
-
         }
     }
 }
