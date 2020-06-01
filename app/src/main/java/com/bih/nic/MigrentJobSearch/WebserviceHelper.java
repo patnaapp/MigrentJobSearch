@@ -66,6 +66,8 @@ public class WebserviceHelper implements KvmSerializable {
 
     public static final  String APPVERSION_METHOD = "getAppLatest";
     public static final  String UpdateUserDetails = "UpdateUserDetails";
+    public static final  String AcceptRjctRecordsFromPacs = "UpdateUserDetails";
+    static String rest;
 
 
     public static ArrayList<District> getDistrictData() {
@@ -985,6 +987,73 @@ public class WebserviceHelper implements KvmSerializable {
             e.printStackTrace();
             return null;
         }
+
+    }
+
+
+
+    public static String UploadAcceptedRecordsFromPacs(JobListEntity data) {
+
+        SoapObject request = new SoapObject(SERVICENAMESPACE, AcceptRjctRecordsFromPacs);
+        request.addProperty("SLNO", data.getId());
+//        request.addProperty("UserID",userid);
+//        request.addProperty("PacsCode",panc);
+//        request.addProperty("RiceMillId",ricemill);
+        request.addProperty("StatusId","A");
+
+
+
+        try {
+            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+            envelope.dotNet = true;
+            envelope.implicitTypes = true;
+            envelope.setOutputSoapObject(request);
+
+            HttpTransportSE androidHttpTransport = new HttpTransportSE(SERVICEURL);
+            androidHttpTransport.call(SERVICENAMESPACE + AcceptRjctRecordsFromPacs, envelope);
+
+            rest = envelope.getResponse().toString();
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            //return "0";
+            return null;
+        }
+        return rest;
+
+    }
+
+
+    public static String UploadRejectedRecordsFromPacs(JobListEntity data) {
+
+        SoapObject request = new SoapObject(SERVICENAMESPACE, AcceptRjctRecordsFromPacs);
+        request.addProperty("SLNO", data.getId());
+//        request.addProperty("UserID",userid);
+//        request.addProperty("PacsCode",panc);
+//        request.addProperty("RiceMillId",ricemill);
+        request.addProperty("StatusId","R");
+
+
+
+        try {
+            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+            envelope.dotNet = true;
+            envelope.implicitTypes = true;
+            envelope.setOutputSoapObject(request);
+
+            HttpTransportSE androidHttpTransport = new HttpTransportSE(SERVICEURL);
+            androidHttpTransport.call(SERVICENAMESPACE + AcceptRjctRecordsFromPacs, envelope);
+
+            rest = envelope.getResponse().toString();
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            //return "0";
+            return null;
+        }
+        return rest;
 
     }
 

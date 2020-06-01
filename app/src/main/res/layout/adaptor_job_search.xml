@@ -185,7 +185,16 @@
                             android:layout_marginLeft="6dp"
                             android:text="New Text"
                             android:textColor="@color/color_black" />
+
+
                     </LinearLayout>
+
+
+
+
+
+
+
 
                     <LinearLayout
 
@@ -247,7 +256,12 @@
                             android:text="New Text"
                             android:textColor="@color/color_black" />
                     </LinearLayout>
-
+                </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/ll_detail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -346,7 +360,7 @@
                             android:tint="@color/holo_green_dark"/>
                     </LinearLayout>
 
-                </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_marginTop="2dp"
@@ -482,7 +496,7 @@
                             android:textColor="@android:color/black" />
                     </LinearLayout>
                 </LinearLayout>
-
+                    </LinearLayout>
                 <LinearLayout
                     android:layout_marginTop="4dp"
                     android:layout_width="match_parent"
@@ -517,7 +531,6 @@
                         android:textColor="@color/color_white"
                         android:textStyle="bold"
                         android:textSize="18sp"
-                        android:onClick="acceptRecord"
                         android:background="@drawable/buttonshapeaccept"
                         android:text="Accept" />
 
@@ -531,7 +544,6 @@
                         android:textColor="@color/color_white"
                         android:textStyle="bold"
                         android:textSize="18sp"
-                        android:onClick="rejectRecords"
                         android:background="@drawable/buttonbackshape1"
                         />
                 </LinearLayout>
