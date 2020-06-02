@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.Image;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
@@ -20,7 +19,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bih.nic.MigrentJobSearch.MainHomeActivity;
 import com.bih.nic.MigrentJobSearch.Model.DefaultResponse;
 import com.bih.nic.MigrentJobSearch.Model.JobListEntity;
 import com.bih.nic.MigrentJobSearch.R;

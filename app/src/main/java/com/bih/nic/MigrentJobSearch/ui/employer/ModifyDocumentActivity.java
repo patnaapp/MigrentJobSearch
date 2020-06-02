@@ -1,4 +1,4 @@
-package com.bih.nic.MigrentJobSearch;
+package com.bih.nic.MigrentJobSearch.ui.employer;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -24,6 +24,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.bih.nic.MigrentJobSearch.DataBaseHelper.DataBaseHelper;
+import com.bih.nic.MigrentJobSearch.GlobalVariables;
 import com.bih.nic.MigrentJobSearch.Model.BenDetails;
 import com.bih.nic.MigrentJobSearch.Model.BlockWeb;
 import com.bih.nic.MigrentJobSearch.Model.CategoryMaster;
@@ -32,6 +33,10 @@ import com.bih.nic.MigrentJobSearch.Model.SkillMaster;
 import com.bih.nic.MigrentJobSearch.Model.SubSkillMaster;
 import com.bih.nic.MigrentJobSearch.Model.panchayat;
 import com.bih.nic.MigrentJobSearch.Model.qualification;
+import com.bih.nic.MigrentJobSearch.R;
+import com.bih.nic.MigrentJobSearch.Utiilties;
+import com.bih.nic.MigrentJobSearch.Verhoeff;
+import com.bih.nic.MigrentJobSearch.WebserviceHelper;
 
 import java.util.ArrayList;
 import java.util.Calendar;

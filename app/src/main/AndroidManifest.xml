@@ -65,18 +65,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".LegacyTableViewActivity"></activity>
-        <activity android:name=".PaymentStatusActivity" />
-        <activity android:name=".EmployerMainHomeActivity" />
-        <activity android:name=".JobSearchActivity" />
-        <activity android:name=".ModifyDocumentActivity" />
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".RequestOtpActivity" />
-        <activity android:name=".MainHomeActivity" />
+        <activity
+            android:name=".ui.MultiLoginActivity"
+            android:label="@string/title_activity_multi_login"
+            android:theme="@style/Theme.AppCompat.Light"></activity>
+        <activity android:name=".ui.employer.PaymentStatusActivity" />
+        <activity android:name=".ui.employer.JobSearchActivity" />
+        <activity android:name=".ui.employer.ModifyDocumentActivity" />
+        <activity android:name=".ui.employer.ProfileActivity" />
+        <activity android:name=".ui.employer.RequestOtpActivity" />
+        <activity android:name=".ui.employer.MainHomeActivity" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".VerifyAadhaar1" />
         <activity
-            android:name=".SplashActivity"
+            android:name=".ui.SplashActivity"
             android:theme="@style/NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -98,9 +100,9 @@
         <activity android:name=".ChooseCenter" />
         <activity android:name=".VerifyAadhaar" />
         <activity android:name=".MultiplePhotoActivity" />
-        <activity android:name=".ChangeMobileNumberActivity" />
+        <activity android:name=".ui.employer.ChangeMobileNumberActivity" />
         <activity android:name=".CameraActivity" />
-        <activity android:name=".UpdateMobileNumberActivity" />
+        <activity android:name=".ui.employer.UpdateMobileNumberActivity" />
 
         <uses-library
             android:name="org.apache.http.legacy"

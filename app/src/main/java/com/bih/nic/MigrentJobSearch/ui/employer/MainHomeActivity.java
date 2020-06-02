@@ -1,4 +1,4 @@
-package com.bih.nic.MigrentJobSearch;
+package com.bih.nic.MigrentJobSearch.ui.employer;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -14,14 +14,18 @@ import android.text.Html;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bih.nic.MigrentJobSearch.DataBaseHelper.DataBaseHelper;
+import com.bih.nic.MigrentJobSearch.GlobalVariables;
 import com.bih.nic.MigrentJobSearch.Model.BenDetails;
 import com.bih.nic.MigrentJobSearch.Model.PaymentStatusEntity;
+import com.bih.nic.MigrentJobSearch.R;
+import com.bih.nic.MigrentJobSearch.Utiilties;
+import com.bih.nic.MigrentJobSearch.WebserviceHelper;
+import com.bih.nic.MigrentJobSearch.ui.MultiLoginActivity;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -160,7 +164,7 @@ public class MainHomeActivity extends Activity {
     }
 
     public void onSearchJob(View view){
-        Intent i =new Intent(MainHomeActivity.this,JobSearchActivity.class);
+        Intent i =new Intent(MainHomeActivity.this, JobSearchActivity.class);
         i.putExtra("data",Reg_No);
         i.putExtra("DistName",DistName);
         startActivity(i);
@@ -187,7 +191,7 @@ public class MainHomeActivity extends Activity {
     private void confirmLogout(){
         PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("UserId","").commit();
 
-        Intent intent = new Intent(this, Login.class);
+        Intent intent = new Intent(this, MultiLoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK| Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
@@ -248,7 +252,7 @@ public class MainHomeActivity extends Activity {
             Log.d("Responsevalue", "" + result);
             if (result != null) {
                 BenDetails=result;
-                Intent i =new Intent(MainHomeActivity.this,ModifyDocumentActivity.class);
+                Intent i =new Intent(MainHomeActivity.this, ModifyDocumentActivity.class);
                 i.putExtra("data",BenDetails);
                 startActivity(i);
 
@@ -293,7 +297,7 @@ public class MainHomeActivity extends Activity {
             Log.d("Responsevalue", "" + result);
             if (result != null) {
                 BenDetails=result;
-                Intent i =new Intent(MainHomeActivity.this,ProfileActivity.class);
+                Intent i =new Intent(MainHomeActivity.this, ProfileActivity.class);
                 i.putExtra("data",BenDetails);
                 startActivity(i);
 
@@ -339,7 +343,7 @@ public class MainHomeActivity extends Activity {
             //Log.d("Responsevalue", "" + result);
             if (result != null) {
                 if(result.getStatus()){
-                    Intent i =new Intent(MainHomeActivity.this,PaymentStatusActivity.class);
+                    Intent i =new Intent(MainHomeActivity.this, PaymentStatusActivity.class);
                     i.putExtra("data",result);
                     startActivity(i);
                 }else{

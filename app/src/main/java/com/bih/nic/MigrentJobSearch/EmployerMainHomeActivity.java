@@ -21,6 +21,10 @@ import android.widget.Toast;
 import com.bih.nic.MigrentJobSearch.DataBaseHelper.DataBaseHelper;
 import com.bih.nic.MigrentJobSearch.Model.BenDetails;
 import com.bih.nic.MigrentJobSearch.Model.PaymentStatusEntity;
+import com.bih.nic.MigrentJobSearch.ui.employer.JobSearchActivity;
+import com.bih.nic.MigrentJobSearch.ui.employer.ModifyDocumentActivity;
+import com.bih.nic.MigrentJobSearch.ui.employer.PaymentStatusActivity;
+import com.bih.nic.MigrentJobSearch.ui.employer.ProfileActivity;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -159,7 +163,7 @@ public class EmployerMainHomeActivity extends Activity {
     }
 
     public void onSearchJob(View view){
-        Intent i =new Intent(EmployerMainHomeActivity.this,JobSearchActivity.class);
+        Intent i =new Intent(EmployerMainHomeActivity.this, JobSearchActivity.class);
         i.putExtra("data",Reg_No);
         i.putExtra("DistName",DistName);
         startActivity(i);
@@ -247,7 +251,7 @@ public class EmployerMainHomeActivity extends Activity {
             Log.d("Responsevalue", "" + result);
             if (result != null) {
                 BenDetails=result;
-                Intent i =new Intent(EmployerMainHomeActivity.this,ModifyDocumentActivity.class);
+                Intent i =new Intent(EmployerMainHomeActivity.this, ModifyDocumentActivity.class);
                 i.putExtra("data",BenDetails);
                 startActivity(i);
 
@@ -292,7 +296,7 @@ public class EmployerMainHomeActivity extends Activity {
             Log.d("Responsevalue", "" + result);
             if (result != null) {
                 BenDetails=result;
-                Intent i =new Intent(EmployerMainHomeActivity.this,ProfileActivity.class);
+                Intent i =new Intent(EmployerMainHomeActivity.this, ProfileActivity.class);
                 i.putExtra("data",BenDetails);
                 startActivity(i);
 
@@ -338,7 +342,7 @@ public class EmployerMainHomeActivity extends Activity {
             //Log.d("Responsevalue", "" + result);
             if (result != null) {
                 if(result.getStatus()){
-                    Intent i =new Intent(EmployerMainHomeActivity.this,PaymentStatusActivity.class);
+                    Intent i =new Intent(EmployerMainHomeActivity.this, PaymentStatusActivity.class);
                     i.putExtra("data",result);
                     startActivity(i);
                 }else{

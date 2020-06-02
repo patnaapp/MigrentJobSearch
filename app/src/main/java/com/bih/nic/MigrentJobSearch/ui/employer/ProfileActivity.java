@@ -1,4 +1,4 @@
-package com.bih.nic.MigrentJobSearch;
+package com.bih.nic.MigrentJobSearch.ui.employer;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -22,9 +22,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bih.nic.MigrentJobSearch.CameraActivity;
 import com.bih.nic.MigrentJobSearch.DataBaseHelper.DataBaseHelper;
 import com.bih.nic.MigrentJobSearch.Model.BenDetails;
 import com.bih.nic.MigrentJobSearch.Model.DefaultResponse;
+import com.bih.nic.MigrentJobSearch.R;
+import com.bih.nic.MigrentJobSearch.Utiilties;
+import com.bih.nic.MigrentJobSearch.WebserviceHelper;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -276,7 +280,7 @@ public class ProfileActivity extends Activity implements View.OnClickListener
         final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         if (manager.isProviderEnabled(LocationManager.GPS_PROVIDER) == true){
-            Intent iCamera = new Intent(getApplicationContext(),CameraActivity.class);
+            Intent iCamera = new Intent(getApplicationContext(), CameraActivity.class);
             if (view.equals(img_studphoto))
                 iCamera.putExtra("KEY_PIC", "1");
             startActivityForResult(iCamera, CAMERA_PIC);
