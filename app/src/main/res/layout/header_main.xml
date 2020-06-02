@@ -39,7 +39,7 @@
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="24dp"
-            android:text="श्रम साधन"
+            android:text="बिहार श्रम साधन"
             android:textAlignment="center"
             android:textColor="@color/holo_red_dark"
             android:textSize="22sp"

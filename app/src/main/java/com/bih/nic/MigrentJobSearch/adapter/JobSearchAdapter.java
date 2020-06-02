@@ -99,10 +99,10 @@ public class JobSearchAdapter extends RecyclerView.Adapter<JobSearchAdapter.View
             holder.ll_status.setVisibility(View.VISIBLE);
 
             if(info.getIsAccepted().equals("Y")){
-                holder.tv_status.setText("आवेदन स्वीकृत किया गया");
+                holder.tv_status.setText("आपने आवेदन स्वीकृत कर लिया");
                 holder.tv_status.setTextColor(activity.getResources().getColor(R.color.green));
             }else if(info.getIsAccepted().equals("R")){
-                holder.tv_status.setText("आवेदन अस्वीकृत किया गया");
+                holder.tv_status.setText("आपने आवेदन अस्वीकृत किया");
                 holder.tv_status.setTextColor(activity.getResources().getColor(R.color.holo_red_dark));
             }
         }else{
@@ -150,10 +150,10 @@ public class JobSearchAdapter extends RecyclerView.Adapter<JobSearchAdapter.View
                 }
                 else {
                     new android.app.AlertDialog.Builder(activity)
-                            .setTitle("Alert !!")
-                            .setMessage("Please turn on internet connection to proceed.")
+                            .setTitle("अलर्ट !!")
+                            .setMessage("कृपया अपना इंटर्नेट कनेक्शन ऑन करें")
                             .setCancelable(false)
-                            .setPositiveButton("OK ", new DialogInterface.OnClickListener() {
+                            .setPositiveButton("ओके", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
                                     Intent I = new Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS);
                                     activity.startActivity(I);
@@ -191,10 +191,10 @@ public class JobSearchAdapter extends RecyclerView.Adapter<JobSearchAdapter.View
                 else {
 
                     new android.app.AlertDialog.Builder(activity)
-                            .setTitle("Alert !!")
-                            .setMessage("Please turn on internet connection to proceed.")
+                            .setTitle("अलर्ट !!")
+                            .setMessage("कृपया अपना इंटर्नेट कनेक्शन ऑन करें")
                             .setCancelable(false)
-                            .setPositiveButton("OK ", new DialogInterface.OnClickListener() {
+                            .setPositiveButton("ओके", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
                                     Intent I = new Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS);
                                     activity.startActivity(I);
@@ -307,7 +307,7 @@ public class JobSearchAdapter extends RecyclerView.Adapter<JobSearchAdapter.View
                             .setTitle("सूचना")
                             .setMessage("नौकरी का अनुरोध अपडेट कर दिया गया है, आगे की जानकारी सिग्रह ही आपको अप्डेट की जाएगी|")
                             .setCancelable(true)
-                            .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                            .setPositiveButton("ओके", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
                                     dialog.dismiss();
                                 }
@@ -319,7 +319,7 @@ public class JobSearchAdapter extends RecyclerView.Adapter<JobSearchAdapter.View
                     builder.setTitle("Failed");
                     // Ask the final question
                     builder.setMessage(result.getMessage());
-                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    builder.setPositiveButton("ओके", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
@@ -383,7 +383,7 @@ public class JobSearchAdapter extends RecyclerView.Adapter<JobSearchAdapter.View
                             .setTitle("सूचना")
                             .setMessage("नौकरी का अनुरोध अपडेट कर दिया गया")
                             .setCancelable(true)
-                            .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                            .setPositiveButton("ओके", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
                                     dialog.dismiss();
                                 }
@@ -394,7 +394,7 @@ public class JobSearchAdapter extends RecyclerView.Adapter<JobSearchAdapter.View
                     builder.setTitle("Failed");
                     // Ask the final question
                     builder.setMessage(result.getMessage());
-                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    builder.setPositiveButton("ओके", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
