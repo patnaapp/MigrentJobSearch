@@ -398,7 +398,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="नौकरी देखें"
+                                android:text="नौकरियों की सूची"
                                 android:gravity="center"
                                 android:textSize="13sp"
                                 android:layout_marginTop="8dp"
