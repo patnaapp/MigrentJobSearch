@@ -31,6 +31,7 @@
                 <de.hdodenhof.circleimageview.CircleImageView
                     xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/profile_image"
+                    android:visibility="gone"
                     android:layout_width="100dp"
                     android:layout_gravity="center"
                     android:layout_height="80dp"
@@ -232,194 +233,194 @@
         </LinearLayout>
     </LinearLayout>
 
-        <ScrollView
-            android:layout_below="@+id/linfilter"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:scrollbars="none">
+    <ScrollView
+        android:layout_below="@+id/linfilter"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
 
-            <RelativeLayout
+        <RelativeLayout
 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <View
+                android:id="@+id/vw_div"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="1dp"
+                android:background="#330099" />
 
-
-                <View
-                    android:id="@+id/vw_div"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#330099" />
+            <LinearLayout
+                android:layout_below="@+id/vw_div"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:weightSum="1"
+                android:baselineAligned="false"
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_below="@+id/vw_div"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="0dp"
-                    android:weightSum="1"
-                    android:baselineAligned="false"
-                    android:orientation="vertical">
+                    android:layout_margin="12dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="110dp"
+                    android:orientation="horizontal">
 
                     <LinearLayout
-                        android:layout_margin="12dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="110dp"
-                        android:orientation="horizontal">
+                        android:layout_marginLeft="20dp"
+                        android:onClick="onSearchLabours"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.5"
+                        android:orientation="vertical"
+                        android:padding="5dp"
+                        android:gravity="center"
+                        android:background="@drawable/boxouterlayer"
+                        android:id="@+id/ll_new_labours">
 
-                        <LinearLayout
-                            android:layout_marginLeft="20dp"
-                            android:onClick="onRegister"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="0.5"
-                            android:orientation="vertical"
-                            android:padding="5dp"
-                            android:gravity="center"
-                            android:background="@drawable/boxouterlayer"
-                            android:id="@+id/ll_register_Grivance">
-
-                            <ImageView
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:src="@drawable/new_entry"
-                                android:tint="#10163A"/>
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="दस्तावेज़ में संशोधन करें"
-                                android:gravity="center"
-                                android:textSize="13sp"
-                                android:layout_marginTop="8dp"
-                                android:textStyle="bold"
-                                android:textColor="#000"
-                                android:textAppearance="?android:textAppearanceSmall"/>
-
-                        </LinearLayout>
-
-
-                        <View
-                            android:layout_width="10dp"
-                            android:layout_height="match_parent">
-
-                        </View>
-
-                        <LinearLayout
-                            android:layout_marginRight="20dp"
-                            android:layout_width="0dp"
-
-                            android:layout_height="match_parent"
-                            android:layout_weight="0.5"
-                            android:orientation="vertical"
-                            android:padding="5dp"
-                            android:gravity="center"
-                            android:background="@drawable/boxouterlayer"
-                            android:id="@+id/ll_profile">
-
-                            <ImageView
-
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:tint="#10163A"
-                                android:src="@drawable/ic_person_black_24dp"/>
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="प्रोफाइल देखिये"
-                                android:gravity="center"
-                                android:layout_marginTop="8dp"
-                                android:textSize="13sp"
-                                android:textStyle="bold"
-                                android:textColor="#000"
-                                android:textAppearance="?android:textAppearanceSmall"/>
-
-
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:visibility="visible"
-                        android:layout_marginLeft="12dp"
-                        android:layout_marginRight="12dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="110dp"
-                        android:orientation="horizontal"
-                        android:weightSum="2">
-
-                        <LinearLayout
-                            android:layout_weight="1"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="6dp"
-                            android:onClick="onCheckPaymentStatus"
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/ic_person_black_24dp"
+                            android:tint="#10163A"/>
+                        <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:padding="5dp"
+                            android:layout_height="wrap_content"
+                            android:text="श्रमिको की सूचि"
                             android:gravity="center"
-                            android:background="@drawable/boxouterlayer"
-                            android:id="@+id/check_payment_status">
-
-                            <ImageView
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:src="@drawable/process"
-                                android:tint="#10163A"/>
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="भुगतान की स्थिति देखें"
-                                android:gravity="center"
-                                android:textSize="13sp"
-                                android:layout_marginTop="8dp"
-                                android:textStyle="bold"
-                                android:textColor="#000"
-                                android:textAppearance="?android:textAppearanceSmall"/>
-
-                        </LinearLayout>
-
-
-                        <LinearLayout
-                            android:layout_weight="1"
-                            android:layout_marginLeft="6dp"
-                            android:layout_marginRight="20dp"
-                            android:onClick="onSearchJob"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:padding="5dp"
-                            android:gravity="center"
-                            android:background="@drawable/boxouterlayer"
-                            android:id="@+id/view_jobs">
-
-                            <ImageView
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:src="@drawable/mail_alert"
-                                android:tint="#10163A"/>
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="नौकरियों की सूची"
-                                android:gravity="center"
-                                android:textSize="13sp"
-                                android:layout_marginTop="8dp"
-                                android:textStyle="bold"
-                                android:textColor="#000"
-                                android:textAppearance="?android:textAppearanceSmall"/>
-
-                        </LinearLayout>
+                            android:textSize="13sp"
+                            android:layout_marginTop="8dp"
+                            android:textStyle="bold"
+                            android:textColor="#000"
+                            android:textAppearance="?android:textAppearanceSmall"/>
 
                     </LinearLayout>
 
 
+                    <View
+                        android:layout_width="10dp"
+                        android:layout_height="match_parent">
+
+                    </View>
+
+                    <LinearLayout
+                        android:layout_marginRight="20dp"
+                        android:layout_width="0dp"
+
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.5"
+                        android:orientation="vertical"
+                        android:padding="5dp"
+                        android:gravity="center"
+                        android:background="@drawable/boxouterlayer"
+                        android:id="@+id/ll_profile">
+
+                        <ImageView
+
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:tint="#10163A"
+                            android:src="@drawable/ic_person_black_24dp"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="प्रोफाइल देखिये"
+                            android:gravity="center"
+                            android:layout_marginTop="8dp"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            android:textColor="#000"
+                            android:textAppearance="?android:textAppearanceSmall"/>
+
+
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_below="@+id/vw_div"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"></LinearLayout>
-            </RelativeLayout>
+                    android:visibility="visible"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="110dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
 
-        </ScrollView>
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="6dp"
+                        android:onClick="onCheckPaymentStatus"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="5dp"
+                        android:gravity="center"
+                        android:background="@drawable/boxouterlayer"
+                        android:id="@+id/check_payment_status">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/process"
+                            android:tint="#10163A"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="भुगतान की स्थिति देखें"
+                            android:gravity="center"
+                            android:textSize="13sp"
+                            android:layout_marginTop="8dp"
+                            android:textStyle="bold"
+                            android:textColor="#000"
+                            android:textAppearance="?android:textAppearanceSmall"/>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:layout_marginLeft="6dp"
+                        android:layout_marginRight="20dp"
+                        android:onClick="onSearchJob"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="5dp"
+                        android:gravity="center"
+                        android:background="@drawable/boxouterlayer"
+                        android:id="@+id/view_jobs">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/mail_alert"
+                            android:tint="#10163A"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="नौकरियों की सूची"
+                            android:gravity="center"
+                            android:textSize="13sp"
+                            android:layout_marginTop="8dp"
+                            android:textStyle="bold"
+                            android:textColor="#000"
+                            android:textAppearance="?android:textAppearanceSmall"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_below="@+id/vw_div"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"></LinearLayout>
+        </RelativeLayout>
+
+    </ScrollView>
     <ImageView
         android:id="@+id/iv_footer"
         android:layout_width="match_parent"

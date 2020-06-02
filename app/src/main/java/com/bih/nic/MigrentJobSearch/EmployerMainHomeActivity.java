@@ -26,7 +26,7 @@ import com.squareup.picasso.Picasso;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class EmployerMainHomeActivity extends Activity {
-    LinearLayout ll_profile,ll_register_Grivance;
+    LinearLayout ll_profile,ll_new_labours;
     String Reg_No="",user_name="", mobile="", address="", DistName="", ProfileImg="";
     TextView tv_benname,urole,tv_mobile,tv_address,tv_version;
     CircleImageView profile_image;
@@ -38,7 +38,7 @@ public class EmployerMainHomeActivity extends Activity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_home);
+        setContentView(R.layout.activity_employer_home_new);
         getActionBar().hide();
 
         BenDetails=new BenDetails();
@@ -46,7 +46,7 @@ public class EmployerMainHomeActivity extends Activity {
         Utiilties.setStatusBarColor(EmployerMainHomeActivity.this);
 
         ll_profile=(LinearLayout)findViewById(R.id.ll_profile);
-        ll_register_Grivance=(LinearLayout)findViewById(R.id.ll_register_Grivance);
+        ll_new_labours=(LinearLayout)findViewById(R.id.ll_new_labours);
         tv_benname=(TextView) findViewById(R.id.tv_benname);
         urole=(TextView) findViewById(R.id.urole);
         tv_mobile=(TextView) findViewById(R.id.tv_mobile);
@@ -89,7 +89,7 @@ public class EmployerMainHomeActivity extends Activity {
 
             }
         });
-        ll_register_Grivance.setOnClickListener(new View.OnClickListener() {
+        ll_new_labours.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!GlobalVariables.isOffline && !Utiilties.isOnline(EmployerMainHomeActivity.this)) {
