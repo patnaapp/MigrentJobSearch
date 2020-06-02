@@ -65,7 +65,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".PaymentStatusActivity"></activity>
+        <activity android:name=".LegacyTableViewActivity"></activity>
+        <activity android:name=".PaymentStatusActivity" />
+        <activity android:name=".EmployerMainHomeActivity" />
         <activity android:name=".JobSearchActivity" />
         <activity android:name=".ModifyDocumentActivity" />
         <activity android:name=".ProfileActivity" />

@@ -210,7 +210,8 @@ public class JobSearchAdapter extends RecyclerView.Adapter<JobSearchAdapter.View
     }
 
     @Override
-    public int getItemCount() {
+    public int getItemCount()
+    {
         return ThrList.size();
     }
 
@@ -255,8 +256,8 @@ public class JobSearchAdapter extends RecyclerView.Adapter<JobSearchAdapter.View
     }
 
 
-    public String getGenderHindi(String gender){
-
+    public String getGenderHindi(String gender)
+    {
         return gender;
     }
 
@@ -377,7 +378,7 @@ public class JobSearchAdapter extends RecyclerView.Adapter<JobSearchAdapter.View
             if (result != null) {
                 if(result.getStatus()){
                     ThrList.get(position).setIsAccepted("R");
-                   notifyDataSetChanged();
+                    notifyDataSetChanged();
 
                     new android.app.AlertDialog.Builder(activity)
                             .setTitle("सूचना")
