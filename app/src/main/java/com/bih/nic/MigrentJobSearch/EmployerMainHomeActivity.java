@@ -21,10 +21,10 @@ import android.widget.Toast;
 import com.bih.nic.MigrentJobSearch.DataBaseHelper.DataBaseHelper;
 import com.bih.nic.MigrentJobSearch.Model.BenDetails;
 import com.bih.nic.MigrentJobSearch.Model.PaymentStatusEntity;
-import com.bih.nic.MigrentJobSearch.ui.employer.JobSearchActivity;
-import com.bih.nic.MigrentJobSearch.ui.employer.ModifyDocumentActivity;
-import com.bih.nic.MigrentJobSearch.ui.employer.PaymentStatusActivity;
-import com.bih.nic.MigrentJobSearch.ui.employer.ProfileActivity;
+import com.bih.nic.MigrentJobSearch.ui.labour.JobSearchActivity;
+import com.bih.nic.MigrentJobSearch.ui.labour.ModifyDocumentActivity;
+import com.bih.nic.MigrentJobSearch.ui.labour.PaymentStatusActivity;
+import com.bih.nic.MigrentJobSearch.ui.labour.ProfileActivity;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;

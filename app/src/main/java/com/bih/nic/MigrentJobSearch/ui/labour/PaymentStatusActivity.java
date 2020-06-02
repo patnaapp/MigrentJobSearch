@@ -1,8 +1,7 @@
-package com.bih.nic.MigrentJobSearch.ui.employer;
+package com.bih.nic.MigrentJobSearch.ui.labour;
 
 import android.app.Activity;
 import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;

@@ -19,9 +19,9 @@ import android.widget.Toast;
 import com.bih.nic.MigrentJobSearch.DataBaseHelper.DataBaseHelper;
 import com.bih.nic.MigrentJobSearch.Model.UserDetails;
 import com.bih.nic.MigrentJobSearch.Model.panchayat;
-import com.bih.nic.MigrentJobSearch.ui.employer.ChangeMobileNumberActivity;
-import com.bih.nic.MigrentJobSearch.ui.employer.MainHomeActivity;
-import com.bih.nic.MigrentJobSearch.ui.employer.RequestOtpActivity;
+import com.bih.nic.MigrentJobSearch.ui.labour.ChangeMobileNumberActivity;
+import com.bih.nic.MigrentJobSearch.ui.labour.MainHomeActivity;
+import com.bih.nic.MigrentJobSearch.ui.labour.RequestOtpActivity;
 
 import java.util.ArrayList;
 

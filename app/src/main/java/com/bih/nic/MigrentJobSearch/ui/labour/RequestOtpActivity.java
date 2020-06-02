@@ -1,4 +1,4 @@
-package com.bih.nic.MigrentJobSearch.ui.employer;
+package com.bih.nic.MigrentJobSearch.ui.labour;
 
 import android.app.Activity;
 import android.app.AlertDialog;

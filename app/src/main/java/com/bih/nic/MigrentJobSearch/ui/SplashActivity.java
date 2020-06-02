@@ -28,7 +28,7 @@ import com.bih.nic.MigrentJobSearch.Model.Versioninfo;
 import com.bih.nic.MigrentJobSearch.R;
 import com.bih.nic.MigrentJobSearch.Utiilties;
 import com.bih.nic.MigrentJobSearch.WebserviceHelper;
-import com.bih.nic.MigrentJobSearch.ui.employer.MainHomeActivity;
+import com.bih.nic.MigrentJobSearch.ui.labour.MainHomeActivity;
 
 import java.io.IOException;
 
