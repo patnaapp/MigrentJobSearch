@@ -538,6 +538,7 @@
                     android:background="@color/colorPrimary"/>
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:id="@+id/ll_status"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -570,6 +571,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:id="@+id/ll_btn"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -602,6 +604,28 @@
                         android:textSize="15sp"
                         android:background="@drawable/buttonbackshape1"
                         />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_selection"
+                    android:layout_marginTop="4dp"
+                    android:background="@color/colorText"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="4dp"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:id="@+id/tv_selection_status"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:text="आप तिथि 12/12/12 को इस नौकरी के लिए चुने गए हैं"
+                        android:textColor="@android:color/white" />
+
                 </LinearLayout>
             </LinearLayout>
 

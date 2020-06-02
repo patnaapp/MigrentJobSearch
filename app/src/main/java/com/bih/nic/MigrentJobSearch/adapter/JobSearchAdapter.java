@@ -108,7 +108,15 @@ public class JobSearchAdapter extends RecyclerView.Adapter<JobSearchAdapter.View
         }else{
             holder.ll_btn.setVisibility(View.VISIBLE);
             holder.ll_status.setVisibility(View.GONE);
+        }
 
+        if(info.getIsSelected().equals("Y")){
+            holder.ll_selection.setVisibility(View.VISIBLE);
+            holder.ll_btn.setVisibility(View.GONE);
+            holder.ll_status.setVisibility(View.GONE);
+            holder.tv_selection_status.setText("बधाई हो! आपका चयन "+ info.getSkillName() +" पद के लिए, तारीख :- "+ info.getSelectedDate() +" को कर लिया गया हैं");
+        }else{
+            holder.ll_selection.setVisibility(View.GONE);
         }
 
         holder.iv_call.setOnClickListener(new View.OnClickListener() {
@@ -207,10 +215,10 @@ public class JobSearchAdapter extends RecyclerView.Adapter<JobSearchAdapter.View
     }
 
     public class ViewHolder  extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView tv_slno,tv_work_site,tv_skill_cat,tv_skill_name,tv_person_no,tv_gendar,tv_start_date,tv_exp,tv_exp_max,tv_salary,tv_salary_max,tv_block,tv_supervisor_name,tv_super_no,tv_district,tv_status;
+        TextView tv_slno,tv_work_site,tv_skill_cat,tv_skill_name,tv_person_no,tv_gendar,tv_start_date,tv_exp,tv_exp_max,tv_salary,tv_salary_max,tv_block,tv_supervisor_name,tv_super_no,tv_district,tv_status,tv_selection_status;
         ImageView iv_call;
         Button btn_accpt,btn_rjct;
-        LinearLayout ll_btn,ll_status;
+        LinearLayout ll_btn,ll_status,ll_selection;
         ViewHolder(View itemView) {
             super(itemView);
             tv_slno=itemView.findViewById(R.id.tv_slno);
@@ -230,10 +238,13 @@ public class JobSearchAdapter extends RecyclerView.Adapter<JobSearchAdapter.View
             tv_district=itemView.findViewById(R.id.tv_district);
             tv_status=itemView.findViewById(R.id.tv_status);
             iv_call=itemView.findViewById(R.id.iv_call);
+            tv_selection_status=itemView.findViewById(R.id.tv_selection_status);
+
             btn_accpt=itemView.findViewById(R.id.btn_accpt);
             btn_rjct=itemView.findViewById(R.id.btn_rjct);
             ll_btn=itemView.findViewById(R.id.ll_btn);
             ll_status=itemView.findViewById(R.id.ll_status);
+            ll_selection=itemView.findViewById(R.id.ll_selection);
         }
 
         @Override
@@ -366,7 +377,7 @@ public class JobSearchAdapter extends RecyclerView.Adapter<JobSearchAdapter.View
             if (result != null) {
                 if(result.getStatus()){
                     ThrList.get(position).setIsAccepted("R");
-                    notifyDataSetChanged();
+                   notifyDataSetChanged();
 
                     new android.app.AlertDialog.Builder(activity)
                             .setTitle("सूचना")

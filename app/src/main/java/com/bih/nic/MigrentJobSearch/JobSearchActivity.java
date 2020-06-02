@@ -218,7 +218,7 @@ public class JobSearchActivity extends Activity implements AdapterView.OnItemSel
                 this.dialog.dismiss();
             }
 
-            data = result;
+            data = checkForJobSelection(result);
             populateData();
 
         }
@@ -248,5 +248,17 @@ public class JobSearchActivity extends Activity implements AdapterView.OnItemSel
                 });
 
         ab.show();
+    }
+
+    public ArrayList<JobListEntity> checkForJobSelection(ArrayList<JobListEntity> list){
+        ArrayList<JobListEntity> selectedJob = new ArrayList<JobListEntity>();
+        for(JobListEntity item: list){
+            if(item.getIsSelected() != null && item.getIsSelected().equals("Y")){
+                selectedJob.add(item);
+                return selectedJob;
+            }
+        }
+
+        return list;
     }
 }

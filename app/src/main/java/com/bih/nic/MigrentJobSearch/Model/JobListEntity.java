@@ -34,6 +34,7 @@ public class JobListEntity implements KvmSerializable, Serializable {
     private String isSelected = "";
     private String isAccepted = "";
     private String AcceptedDate = "";
+    private String SelectedDate = "";
 
     public JobListEntity(SoapObject obj) {
 
@@ -50,6 +51,7 @@ public class JobListEntity implements KvmSerializable, Serializable {
         this.RequestedDate = obj.getProperty("RequestedDate").toString();
         this.isAccepted = obj.getProperty("IsAccepted").toString();
         this.AcceptedDate = obj.getProperty("AcceptedDate").toString();
+        this.SelectedDate = obj.getProperty("SelectedDate").toString();
         this.isSelected = obj.getProperty("IsSelected").toString();
 //        this.numberOfPerson = obj.getProperty("NoOfPerson").toString();
 
@@ -76,6 +78,14 @@ public class JobListEntity implements KvmSerializable, Serializable {
 
     public static void setJobListEntity_CLASS(Class<JobListEntity> jobListEntity_CLASS) {
         JobListEntity_CLASS = jobListEntity_CLASS;
+    }
+
+    public String getSelectedDate() {
+        return SelectedDate;
+    }
+
+    public void setSelectedDate(String selectedDate) {
+        SelectedDate = selectedDate;
     }
 
     public String getIsAccepted() {
