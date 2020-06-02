@@ -101,7 +101,7 @@ public class JobSearchActivity extends Activity implements AdapterView.OnItemSel
             tv_Norecord.setVisibility(View.GONE);
             listView.setVisibility(View.VISIBLE);
 
-            adaptor_showedit_listDetail = new JobSearchAdapter(this, data);
+            adaptor_showedit_listDetail = new JobSearchAdapter(this, data, RegNo);
             listView.setLayoutManager(new LinearLayoutManager(this));
             listView.setAdapter(adaptor_showedit_listDetail);
 

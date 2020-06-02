@@ -169,6 +169,38 @@
                             android:textColor="@color/colorPrimary"
                             android:layout_width="88dp"
                             android:layout_height="wrap_content"
+                            android:text="जिला " />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="4dp"
+                            android:textStyle="bold"
+                            android:text=":"/>
+
+                        <TextView
+                            android:id="@+id/tv_district"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="6dp"
+                            android:text="New Text"
+                            android:textColor="@color/color_black" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="3dp">
+
+                        <TextView
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorPrimary"
+                            android:layout_width="88dp"
+                            android:layout_height="wrap_content"
                             android:text="प्रखंड" />
 
                         <TextView
@@ -188,13 +220,6 @@
 
 
                     </LinearLayout>
-
-
-
-
-
-
-
 
                     <LinearLayout
 
@@ -513,37 +538,68 @@
                     android:background="@color/colorPrimary"/>
 
                 <LinearLayout
-                    android:id="@+id/linearlay_mill"
+                    android:id="@+id/ll_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="3dp">
+
+                    <TextView
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:text="स्वीकृति की स्थिति" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:textStyle="bold"
+                        android:text=":"/>
+
+                    <TextView
+                        android:id="@+id/tv_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="6dp"
+                        android:text="New Text"
+                        android:textColor="@color/color_black" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_btn"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-
-                    android:layout_margin="5dp"
+                    android:layout_margin="2dp"
                     android:orientation="horizontal"
-                    android:padding="5dp"
+                    android:padding="4dp"
                     android:weightSum="2">
 
                     <Button
                         android:id="@+id/btn_accpt"
                         android:layout_width="match_parent"
-                        android:layout_height="30dp"
+                        android:layout_height="32dp"
                         android:layout_margin="2dp"
                         android:layout_weight="1"
                         android:textColor="@color/color_white"
                         android:textStyle="bold"
-                        android:textSize="18sp"
+                        android:textSize="15sp"
                         android:background="@drawable/buttonshapeaccept"
-                        android:text="Accept" />
+                        android:text="स्वीकार करें" />
 
                     <Button
                         android:id="@+id/btn_rjct"
                         android:layout_width="match_parent"
-                        android:layout_height="30dp"
+                        android:layout_height="32dp"
                         android:layout_margin="2dp"
                         android:layout_weight="1"
-                        android:text="Remove"
+                        android:text="अस्वीकार करें"
                         android:textColor="@color/color_white"
                         android:textStyle="bold"
-                        android:textSize="18sp"
+                        android:textSize="15sp"
                         android:background="@drawable/buttonbackshape1"
                         />
                 </LinearLayout>

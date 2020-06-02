@@ -16,9 +16,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bih.nic.MigrentJobSearch.MainHomeActivity;
+import com.bih.nic.MigrentJobSearch.Model.DefaultResponse;
 import com.bih.nic.MigrentJobSearch.Model.JobListEntity;
 import com.bih.nic.MigrentJobSearch.R;
 import com.bih.nic.MigrentJobSearch.Utiilties;
@@ -33,11 +36,13 @@ public class JobSearchAdapter extends RecyclerView.Adapter<JobSearchAdapter.View
     ArrayList<JobListEntity> ThrList=new ArrayList<>();
     String panchayatCode,panchayatName="";
     Boolean isShowDetail = false;
+    String regNo;
 
-    public JobSearchAdapter(Activity listViewshowedit, ArrayList<JobListEntity> rlist) {
+    public JobSearchAdapter(Activity listViewshowedit, ArrayList<JobListEntity> rlist, String regNo) {
         this.activity=listViewshowedit;
         this.ThrList=rlist;
         mInflater = (LayoutInflater)activity.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+        this.regNo = regNo;
     }
 
     @Override
@@ -47,7 +52,7 @@ public class JobSearchAdapter extends RecyclerView.Adapter<JobSearchAdapter.View
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         final JobListEntity info = ThrList.get(position);
 
         holder.tv_slno.setText(String.valueOf(position+1));
@@ -64,6 +69,7 @@ public class JobSearchAdapter extends RecyclerView.Adapter<JobSearchAdapter.View
         holder.tv_block.setText(info.getBlock());
         holder.tv_supervisor_name.setText(info.getContactName());
         holder.tv_super_no.setText(info.getContactNumber());
+        holder.tv_district.setText(info.getDistrict());
 
 //        holder.rl_view_detail.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -88,6 +94,23 @@ public class JobSearchAdapter extends RecyclerView.Adapter<JobSearchAdapter.View
             holder.iv_call.setVisibility(View.GONE);
         }
 
+        if(info.getIsAccepted() != null && (info.getIsAccepted().equals("Y") || info.getIsAccepted().equals("R"))){
+            holder.ll_btn.setVisibility(View.GONE);
+            holder.ll_status.setVisibility(View.VISIBLE);
+
+            if(info.getIsAccepted().equals("Y")){
+                holder.tv_status.setText("आवेदन स्वीकृत किया गया");
+                holder.tv_status.setTextColor(activity.getResources().getColor(R.color.green));
+            }else if(info.getIsAccepted().equals("R")){
+                holder.tv_status.setText("आवेदन अस्वीकृत किया गया");
+                holder.tv_status.setTextColor(activity.getResources().getColor(R.color.holo_red_dark));
+            }
+        }else{
+            holder.ll_btn.setVisibility(View.VISIBLE);
+            holder.ll_status.setVisibility(View.GONE);
+
+        }
+
         holder.iv_call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,50 +118,41 @@ public class JobSearchAdapter extends RecyclerView.Adapter<JobSearchAdapter.View
                 activity.startActivity(intent);
             }
         });
+
         holder.btn_accpt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(Utiilties.isOnline(activity)) {
-                    android.support.v7.app.AlertDialog.Builder ab = new android.support.v7.app.AlertDialog.Builder(activity);
-                    ab.setTitle("Acceptance Confirmation!");
-                    ab.setIcon(R.drawable.que);
-                    ab.setMessage("Are you sure you want to accept this job ?");
-                    ab.setPositiveButton("[No]", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int whichButton) {
 
+                    new android.app.AlertDialog.Builder(activity)
+                            .setTitle("स्वीकृति की पुष्टि")
+                            .setMessage("क्या आप वाकई इस नौकरी को स्वीकार करना चाहते हैं?")
+                            .setCancelable(false)
+                            .setPositiveButton("हाँ", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    new AcceptRecordsFromPacs(info, position).execute();
+                                    dialog.dismiss();
+                                }
+                            }).setNegativeButton("नहीं ", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
                         }
-                    });
-
-                    ab.setNegativeButton("[Accept]", new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick(DialogInterface dialog, int whichButton) {
-
-//                    ArrayList<UploadedPaddyToRmEntity> dataProgress = dbHelper.getPaddyRecordsForAcptRjct(UserId, rowid);
-//                    for (UploadedPaddyToRmEntity data : dataProgress) {
-                            // new AcceptRecordsFromPacs(info.getId(),"A").execute();
-
-                            new AcceptRecordsFromPacs(info).execute();
-                            // }
-                        }
-                    });
-                    ab.create().getWindow().getAttributes().windowAnimations = R.style.alert_animation;
-                    ab.show();
+                    }).show();
                 }
                 else {
-                    android.app.AlertDialog.Builder alertDialog = new android.app.AlertDialog.Builder(activity);
-                    alertDialog.setTitle("Alert !!");
-                    alertDialog.setMessage("Please turn on internet connection to proceed.");
-                    alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            Intent I = new Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS);
-                            activity.startActivity(I);
-                            dialog.cancel();
-                        }
-                    });
-                    alertDialog.show();
+                    new android.app.AlertDialog.Builder(activity)
+                            .setTitle("Alert !!")
+                            .setMessage("Please turn on internet connection to proceed.")
+                            .setCancelable(false)
+                            .setPositiveButton("OK ", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    Intent I = new Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS);
+                                    activity.startActivity(I);
+                                    dialog.cancel();
+                                }
+                            }).show();
+
                 }
             }
         });
@@ -147,45 +161,41 @@ public class JobSearchAdapter extends RecyclerView.Adapter<JobSearchAdapter.View
             @Override
             public void onClick(View v) {
                 if (Utiilties.isOnline(activity)) {
-                    android.support.v7.app.AlertDialog.Builder ab = new android.support.v7.app.AlertDialog.Builder(
-                            activity);
-                    ab.setTitle("Rejection Confirmation!");
-                    ab.setIcon(R.drawable.que);
-                    ab.setMessage("Are you sure you want to reject this record ?");
-                    ab.setPositiveButton("[No]", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int whichButton) {
 
+                    new android.app.AlertDialog.Builder(activity)
+                            .setTitle("अस्वीकृति की पुष्टि")
+                            .setMessage("क्या आप वाकई इस नौकरी को अस्वीकार करना चाहते हैं?")
+                            .setCancelable(false)
+                            .setPositiveButton("हाँ", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    new RejectRecordsFromPacs(info, position).execute();
+                                    dialog.dismiss();
+                                }
+                            }).setNegativeButton("नहीं ", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
                         }
-                    });
+                    }).show();
 
-                    ab.setNegativeButton("[REJECT]", new DialogInterface.OnClickListener() {
 
-                        @Override
-                        public void onClick(DialogInterface dialog, int whichButton) {
-
-//                    ArrayList<UploadedPaddyToRmEntity> dataProgress = dbHelper.getPaddyRecordsForAcptRjct(UserId, rowid);
-//                    for (UploadedPaddyToRmEntity data : dataProgress) {
-                            new RejectRecordsFromPacs(info).execute();
-                            // }
-                        }
-                    });
-                    ab.create().getWindow().getAttributes().windowAnimations = R.style.alert_animation;
-                    ab.show();
                 }
                 else {
-                    android.app.AlertDialog.Builder alertDialog = new android.app.AlertDialog.Builder(activity);
-                    alertDialog.setTitle("Alert !!");
-                    alertDialog.setMessage("Please turn on internet connection to proceed.");
-                    alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            Intent I = new Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS);
-                            activity.startActivity(I);
-                            dialog.cancel();
-                        }
-                    });
-                    alertDialog.show();
+
+                    new android.app.AlertDialog.Builder(activity)
+                            .setTitle("Alert !!")
+                            .setMessage("Please turn on internet connection to proceed.")
+                            .setCancelable(false)
+                            .setPositiveButton("OK ", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    Intent I = new Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS);
+                                    activity.startActivity(I);
+                                    dialog.cancel();
+                                }
+                            }).show();
+
+
+
                 }
             }
         });
@@ -197,9 +207,10 @@ public class JobSearchAdapter extends RecyclerView.Adapter<JobSearchAdapter.View
     }
 
     public class ViewHolder  extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView tv_slno,tv_work_site,tv_skill_cat,tv_skill_name,tv_person_no,tv_gendar,tv_start_date,tv_exp,tv_exp_max,tv_salary,tv_salary_max,tv_block,tv_supervisor_name,tv_super_no;
+        TextView tv_slno,tv_work_site,tv_skill_cat,tv_skill_name,tv_person_no,tv_gendar,tv_start_date,tv_exp,tv_exp_max,tv_salary,tv_salary_max,tv_block,tv_supervisor_name,tv_super_no,tv_district,tv_status;
         ImageView iv_call;
         Button btn_accpt,btn_rjct;
+        LinearLayout ll_btn,ll_status;
         ViewHolder(View itemView) {
             super(itemView);
             tv_slno=itemView.findViewById(R.id.tv_slno);
@@ -216,9 +227,13 @@ public class JobSearchAdapter extends RecyclerView.Adapter<JobSearchAdapter.View
             tv_block=itemView.findViewById(R.id.tv_block);
             tv_supervisor_name=itemView.findViewById(R.id.tv_supervisor_name);
             tv_super_no=itemView.findViewById(R.id.tv_super_no);
+            tv_district=itemView.findViewById(R.id.tv_district);
+            tv_status=itemView.findViewById(R.id.tv_status);
             iv_call=itemView.findViewById(R.id.iv_call);
             btn_accpt=itemView.findViewById(R.id.btn_accpt);
             btn_rjct=itemView.findViewById(R.id.btn_rjct);
+            ll_btn=itemView.findViewById(R.id.ll_btn);
+            ll_status=itemView.findViewById(R.id.ll_status);
         }
 
         @Override
@@ -234,15 +249,17 @@ public class JobSearchAdapter extends RecyclerView.Adapter<JobSearchAdapter.View
         return gender;
     }
 
-    private class AcceptRecordsFromPacs extends AsyncTask<String, Void, String> {
+    private class AcceptRecordsFromPacs extends AsyncTask<String, Void, DefaultResponse> {
         JobListEntity data;
         String rowid;
+        int position;
         private final ProgressDialog dialog = new ProgressDialog(activity);
         private final android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(activity).create();
 
 
-        AcceptRecordsFromPacs(JobListEntity data) {
+        AcceptRecordsFromPacs(JobListEntity data, int position) {
             this.data = data;
+            this.position = position;
             //_uid = data.getId();
             //rowid = data.get_phase1_id();
 
@@ -252,98 +269,55 @@ public class JobSearchAdapter extends RecyclerView.Adapter<JobSearchAdapter.View
         protected void onPreExecute() {
 
             this.dialog.setCanceledOnTouchOutside(false);
-            this.dialog.setMessage("UpLoading...");
+            this.dialog.setMessage("पुष्टि किया जा रहा हैं...");
             this.dialog.show();
         }
 
         @Override
-        protected String doInBackground(String... param) {
-
-
-            String res = WebserviceHelper.UploadAcceptedRecordsFromPacs(data);
+        protected DefaultResponse doInBackground(String... param) {
+            DefaultResponse res = WebserviceHelper.UploadAcceptedRecordsFromPacs(data, regNo);
             return res;
 
         }
 
         @Override
-        protected void onPostExecute(String result) {
+        protected void onPostExecute(DefaultResponse result) {
             if (this.dialog.isShowing()) {
                 this.dialog.dismiss();
             }
+
             Log.d("Responsevalue", "" + result);
             if (result != null) {
-                String string = result;
-                String[] parts = string.split(",");
-                String part1 = parts[0]; // 004-
-                String part2 = parts[1];
+                if(result.getStatus()){
+                    ThrList.get(position).setIsAccepted("Y");
+                    notifyDataSetChanged();
 
-                if (part1.equals("1")) {
-//
-//                    dataBaseupload = new DataBaseHelper(mContext);
-//                    long c = dataBaseupload.deleteRecPhase1(rowid);
-
+                    new android.app.AlertDialog.Builder(activity)
+                            .setTitle("सूचना")
+                            .setMessage("नौकरी का अनुरोध अपडेट कर दिया गया है, आगे की जानकारी सिग्रह ही आपको अप्डेट की जाएगी|")
+                            .setCancelable(true)
+                            .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.dismiss();
+                                }
+                            }).show();
+                    //Toast.makeText(activity, "नौकरी का अनुरोध अपडेट कर दिया गया है, आगे की जानकारी सिग्रह ही आपको अप्डेट की जाएगी|", Toast.LENGTH_SHORT).show();
+                }else{
                     AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                     builder.setIcon(R.drawable.logo);
-                    builder.setTitle("Record Accepted!!");
+                    builder.setTitle("Failed");
                     // Ask the final question
-                    builder.setMessage("Job Acceptance Uploaded Successfully for Job ID:-"+data.getId());
-
-
+                    builder.setMessage(result.getMessage());
                     builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-//                            DataBaseHelper dataBaseHelper = new DataBaseHelper(mContext);
-//                            Phase1Listt = dataBaseHelper.getAllEntryDetailPhase1(PreferenceManager.getDefaultSharedPreferences(mContext).getString("USERID", ""));
-//                            dialog.dismiss();
-//                            refresh(Phase1Listt);
-//                            Phase1Listt = dataBaseHelper.getAllEntryDetailPhase1(PreferenceManager.getDefaultSharedPreferences(mContext).getString("USERID", ""));
                             dialog.dismiss();
-                            activity.finish();
-
-
                         }
                     });
-
-                    AlertDialog dialog = builder.create();
-
-                    dialog.show();
-
-                } else if (part1.equals("0")) {
-
-                    AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-                    builder.setIcon(R.drawable.logo);
-                    builder.setTitle("Record Not Accepted!!");
-                    // Ask the final question
-                    builder.setMessage("Job Removed Successfully for Job ID-"+rowid);
-
-
-                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener()
-                    {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-//                            DataBaseHelper dataBaseHelper = new DataBaseHelper(mContext);
-//                            Phase1Listt = dataBaseHelper.getAllEntryDetailPhase1(PreferenceManager.getDefaultSharedPreferences(mContext).getString("USERID", ""));
-//                            dialog.dismiss();
-//                            refresh(Phase1Listt);
-//                            Phase1Listt = dataBaseHelper.getAllEntryDetailPhase1(PreferenceManager.getDefaultSharedPreferences(mContext).getString("USERID", ""));
-                            dialog.dismiss();
-
-                        }
-                    });
-
-                    AlertDialog dialog = builder.create();
-
-                    dialog.show();
-
                 }
-                else
-                    {
-                    Toast.makeText(activity, "Your data is not uploaded Successfully ! ", Toast.LENGTH_SHORT).show();
-                }
+
             }
-            else
-                {
-
+            else{
                 Toast.makeText(activity, "Result:null ..Uploading failed...Please Try Later", Toast.LENGTH_SHORT).show();
             }
 
@@ -351,15 +325,17 @@ public class JobSearchAdapter extends RecyclerView.Adapter<JobSearchAdapter.View
     }
 
 
-    private class RejectRecordsFromPacs extends AsyncTask<String, Void, String> {
+    private class RejectRecordsFromPacs extends AsyncTask<String, Void, DefaultResponse> {
         JobListEntity data;
         String rowid;
+        int position;
         private final ProgressDialog dialog = new ProgressDialog(activity);
         private final android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(activity).create();
 
 
-        RejectRecordsFromPacs(JobListEntity data) {
+        RejectRecordsFromPacs(JobListEntity data, int position) {
             this.data = data;
+            this.position = position;
             //_uid = data.getId();
             //rowid = data.get_phase1_id();
 
@@ -369,92 +345,118 @@ public class JobSearchAdapter extends RecyclerView.Adapter<JobSearchAdapter.View
         protected void onPreExecute() {
 
             this.dialog.setCanceledOnTouchOutside(false);
-            this.dialog.setMessage("UpLoading...");
+            this.dialog.setMessage("पुष्टि किया जा रहा हैं...");
             this.dialog.show();
         }
 
         @Override
-        protected String doInBackground(String... param) {
+        protected DefaultResponse doInBackground(String... param) {
 
-            String res = WebserviceHelper.UploadRejectedRecordsFromPacs(data);
+            DefaultResponse res = WebserviceHelper.UploadRejectedRecordsFromPacs(data, regNo);
             return res;
 
         }
 
         @Override
-        protected void onPostExecute(String result) {
+        protected void onPostExecute(DefaultResponse result) {
             if (this.dialog.isShowing()) {
                 this.dialog.dismiss();
             }
             Log.d("Responsevalue", "" + result);
             if (result != null) {
-                String string = result;
-                String[] parts = string.split(",");
-                String part1 = parts[0]; // 004-
-                String part2 = parts[1];
+                if(result.getStatus()){
+                    ThrList.get(position).setIsAccepted("R");
+                    notifyDataSetChanged();
 
-                if (part1.equals("1")) {
-//
-//                    dataBaseupload = new DataBaseHelper(mContext);
-//                    long c = dataBaseupload.deleteRecPhase1(rowid);
-
+                    new android.app.AlertDialog.Builder(activity)
+                            .setTitle("सूचना")
+                            .setMessage("नौकरी का अनुरोध अपडेट कर दिया गया")
+                            .setCancelable(true)
+                            .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.dismiss();
+                                }
+                            }).show();
+                }else{
                     AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                     builder.setIcon(R.drawable.logo);
-                    builder.setTitle("Record Rejected!!");
+                    builder.setTitle("Failed");
                     // Ask the final question
-                    builder.setMessage("Paddy Record Rejected for SlNo-"+data.getId());
-
-
+                    builder.setMessage(result.getMessage());
                     builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-//                            DataBaseHelper dataBaseHelper = new DataBaseHelper(mContext);
-//                            Phase1Listt = dataBaseHelper.getAllEntryDetailPhase1(PreferenceManager.getDefaultSharedPreferences(mContext).getString("USERID", ""));
-//                            dialog.dismiss();
-//                            refresh(Phase1Listt);
-//                            Phase1Listt = dataBaseHelper.getAllEntryDetailPhase1(PreferenceManager.getDefaultSharedPreferences(mContext).getString("USERID", ""));
                             dialog.dismiss();
-                            activity.finish();
-
-
                         }
                     });
-
-                    AlertDialog dialog = builder.create();
-
-                    dialog.show();
-
-                } else if (part1.equals("0")) {
-
-                    AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-                    builder.setIcon(R.drawable.logo);
-                    builder.setTitle("Record Not Rejected!!");
-                    // Ask the final question
-                    builder.setMessage("Paddy Record Not Rejected for SlNo-"+rowid);
-
-
-                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-//                            DataBaseHelper dataBaseHelper = new DataBaseHelper(mContext);
-//                            Phase1Listt = dataBaseHelper.getAllEntryDetailPhase1(PreferenceManager.getDefaultSharedPreferences(mContext).getString("USERID", ""));
-//                            dialog.dismiss();
-//                            refresh(Phase1Listt);
-//                            Phase1Listt = dataBaseHelper.getAllEntryDetailPhase1(PreferenceManager.getDefaultSharedPreferences(mContext).getString("USERID", ""));
-                            dialog.dismiss();
-
-
-
-                        }
-                    });
-
-                    AlertDialog dialog = builder.create();
-
-                    dialog.show();
-
-                } else {
-                    Toast.makeText(activity, "Your data is not uploaded Successfully ! ", Toast.LENGTH_SHORT).show();
                 }
+//                String string = result;
+//                String[] parts = string.split(",");
+//                String part1 = parts[0]; // 004-
+//                String part2 = parts[1];
+//
+//                if (part1.equals("1")) {
+////
+////                    dataBaseupload = new DataBaseHelper(mContext);
+////                    long c = dataBaseupload.deleteRecPhase1(rowid);
+//
+//                    AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+//                    builder.setIcon(R.drawable.logo);
+//                    builder.setTitle("Record Rejected!!");
+//                    // Ask the final question
+//                    builder.setMessage("Paddy Record Rejected for SlNo-"+data.getId());
+//
+//
+//                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+////                            DataBaseHelper dataBaseHelper = new DataBaseHelper(mContext);
+////                            Phase1Listt = dataBaseHelper.getAllEntryDetailPhase1(PreferenceManager.getDefaultSharedPreferences(mContext).getString("USERID", ""));
+////                            dialog.dismiss();
+////                            refresh(Phase1Listt);
+////                            Phase1Listt = dataBaseHelper.getAllEntryDetailPhase1(PreferenceManager.getDefaultSharedPreferences(mContext).getString("USERID", ""));
+//                            dialog.dismiss();
+//                            activity.finish();
+//
+//
+//                        }
+//                    });
+//
+//                    AlertDialog dialog = builder.create();
+//
+//                    dialog.show();
+//
+//                } else if (part1.equals("0")) {
+//
+//                    AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+//                    builder.setIcon(R.drawable.logo);
+//                    builder.setTitle("Record Not Rejected!!");
+//                    // Ask the final question
+//                    builder.setMessage("Paddy Record Not Rejected for SlNo-"+rowid);
+//
+//
+//                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+////                            DataBaseHelper dataBaseHelper = new DataBaseHelper(mContext);
+////                            Phase1Listt = dataBaseHelper.getAllEntryDetailPhase1(PreferenceManager.getDefaultSharedPreferences(mContext).getString("USERID", ""));
+////                            dialog.dismiss();
+////                            refresh(Phase1Listt);
+////                            Phase1Listt = dataBaseHelper.getAllEntryDetailPhase1(PreferenceManager.getDefaultSharedPreferences(mContext).getString("USERID", ""));
+//                            dialog.dismiss();
+//
+//
+//
+//                        }
+//                    });
+//
+//                    AlertDialog dialog = builder.create();
+//
+//                    dialog.show();
+//
+//                } else {
+//                    Toast.makeText(activity, "Your data is not uploaded Successfully ! ", Toast.LENGTH_SHORT).show();
+//                }
             } else {
 
                 Toast.makeText(activity, "Result:null ..Uploading failed...Please Try Later", Toast.LENGTH_SHORT).show();

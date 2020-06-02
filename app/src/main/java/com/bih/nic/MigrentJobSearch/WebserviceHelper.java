@@ -39,7 +39,7 @@ public class WebserviceHelper implements KvmSerializable {
     public static final String SERVICEURL = "http://shramsadhan.bih.nic.in/MigrantJobSearchWebservice.asmx";
 
 //    public static final String SERVICENAMESPACE = "http://10.133.20.159/";
-    //public static final String SERVICEURL = "http://10.133.20.159/TestService/MigrantJobSearchWebservice.asmx";
+//    public static final String SERVICEURL = "http://10.133.20.159/TestService/MigrantJobSearchWebservice.asmx";
 
     private static final String AuthenticateUser = "Authenticate";
     private static final String GETBENEFICIARYLIST="getAadhaar";
@@ -47,6 +47,7 @@ public class WebserviceHelper implements KvmSerializable {
     private static final String BLOCK_METHOD="getBlock";
     private static final String SKILL_METHOD="SkilMasterList";
     private static final String JOB_SEARCH_METHOD="JobSearchDetails1";
+    private static final String GET_JOB_REQUEST_METHOD="GetJobRequest";
     private static final String UPDATE_PROFILE_IMAGE_METHOD="UpdateImage";
     private static final String SUBSKILL_METHOD="SubSkilMasterList";
     private static final String DISTRICT_METHOD="getDistrict";
@@ -66,7 +67,7 @@ public class WebserviceHelper implements KvmSerializable {
 
     public static final  String APPVERSION_METHOD = "getAppLatest";
     public static final  String UpdateUserDetails = "UpdateUserDetails";
-    public static final  String AcceptRjctRecordsFromPacs = "UpdateUserDetails";
+    public static final  String AcceptRjctRecordsFromPacs = "UpdateRequest";
     static String rest;
 
 
@@ -130,7 +131,7 @@ public class WebserviceHelper implements KvmSerializable {
     public static ArrayList<JobListEntity> searchJobMasterData(String regId, String distId) {
 
         SoapObject res1;
-        res1=getServerData(JOB_SEARCH_METHOD, JobListEntity.JobListEntity_CLASS, "UserId", "Districtcode", regId, distId);
+        res1=getServerData(GET_JOB_REQUEST_METHOD, JobListEntity.JobListEntity_CLASS, "RegistrationNo", regId);
         int TotalProperty=0;
         if(res1!=null) TotalProperty= res1.getPropertyCount();
 
@@ -967,9 +968,6 @@ public class WebserviceHelper implements KvmSerializable {
             request.addProperty("dob","");
 
 
-
-
-
             SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
                     SoapEnvelope.VER11);
             envelope.dotNet = true;
@@ -992,16 +990,15 @@ public class WebserviceHelper implements KvmSerializable {
 
 
 
-    public static String UploadAcceptedRecordsFromPacs(JobListEntity data) {
+    public static DefaultResponse UploadAcceptedRecordsFromPacs(JobListEntity data, String regNo) {
 
         SoapObject request = new SoapObject(SERVICENAMESPACE, AcceptRjctRecordsFromPacs);
-        request.addProperty("SLNO", data.getId());
-//        request.addProperty("UserID",userid);
-//        request.addProperty("PacsCode",panc);
-//        request.addProperty("RiceMillId",ricemill);
-        request.addProperty("StatusId","A");
+        request.addProperty("_RequestId", data.getId());
+        request.addProperty("_RegistrationNo",regNo);
+        request.addProperty("_Status","Y");
 
-
+        DefaultResponse response;
+        SoapObject res1;
 
         try {
             SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
@@ -1012,7 +1009,11 @@ public class WebserviceHelper implements KvmSerializable {
             HttpTransportSE androidHttpTransport = new HttpTransportSE(SERVICEURL);
             androidHttpTransport.call(SERVICENAMESPACE + AcceptRjctRecordsFromPacs, envelope);
 
-            rest = envelope.getResponse().toString();
+            res1 = (SoapObject) envelope.getResponse();
+
+            int TotalProperty = res1.getPropertyCount();
+
+            response = new DefaultResponse(res1);
 
         }
         catch (Exception e) {
@@ -1020,21 +1021,20 @@ public class WebserviceHelper implements KvmSerializable {
             //return "0";
             return null;
         }
-        return rest;
+        return response;
 
     }
 
 
-    public static String UploadRejectedRecordsFromPacs(JobListEntity data) {
+    public static DefaultResponse UploadRejectedRecordsFromPacs(JobListEntity data, String regNo) {
 
         SoapObject request = new SoapObject(SERVICENAMESPACE, AcceptRjctRecordsFromPacs);
-        request.addProperty("SLNO", data.getId());
-//        request.addProperty("UserID",userid);
-//        request.addProperty("PacsCode",panc);
-//        request.addProperty("RiceMillId",ricemill);
-        request.addProperty("StatusId","R");
+        request.addProperty("_RequestId", data.getId());
+        request.addProperty("_RegistrationNo",regNo);
+        request.addProperty("_Status","R");
 
-
+        DefaultResponse response;
+        SoapObject res1;
 
         try {
             SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
@@ -1045,7 +1045,11 @@ public class WebserviceHelper implements KvmSerializable {
             HttpTransportSE androidHttpTransport = new HttpTransportSE(SERVICEURL);
             androidHttpTransport.call(SERVICENAMESPACE + AcceptRjctRecordsFromPacs, envelope);
 
-            rest = envelope.getResponse().toString();
+            res1 = (SoapObject) envelope.getResponse();
+
+            int TotalProperty = res1.getPropertyCount();
+
+            response = new DefaultResponse(res1);
 
         }
         catch (Exception e) {
@@ -1053,7 +1057,7 @@ public class WebserviceHelper implements KvmSerializable {
             //return "0";
             return null;
         }
-        return rest;
+        return response;
 
     }
 

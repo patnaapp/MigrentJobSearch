@@ -11,7 +11,12 @@ public class JobListEntity implements KvmSerializable, Serializable {
 
     public static Class<JobListEntity> JobListEntity_CLASS = JobListEntity.class;
     private String id = "";
+    private String vchRegNum = "";
+    private String RequestedBy = "";
+    private String WorksId = "";
     private String workSite = "";
+    private String WorksRegId = "";
+    private String SkillId = "";
     private String skillCategory = "";
     private String skillName = "";
     private String numberOfPerson = "";
@@ -25,11 +30,31 @@ public class JobListEntity implements KvmSerializable, Serializable {
     private String block = "";
     private String contactNumber = "";
     private String contactName = "";
+    private String RequestedDate = "";
+    private String isSelected = "";
+    private String isAccepted = "";
+    private String AcceptedDate = "";
 
     public JobListEntity(SoapObject obj) {
 
-        this.district = obj.getProperty("DistrictName").toString();
-        this.block = obj.getProperty("BlockName").toString();
+        this.id = obj.getProperty("RequestId").toString();
+        this.WorksId = obj.getProperty("WorksId").toString();
+        this.workSite = obj.getProperty("WorkSiteNameHn").toString();
+        this.WorksRegId = obj.getProperty("WorksRegId").toString();
+        this.SkillId = obj.getProperty("SkillId").toString();
+        //this.skillName = obj.getProperty("SkillNameHn").toString();
+
+        //this.experience = obj.getProperty("Experiance").toString();
+        this.vchRegNum = obj.getProperty("vchRegNum").toString();
+        this.RequestedBy = obj.getProperty("RequestedBy").toString();
+        this.RequestedDate = obj.getProperty("RequestedDate").toString();
+        this.isAccepted = obj.getProperty("IsAccepted").toString();
+        this.AcceptedDate = obj.getProperty("AcceptedDate").toString();
+        this.isSelected = obj.getProperty("IsSelected").toString();
+//        this.numberOfPerson = obj.getProperty("NoOfPerson").toString();
+
+        this.district = obj.getProperty("DistrictNameHN").toString();
+        this.block = obj.getProperty("BlockNameHN").toString();
         this.skillCategory = obj.getProperty("SkillCategoryHn").toString();
         this.skillName = obj.getProperty("SkillNameHn").toString();
         this.experience = obj.getProperty("Experiance").toString();
@@ -37,9 +62,9 @@ public class JobListEntity implements KvmSerializable, Serializable {
         this.salary = obj.getProperty("Salary1").toString();
         this.salaryMax = obj.getProperty("SalaryMax").toString();
         this.startDate = obj.getProperty("StartDate").toString();
-        this.gendar = obj.getProperty("Gender").toString();
+        this.gendar = obj.getProperty("Gender_NameHN").toString();
         this.numberOfPerson = obj.getProperty("NoOfPerson").toString();
-        this.workSite = obj.getProperty("WorkSiteNameHn1").toString();
+        //this.workSite = obj.getProperty("WorkSiteNameHn1").toString();
         this.contactNumber = obj.getProperty("CPMobileNo").toString();
         this.contactName = obj.getProperty("ContactPersonHn").toString();
 
@@ -53,7 +78,77 @@ public class JobListEntity implements KvmSerializable, Serializable {
         JobListEntity_CLASS = jobListEntity_CLASS;
     }
 
+    public String getIsAccepted() {
+        return isAccepted;
+    }
 
+    public void setIsAccepted(String isAccepted) {
+        this.isAccepted = isAccepted;
+    }
+
+    public String getAcceptedDate() {
+        return AcceptedDate;
+    }
+
+    public void setAcceptedDate(String acceptedDate) {
+        AcceptedDate = acceptedDate;
+    }
+
+    public String getVchRegNum() {
+        return vchRegNum;
+    }
+
+    public void setVchRegNum(String vchRegNum) {
+        this.vchRegNum = vchRegNum;
+    }
+
+    public String getRequestedBy() {
+        return RequestedBy;
+    }
+
+    public void setRequestedBy(String requestedBy) {
+        RequestedBy = requestedBy;
+    }
+
+    public String getWorksId() {
+        return WorksId;
+    }
+
+    public void setWorksId(String worksId) {
+        WorksId = worksId;
+    }
+
+    public String getWorksRegId() {
+        return WorksRegId;
+    }
+
+    public void setWorksRegId(String worksRegId) {
+        WorksRegId = worksRegId;
+    }
+
+    public String getSkillId() {
+        return SkillId;
+    }
+
+    public void setSkillId(String skillId) {
+        SkillId = skillId;
+    }
+
+    public String getRequestedDate() {
+        return RequestedDate;
+    }
+
+    public void setRequestedDate(String requestedDate) {
+        RequestedDate = requestedDate;
+    }
+
+    public String getIsSelected() {
+        return isSelected;
+    }
+
+    public void setIsSelected(String isSelected) {
+        this.isSelected = isSelected;
+    }
 
     public String getContactNumber() {
         return contactNumber;
