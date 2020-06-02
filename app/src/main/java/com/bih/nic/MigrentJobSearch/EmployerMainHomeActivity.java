@@ -42,7 +42,7 @@ public class EmployerMainHomeActivity extends Activity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_employer_home_new);
+        //setContentView(R.layout.activity_employer_home_new);
         getActionBar().hide();
 
         BenDetails=new BenDetails();

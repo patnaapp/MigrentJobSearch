@@ -32,7 +32,7 @@
         <item>@drawable/capture</item>
     </string-array>
     <string name="title_activity_multi_login">MultiLoginActivity</string>
-    <string name="title_home">श्रमिक</string>
-    <string name="title_dashboard">नियोक्ता</string>
+    <string name="title_home">श्रमिक लॉगिन</string>
+    <string name="title_dashboard">नियोक्ता लॉगिन</string>
     <string name="title_notifications">Notifications</string>
 </resources>

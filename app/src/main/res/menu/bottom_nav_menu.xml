@@ -4,12 +4,12 @@
     <item
         android:id="@+id/navigation_labour"
         android:icon="@drawable/ic_home_black_24dp"
-        android:title="@string/title_home" />
+        android:title="श्रमिक" />
 
     <item
         android:id="@+id/navigation_employer"
         android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/title_dashboard" />
+        android:title="नियोक्ता" />
 
 <!--    <item-->
 <!--        android:id="@+id/navigation_hq"-->

@@ -15,7 +15,7 @@
         android:id="@+id/navigation_employer"
         android:name="com.bih.nic.MigrentJobSearch.ui.employer.EmployerFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_employer" />
 
     <fragment
         android:id="@+id/navigation_hq"
