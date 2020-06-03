@@ -46,7 +46,7 @@ public class JobOfferPosted_BlockActivity extends Activity implements AdapterVie
     ArrayList<District> DistrictList;
 
     String skillId,subSkillId;
-    String DistId="",DistNAme="", orgid="12345";
+    String DistId="",DistNAme="";
 
     DataBaseHelper dataBaseHelper;
     String OrgId="",user_name="", mobile="", address="", DistName="", ProfileImg="",CompanyName="", UserId="",UserRole="";
