@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,21 +19,20 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.bih.nic.MigrentJobSearch.DataBaseHelper.DataBaseHelper;
-import com.bih.nic.MigrentJobSearch.Model.BenDetails;
 import com.bih.nic.MigrentJobSearch.Model.District;
 import com.bih.nic.MigrentJobSearch.Model.JobListEntity;
-
 import com.bih.nic.MigrentJobSearch.adapter.JobSearchAdapter;
+import com.bih.nic.MigrentJobSearch.adapter.LabourSearchAdaptor;
 
 import java.util.ArrayList;
 
-public class JobSearchActivity extends Activity implements AdapterView.OnItemSelectedListener {
+public class LabourSearchActivity extends Activity implements AdapterView.OnItemSelectedListener {
 
     RecyclerView listView;
     TextView tv_Norecord;
     Spinner spn_skill,spn_sub_skill;
     ImageView img_back;
-    JobSearchAdapter adaptor_showedit_listDetail;
+    LabourSearchAdaptor labourSearchAdaptor;
 
     ProgressDialog dialog;
     ArrayList<JobListEntity> data;
@@ -46,7 +46,7 @@ public class JobSearchActivity extends Activity implements AdapterView.OnItemSel
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_job_search);
+        setContentView(R.layout.activity_labour_search);
 
         getActionBar().hide();
         Utiilties.setStatusBarColor(this);
@@ -90,9 +90,9 @@ public class JobSearchActivity extends Activity implements AdapterView.OnItemSel
             tv_Norecord.setVisibility(View.GONE);
             listView.setVisibility(View.VISIBLE);
 
-            adaptor_showedit_listDetail = new JobSearchAdapter(this, data, RegNo);
+            labourSearchAdaptor = new LabourSearchAdaptor(this, data, RegNo);
             listView.setLayoutManager(new LinearLayoutManager(this));
-            listView.setAdapter(adaptor_showedit_listDetail);
+            listView.setAdapter(labourSearchAdaptor);
 
         }else{
             listView.setVisibility(View.GONE);
@@ -149,7 +149,7 @@ public class JobSearchActivity extends Activity implements AdapterView.OnItemSel
     }
 
     private class SyncJobSearchData extends AsyncTask<String, Void, ArrayList<JobListEntity>> {
-        private final ProgressDialog dialog = new ProgressDialog(JobSearchActivity.this);
+        private final ProgressDialog dialog = new ProgressDialog(LabourSearchActivity.this);
         int optionType;
 
         @Override

@@ -37,13 +37,9 @@ public class SplashActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        //getActionBar().hide();
 
-        //Utiilties.setActionBarBackground(SplashActivity.this);
-     Utiilties.setStatusBarColor(SplashActivity.this);
+        Utiilties.setStatusBarColor(SplashActivity.this);
 
-        //ActionBar actionBar = getActionBar();
-        //actionBar.setTitle(" ");
 
 
         databaseHelper=new DataBaseHelper(getApplicationContext());
@@ -243,18 +239,6 @@ public class SplashActivity extends Activity {
 
             @Override
             public void run() {
-                    /*if (check_ROLE.equalsIgnoreCase("COLL")) {
-                        Intent i = new Intent(SplashActivity.this, MainActivity.class);
-                        startActivity(i);
-                    } else {
-                        // This method will be executed once the timer is over
-                        // Start your app main activity
-                        Intent i = new Intent(SplashActivity.this, AdminActivity.class);
-                        startActivity(i);
-                    }*/
-
-                // This method will be executed once the timer is over
-                // Start your app main activity
 
                 // close this activity
                 if(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserId", "").equals("")) {
@@ -263,15 +247,11 @@ public class SplashActivity extends Activity {
                     startActivity(i);
                     finish();
                 }else {
-//                    if(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserId", "").equalsIgnoreCase("BLKADM")) {
-//                        Intent i = new Intent(SplashActivity.this, VerifyAadhaar.class);
-//                        startActivity(i);
-//                        finish();
-//                    }else {
+
                         Intent i = new Intent(SplashActivity.this, MainHomeActivity.class);
                         startActivity(i);
                         finish();
-                   // }
+
                 }
             }
         }, SPLASH_TIME_OUT);
