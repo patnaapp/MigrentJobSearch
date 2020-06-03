@@ -14,9 +14,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.bih.nic.MigrentJobSearch.DataBaseHelper.DataBaseHelper;
+import com.bih.nic.MigrentJobSearch.Model.AcptdRjctdJobOfferEntity;
 import com.bih.nic.MigrentJobSearch.Model.BlockJobOfferPostedEntity;
 import com.bih.nic.MigrentJobSearch.R;
 import com.bih.nic.MigrentJobSearch.WebserviceHelper;
+import com.bih.nic.MigrentJobSearch.adapter.AccptedRctdJobAdapter;
 import com.bih.nic.MigrentJobSearch.adapter.PostedJobBlockAdapter;
 
 import java.util.ArrayList;
@@ -27,8 +29,8 @@ public class AcceptedRejctd_Job_Activity extends AppCompatActivity {
     TextView tv_Norecord,tv_distName;
     Spinner spn_skill,spn_sub_skill;
     ImageView img_back;
-    PostedJobBlockAdapter adaptor_showedit_listDetail;
-    ArrayList<BlockJobOfferPostedEntity> data;
+    AccptedRctdJobAdapter adaptor_showedit_listDetail;
+    ArrayList<AcptdRjctdJobOfferEntity> data;
 
     String DistId="",DistNAme="";
 
@@ -60,7 +62,7 @@ public class AcceptedRejctd_Job_Activity extends AppCompatActivity {
         new SyncAcceptedRjctdJobsOffers().execute();
     }
 
-    private class SyncAcceptedRjctdJobsOffers extends AsyncTask<String, Void, ArrayList<BlockJobOfferPostedEntity>>
+    private class SyncAcceptedRjctdJobsOffers extends AsyncTask<String, Void, ArrayList<AcptdRjctdJobOfferEntity>>
     {
         private final ProgressDialog dialog = new ProgressDialog(AcceptedRejctd_Job_Activity.this);
         int optionType;
@@ -74,13 +76,14 @@ public class AcceptedRejctd_Job_Activity extends AppCompatActivity {
         }
 
         @Override
-        protected ArrayList<BlockJobOfferPostedEntity> doInBackground(String...arg)
+        protected ArrayList<AcptdRjctdJobOfferEntity> doInBackground(String...arg)
         {
-            return WebserviceHelper.BlockJobOfferPosted(DistId, OrgId,UserRole);
+            return WebserviceHelper.JobOfferAcptdRjctd(DistId, OrgId,UserRole);
+          //  return WebserviceHelper.JobOfferAcptdRjctd(blkcode, OrgId,UserRole,status);
         }
 
         @Override
-        protected void onPostExecute(ArrayList<BlockJobOfferPostedEntity> result)
+        protected void onPostExecute(ArrayList<AcptdRjctdJobOfferEntity> result)
         {
             if (this.dialog.isShowing())
             {
@@ -102,7 +105,7 @@ public class AcceptedRejctd_Job_Activity extends AppCompatActivity {
             tv_Norecord.setVisibility(View.GONE);
             listView.setVisibility(View.VISIBLE);
 
-            adaptor_showedit_listDetail = new PostedJobBlockAdapter(this, data, OrgId);
+            adaptor_showedit_listDetail = new AccptedRctdJobAdapter(this, data, OrgId);
             listView.setLayoutManager(new LinearLayoutManager(this));
             listView.setAdapter(adaptor_showedit_listDetail);
 

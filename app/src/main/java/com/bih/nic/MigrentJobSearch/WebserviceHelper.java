@@ -3,6 +3,7 @@ package com.bih.nic.MigrentJobSearch;
 import android.content.Context;
 import android.util.Log;
 
+import com.bih.nic.MigrentJobSearch.Model.AcptdRjctdJobOfferEntity;
 import com.bih.nic.MigrentJobSearch.Model.BenDetails;
 import com.bih.nic.MigrentJobSearch.Model.BlockJobOfferPostedEntity;
 import com.bih.nic.MigrentJobSearch.Model.BlockWeb;
@@ -1199,6 +1200,58 @@ public class WebserviceHelper implements KvmSerializable {
                 if (property instanceof SoapObject) {
                     SoapObject final_object = (SoapObject) property;
                     BlockJobOfferPostedEntity panchayat = new BlockJobOfferPostedEntity(final_object);
+                    pvmArrayList.add(panchayat);
+                }
+            } else
+                return pvmArrayList;
+        }
+
+
+        return pvmArrayList;
+    }
+
+
+
+    public static ArrayList<AcptdRjctdJobOfferEntity> JobOfferAcptdRjctd(String distid, String orgid, String role) {
+
+
+        SoapObject request = new SoapObject(SERVICENAMESPACE, GET_JOB_Offer_block_Posted_METHOD);
+
+        request.addProperty("DistCode", distid);
+        request.addProperty("orgId", orgid);
+        request.addProperty("Role", role);
+
+        SoapObject res1;
+        try {
+
+            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
+                    SoapEnvelope.VER11);
+            envelope.dotNet = true;
+            envelope.setOutputSoapObject(request);
+
+            envelope.addMapping(SERVICENAMESPACE, AcptdRjctdJobOfferEntity.AcptdRjctdOffer_CLASS.getSimpleName(), AcptdRjctdJobOfferEntity.AcptdRjctdOffer_CLASS);
+
+            HttpTransportSE androidHttpTransport = new HttpTransportSE(
+                    SERVICEURL);
+            androidHttpTransport.call(SERVICENAMESPACE + GET_JOB_Offer_block_Posted_METHOD,
+                    envelope);
+
+            res1 = (SoapObject) envelope.getResponse();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        int TotalProperty = res1.getPropertyCount();
+
+        ArrayList<AcptdRjctdJobOfferEntity> pvmArrayList = new ArrayList<AcptdRjctdJobOfferEntity>();
+
+        for (int ii = 0; ii < TotalProperty; ii++) {
+            if (res1.getProperty(ii) != null) {
+                Object property = res1.getProperty(ii);
+                if (property instanceof SoapObject) {
+                    SoapObject final_object = (SoapObject) property;
+                    AcptdRjctdJobOfferEntity panchayat = new AcptdRjctdJobOfferEntity(final_object);
                     pvmArrayList.add(panchayat);
                 }
             } else
