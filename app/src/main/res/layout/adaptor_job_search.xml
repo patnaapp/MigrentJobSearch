@@ -571,7 +571,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:id="@+id/ll_btn"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"

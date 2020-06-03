@@ -176,6 +176,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Arwal"
+                    android:maxLines="3"
                     android:textColor="@android:color/black"
                     android:textSize="13sp"/>
             </LinearLayout>
@@ -246,7 +247,7 @@
     </RelativeLayout>
 
     <LinearLayout
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="6dp"
         android:id="@+id/ll_job"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -254,7 +255,7 @@
         android:layout_below="@+id/rl_user_info">
 
         <LinearLayout
-            android:layout_margin="12dp"
+            android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:orientation="horizontal">
@@ -265,24 +266,25 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:padding="5dp"
+                android:padding="4dp"
                 android:gravity="center"
-                android:background="#ffff"
+                android:background="@drawable/textboxshape"
                 android:id="@+id/ll_new_labours">
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/ic_person_black_24dp" />
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/search_labour" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Search Labour"
+                    android:text="श्रम की खोज"
                     android:gravity="center"
                     android:textSize="13sp"
-                    android:layout_marginTop="8dp"
-                    android:textStyle="bold"
-                    android:textColor="#000"
+                    android:layout_marginTop="4dp"
+                    android:textStyle="normal"
+                    android:textColor="@color/colorPrimary"
                     android:textAppearance="?android:textAppearanceSmall"/>
 
             </LinearLayout>
@@ -296,26 +298,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:padding="5dp"
+                android:padding="4dp"
                 android:gravity="center"
-                android:background="#fff">
+                android:background="@drawable/textboxshape">
 
                 <ImageView
                     android:layout_centerHorizontal="true"
                     android:id="@+id/iv_upload"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/ic_person_black_24dp"/>
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/offer_job"/>
                 <TextView
                     android:layout_below="@+id/iv_upload"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Job Offer Report"
+                    android:text="पोस्ट की गई नौकरी"
                     android:gravity="center"
                     android:layout_marginTop="6dp"
                     android:textSize="13sp"
-                    android:textStyle="bold"
-                    android:textColor="#000"
+                    android:textStyle="normal"
+                    android:textColor="@color/colorPrimary"
                     android:textAppearance="?android:textAppearanceSmall"/>
 
 
@@ -329,26 +331,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:padding="5dp"
+                android:padding="4dp"
                 android:gravity="center"
-                android:background="#fff">
+                android:background="@drawable/textboxshape">
 
                 <ImageView
                     android:layout_centerHorizontal="true"
                     android:id="@+id/iv_assign"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/ic_person_black_24dp"/>
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/assign"/>
                 <TextView
                     android:layout_below="@+id/iv_assign"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Assigned Job"
+                    android:text="श्रम को काम सौंपें"
                     android:gravity="center"
                     android:layout_marginTop="6dp"
                     android:textSize="13sp"
-                    android:textStyle="bold"
-                    android:textColor="#000"
+                    android:textStyle="normal"
+                    android:textColor="@color/colorPrimary"
                     android:textAppearance="?android:textAppearanceSmall"/>
 
 

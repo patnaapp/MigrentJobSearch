@@ -102,6 +102,9 @@ public class JobSearchAdapter extends RecyclerView.Adapter<JobSearchAdapter.View
             }else if(info.getIsAccepted().equals("R")){
                 holder.tv_status.setText("आपने आवेदन अस्वीकृत किया");
                 holder.tv_status.setTextColor(activity.getResources().getColor(R.color.holo_red_dark));
+
+                holder.btn_rjct.setVisibility(View.GONE);
+                holder.ll_btn.setVisibility(View.VISIBLE);
             }
         }else{
             holder.ll_btn.setVisibility(View.VISIBLE);
