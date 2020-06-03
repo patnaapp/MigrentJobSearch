@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,10 +18,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bih.nic.MigrentJobSearch.DataBaseHelper.DataBaseHelper;
 import com.bih.nic.MigrentJobSearch.Model.District;
 import com.bih.nic.MigrentJobSearch.Model.JobListEntity;
+import com.bih.nic.MigrentJobSearch.Model.panchayat;
+import com.bih.nic.MigrentJobSearch.Model.workListModel;
 import com.bih.nic.MigrentJobSearch.adapter.JobSearchAdapter;
 import com.bih.nic.MigrentJobSearch.adapter.LabourSearchAdaptor;
 
@@ -59,7 +63,7 @@ public class LabourSearchActivity extends Activity implements AdapterView.OnItem
         String distName = getIntent().getStringExtra("DistName");
         new SyncJobSearchData().execute();
 
-        setDistrictSpinner(distName);
+        new  LoadJonList("12").execute();
 
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,6 +104,63 @@ public class LabourSearchActivity extends Activity implements AdapterView.OnItem
         }
     }
 
+    private class LoadJonList extends AsyncTask<String, Void, ArrayList<workListModel>>
+    {
+        String blockcode = "";
+        ArrayList<workListModel> blocklist = new ArrayList<>();
+        private final ProgressDialog dialog = new ProgressDialog(
+                LabourSearchActivity.this);
+
+        LoadJonList(String distCode) {
+            this.blockcode = distCode;
+        }
+
+        @Override
+        protected void onPreExecute() {
+
+            this.dialog.setCanceledOnTouchOutside(false);
+            this.dialog.setMessage("Loading...");
+            this.dialog.show();
+        }
+
+        @Override
+        protected ArrayList<workListModel> doInBackground(String... param)
+        {
+
+            this.blocklist = WebserviceHelper.GetWorkDetails(blockcode);
+
+            return this.blocklist;
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<workListModel> result)
+        {
+            if (this.dialog.isShowing())
+            {
+                this.dialog.dismiss();
+
+            }
+
+            if (result != null)
+            {
+                if (result.size() > 0)
+                {
+                    DataBaseHelper placeData = new DataBaseHelper(LabourSearchActivity.this);
+
+                 //   long i = placeData.setPanchayatLocal(result, PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("District", ""),blockcode);
+                    if (result.size() > 0) setJobList(result);
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.loading_fail),Toast.LENGTH_LONG).show();
+
+                }
+            }
+
+        }
+
+    }
+
 
 
     public void setDistrictSpinner(String DistName){
@@ -121,6 +182,26 @@ public class LabourSearchActivity extends Activity implements AdapterView.OnItem
         }catch (Exception e){
             new SyncJobSearchData().execute();
         }
+
+    }  public void setJobList(ArrayList<workListModel>joblist){
+
+        ArrayList<String> list = new ArrayList<String>();
+        list.add("-Select-");
+        for (workListModel info: joblist){
+            list.add(info.getWorl_Name());
+        }
+
+        ArrayAdapter adaptor = new ArrayAdapter(this, android.R.layout.simple_spinner_item, list);
+        adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spn_sub_skill.setAdapter(adaptor);
+
+        /*try{
+            if(!DistName.isEmpty()){
+                spn_sub_skill.setSelection(list.indexOf(DistName));
+            }
+        }catch (Exception e){
+            new SyncJobSearchData().execute();
+        }*/
 
     }
 
