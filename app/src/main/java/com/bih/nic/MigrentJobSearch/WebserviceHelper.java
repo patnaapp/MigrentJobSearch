@@ -15,6 +15,7 @@ import com.bih.nic.MigrentJobSearch.Model.UserDetails;
 import com.bih.nic.MigrentJobSearch.Model.Versioninfo;
 import com.bih.nic.MigrentJobSearch.Model.panchayat;
 import com.bih.nic.MigrentJobSearch.Model.ward_model;
+import com.bih.nic.MigrentJobSearch.Model.workListModel;
 
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.KvmSerializable;
@@ -68,6 +69,7 @@ public class WebserviceHelper implements KvmSerializable {
     public static final  String APPVERSION_METHOD = "getAppLatest";
     public static final  String UpdateUserDetails = "UpdateUserDetails";
     public static final  String AcceptRjctRecordsFromPacs = "UpdateRequest";
+    public static final  String GetWorkDetails = "GetWorkDetails";
     static String rest;
 
 
@@ -261,6 +263,29 @@ public class WebserviceHelper implements KvmSerializable {
                 if (property instanceof SoapObject) {
                     SoapObject final_object = (SoapObject) property;
                     panchayat block= new panchayat(final_object);
+                    fieldList.add(block);
+                }
+            } else
+                return fieldList;
+        }
+
+        return fieldList;
+    }
+    public static ArrayList<workListModel> GetWorkDetails(String panch) {
+
+        SoapObject res1;
+        res1=getServerData(GetWorkDetails, panchayat.panchayat,"orgId",panch);
+        int TotalProperty=0;
+        if(res1!=null) TotalProperty= res1.getPropertyCount();
+
+        ArrayList<workListModel> fieldList = new ArrayList<workListModel>();
+
+        for (int i = 0; i < TotalProperty; i++) {
+            if (res1.getProperty(i) != null) {
+                Object property = res1.getProperty(i);
+                if (property instanceof SoapObject) {
+                    SoapObject final_object = (SoapObject) property;
+                    workListModel block= new workListModel(final_object);
                     fieldList.add(block);
                 }
             } else
