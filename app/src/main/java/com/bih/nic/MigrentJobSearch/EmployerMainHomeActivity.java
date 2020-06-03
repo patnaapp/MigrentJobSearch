@@ -22,13 +22,14 @@ import com.bih.nic.MigrentJobSearch.DataBaseHelper.DataBaseHelper;
 import com.bih.nic.MigrentJobSearch.Model.BenDetails;
 import com.bih.nic.MigrentJobSearch.Model.PaymentStatusEntity;
 import com.bih.nic.MigrentJobSearch.ui.MultiLoginActivity;
+import com.bih.nic.MigrentJobSearch.ui.employer.JobOfferPostedActivity;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class EmployerMainHomeActivity extends Activity {
     LinearLayout ll_profile,ll_new_labours;
-    String OrgId="",user_name="", mobile="", address="", DistName="", ProfileImg="",CompanyName="", UserId;
+    String OrgId="",user_name="", mobile="", address="", DistName="", ProfileImg="",CompanyName="", UserId,UserRole="";
     TextView tv_benname,urole,tv_mobile,tv_address,tv_version,tv_email;
     CircleImageView profile_image;
     TextView tv_workplace,tv_phone,tv_work_address;
@@ -98,6 +99,7 @@ public class EmployerMainHomeActivity extends Activity {
         CompanyName=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("ComanyName", "");
         mobile=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("Mobile", "");
         address=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("Address", "");
+        UserRole=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserRole", "");
 
 
 //        tv_benname.setText(user_name);
@@ -113,7 +115,7 @@ public class EmployerMainHomeActivity extends Activity {
     }
 
     public void onOfferJobReport(View view){
-        Intent intent = new Intent(this, LabourSearchActivity.class);
+        Intent intent = new Intent(this, JobOfferPostedActivity.class);
         startActivity(intent);
     }
 
@@ -160,6 +162,13 @@ public class EmployerMainHomeActivity extends Activity {
         onExit();
     }
 
+
+    public void onJobOffers(View view){
+        Intent intent = new Intent(this, LegacyTableViewActivity.class);
+
+        startActivity(intent);
+        finish();
+    }
 
 
 }
