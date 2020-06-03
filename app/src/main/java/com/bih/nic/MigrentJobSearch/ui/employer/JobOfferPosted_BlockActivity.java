@@ -32,7 +32,7 @@ import java.util.ArrayList;
 public class JobOfferPosted_BlockActivity extends Activity implements AdapterView.OnItemSelectedListener {
 
     RecyclerView listView;
-    TextView tv_Norecord;
+    TextView tv_Norecord,tv_distName;
     Spinner spn_skill,spn_sub_skill;
     ImageView img_back;
     PostedJobBlockAdapter adaptor_showedit_listDetail;
@@ -46,7 +46,7 @@ public class JobOfferPosted_BlockActivity extends Activity implements AdapterVie
     ArrayList<District> DistrictList;
 
     String skillId,subSkillId;
-    String DistId="", orgid="12345";
+    String DistId="",DistNAme="", orgid="12345";
 
     DataBaseHelper dataBaseHelper;
     String OrgId="",user_name="", mobile="", address="", DistName="", ProfileImg="",CompanyName="", UserId="",UserRole="";
@@ -60,9 +60,11 @@ public class JobOfferPosted_BlockActivity extends Activity implements AdapterVie
         getActionBar().hide();
         Utiilties.setStatusBarColor(this);
 
+        DistId = getIntent().getStringExtra("DistCode");
+        DistNAme = getIntent().getStringExtra("DistName");
+
         initialise();
 
-        DistId = getIntent().getStringExtra("DistCode");
 
         OrgId= PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("OrgId", "");
         UserId=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserId", "");
@@ -75,6 +77,13 @@ public class JobOfferPosted_BlockActivity extends Activity implements AdapterVie
 
 
         new SyncJobOfferData().execute();
+
+        img_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override
@@ -96,7 +105,10 @@ public class JobOfferPosted_BlockActivity extends Activity implements AdapterVie
         tv_Norecord = findViewById(R.id.tv_Norecordjobposting);
 
         listView = findViewById(R.id.listviewjobposting);
+        tv_distName = findViewById(R.id.tv_distName);
         img_back=(ImageView) findViewById(R.id.img);
+
+        tv_distName.setText("जिला का नाम:-"+DistNAme);
 
         spn_sub_skill.setOnItemSelectedListener(this);
         spn_skill.setOnItemSelectedListener(this);

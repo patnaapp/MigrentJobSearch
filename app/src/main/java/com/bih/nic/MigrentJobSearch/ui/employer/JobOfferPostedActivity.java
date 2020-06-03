@@ -80,6 +80,13 @@ public class JobOfferPostedActivity extends Activity implements AdapterView.OnIt
         address=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("Address", "");
 
         new SyncJobOfferData().execute();
+
+        img_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override
@@ -97,6 +104,7 @@ public class JobOfferPostedActivity extends Activity implements AdapterView.OnIt
         dataBaseHelper=new DataBaseHelper(this);
 
         spn_skill = findViewById(R.id.spn_skill);
+
         spn_sub_skill = findViewById(R.id.spn_sub_skill);
         tv_Norecord = findViewById(R.id.tv_Norecordjobposting);
 

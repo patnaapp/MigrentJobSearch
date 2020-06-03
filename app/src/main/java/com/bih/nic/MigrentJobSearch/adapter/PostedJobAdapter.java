@@ -68,6 +68,7 @@ public class PostedJobAdapter extends RecyclerView.Adapter<PostedJobAdapter.View
                 Intent intent = new Intent(activity, JobOfferPosted_BlockActivity.class);
                 //intent.putExtra("data",Reg_No);
                 intent.putExtra("DistCode",info.getDistrictCode());
+                intent.putExtra("DistName",info.getDistrictName());
                 activity.startActivity(intent);
             }
         });

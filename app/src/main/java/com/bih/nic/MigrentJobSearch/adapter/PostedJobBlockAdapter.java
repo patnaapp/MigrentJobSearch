@@ -1,6 +1,7 @@
 package com.bih.nic.MigrentJobSearch.adapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +15,8 @@ import android.widget.TextView;
 import com.bih.nic.MigrentJobSearch.Model.BlockJobOfferPostedEntity;
 import com.bih.nic.MigrentJobSearch.Model.JobOfferPostedEntity;
 import com.bih.nic.MigrentJobSearch.R;
+import com.bih.nic.MigrentJobSearch.ui.employer.AcceptedRejctd_Job_Activity;
+import com.bih.nic.MigrentJobSearch.ui.employer.JobOfferPosted_BlockActivity;
 
 import java.util.ArrayList;
 
@@ -44,11 +47,36 @@ public class PostedJobBlockAdapter extends RecyclerView.Adapter<PostedJobBlockAd
         final BlockJobOfferPostedEntity info = ThrList.get(position);
 
         // holder.tv_slno.setText(String.valueOf(position+1));
-        holder.tv_blk_name.setText(info.getBlockName());
+        holder.tv_blk_name.setText(info.getBlockName().toUpperCase());
         holder.total_reg.setText(info.getTtlReg());
         holder.tv_joboffer.setText(info.getTotalJobOffer());
         holder.tv_accpted.setText(info.getTtlRegA());
         holder.tv_rejected.setText(info.getTtlRegR());
+
+        holder.tv_accpted.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, AcceptedRejctd_Job_Activity.class);
+                //intent.putExtra("data",Reg_No);
+                intent.putExtra("StatusFlag","Y");
+                intent.putExtra("BlockCode",info.getBlockCode());
+                intent.putExtra("BlockNAme",info.getBlockName());
+                activity.startActivity(intent);
+            }
+        });
+
+        holder.tv_rejected.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, AcceptedRejctd_Job_Activity.class);
+                //intent.putExtra("data",Reg_No);
+                intent.putExtra("StatusFlag","R");
+                intent.putExtra("BlockCode",info.getBlockCode());
+                intent.putExtra("BlockNAme",info.getBlockName());
+                activity.startActivity(intent);
+            }
+        });
+
 
     }
 

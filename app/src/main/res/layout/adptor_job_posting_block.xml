@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_margin="10sp"
+    android:layout_margin="3sp"
     android:layout_width="match_parent"
     android:background="@color/holo_gray_light"
     android:layout_height="wrap_content">
@@ -13,10 +13,10 @@
     <!--android:layout_marginTop="5dp">-->
     <LinearLayout
         android:background="@android:color/white"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginRight="4dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginBottom="2dp"
         android:id="@+id/sblist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
                 <TextView
                     android:layout_width="120dp"
                     android:layout_height="25dp"
-                    android:text="Block Name"
+                    android:text="प्रखंड"
                     android:textStyle="bold" />
 
                 <TextView
@@ -76,15 +76,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="6dp"
                     android:text="10071201202"
+                    android:textStyle="bold"
                     android:textColor="#0000EE" />
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#CFCFCF"/>
             <LinearLayout
                 android:layout_marginTop="2dp"
                 android:layout_width="match_parent"
@@ -96,7 +90,7 @@
                     android:textStyle="bold"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:text="Total Registration" />
+                    android:text="पंजीकृत श्रमिक" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -111,94 +105,101 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="6dp"
                     android:text="10071201202"
-                    android:textColor="@android:color/black" />
+                    android:textStyle="bold"
+                    android:textColor="@android:color/holo_green_light" />
             </LinearLayout>
             <LinearLayout
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#CFCFCF"/>
+
+            <LinearLayout
+                android:layout_margin="4dp"
+                android:padding="4dp"
+                android:background="@color/color_white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="3dp">
+                android:weightSum="3">
 
-                <TextView
-                    android:textStyle="bold"
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:text="Total Job Offer" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="4dp"
-                    android:textStyle="bold"
-                    android:text=":"/>
-
-                <TextView
-                    android:id="@+id/tv_joboffer_blk"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="6dp"
-                    android:text="10071201202"
-                    android:textColor="@android:color/black" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_marginTop="2dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="3dp">
+                    android:layout_weight="1"
 
-                <TextView
-                    android:textStyle="bold"
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:text="Total Accepted" />
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:textAlignment="center"
+                        android:text="नौकरी प्रस्ताव"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="4dp"
-                    android:textStyle="bold"
-                    android:text=":"/>
+                    <TextView
+                        android:id="@+id/tv_joboffer_blk"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textAlignment="center"
+                        android:lines="1"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:text="New Text"
+                        android:textColor="#151B54" />
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tv_accpted_blk"
+                <LinearLayout
+                    android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="6dp"
-                    android:text="10071201202"
-                    android:textColor="@android:color/black" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_marginTop="2dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="3dp">
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:textAlignment="center"
+                        android:text="स्वीकृत"/>
 
-                <TextView
-                    android:textStyle="bold"
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:text="Total Rejected" />
+                    <TextView
+                        android:id="@+id/tv_accpted_blk"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lines="1"
+                        android:text="New Text"
+                        android:textAlignment="center"
+                        android:textColor="@color/green"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="4dp"
-                    android:textStyle="bold"
-                    android:text=":"/>
-
-                <TextView
-                    android:id="@+id/tv_rejected_blk"
+                <LinearLayout
+                    android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="6dp"
-                    android:text="10071201202"
-                    android:textColor="@android:color/black" />
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:textAlignment="center"
+                        android:text="अस्वीकृत"/>
+
+                    <TextView
+                        android:id="@+id/tv_rejected_blk"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textAlignment="center"
+                        android:lines="1"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:text="New Text"
+                        android:textColor="@color/holo_red_dark" />
+                </LinearLayout>
+
             </LinearLayout>
-
-
 
         </LinearLayout>
 
