@@ -119,16 +119,6 @@ public class LabourFragment extends Fragment {
         tv_version = (TextView) root.findViewById(R.id.tv_version);
     }
 
-//    public void onRequestOtp(View view){
-//        Intent intent = new Intent(getContext(), RequestOtpActivity.class);
-//        startActivity(intent);
-//    }
-//
-//    public void onChangeMobileNo(View view){
-//        Intent intent = new Intent(getContext(), ChangeMobileNumberActivity.class);
-//        startActivity(intent);
-//    }
-
     private class LoginTask extends AsyncTask<String, Void, UserDetails> {
 
         private final ProgressDialog dialog = new ProgressDialog(getContext());
