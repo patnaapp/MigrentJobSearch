@@ -202,6 +202,21 @@
 
     </LinearLayout>
 
+    <TextView
+        android:layout_below="@+id/ll_input"
+        android:id="@+id/tv_registration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_margin="20dp"
+        android:layout_weight="1"
+        android:background="@drawable/textboxshape"
+        android:padding="8dp"
+        android:text=" पंजीकरण करें "
+        android:textAlignment="center"
+        android:textSize="15sp" />
+
+
     <ImageView
         android:id="@+id/iv_footer"
         android:layout_width="match_parent"

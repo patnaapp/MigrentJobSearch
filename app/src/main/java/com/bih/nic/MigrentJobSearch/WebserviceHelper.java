@@ -309,7 +309,9 @@ public class WebserviceHelper implements KvmSerializable {
             return null;
         }
 
-    } public static UserDetails loginUser(String User_ID, String Pwd) {
+    }
+
+    public static UserDetails loginUser(String User_ID, String Pwd) {
         try {
             SoapObject res1;
             res1=getServerData(AuthenticateUser, UserDetails.getUserClass(),"RegistrationNo","OTP",User_ID,Pwd);
