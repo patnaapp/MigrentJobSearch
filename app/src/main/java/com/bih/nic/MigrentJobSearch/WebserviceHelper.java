@@ -7,6 +7,7 @@ import com.bih.nic.MigrentJobSearch.Model.BenDetails;
 import com.bih.nic.MigrentJobSearch.Model.BlockWeb;
 import com.bih.nic.MigrentJobSearch.Model.DefaultResponse;
 import com.bih.nic.MigrentJobSearch.Model.District;
+import com.bih.nic.MigrentJobSearch.Model.EmployerDetails;
 import com.bih.nic.MigrentJobSearch.Model.JobListEntity;
 import com.bih.nic.MigrentJobSearch.Model.PaymentStatusEntity;
 import com.bih.nic.MigrentJobSearch.Model.SkillMaster;
@@ -43,6 +44,7 @@ public class WebserviceHelper implements KvmSerializable {
     public static final String SERVICEURL = "http://10.133.20.159/TestService/MigrantJobSearchWebservice.asmx";
 
     private static final String AuthenticateUser = "Authenticate";
+    private static final String AuthenticateORGUser = "AuthenticateOrgLogin";
     private static final String GETBENEFICIARYLIST="getAadhaar";
     private static final String UpdateMobile_UID="UpdateMobile_UID";
     private static final String BLOCK_METHOD="getBlock";
@@ -327,7 +329,21 @@ public class WebserviceHelper implements KvmSerializable {
 
     }
 
+    public static EmployerDetails EmployerloginUser(String User_ID, String Pwd) {
+        try {
+            SoapObject res1;
+            res1=getServerData(AuthenticateORGUser, UserDetails.getUserClass(),"_UserId","_Password",User_ID,Pwd);
+            if (res1 != null) {
+                return new EmployerDetails(res1);
+            } else
+                return null;
 
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
 
     public static SoapObject getServerData(String methodName,Class bindClass)
     {
