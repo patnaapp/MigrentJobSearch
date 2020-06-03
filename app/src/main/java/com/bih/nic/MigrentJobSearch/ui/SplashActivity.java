@@ -1,4 +1,4 @@
-package com.bih.nic.MigrentJobSearch;
+package com.bih.nic.MigrentJobSearch.ui;
 
 import android.Manifest;
 import android.app.Activity;
@@ -21,8 +21,14 @@ import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.bih.nic.MigrentJobSearch.CommonPref;
 import com.bih.nic.MigrentJobSearch.DataBaseHelper.DataBaseHelper;
+import com.bih.nic.MigrentJobSearch.MarshmallowPermission;
 import com.bih.nic.MigrentJobSearch.Model.Versioninfo;
+import com.bih.nic.MigrentJobSearch.R;
+import com.bih.nic.MigrentJobSearch.Utiilties;
+import com.bih.nic.MigrentJobSearch.WebserviceHelper;
+import com.bih.nic.MigrentJobSearch.ui.labour.MainHomeActivity;
 
 import java.io.IOException;
 
@@ -243,7 +249,7 @@ public class SplashActivity extends Activity {
                 // close this activity
                 if(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserId", "").equals("")) {
 
-                    Intent i = new Intent(SplashActivity.this, Login.class);
+                    Intent i = new Intent(SplashActivity.this, MultiLoginActivity.class);
                     startActivity(i);
                     finish();
                 }else {

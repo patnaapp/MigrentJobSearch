@@ -1,4 +1,4 @@
-package com.bih.nic.MigrentJobSearch;
+package com.bih.nic.MigrentJobSearch.ui.labour;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -18,10 +18,15 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.bih.nic.MigrentJobSearch.DataBaseHelper.DataBaseHelper;
+import com.bih.nic.MigrentJobSearch.GlobalVariables;
 import com.bih.nic.MigrentJobSearch.Model.BenDetails;
 import com.bih.nic.MigrentJobSearch.Model.District;
 import com.bih.nic.MigrentJobSearch.Model.JobListEntity;
-
+import com.bih.nic.MigrentJobSearch.Model.SkillMaster;
+import com.bih.nic.MigrentJobSearch.Model.SubSkillMaster;
+import com.bih.nic.MigrentJobSearch.R;
+import com.bih.nic.MigrentJobSearch.Utiilties;
+import com.bih.nic.MigrentJobSearch.WebserviceHelper;
 import com.bih.nic.MigrentJobSearch.adapter.JobSearchAdapter;
 
 import java.util.ArrayList;
@@ -36,6 +41,10 @@ public class JobSearchActivity extends Activity implements AdapterView.OnItemSel
 
     ProgressDialog dialog;
     ArrayList<JobListEntity> data;
+    BenDetails benDetails;
+
+    ArrayList<SkillMaster> skillList, cateogryList;
+    ArrayList<SubSkillMaster> subSkillList;
     ArrayList<District> DistrictList;
 
     String skillId,subSkillId;
@@ -67,7 +76,13 @@ public class JobSearchActivity extends Activity implements AdapterView.OnItemSel
                 finish();
             }
         });
-
+        //new SyncJobSearchData().execute();
+        //For Testing
+//        JobListEntity info = new JobListEntity();
+//        info.setWorkSite("Test");
+//        data = new ArrayList<>();
+//        data.add(info);
+//        populateData();
     }
 
     public void initialise(){
@@ -100,7 +115,19 @@ public class JobSearchActivity extends Activity implements AdapterView.OnItemSel
         }
     }
 
-
+//    public void setSkillSpinner(){
+//        ArrayList<String> list = new ArrayList<String>();
+//        list.add("-Select-");
+//        int index = 0;
+//        for (SkillMaster info: skillList){
+//            list.add(info.getSkillName());
+//        }
+//
+//        ArrayAdapter adaptor = new ArrayAdapter(this, android.R.layout.simple_spinner_item, list);
+//        adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spn_skill.setAdapter(adaptor);
+//
+//    }
 
     public void setDistrictSpinner(String DistName){
         DistrictList=dataBaseHelper.getDistDetail();
@@ -124,6 +151,31 @@ public class JobSearchActivity extends Activity implements AdapterView.OnItemSel
 
     }
 
+//    public void loadSkillSpinnerData(){
+//        skillList = dataBaseHelper.getSkillMasterList();
+//        if (skillList.size() > 0){
+//            setSkillSpinner();
+//        }else{
+//            if (Utiilties.isOnline(this) == false) {
+//                showAlertForInternet();
+//            } else {
+//                new SyncSkillMasterData().execute();
+//            }
+//        }
+//    }
+
+//    public void loadSubSkillSpinnerData(){
+//        subSkillList = dataBaseHelper.getSubSkillMasterList(skillId);
+//        if (subSkillList.size() > 0){
+//            setSubSkillSpinner();
+//        }else{
+//            if (Utiilties.isOnline(this) == false) {
+//                showAlertForInternet();
+//            } else {
+//                new SyncSubSkillMasterData().execute();
+//            }
+//        }
+//    }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

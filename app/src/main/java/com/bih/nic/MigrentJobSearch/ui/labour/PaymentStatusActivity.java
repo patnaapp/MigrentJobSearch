@@ -1,8 +1,7 @@
-package com.bih.nic.MigrentJobSearch;
+package com.bih.nic.MigrentJobSearch.ui.labour;
 
 import android.app.Activity;
 import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -11,6 +10,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bih.nic.MigrentJobSearch.Model.PaymentStatusEntity;
+import com.bih.nic.MigrentJobSearch.R;
+import com.bih.nic.MigrentJobSearch.Utiilties;
 
 public class PaymentStatusActivity extends Activity {
 
