@@ -21,14 +21,15 @@ import android.widget.Toast;
 import com.bih.nic.MigrentJobSearch.DataBaseHelper.DataBaseHelper;
 import com.bih.nic.MigrentJobSearch.Model.BenDetails;
 import com.bih.nic.MigrentJobSearch.Model.PaymentStatusEntity;
+import com.bih.nic.MigrentJobSearch.ui.MultiLoginActivity;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class EmployerMainHomeActivity extends Activity {
     LinearLayout ll_profile,ll_new_labours;
-    String Reg_No="",user_name="", mobile="", address="", DistName="", ProfileImg="",workplace="";
-    TextView tv_benname,urole,tv_mobile,tv_address,tv_version;
+    String OrgId="",user_name="", mobile="", address="", DistName="", ProfileImg="",CompanyName="", UserId;
+    TextView tv_benname,urole,tv_mobile,tv_address,tv_version,tv_email;
     CircleImageView profile_image;
     TextView tv_workplace,tv_phone,tv_work_address;
     //ImageView profile_image;
@@ -53,6 +54,7 @@ public class EmployerMainHomeActivity extends Activity {
         tv_mobile=(TextView) findViewById(R.id.tv_mobile);
         tv_address=(TextView) findViewById(R.id.tv_address);
         tv_version=(TextView) findViewById(R.id.tv_version);
+        tv_email=(TextView) findViewById(R.id.tv_email);
 
 
         tv_workplace=(TextView) findViewById(R.id.tv_workplace);
@@ -88,21 +90,31 @@ public class EmployerMainHomeActivity extends Activity {
     protected void onResume() {
         super.onResume();
 
-        Reg_No=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserId", "");
-        user_name=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserName", "");
+        OrgId=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("OrgId", "");
+        UserId=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserId", "");
 
 
-        DistName=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("DistName", "");
-        workplace=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("Photo", "");
+        //DistName=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("DistName", "");
+        CompanyName=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("ComanyName", "");
         mobile=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("Mobile", "");
-        address=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("Photo", "");
+        address=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("Address", "");
 
 
 //        tv_benname.setText(user_name);
-        tv_workplace.setText(workplace);
+        tv_workplace.setText(CompanyName);
         tv_phone.setText(mobile);
         tv_work_address.setText(address);
+        tv_email.setText(UserId);
+    }
 
+    public void onSearchJob(View view){
+        Intent intent = new Intent(this, LabourSearchActivity.class);
+        startActivity(intent);
+    }
+
+    public void onOfferJobReport(View view){
+        Intent intent = new Intent(this, LabourSearchActivity.class);
+        startActivity(intent);
     }
 
     public void OnClick_goToLoginScreen(View view){
@@ -122,7 +134,7 @@ public class EmployerMainHomeActivity extends Activity {
     private void confirmLogout(){
         PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("UserId","").commit();
 
-        Intent intent = new Intent(this, Login.class);
+        Intent intent = new Intent(this, MultiLoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK| Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();

@@ -78,7 +78,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="कार्य स्थल का नाम"
+                android:text="कंपनी का नाम"
                 android:textColor="@color/colorGreyDark"
                 android:textSize="12sp"/>
 
@@ -88,7 +88,7 @@
                 android:layout_height="wrap_content"
                 android:text="EEARWALTEST"
                 android:textColor="@android:color/black"
-                android:textSize="15sp"/>
+                android:textSize="14sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -121,7 +121,7 @@
                     android:layout_height="wrap_content"
                     android:text="23586362466"
                     android:textColor="@android:color/black"
-                    android:textSize="15sp"/>
+                    android:textSize="14sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -134,7 +134,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Email"
+                    android:text="यूज़र आईडी"
                     android:textColor="@color/colorGreyDark"
                     android:textSize="12sp"/>
 
@@ -144,7 +144,7 @@
                     android:layout_height="wrap_content"
                     android:text="asgsdg"
                     android:textColor="@android:color/black"
-                    android:textSize="15sp"/>
+                    android:textSize="14sp"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -177,7 +177,7 @@
                     android:layout_height="wrap_content"
                     android:text="Arwal"
                     android:textColor="@android:color/black"
-                    android:textSize="15sp"/>
+                    android:textSize="13sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -206,7 +206,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:visibility="visible"
+            android:visibility="gone"
             android:layout_marginTop="12dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -256,11 +256,11 @@
         <LinearLayout
             android:layout_margin="12dp"
             android:layout_width="match_parent"
-            android:layout_height="130dp"
+            android:layout_height="100dp"
             android:orientation="horizontal">
 
             <LinearLayout
-
+                android:onClick="onSearchJob"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -277,7 +277,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="नौकरियो की सूचि"
+                    android:text="Search Labour"
                     android:gravity="center"
                     android:textSize="13sp"
                     android:layout_marginTop="8dp"
@@ -287,41 +287,18 @@
 
             </LinearLayout>
 
-
             <View
-                android:layout_width="10dp"
-                android:layout_height="match_parent">
-
-            </View>
+                android:layout_width="8dp"
+                android:layout_height="match_parent"/>
 
             <RelativeLayout
-
+                android:onClick="onOfferJobReport"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:padding="5dp"
                 android:gravity="center"
-                android:background="#fff"
-                >
-
-                <!--                <RelativeLayout-->
-                <!--                    android:id="@+id/rl_count"-->
-                <!--                    android:layout_width="wrap_content"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_marginLeft="4dp"-->
-                <!--                    android:layout_toEndOf="@+id/iv_upload"-->
-                <!--                    android:background="@drawable/circuler_shape_red_small">-->
-
-                <!--                    <TextView-->
-                <!--                        android:id="@+id/tv_count"-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="19dp"-->
-                <!--                        android:layout_centerInParent="true"-->
-                <!--                        android:text="1"-->
-                <!--                        android:textColor="@android:color/white"-->
-                <!--                        android:textSize="12sp"-->
-                <!--                        android:textStyle="normal" />-->
-                <!--                </RelativeLayout>-->
+                android:background="#fff">
 
                 <ImageView
                     android:layout_centerHorizontal="true"
@@ -333,7 +310,40 @@
                     android:layout_below="@+id/iv_upload"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Edit / Upload Scheme"
+                    android:text="Job Offer Report"
+                    android:gravity="center"
+                    android:layout_marginTop="6dp"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:textColor="#000"
+                    android:textAppearance="?android:textAppearanceSmall"/>
+
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="8dp"
+                android:layout_height="match_parent"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="5dp"
+                android:gravity="center"
+                android:background="#fff">
+
+                <ImageView
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/iv_assign"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/ic_person_black_24dp"/>
+                <TextView
+                    android:layout_below="@+id/iv_assign"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Assigned Job"
                     android:gravity="center"
                     android:layout_marginTop="6dp"
                     android:textSize="13sp"
@@ -348,7 +358,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginTop="12dp"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -357,7 +367,7 @@
         <LinearLayout
             android:layout_margin="12dp"
             android:layout_width="match_parent"
-            android:layout_height="130dp"
+            android:layout_height="120dp"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -458,7 +468,7 @@
     <ImageView
         android:id="@+id/iv_footer"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="36dp"
         android:src="@drawable/nic"
         android:layout_alignParentBottom="true"/>
 </RelativeLayout>

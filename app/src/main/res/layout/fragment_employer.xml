@@ -128,7 +128,7 @@
                 android:background="@drawable/textboxshape2"
                 android:hint="रेजिस्ट्रेशन संख्या"
                 android:padding="10dp"
-                android:inputType="text"
+                android:inputType="textCapCharacters"
                 android:singleLine="true"
                 android:textColor="#222222"
                 android:focusableInTouchMode="true"
