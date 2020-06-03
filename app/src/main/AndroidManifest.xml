@@ -66,16 +66,16 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".LabourSearchActivity"></activity>
-        <activity android:name=".PaymentStatusActivity" />
-        <activity android:name=".JobSearchActivity" />
-        <activity android:name=".ModifyDocumentActivity" />
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".RequestOtpActivity" />
-        <activity android:name=".MainHomeActivity" />
+        <activity android:name=".ui.labour.PaymentStatusActivity" />
+        <activity android:name=".ui.labour.JobSearchActivity" />
+        <activity android:name=".ui.labour.ModifyDocumentActivity" />
+        <activity android:name=".ui.labour.ProfileActivity" />
+        <activity android:name=".ui.labour.RequestOtpActivity" />
+        <activity android:name=".ui.labour.MainHomeActivity" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".VerifyAadhaar1" />
         <activity
-            android:name=".SplashActivity"
+            android:name=".ui.SplashActivity"
             android:theme="@style/NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -84,23 +84,26 @@
             </intent-filter>
         </activity>
         <activity android:name=".Login" />
-        <activity
-            android:name=".UpdateAdhaar"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="com.example.nic.aadhar1.UpdateAdhaar" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+<!--        <activity-->
+<!--            android:name=".UpdateAdhaar"-->
+<!--            android:exported="true">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="com.example.nic.aadhar1.UpdateAdhaar" />-->
+
+<!--                <category android:name="android.intent.category.DEFAULT" />-->
+<!--            </intent-filter>-->
+<!--        </activity>-->
         <activity android:name=".UpdateAdhaarMobile" />
         <activity android:name=".ChooseCenter" />
         <activity android:name=".VerifyAadhaar" />
         <activity android:name=".MultiplePhotoActivity" />
-        <activity android:name=".ChangeMobileNumberActivity" />
+        <activity android:name=".ui.labour.ChangeMobileNumberActivity" />
         <activity android:name=".CameraActivity" />
-        <activity android:name=".UpdateMobileNumberActivity" />
-
+        <activity android:name=".ui.labour.UpdateMobileNumberActivity" />
+        <activity android:name=".EmployerMainHomeActivity"/>
+        <activity android:name=".ui.MultiLoginActivity"
+            android:theme="@style/Theme.AppCompat.Light"/>
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
