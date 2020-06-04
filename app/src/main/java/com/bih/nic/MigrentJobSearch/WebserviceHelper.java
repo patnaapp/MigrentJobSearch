@@ -56,6 +56,7 @@ public class WebserviceHelper implements KvmSerializable {
     private static final String GET_JOB_REQUEST_METHOD="GetJobRequest";
     private static final String GET_JOB_Offer_Posted_METHOD="GetJobOfferOrg";
     private static final String GET_JOB_Offer_block_Posted_METHOD="GetJobOfferBlockwise";
+    private static final String GET_Acpt_Rjct_Job_By_Labour="GetJobOfferLabourDetails";
     private static final String UPDATE_PROFILE_IMAGE_METHOD="UpdateImage";
     private static final String SUBSKILL_METHOD="SubSkilMasterList";
     private static final String DISTRICT_METHOD="getDistrict";
@@ -1212,14 +1213,15 @@ public class WebserviceHelper implements KvmSerializable {
 
 
 
-    public static ArrayList<AcptdRjctdJobOfferEntity> JobOfferAcptdRjctd(String distid, String orgid, String role) {
+    public static ArrayList<AcptdRjctdJobOfferEntity> JobOfferAcptdRjctd(String blkid, String orgid, String role,String status) {
 
 
-        SoapObject request = new SoapObject(SERVICENAMESPACE, GET_JOB_Offer_block_Posted_METHOD);
+        SoapObject request = new SoapObject(SERVICENAMESPACE, GET_Acpt_Rjct_Job_By_Labour);
 
-        request.addProperty("DistCode", distid);
+        request.addProperty("BlockCode", blkid);
         request.addProperty("orgId", orgid);
         request.addProperty("Role", role);
+        request.addProperty("Status", status);
 
         SoapObject res1;
         try {
@@ -1233,7 +1235,7 @@ public class WebserviceHelper implements KvmSerializable {
 
             HttpTransportSE androidHttpTransport = new HttpTransportSE(
                     SERVICEURL);
-            androidHttpTransport.call(SERVICENAMESPACE + GET_JOB_Offer_block_Posted_METHOD,
+            androidHttpTransport.call(SERVICENAMESPACE + GET_Acpt_Rjct_Job_By_Labour,
                     envelope);
 
             res1 = (SoapObject) envelope.getResponse();

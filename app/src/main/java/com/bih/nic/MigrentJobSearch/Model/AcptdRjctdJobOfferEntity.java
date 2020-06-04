@@ -10,22 +10,24 @@ import java.util.Hashtable;
 public class AcptdRjctdJobOfferEntity implements KvmSerializable, Serializable {
 
     public static Class<AcptdRjctdJobOfferEntity> AcptdRjctdOffer_CLASS = AcptdRjctdJobOfferEntity.class;
-    private String DistrictCode = "";
-    private String DistrictName = "";
-    private String ttlReg = "";
-    private String TotalJobOffer = "";
-    private String ttlRegA = "";
-    private String ttlRegR = "";
+    private String vchregnum = "";
+    private String vchName = "";
+    private String vchMobile = "";
+    private String gender = "";
+    private String vchGuardian_name = "";
+    private String vchGuardian_number = "";
+    private String SkillName = "";
 
 
     public AcptdRjctdJobOfferEntity(SoapObject obj) {
 
-        this.DistrictCode = obj.getProperty("DistrictCode").toString();
-        this.DistrictName = obj.getProperty("DistrictName").toString();
-        this.ttlReg = obj.getProperty("ttlReg").toString();
-        this.TotalJobOffer = obj.getProperty("TotalJobOffer").toString();
-        this.ttlRegA = obj.getProperty("ttlRegA").toString();
-        this.ttlRegR = obj.getProperty("ttlRegR").toString();
+        this.vchregnum = obj.getProperty("vchregnum").toString();
+        this.vchName = obj.getProperty("vchName").toString();
+        this.vchMobile = obj.getProperty("vchMobile").toString();
+        this.gender = obj.getProperty("gender").toString();
+        this.vchGuardian_name = obj.getProperty("vchGuardian_name").toString();
+        this.vchGuardian_number = obj.getProperty("vchGuardian_number").toString();
+        this.SkillName = obj.getProperty("SkillName").toString();
         //this.skillName = obj.getProperty("SkillNameHn").toString();
 
 
@@ -40,52 +42,60 @@ public class AcptdRjctdJobOfferEntity implements KvmSerializable, Serializable {
         AcptdRjctdOffer_CLASS = jobOffer_CLASS;
     }
 
-    public String getDistrictCode() {
-        return DistrictCode;
+    public String getVchregnum() {
+        return vchregnum;
     }
 
-    public void setDistrictCode(String districtCode) {
-        DistrictCode = districtCode;
+    public void setVchregnum(String vchregnum) {
+        this.vchregnum = vchregnum;
     }
 
-    public String getDistrictName() {
-        return DistrictName;
+    public String getVchName() {
+        return vchName;
     }
 
-    public void setDistrictName(String districtName) {
-        DistrictName = districtName;
+    public void setVchName(String vchName) {
+        this.vchName = vchName;
     }
 
-    public String getTtlReg() {
-        return ttlReg;
+    public String getVchMobile() {
+        return vchMobile;
     }
 
-    public void setTtlReg(String ttlReg) {
-        this.ttlReg = ttlReg;
+    public void setVchMobile(String vchMobile) {
+        this.vchMobile = vchMobile;
     }
 
-    public String getTotalJobOffer() {
-        return TotalJobOffer;
+    public String getGender() {
+        return gender;
     }
 
-    public void setTotalJobOffer(String totalJobOffer) {
-        TotalJobOffer = totalJobOffer;
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
-    public String getTtlRegA() {
-        return ttlRegA;
+    public String getVchGuardian_name() {
+        return vchGuardian_name;
     }
 
-    public void setTtlRegA(String ttlRegA) {
-        this.ttlRegA = ttlRegA;
+    public void setVchGuardian_name(String vchGuardian_name) {
+        this.vchGuardian_name = vchGuardian_name;
     }
 
-    public String getTtlRegR() {
-        return ttlRegR;
+    public String getVchGuardian_number() {
+        return vchGuardian_number;
     }
 
-    public void setTtlRegR(String ttlRegR) {
-        this.ttlRegR = ttlRegR;
+    public void setVchGuardian_number(String vchGuardian_number) {
+        this.vchGuardian_number = vchGuardian_number;
+    }
+
+    public String getSkillName() {
+        return SkillName;
+    }
+
+    public void setSkillName(String skillName) {
+        SkillName = skillName;
     }
 
     @Override

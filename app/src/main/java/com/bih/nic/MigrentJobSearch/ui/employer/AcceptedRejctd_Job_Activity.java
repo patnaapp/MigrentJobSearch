@@ -1,5 +1,6 @@
 package com.bih.nic.MigrentJobSearch.ui.employer;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
@@ -9,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -17,16 +19,17 @@ import com.bih.nic.MigrentJobSearch.DataBaseHelper.DataBaseHelper;
 import com.bih.nic.MigrentJobSearch.Model.AcptdRjctdJobOfferEntity;
 import com.bih.nic.MigrentJobSearch.Model.BlockJobOfferPostedEntity;
 import com.bih.nic.MigrentJobSearch.R;
+import com.bih.nic.MigrentJobSearch.Utiilties;
 import com.bih.nic.MigrentJobSearch.WebserviceHelper;
 import com.bih.nic.MigrentJobSearch.adapter.AccptedRctdJobAdapter;
 import com.bih.nic.MigrentJobSearch.adapter.PostedJobBlockAdapter;
 
 import java.util.ArrayList;
 
-public class AcceptedRejctd_Job_Activity extends AppCompatActivity {
+public class AcceptedRejctd_Job_Activity extends Activity implements AdapterView.OnItemSelectedListener {
 
     RecyclerView listView;
-    TextView tv_Norecord,tv_distName;
+    TextView tv_Norecord,tv_distName,tv_skill11;
     Spinner spn_skill,spn_sub_skill;
     ImageView img_back;
     AccptedRctdJobAdapter adaptor_showedit_listDetail;
@@ -44,10 +47,22 @@ public class AcceptedRejctd_Job_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accepted_rejctd__job_);
 
+        getActionBar().hide();
+        Utiilties.setStatusBarColor(this);
+        initialise();
 
         status = getIntent().getStringExtra("StatusFlag");
         blkcode = getIntent().getStringExtra("BlockCode");
         blkname = getIntent().getStringExtra("BlockNAme");
+
+        if (status.equals("SHRGJA")){
+            tv_skill11.setText("प्रखंड वाइज स्वीकृत नौकरी प्रस्ताव");
+            tv_skill11.setTextColor(getApplicationContext().getResources().getColor(R.color.green));
+        }
+        else if (status.equals("SHRGJR")){
+            tv_skill11.setText("प्रखंड वाइज अस्वीकृत नौकरी प्रस्ताव");
+            tv_skill11.setTextColor(getApplicationContext().getResources().getColor(R.color.holo_red_dark));
+        }
 
         OrgId= PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("OrgId", "");
         UserId=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserId", "");
@@ -60,6 +75,16 @@ public class AcceptedRejctd_Job_Activity extends AppCompatActivity {
 
 
         new SyncAcceptedRjctdJobsOffers().execute();
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 
     private class SyncAcceptedRjctdJobsOffers extends AsyncTask<String, Void, ArrayList<AcptdRjctdJobOfferEntity>>
@@ -78,8 +103,8 @@ public class AcceptedRejctd_Job_Activity extends AppCompatActivity {
         @Override
         protected ArrayList<AcptdRjctdJobOfferEntity> doInBackground(String...arg)
         {
-            return WebserviceHelper.JobOfferAcptdRjctd(DistId, OrgId,UserRole);
-          //  return WebserviceHelper.JobOfferAcptdRjctd(blkcode, OrgId,UserRole,status);
+
+            return WebserviceHelper.JobOfferAcptdRjctd(blkcode, OrgId,UserRole,status);
         }
 
         @Override
@@ -116,4 +141,23 @@ public class AcceptedRejctd_Job_Activity extends AppCompatActivity {
             tv_Norecord.setVisibility(View.VISIBLE);
         }
     }
+
+    public void initialise(){
+        dataBaseHelper=new DataBaseHelper(this);
+
+        spn_skill = findViewById(R.id.spn_skill);
+        spn_sub_skill = findViewById(R.id.spn_sub_skill);
+        tv_Norecord = findViewById(R.id.tv_Norecordacptrjctjob);
+        tv_skill11 = findViewById(R.id.tv_skill11);
+
+        listView = findViewById(R.id.listviewacptrjct);
+        //tv_distName = findViewById(R.id.tv_distName);
+        img_back=(ImageView) findViewById(R.id.img);
+
+        //tv_distName.setText("जिला का नाम:-"+DistNAme);
+
+        spn_sub_skill.setOnItemSelectedListener(this);
+        spn_skill.setOnItemSelectedListener(this);
+    }
+
 }

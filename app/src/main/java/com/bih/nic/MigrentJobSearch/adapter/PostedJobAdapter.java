@@ -55,7 +55,7 @@ public class PostedJobAdapter extends RecyclerView.Adapter<PostedJobAdapter.View
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         final JobOfferPostedEntity info = ThrList.get(position);
 
-        // holder.tv_slno.setText(String.valueOf(position+1));
+         holder.tv_slno.setText(String.valueOf(position+1)+").");
         holder.tv_dise_name.setText(info.getDistrictName());
         holder.total_reg.setText(info.getTtlReg());
         holder.tv_joboffer.setText(info.getTotalJobOffer());
@@ -83,7 +83,7 @@ public class PostedJobAdapter extends RecyclerView.Adapter<PostedJobAdapter.View
     }
 
     public class ViewHolder  extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView tv_dise_name,total_reg,tv_joboffer,tv_accpted,tv_rejected;
+        TextView tv_dise_name,total_reg,tv_joboffer,tv_accpted,tv_rejected,tv_slno;
         ImageView iv_call;
 
 
@@ -91,7 +91,7 @@ public class PostedJobAdapter extends RecyclerView.Adapter<PostedJobAdapter.View
         LinearLayout ll_btn,ll_status,ll_selection;
         ViewHolder(View itemView) {
             super(itemView);
-            //tv_slno=itemView.findViewById(R.id.tv_slno);
+            tv_slno=itemView.findViewById(R.id.tv_slno);
             tv_dise_name=itemView.findViewById(R.id.tv_dise_name);
             total_reg=itemView.findViewById(R.id.total_reg);
             tv_joboffer=itemView.findViewById(R.id.tv_joboffer);
