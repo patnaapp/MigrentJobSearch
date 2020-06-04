@@ -56,17 +56,31 @@ public class PostedJobBlockAdapter extends RecyclerView.Adapter<PostedJobBlockAd
         holder.tv_rejected.setText(info.getTtlRegR());
 
 //
-//        holder.total_reg.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(activity, AcceptedRejctd_Job_Activity.class);
-//                //intent.putExtra("data",Reg_No);
-//                intent.putExtra("StatusFlag","Y");
-//                intent.putExtra("BlockCode",info.getBlockCode());
-//                intent.putExtra("BlockNAme",info.getBlockName());
-//                activity.startActivity(intent);
-//            }
-//        });
+        holder.total_reg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, LegacyTableViewActivity.class);
+                String distid = activity.getIntent().getStringExtra("DistCode");
+                intent.putExtra("distid",distid);
+                intent.putExtra("StatusFlag","SHRG");
+                intent.putExtra("BlockCode",info.getBlockCode());
+                intent.putExtra("BlockNAme",info.getBlockName());
+                activity.startActivity(intent);
+            }
+        });
+
+        holder.tv_joboffer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, LegacyTableViewActivity.class);
+                String distid = activity.getIntent().getStringExtra("DistCode");
+                intent.putExtra("distid",distid);
+                intent.putExtra("StatusFlag","SHRGJ");
+                intent.putExtra("BlockCode",info.getBlockCode());
+                intent.putExtra("BlockNAme",info.getBlockName());
+                activity.startActivity(intent);
+            }
+        });
 //
 //
 
@@ -80,6 +94,7 @@ public class PostedJobBlockAdapter extends RecyclerView.Adapter<PostedJobBlockAd
                 if (!(info.getTtlRegA().equals("0"))){
                     Intent intent = new Intent(activity, LegacyTableViewActivity.class);
                     //intent.putExtra("data",Reg_No);
+                    intent.putExtra("distid","");
                     intent.putExtra("StatusFlag","SHRGJA");
                     intent.putExtra("BlockCode",info.getBlockCode());
                     intent.putExtra("BlockNAme",info.getBlockName());
@@ -98,6 +113,7 @@ public class PostedJobBlockAdapter extends RecyclerView.Adapter<PostedJobBlockAd
                 if (!(info.getTtlRegR().equals("0"))) {
                     Intent intent = new Intent(activity, LegacyTableViewActivity.class);
                     //intent.putExtra("data",Reg_No);
+                    intent.putExtra("distid","");
                     intent.putExtra("StatusFlag", "SHRGJR");
                     intent.putExtra("BlockCode", info.getBlockCode());
                     intent.putExtra("BlockNAme", info.getBlockName());

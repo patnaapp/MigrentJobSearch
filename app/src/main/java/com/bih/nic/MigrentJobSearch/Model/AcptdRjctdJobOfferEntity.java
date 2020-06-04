@@ -17,6 +17,7 @@ public class AcptdRjctdJobOfferEntity implements KvmSerializable, Serializable {
     private String vchGuardian_name = "";
     private String vchGuardian_number = "";
     private String SkillName = "";
+    private String WorkSiteNameHn = "";
 
 
     public AcptdRjctdJobOfferEntity(SoapObject obj) {
@@ -28,6 +29,7 @@ public class AcptdRjctdJobOfferEntity implements KvmSerializable, Serializable {
         this.vchGuardian_name = obj.getProperty("vchGuardian_name").toString();
         this.vchGuardian_number = obj.getProperty("vchGuardian_number").toString();
         this.SkillName = obj.getProperty("SkillName").toString();
+        this.WorkSiteNameHn = obj.getProperty("WorkSiteNameHn").toString();
         //this.skillName = obj.getProperty("SkillNameHn").toString();
 
 
@@ -92,6 +94,14 @@ public class AcptdRjctdJobOfferEntity implements KvmSerializable, Serializable {
 
     public String getSkillName() {
         return SkillName;
+    }
+
+    public String getWorkSiteNameHn() {
+        return WorkSiteNameHn;
+    }
+
+    public void setWorkSiteNameHn(String workSiteNameHn) {
+        WorkSiteNameHn = workSiteNameHn;
     }
 
     public void setSkillName(String skillName) {

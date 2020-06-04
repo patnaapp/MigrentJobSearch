@@ -1216,11 +1216,12 @@ public class WebserviceHelper implements KvmSerializable {
 
 
 
-    public static ArrayList<AcptdRjctdJobOfferEntity> JobOfferAcptdRjctd(String blkid, String orgid, String role,String status) {
+    public static ArrayList<AcptdRjctdJobOfferEntity> JobOfferAcptdRjctd(String distid,String blkid, String orgid, String role,String status) {
 
 
         SoapObject request = new SoapObject(SERVICENAMESPACE, GET_Acpt_Rjct_Job_By_Labour);
 
+        request.addProperty("Distcode", distid);
         request.addProperty("BlockCode", blkid);
         request.addProperty("orgId", orgid);
         request.addProperty("Role", role);

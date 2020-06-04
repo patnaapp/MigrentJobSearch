@@ -39,7 +39,7 @@ public class AcceptedRejctd_Job_Activity extends Activity implements AdapterView
 
     DataBaseHelper dataBaseHelper;
     String status="",blkcode="", blkname="";
-    String OrgId="",user_name="", mobile="", address="", DistName="", ProfileImg="",CompanyName="", UserId="",UserRole="";
+    String OrgId="",user_name="", mobile="", address="", DistName="", ProfileImg="",CompanyName="", UserId="",UserRole="",distid="";
 
 
     @Override
@@ -51,6 +51,7 @@ public class AcceptedRejctd_Job_Activity extends Activity implements AdapterView
         Utiilties.setStatusBarColor(this);
         initialise();
 
+        distid = getIntent().getStringExtra("distid");
         status = getIntent().getStringExtra("StatusFlag");
         blkcode = getIntent().getStringExtra("BlockCode");
         blkname = getIntent().getStringExtra("BlockNAme");
@@ -104,7 +105,7 @@ public class AcceptedRejctd_Job_Activity extends Activity implements AdapterView
         protected ArrayList<AcptdRjctdJobOfferEntity> doInBackground(String...arg)
         {
 
-            return WebserviceHelper.JobOfferAcptdRjctd(blkcode, OrgId,UserRole,status);
+            return WebserviceHelper.JobOfferAcptdRjctd(distid,blkcode, OrgId,UserRole,status);
         }
 
         @Override
