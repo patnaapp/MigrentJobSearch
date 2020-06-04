@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bih.nic.MigrentJobSearch.LegacyTableViewActivity;
 import com.bih.nic.MigrentJobSearch.Model.BlockJobOfferPostedEntity;
@@ -68,28 +69,43 @@ public class PostedJobBlockAdapter extends RecyclerView.Adapter<PostedJobBlockAd
 //        });
 //
 //
+
+
+
         holder.tv_accpted.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Intent intent = new Intent(activity, AcceptedRejctd_Job_Activity.class);
-                Intent intent = new Intent(activity, LegacyTableViewActivity.class);
-                //intent.putExtra("data",Reg_No);
-                intent.putExtra("StatusFlag","SHRGJA");
-                intent.putExtra("BlockCode",info.getBlockCode());
-                intent.putExtra("BlockNAme",info.getBlockName());
-                activity.startActivity(intent);
+
+                if (!(info.getTtlRegA().equals("0"))){
+                    Intent intent = new Intent(activity, LegacyTableViewActivity.class);
+                    //intent.putExtra("data",Reg_No);
+                    intent.putExtra("StatusFlag","SHRGJA");
+                    intent.putExtra("BlockCode",info.getBlockCode());
+                    intent.putExtra("BlockNAme",info.getBlockName());
+                    activity.startActivity(intent);
+                }
+                else {
+                    Toast.makeText(activity, "कोई स्वीकृत नौकरी नहीं है", Toast.LENGTH_SHORT).show();
+                }
             }
         });
-//
+
+
         holder.tv_rejected.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(activity, LegacyTableViewActivity.class);
-                //intent.putExtra("data",Reg_No);
-                intent.putExtra("StatusFlag","SHRGJR");
-                intent.putExtra("BlockCode",info.getBlockCode());
-                intent.putExtra("BlockNAme",info.getBlockName());
-                activity.startActivity(intent);
+                if (!(info.getTtlRegR().equals("0"))) {
+                    Intent intent = new Intent(activity, LegacyTableViewActivity.class);
+                    //intent.putExtra("data",Reg_No);
+                    intent.putExtra("StatusFlag", "SHRGJR");
+                    intent.putExtra("BlockCode", info.getBlockCode());
+                    intent.putExtra("BlockNAme", info.getBlockName());
+                    activity.startActivity(intent);
+                }
+                else {
+                    Toast.makeText(activity, "कोई अस्वीकृत नौकरी नहीं है", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

@@ -46,7 +46,7 @@ public class AccptedRctdJobAdapter extends RecyclerView.Adapter<AccptedRctdJobAd
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         final AcptdRjctdJobOfferEntity info = ThrList.get(position);
 
-         holder.tv_slno.setText(String.valueOf(position+1));
+        holder.tv_slno.setText(String.valueOf(position+1));
         //holder.tv_blk_name.setText(info.getBlockName().toUpperCase());
         holder.tv_regno.setText(info.getVchregnum());
         holder.tv_labour_name.setText(info.getVchName());

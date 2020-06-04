@@ -81,9 +81,10 @@
 
                 <TextView
                     android:id="@+id/tv_dise_name"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="6dp"
+                    android:background="@drawable/textboxshape"
                     android:textStyle="bold"
                     android:text="10071201202"
                     android:textColor="#0000EE" />

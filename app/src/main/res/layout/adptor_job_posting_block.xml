@@ -175,11 +175,13 @@
 
                     <TextView
                         android:id="@+id/tv_accpted_blk"
-                        android:layout_width="match_parent"
+                        android:layout_width="50dp"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/textboxshape"
                         android:lines="1"
                         android:text="New Text"
                         android:textAlignment="center"
+                        android:layout_gravity="center"
                         android:textColor="@color/green"
                         android:textSize="13sp"
                         android:textStyle="bold" />
@@ -199,11 +201,13 @@
 
                     <TextView
                         android:id="@+id/tv_rejected_blk"
-                        android:layout_width="match_parent"
+                        android:layout_width="50dp"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:textAlignment="center"
+                        android:background="@drawable/textboxshape"
                         android:lines="1"
+                        android:layout_gravity="center"
                         android:textSize="13sp"
                         android:textStyle="bold"
                         android:text="New Text"
