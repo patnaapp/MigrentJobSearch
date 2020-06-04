@@ -53,43 +53,43 @@ public class PostedJobBlockAdapter extends RecyclerView.Adapter<PostedJobBlockAd
         holder.tv_accpted.setText(info.getTtlRegA());
         holder.tv_rejected.setText(info.getTtlRegR());
 
-
-        holder.total_reg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(activity, AcceptedRejctd_Job_Activity.class);
-                //intent.putExtra("data",Reg_No);
-                intent.putExtra("StatusFlag","Y");
-                intent.putExtra("BlockCode",info.getBlockCode());
-                intent.putExtra("BlockNAme",info.getBlockName());
-                activity.startActivity(intent);
-            }
-        });
-
-
-        holder.tv_accpted.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(activity, AcceptedRejctd_Job_Activity.class);
-                //intent.putExtra("data",Reg_No);
-                intent.putExtra("StatusFlag","Y");
-                intent.putExtra("BlockCode",info.getBlockCode());
-                intent.putExtra("BlockNAme",info.getBlockName());
-                activity.startActivity(intent);
-            }
-        });
-
-        holder.tv_rejected.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(activity, AcceptedRejctd_Job_Activity.class);
-                //intent.putExtra("data",Reg_No);
-                intent.putExtra("StatusFlag","R");
-                intent.putExtra("BlockCode",info.getBlockCode());
-                intent.putExtra("BlockNAme",info.getBlockName());
-                activity.startActivity(intent);
-            }
-        });
+//
+//        holder.total_reg.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(activity, AcceptedRejctd_Job_Activity.class);
+//                //intent.putExtra("data",Reg_No);
+//                intent.putExtra("StatusFlag","Y");
+//                intent.putExtra("BlockCode",info.getBlockCode());
+//                intent.putExtra("BlockNAme",info.getBlockName());
+//                activity.startActivity(intent);
+//            }
+//        });
+//
+//
+//        holder.tv_accpted.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(activity, AcceptedRejctd_Job_Activity.class);
+//                //intent.putExtra("data",Reg_No);
+//                intent.putExtra("StatusFlag","Y");
+//                intent.putExtra("BlockCode",info.getBlockCode());
+//                intent.putExtra("BlockNAme",info.getBlockName());
+//                activity.startActivity(intent);
+//            }
+//        });
+//
+//        holder.tv_rejected.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(activity, AcceptedRejctd_Job_Activity.class);
+//                //intent.putExtra("data",Reg_No);
+//                intent.putExtra("StatusFlag","R");
+//                intent.putExtra("BlockCode",info.getBlockCode());
+//                intent.putExtra("BlockNAme",info.getBlockName());
+//                activity.startActivity(intent);
+//            }
+//        });
 
 
     }
