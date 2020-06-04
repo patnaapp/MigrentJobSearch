@@ -81,9 +81,10 @@
 
                 <TextView
                     android:id="@+id/tv_dise_name"
-                    android:layout_width="wrap_content"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="6dp"
+                    android:textAlignment="center"
                     android:background="@drawable/textboxshape"
                     android:textStyle="bold"
                     android:text="10071201202"
@@ -100,14 +101,14 @@
                     android:textStyle="bold"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:text="पंजीकृत श्रमिक" />
+                    android:text="   पंजीकृत श्रमिक" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
                     android:textStyle="bold"
-                    android:text=":"/>
+                    android:text="  :"/>
 
                 <TextView
                     android:id="@+id/total_reg"
