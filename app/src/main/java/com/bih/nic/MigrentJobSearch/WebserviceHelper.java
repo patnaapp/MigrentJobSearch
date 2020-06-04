@@ -3,11 +3,15 @@ package com.bih.nic.MigrentJobSearch;
 import android.content.Context;
 import android.util.Log;
 
+import com.bih.nic.MigrentJobSearch.Model.AcptdRjctdJobOfferEntity;
 import com.bih.nic.MigrentJobSearch.Model.BenDetails;
+import com.bih.nic.MigrentJobSearch.Model.BlockJobOfferPostedEntity;
 import com.bih.nic.MigrentJobSearch.Model.BlockWeb;
 import com.bih.nic.MigrentJobSearch.Model.DefaultResponse;
 import com.bih.nic.MigrentJobSearch.Model.District;
+import com.bih.nic.MigrentJobSearch.Model.EmployerDetails;
 import com.bih.nic.MigrentJobSearch.Model.JobListEntity;
+import com.bih.nic.MigrentJobSearch.Model.JobOfferPostedEntity;
 import com.bih.nic.MigrentJobSearch.Model.PaymentStatusEntity;
 import com.bih.nic.MigrentJobSearch.Model.SkillMaster;
 import com.bih.nic.MigrentJobSearch.Model.SubSkillMaster;
@@ -43,12 +47,15 @@ public class WebserviceHelper implements KvmSerializable {
     public static final String SERVICEURL = "http://10.133.20.159/TestService/MigrantJobSearchWebservice.asmx";
 
     private static final String AuthenticateUser = "Authenticate";
+    private static final String AuthenticateORGUser = "AuthenticateOrgLogin";
     private static final String GETBENEFICIARYLIST="getAadhaar";
     private static final String UpdateMobile_UID="UpdateMobile_UID";
     private static final String BLOCK_METHOD="getBlock";
     private static final String SKILL_METHOD="SkilMasterList";
     private static final String JOB_SEARCH_METHOD="JobSearchDetails1";
     private static final String GET_JOB_REQUEST_METHOD="GetJobRequest";
+    private static final String GET_JOB_Offer_Posted_METHOD="GetJobOfferOrg";
+    private static final String GET_JOB_Offer_block_Posted_METHOD="GetJobOfferBlockwise";
     private static final String UPDATE_PROFILE_IMAGE_METHOD="UpdateImage";
     private static final String SUBSKILL_METHOD="SubSkilMasterList";
     private static final String DISTRICT_METHOD="getDistrict";
@@ -327,7 +334,21 @@ public class WebserviceHelper implements KvmSerializable {
 
     }
 
+    public static EmployerDetails EmployerloginUser(String User_ID, String Pwd) {
+        try {
+            SoapObject res1;
+            res1=getServerData(AuthenticateORGUser, UserDetails.getUserClass(),"_UserId","_Password",User_ID,Pwd);
+            if (res1 != null) {
+                return new EmployerDetails(res1);
+            } else
+                return null;
 
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
 
     public static SoapObject getServerData(String methodName,Class bindClass)
     {
@@ -1086,6 +1107,159 @@ public class WebserviceHelper implements KvmSerializable {
         }
         return response;
 
+    }
+
+
+    public static ArrayList<JobOfferPostedEntity> JobOfferPosted(String role, String orgid) {
+
+
+        SoapObject request = new SoapObject(SERVICENAMESPACE, GET_JOB_Offer_Posted_METHOD);
+
+        request.addProperty("Role", role);
+        request.addProperty("orgId", orgid);
+
+        SoapObject res1;
+        try {
+
+            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
+                    SoapEnvelope.VER11);
+            envelope.dotNet = true;
+            envelope.setOutputSoapObject(request);
+
+            envelope.addMapping(SERVICENAMESPACE, JobOfferPostedEntity.JobOffer_CLASS.getSimpleName(), JobOfferPostedEntity.JobOffer_CLASS);
+
+            HttpTransportSE androidHttpTransport = new HttpTransportSE(
+                    SERVICEURL);
+            androidHttpTransport.call(SERVICENAMESPACE + GET_JOB_Offer_Posted_METHOD,
+                    envelope);
+
+            res1 = (SoapObject) envelope.getResponse();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        int TotalProperty = res1.getPropertyCount();
+
+        ArrayList<JobOfferPostedEntity> pvmArrayList = new ArrayList<JobOfferPostedEntity>();
+
+        for (int ii = 0; ii < TotalProperty; ii++) {
+            if (res1.getProperty(ii) != null) {
+                Object property = res1.getProperty(ii);
+                if (property instanceof SoapObject) {
+                    SoapObject final_object = (SoapObject) property;
+                    JobOfferPostedEntity panchayat = new JobOfferPostedEntity(final_object);
+                    pvmArrayList.add(panchayat);
+                }
+            } else
+                return pvmArrayList;
+        }
+
+
+        return pvmArrayList;
+    }
+
+
+    public static ArrayList<BlockJobOfferPostedEntity> BlockJobOfferPosted(String distid,String orgid,String role) {
+
+
+        SoapObject request = new SoapObject(SERVICENAMESPACE, GET_JOB_Offer_block_Posted_METHOD);
+
+        request.addProperty("DistCode", distid);
+        request.addProperty("orgId", orgid);
+        request.addProperty("Role", role);
+
+        SoapObject res1;
+        try {
+
+            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
+                    SoapEnvelope.VER11);
+            envelope.dotNet = true;
+            envelope.setOutputSoapObject(request);
+
+            envelope.addMapping(SERVICENAMESPACE, BlockJobOfferPostedEntity.BlockJobOffer_CLASS.getSimpleName(), BlockJobOfferPostedEntity.BlockJobOffer_CLASS);
+
+            HttpTransportSE androidHttpTransport = new HttpTransportSE(
+                    SERVICEURL);
+            androidHttpTransport.call(SERVICENAMESPACE + GET_JOB_Offer_block_Posted_METHOD,
+                    envelope);
+
+            res1 = (SoapObject) envelope.getResponse();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        int TotalProperty = res1.getPropertyCount();
+
+        ArrayList<BlockJobOfferPostedEntity> pvmArrayList = new ArrayList<BlockJobOfferPostedEntity>();
+
+        for (int ii = 0; ii < TotalProperty; ii++) {
+            if (res1.getProperty(ii) != null) {
+                Object property = res1.getProperty(ii);
+                if (property instanceof SoapObject) {
+                    SoapObject final_object = (SoapObject) property;
+                    BlockJobOfferPostedEntity panchayat = new BlockJobOfferPostedEntity(final_object);
+                    pvmArrayList.add(panchayat);
+                }
+            } else
+                return pvmArrayList;
+        }
+
+
+        return pvmArrayList;
+    }
+
+
+
+    public static ArrayList<AcptdRjctdJobOfferEntity> JobOfferAcptdRjctd(String distid, String orgid, String role) {
+
+
+        SoapObject request = new SoapObject(SERVICENAMESPACE, GET_JOB_Offer_block_Posted_METHOD);
+
+        request.addProperty("DistCode", distid);
+        request.addProperty("orgId", orgid);
+        request.addProperty("Role", role);
+
+        SoapObject res1;
+        try {
+
+            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
+                    SoapEnvelope.VER11);
+            envelope.dotNet = true;
+            envelope.setOutputSoapObject(request);
+
+            envelope.addMapping(SERVICENAMESPACE, AcptdRjctdJobOfferEntity.AcptdRjctdOffer_CLASS.getSimpleName(), AcptdRjctdJobOfferEntity.AcptdRjctdOffer_CLASS);
+
+            HttpTransportSE androidHttpTransport = new HttpTransportSE(
+                    SERVICEURL);
+            androidHttpTransport.call(SERVICENAMESPACE + GET_JOB_Offer_block_Posted_METHOD,
+                    envelope);
+
+            res1 = (SoapObject) envelope.getResponse();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        int TotalProperty = res1.getPropertyCount();
+
+        ArrayList<AcptdRjctdJobOfferEntity> pvmArrayList = new ArrayList<AcptdRjctdJobOfferEntity>();
+
+        for (int ii = 0; ii < TotalProperty; ii++) {
+            if (res1.getProperty(ii) != null) {
+                Object property = res1.getProperty(ii);
+                if (property instanceof SoapObject) {
+                    SoapObject final_object = (SoapObject) property;
+                    AcptdRjctdJobOfferEntity panchayat = new AcptdRjctdJobOfferEntity(final_object);
+                    pvmArrayList.add(panchayat);
+                }
+            } else
+                return pvmArrayList;
+        }
+
+
+        return pvmArrayList;
     }
 
 }

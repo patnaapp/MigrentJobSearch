@@ -139,7 +139,7 @@ public class EmployerFragment extends Fragment {
         @Override
         protected EmployerDetails doInBackground(String... param) {
 
-            return WebserviceHelper.loginUser(regN0,otp);
+            return WebserviceHelper.EmployerloginUser(regN0,otp);
 
 
         }
