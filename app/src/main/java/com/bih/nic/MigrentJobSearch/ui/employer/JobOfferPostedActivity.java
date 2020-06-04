@@ -16,7 +16,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.bih.nic.MigrentJobSearch.DataBaseHelper.DataBaseHelper;
-import com.bih.nic.MigrentJobSearch.LegacyTableViewActivity;
 import com.bih.nic.MigrentJobSearch.Model.BenDetails;
 import com.bih.nic.MigrentJobSearch.Model.District;
 import com.bih.nic.MigrentJobSearch.Model.JobListEntity;

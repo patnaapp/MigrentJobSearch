@@ -111,6 +111,7 @@ public class EmployerMainHomeActivity extends Activity {
 
     public void onSearchJob(View view){
         Intent intent = new Intent(this, LabourSearchActivity.class);
+        intent.putExtra("ORGNID",OrgId);
         startActivity(intent);
     }
 
@@ -164,10 +165,10 @@ public class EmployerMainHomeActivity extends Activity {
 
 
     public void onJobOffers(View view){
-        Intent intent = new Intent(this, LegacyTableViewActivity.class);
+        /*Intent intent = new Intent(this, LegacyTableViewActivity.class);
 
         startActivity(intent);
-        finish();
+        finish();*/
     }
 
 

@@ -8,12 +8,14 @@ public class workListModel {
     private String Worl_Name;
     private String Worksite_nameHn;
 
+    public static Class<workListModel> workListModelClass= workListModel.class;
+
+
     public workListModel(SoapObject final_object) {
         this.Work_Id=final_object.getProperty("WorksId").toString();
         this.Worl_Name=final_object.getProperty("WorkSiteName").toString();
         this.Worksite_nameHn=final_object.getProperty("WorkSiteNameHn").toString();
     }
-
     public String getWork_Id() {
         return Work_Id;
     }

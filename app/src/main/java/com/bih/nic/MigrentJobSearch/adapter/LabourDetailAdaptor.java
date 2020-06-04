@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.bih.nic.MigrentJobSearch.Model.DefaultResponse;
 import com.bih.nic.MigrentJobSearch.Model.JobListEntity;
+import com.bih.nic.MigrentJobSearch.Model.WorkerModel;
 import com.bih.nic.MigrentJobSearch.R;
 import com.bih.nic.MigrentJobSearch.Utiilties;
 import com.bih.nic.MigrentJobSearch.WebserviceHelper;
@@ -31,12 +32,12 @@ public class LabourDetailAdaptor extends RecyclerView.Adapter<LabourDetailAdapto
 
     Activity activity;
     LayoutInflater mInflater;
-    ArrayList<JobListEntity> ThrList = new ArrayList<>();
+    ArrayList<WorkerModel> ThrList = new ArrayList<>();
     String panchayatCode, panchayatName = "";
     Boolean isShowDetail = false;
     String regNo;
 
-    public LabourDetailAdaptor(Activity listViewshowedit, ArrayList<JobListEntity> rlist, String regNo) {
+    public LabourDetailAdaptor(Activity listViewshowedit, ArrayList<WorkerModel> rlist, String regNo) {
         this.activity = listViewshowedit;
         this.ThrList = rlist;
         mInflater = (LayoutInflater) activity.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
@@ -45,29 +46,35 @@ public class LabourDetailAdaptor extends RecyclerView.Adapter<LabourDetailAdapto
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.adaptor_search_labour, parent, false);
+        View view = mInflater.inflate(R.layout.adaptor_labour_detail, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        final JobListEntity info = ThrList.get(position);
+        final WorkerModel info = ThrList.get(position);
 
+        holder.ll_selection.setVisibility(View.GONE);
         holder.tv_slno.setText(String.valueOf(position + 1));
-        holder.tv_work_site.setText(info.getWorkSite());
-        holder.tv_skill_cat.setText(info.getSkillCategory());
-        holder.tv_skill_name.setText(info.getSkillName());
-        holder.tv_person_no.setText(info.getNumberOfPerson());
-        holder.tv_gendar.setText(info.getGendar());
-        holder.tv_start_date.setText(info.getStartDate());
-        holder.tv_exp.setText(info.getExperience());
-        holder.tv_exp_max.setText(info.getExperienceMax());
-        holder.tv_salary.setText(info.getSalary());
-        holder.tv_salary_max.setText(info.getSalaryMax());
-        holder.tv_block.setText(info.getBlock());
-        holder.tv_supervisor_name.setText(info.getContactName());
-        holder.tv_super_no.setText(info.getContactNumber());
-        holder.tv_district.setText(info.getDistrict());
+        if (info.getIntvchGender().equalsIgnoreCase("1")){
+            holder.tv_gendar.setText("Male");
+        }else if(info.getIntvchGender().equalsIgnoreCase("2")){
+            holder.tv_gendar.setText("Female");
+        }
+        holder.tv_vchname.setText(info.getVchName());
+        holder.tv_district.setText(info.getVchDist());
+        holder.tv_block.setText(info.getVchBlock());
+
+        holder.tv_address.setText(info.getVchAddress());
+        holder.tv_perage.setText(info.getVchAge());
+        holder.tv_candidate_mobile.setText(info.getVchMobile());
+        holder.tv_supervisor_name.setText(info.getVchGuardian_name());
+        holder.tv_super_no.setText(info.getVchGuardian_number());
+        holder.tv_skillname.setText(info.getSkillNameHn());
+        holder.tv_exp_max.setText(info.getIntvchExpYears());
+        holder.tv_regNo.setText(info.getVchRegNum());
+
+
 
 
     }
@@ -78,33 +85,32 @@ public class LabourDetailAdaptor extends RecyclerView.Adapter<LabourDetailAdapto
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView tv_slno, tv_work_site, tv_skill_cat, tv_skill_name, tv_person_no, tv_gendar, tv_start_date, tv_exp, tv_exp_max, tv_salary, tv_salary_max, tv_block, tv_supervisor_name, tv_super_no, tv_district, tv_status, tv_selection_status;
+        TextView tv_slno, tv_block, tv_supervisor_name, tv_super_no, tv_district, tv_status, tv_selection_status;
         ImageView iv_call;
         Button btn_accpt, btn_rjct;
         LinearLayout ll_btn, ll_status, ll_selection;
 
+        TextView tv_regNo,tv_vchname,tv_gendar,tv_address,tv_perage,tv_candidate_mobile,tv_skillname,tv_exp_max;
+
         ViewHolder(View itemView) {
             super(itemView);
+
+
+
+            ll_selection = itemView.findViewById(R.id.ll_selection);
             tv_slno = itemView.findViewById(R.id.tv_slno);
-            tv_work_site = itemView.findViewById(R.id.tv_work_site);
-            tv_skill_cat = itemView.findViewById(R.id.tv_skill_cat);
-            tv_skill_name = itemView.findViewById(R.id.tv_skill_name);
-            tv_person_no = itemView.findViewById(R.id.tv_person_no);
             tv_gendar = itemView.findViewById(R.id.tv_gendar);
-            tv_start_date = itemView.findViewById(R.id.tv_start_date);
-            tv_exp = itemView.findViewById(R.id.tv_exp);
-            tv_exp_max = itemView.findViewById(R.id.tv_exp_max);
-            tv_salary = itemView.findViewById(R.id.tv_salary);
-            tv_salary_max = itemView.findViewById(R.id.tv_salary_max);
+            tv_regNo = itemView.findViewById(R.id.tv_regNo);
+            tv_vchname = itemView.findViewById(R.id.tv_vchname);
+            tv_district = itemView.findViewById(R.id.tv_district);
             tv_block = itemView.findViewById(R.id.tv_block);
+            tv_address = itemView.findViewById(R.id.tv_address);
+            tv_perage = itemView.findViewById(R.id.tv_perage);
+            tv_candidate_mobile = itemView.findViewById(R.id.tv_candidate_mobile);
             tv_supervisor_name = itemView.findViewById(R.id.tv_supervisor_name);
             tv_super_no = itemView.findViewById(R.id.tv_super_no);
-            tv_district = itemView.findViewById(R.id.tv_district);
-            tv_status = itemView.findViewById(R.id.tv_status);
-            iv_call = itemView.findViewById(R.id.iv_call);
-            tv_selection_status = itemView.findViewById(R.id.tv_selection_status);
-
-
+            tv_skillname = itemView.findViewById(R.id.tv_skillname);
+            tv_exp_max = itemView.findViewById(R.id.tv_exp_max);
         }
 
         @Override
@@ -120,79 +126,7 @@ public class LabourDetailAdaptor extends RecyclerView.Adapter<LabourDetailAdapto
         return gender;
     }
 
-    private class AcceptRecordsFromPacs extends AsyncTask<String, Void, DefaultResponse> {
-        JobListEntity data;
-        String rowid;
-        int position;
-        private final ProgressDialog dialog = new ProgressDialog(activity);
-        private final android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(activity).create();
 
-
-        AcceptRecordsFromPacs(JobListEntity data, int position) {
-            this.data = data;
-            this.position = position;
-            //_uid = data.getId();
-            //rowid = data.get_phase1_id();
-
-        }
-
-        @Override
-        protected void onPreExecute() {
-
-            this.dialog.setCanceledOnTouchOutside(false);
-            this.dialog.setMessage("पुष्टि किया जा रहा हैं...");
-            this.dialog.show();
-        }
-
-        @Override
-        protected DefaultResponse doInBackground(String... param) {
-            DefaultResponse res = WebserviceHelper.UploadAcceptedRecordsFromPacs(data, regNo);
-            return res;
-
-        }
-
-        @Override
-        protected void onPostExecute(DefaultResponse result) {
-            if (this.dialog.isShowing()) {
-                this.dialog.dismiss();
-            }
-
-            Log.d("Responsevalue", "" + result);
-            if (result != null) {
-                if (result.getStatus()) {
-                    ThrList.get(position).setIsAccepted("Y");
-                    notifyDataSetChanged();
-
-                    new android.app.AlertDialog.Builder(activity)
-                            .setTitle("सूचना")
-                            .setMessage("नौकरी का अनुरोध अपडेट कर दिया गया है, आगे की जानकारी सिग्रह ही आपको अप्डेट की जाएगी|")
-                            .setCancelable(true)
-                            .setPositiveButton("ओके", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    dialog.dismiss();
-                                }
-                            }).show();
-                    //Toast.makeText(activity, "नौकरी का अनुरोध अपडेट कर दिया गया है, आगे की जानकारी सिग्रह ही आपको अप्डेट की जाएगी|", Toast.LENGTH_SHORT).show();
-                } else {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-                    builder.setIcon(R.drawable.logo);
-                    builder.setTitle("Failed");
-                    // Ask the final question
-                    builder.setMessage(result.getMessage());
-                    builder.setPositiveButton("ओके", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-                }
-
-            } else {
-                Toast.makeText(activity, "Result:null ..Uploading failed...Please Try Later", Toast.LENGTH_SHORT).show();
-            }
-
-        }
-    }
 
 
 }
