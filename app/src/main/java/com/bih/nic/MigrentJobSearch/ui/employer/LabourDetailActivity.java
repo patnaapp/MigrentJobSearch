@@ -229,7 +229,6 @@ public class LabourDetailActivity  extends Activity implements AdapterView.OnIte
             if (this.dialog.isShowing())
             {
                 this.dialog.dismiss();
-
             }
 
             if (result != null)
