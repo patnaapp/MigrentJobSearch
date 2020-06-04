@@ -46,26 +46,29 @@ public class AccptedRctdJobAdapter extends RecyclerView.Adapter<AccptedRctdJobAd
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         final AcptdRjctdJobOfferEntity info = ThrList.get(position);
 
-        // holder.tv_slno.setText(String.valueOf(position+1));
+        holder.tv_slno.setText(String.valueOf(position+1));
         //holder.tv_blk_name.setText(info.getBlockName().toUpperCase());
-        holder.tv_regno.setText(info.getTtlReg());
-        holder.tv_labour_name.setText(info.getTotalJobOffer());
-        holder.tv_gender.setText(info.getTtlRegA());
-        holder.tv_labour_district.setText(info.getTtlRegR());
+        holder.tv_regno.setText(info.getVchregnum());
+        holder.tv_labour_name.setText(info.getVchName());
+        holder.tv_gender.setText(info.getGender());
+        holder.tv_candidate_mob.setText(info.getVchMobile());
+        holder.tv_candid_skill.setText(info.getSkillName());
+        holder.tv_gauradian_name.setText(info.getVchGuardian_name());
+        holder.tv_gaurdian_no.setText(info.getVchGuardian_number());
 
         holder.iv_call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", info.get(), null));
-//                activity.startActivity(intent);
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", info.getVchGuardian_number(), null));
+                activity.startActivity(intent);
             }
         });
 
         holder.iv_call_candidate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", info.get(), null));
-//                activity.startActivity(intent);
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", info.getVchMobile(), null));
+                activity.startActivity(intent);
             }
         });
 
@@ -104,7 +107,7 @@ public class AccptedRctdJobAdapter extends RecyclerView.Adapter<AccptedRctdJobAd
     }
 
     public class ViewHolder  extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView tv_regno,tv_labour_name,tv_gender,tv_labour_district,tv_labor_block,tv_person_addres,tv_age,tv_candidate_mob,tv_gauradian_name,tv_gaurdian_no,tv_skill,tv_exp_max,tv_other,tv_candid_skill;
+        TextView tv_slno,tv_regno,tv_labour_name,tv_gender,tv_labour_district,tv_labor_block,tv_person_addres,tv_age,tv_candidate_mob,tv_gauradian_name,tv_gaurdian_no,tv_skill,tv_exp_max,tv_other,tv_candid_skill;
         ImageView iv_call_candidate,iv_call;
 
 
@@ -112,7 +115,7 @@ public class AccptedRctdJobAdapter extends RecyclerView.Adapter<AccptedRctdJobAd
         LinearLayout ll_btn,ll_status,ll_selection;
         ViewHolder(View itemView) {
             super(itemView);
-            //tv_slno=itemView.findViewById(R.id.tv_slno);
+            tv_slno=itemView.findViewById(R.id.tv_slno);
             tv_regno=itemView.findViewById(R.id.tv_regno);
             tv_labour_name=itemView.findViewById(R.id.tv_labour_name);
             tv_gender=itemView.findViewById(R.id.tv_gender);

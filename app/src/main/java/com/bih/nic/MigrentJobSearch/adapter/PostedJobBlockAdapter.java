@@ -11,7 +11,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bih.nic.MigrentJobSearch.LegacyTableViewActivity;
 import com.bih.nic.MigrentJobSearch.Model.BlockJobOfferPostedEntity;
 import com.bih.nic.MigrentJobSearch.Model.JobOfferPostedEntity;
 import com.bih.nic.MigrentJobSearch.R;
@@ -46,7 +48,7 @@ public class PostedJobBlockAdapter extends RecyclerView.Adapter<PostedJobBlockAd
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         final BlockJobOfferPostedEntity info = ThrList.get(position);
 
-        // holder.tv_slno.setText(String.valueOf(position+1));
+        holder.tv_slno.setText(String.valueOf(position+1)+").");
         holder.tv_blk_name.setText(info.getBlockName().toUpperCase());
         holder.total_reg.setText(info.getTtlReg());
         holder.tv_joboffer.setText(info.getTotalJobOffer());
@@ -67,29 +69,45 @@ public class PostedJobBlockAdapter extends RecyclerView.Adapter<PostedJobBlockAd
 //        });
 //
 //
-//        holder.tv_accpted.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(activity, AcceptedRejctd_Job_Activity.class);
-//                //intent.putExtra("data",Reg_No);
-//                intent.putExtra("StatusFlag","Y");
-//                intent.putExtra("BlockCode",info.getBlockCode());
-//                intent.putExtra("BlockNAme",info.getBlockName());
-//                activity.startActivity(intent);
-//            }
-//        });
-//
-//        holder.tv_rejected.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(activity, AcceptedRejctd_Job_Activity.class);
-//                //intent.putExtra("data",Reg_No);
-//                intent.putExtra("StatusFlag","R");
-//                intent.putExtra("BlockCode",info.getBlockCode());
-//                intent.putExtra("BlockNAme",info.getBlockName());
-//                activity.startActivity(intent);
-//            }
-//        });
+
+
+
+        holder.tv_accpted.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Intent intent = new Intent(activity, AcceptedRejctd_Job_Activity.class);
+
+                if (!(info.getTtlRegA().equals("0"))){
+                    Intent intent = new Intent(activity, LegacyTableViewActivity.class);
+                    //intent.putExtra("data",Reg_No);
+                    intent.putExtra("StatusFlag","SHRGJA");
+                    intent.putExtra("BlockCode",info.getBlockCode());
+                    intent.putExtra("BlockNAme",info.getBlockName());
+                    activity.startActivity(intent);
+                }
+                else {
+                    Toast.makeText(activity, "कोई स्वीकृत नौकरी नहीं है", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
+        holder.tv_rejected.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!(info.getTtlRegR().equals("0"))) {
+                    Intent intent = new Intent(activity, LegacyTableViewActivity.class);
+                    //intent.putExtra("data",Reg_No);
+                    intent.putExtra("StatusFlag", "SHRGJR");
+                    intent.putExtra("BlockCode", info.getBlockCode());
+                    intent.putExtra("BlockNAme", info.getBlockName());
+                    activity.startActivity(intent);
+                }
+                else {
+                    Toast.makeText(activity, "कोई अस्वीकृत नौकरी नहीं है", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
 
     }
@@ -101,7 +119,7 @@ public class PostedJobBlockAdapter extends RecyclerView.Adapter<PostedJobBlockAd
     }
 
     public class ViewHolder  extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView tv_blk_name,total_reg,tv_joboffer,tv_accpted,tv_rejected;
+        TextView tv_blk_name,total_reg,tv_joboffer,tv_accpted,tv_rejected,tv_slno;
         ImageView iv_call;
 
 
@@ -109,7 +127,7 @@ public class PostedJobBlockAdapter extends RecyclerView.Adapter<PostedJobBlockAd
         LinearLayout ll_btn,ll_status,ll_selection;
         ViewHolder(View itemView) {
             super(itemView);
-            //tv_slno=itemView.findViewById(R.id.tv_slno);
+            tv_slno=itemView.findViewById(R.id.tv_slno);
             tv_blk_name=itemView.findViewById(R.id.tv_blk_name);
             total_reg=itemView.findViewById(R.id.total_reg_blk);
             tv_joboffer=itemView.findViewById(R.id.tv_joboffer_blk);

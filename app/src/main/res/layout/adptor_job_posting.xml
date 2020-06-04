@@ -56,7 +56,16 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:padding="3dp">
-
+                <TextView
+                    android:id="@+id/tv_slno"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:lines="1"
+                    android:text="1"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp"
+                    android:textStyle="normal" />
                 <TextView
                     android:textStyle="bold"
                     android:layout_width="120dp"
@@ -72,9 +81,10 @@
 
                 <TextView
                     android:id="@+id/tv_dise_name"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="6dp"
+                    android:background="@drawable/textboxshape"
                     android:textStyle="bold"
                     android:text="10071201202"
                     android:textColor="#0000EE" />
