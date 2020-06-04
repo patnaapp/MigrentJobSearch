@@ -52,7 +52,7 @@ public class AccptedRctdJobAdapter extends RecyclerView.Adapter<AccptedRctdJobAd
         holder.tv_labour_name.setText(info.getVchName());
         holder.tv_gender.setText(info.getGender());
         holder.tv_candidate_mob.setText(info.getVchMobile());
-        holder.tv_skill.setText(info.getSkillName());
+        holder.tv_candid_skill.setText(info.getSkillName());
         holder.tv_gauradian_name.setText(info.getVchGuardian_name());
         holder.tv_gaurdian_no.setText(info.getVchGuardian_number());
 

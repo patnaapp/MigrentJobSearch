@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bih.nic.MigrentJobSearch.LegacyTableViewActivity;
 import com.bih.nic.MigrentJobSearch.Model.BlockJobOfferPostedEntity;
 import com.bih.nic.MigrentJobSearch.Model.JobOfferPostedEntity;
 import com.bih.nic.MigrentJobSearch.R;
@@ -70,7 +71,8 @@ public class PostedJobBlockAdapter extends RecyclerView.Adapter<PostedJobBlockAd
         holder.tv_accpted.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(activity, AcceptedRejctd_Job_Activity.class);
+                //Intent intent = new Intent(activity, AcceptedRejctd_Job_Activity.class);
+                Intent intent = new Intent(activity, LegacyTableViewActivity.class);
                 //intent.putExtra("data",Reg_No);
                 intent.putExtra("StatusFlag","SHRGJA");
                 intent.putExtra("BlockCode",info.getBlockCode());
@@ -82,7 +84,7 @@ public class PostedJobBlockAdapter extends RecyclerView.Adapter<PostedJobBlockAd
         holder.tv_rejected.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(activity, AcceptedRejctd_Job_Activity.class);
+                Intent intent = new Intent(activity, LegacyTableViewActivity.class);
                 //intent.putExtra("data",Reg_No);
                 intent.putExtra("StatusFlag","SHRGJR");
                 intent.putExtra("BlockCode",info.getBlockCode());
