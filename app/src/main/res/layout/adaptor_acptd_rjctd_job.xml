@@ -334,7 +334,7 @@
                         android:textColor="@color/colorPrimary"
                         android:layout_width="108dp"
                         android:layout_height="wrap_content"
-                        android:text=" मोबाइल नंबर" />
+                        android:text="मोबाइल नंबर" />
 
                     <TextView
                         android:layout_width="wrap_content"
