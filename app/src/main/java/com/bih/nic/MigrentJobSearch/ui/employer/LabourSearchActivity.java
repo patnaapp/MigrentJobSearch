@@ -63,10 +63,11 @@ public class LabourSearchActivity extends Activity implements AdapterView.OnItem
 
         initialise();
 
-        //ORHNID = getIntent().getStringExtra("OrgId");
+        //ORHNID = getIntent().getStringExtra("ORGNID");
 
         ORHNID= PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("OrgId", "");
         DistCode= PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("DistCode", "");
+
 
 
         new LoadJonList(ORHNID).execute();
@@ -77,9 +78,6 @@ public class LabourSearchActivity extends Activity implements AdapterView.OnItem
                 finish();
             }
         });
-
-        Log.e("orgId", ORHNID);
-        Log.e("DstCode", DistCode);
 
     }
 
@@ -100,6 +98,7 @@ public class LabourSearchActivity extends Activity implements AdapterView.OnItem
     public void populateData() {
         if (data != null && data.size() > 0) {
             Log.e("data", "" + data.size());
+
             tv_Norecord.setVisibility(View.GONE);
             listView.setVisibility(View.VISIBLE);
 
@@ -146,6 +145,7 @@ public class LabourSearchActivity extends Activity implements AdapterView.OnItem
             case R.id.spn_sub_skill:
                 if (position > 0) {
                     JobID = WorkJobList.get(position - 1).getWork_Id();
+
                     new SyncSearchLabourData().execute();
                 }
                 break;
@@ -181,6 +181,7 @@ public class LabourSearchActivity extends Activity implements AdapterView.OnItem
 
            if(result!=null) {
                data=result;
+
                populateData();
            }
 

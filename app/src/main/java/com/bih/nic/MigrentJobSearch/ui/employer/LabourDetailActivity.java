@@ -60,7 +60,7 @@ public class LabourDetailActivity  extends Activity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_labour_search);
 
-        // getActionBar().hide();
+        getActionBar().hide();
         Utiilties.setStatusBarColor(this);
 
         initialise();
@@ -229,6 +229,7 @@ public class LabourDetailActivity  extends Activity implements AdapterView.OnIte
             if (this.dialog.isShowing())
             {
                 this.dialog.dismiss();
+
             }
 
             if (result != null)
