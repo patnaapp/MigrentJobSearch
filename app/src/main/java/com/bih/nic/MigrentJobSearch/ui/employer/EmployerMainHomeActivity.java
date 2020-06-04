@@ -1,29 +1,21 @@
-package com.bih.nic.MigrentJobSearch;
+package com.bih.nic.MigrentJobSearch.ui.employer;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.text.Html;
-import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bih.nic.MigrentJobSearch.DataBaseHelper.DataBaseHelper;
+import com.bih.nic.MigrentJobSearch.LabourSearchActivity;
 import com.bih.nic.MigrentJobSearch.Model.BenDetails;
-import com.bih.nic.MigrentJobSearch.Model.PaymentStatusEntity;
+import com.bih.nic.MigrentJobSearch.R;
+import com.bih.nic.MigrentJobSearch.Utiilties;
 import com.bih.nic.MigrentJobSearch.ui.MultiLoginActivity;
-import com.bih.nic.MigrentJobSearch.ui.employer.JobOfferPostedActivity;
-import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -111,7 +103,6 @@ public class EmployerMainHomeActivity extends Activity {
 
     public void onSearchJob(View view){
         Intent intent = new Intent(this, LabourSearchActivity.class);
-        intent.putExtra("ORGNID",OrgId);
         startActivity(intent);
     }
 
@@ -164,12 +155,12 @@ public class EmployerMainHomeActivity extends Activity {
     }
 
 
-    public void onJobOffers(View view){
-        /*Intent intent = new Intent(this, LegacyTableViewActivity.class);
-
-        startActivity(intent);
-        finish();*/
-    }
+//    public void onJobOffers(View view){
+//        Intent intent = new Intent(this, LegacyTableViewActivity.class);
+//
+//        startActivity(intent);
+//        finish();
+//    }
 
 
 }

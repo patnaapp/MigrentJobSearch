@@ -103,7 +103,7 @@
         <activity android:name=".ui.labour.ChangeMobileNumberActivity" />
         <activity android:name=".CameraActivity" />
         <activity android:name=".ui.labour.UpdateMobileNumberActivity" />
-        <activity android:name=".EmployerMainHomeActivity" />
+        <activity android:name=".ui.employer.EmployerMainHomeActivity" />
         <activity
             android:name=".ui.MultiLoginActivity"
             android:theme="@style/Theme.AppCompat.Light" />
