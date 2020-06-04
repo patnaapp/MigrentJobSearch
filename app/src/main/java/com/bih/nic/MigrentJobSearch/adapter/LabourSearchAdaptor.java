@@ -3,7 +3,6 @@ package com.bih.nic.MigrentJobSearch.adapter;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
@@ -18,10 +17,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bih.nic.MigrentJobSearch.LabourDetailActivity;
 import com.bih.nic.MigrentJobSearch.Model.DefaultResponse;
 import com.bih.nic.MigrentJobSearch.Model.JobListEntity;
-import com.bih.nic.MigrentJobSearch.Model.WorkerModel;
 import com.bih.nic.MigrentJobSearch.R;
 import com.bih.nic.MigrentJobSearch.WebserviceHelper;
 
@@ -32,11 +29,12 @@ public class LabourSearchAdaptor extends RecyclerView.Adapter<LabourSearchAdapto
 
     Activity activity;
     LayoutInflater mInflater;
-    ArrayList<WorkerModel> ThrList = new ArrayList<>();
+    ArrayList<JobListEntity> ThrList = new ArrayList<>();
+    String panchayatCode, panchayatName = "";
     Boolean isShowDetail = false;
     String regNo;
 
-    public LabourSearchAdaptor(Activity listViewshowedit, ArrayList<WorkerModel> rlist, String regNo) {
+    public LabourSearchAdaptor(Activity listViewshowedit, ArrayList<JobListEntity> rlist, String regNo) {
         this.activity = listViewshowedit;
         this.ThrList = rlist;
         mInflater = (LayoutInflater) activity.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
@@ -51,41 +49,23 @@ public class LabourSearchAdaptor extends RecyclerView.Adapter<LabourSearchAdapto
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        final WorkerModel info = ThrList.get(position);
+        final JobListEntity info = ThrList.get(position);
 
         holder.tv_slno.setText(String.valueOf(position + 1));
 
 
-        holder.tv_block.setText(info.getBlockNameHN());
-    //    holder.tv_supervisor_name.setText(info.getContactName());
-       // holder.tv_super_no.setText(info.getContactNumber());
-        holder.tv_district.setText(info.getDistrictNameHN());
+        holder.tv_block.setText(info.getBlock());
+        holder.tv_supervisor_name.setText(info.getContactName());
+        holder.tv_super_no.setText(info.getContactNumber());
+        holder.tv_district.setText(info.getDistrict());
 
 
         holder.tv_start_date.setText(info.getStartDate());
-        holder.tv_exp.setText(info.getExperiance());
-        holder.tv_exp_max.setText(info.getExperianceMax());
+        holder.tv_exp.setText(info.getExperience());
+        holder.tv_exp_max.setText(info.getExperienceMax());
         holder.tv_salary.setText(info.getSalary());
         holder.tv_salary_max.setText(info.getSalaryMax());
-        holder.tv_skill_cat.setText(info.getSkillCategoryHn());
-        holder._noof_labour_found.setText(info.getLabourFound());
-        holder.tv_req_gen.setText(info.getGender());
-        holder.tv_supervisor_name.setText(info.getContactPersonHn());
-        holder.tv_super_no.setText(info.getCPMobileNo());
-        holder.tv_workdetl_name.setText(info.getWorkSiteName());
-        holder.tv_req_per.setText(info.getNoOfPerson());
-        holder.tv_is_verified.setText(info.getIsVerified());
-        holder.tv_pin.setText(info.getPinNo());
-        holder.ll_selection.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(activity, LabourDetailActivity.class);
-                intent.putExtra("SkillId",info.getSkillId());
-                intent.putExtra("Gender",info.getGender());
-                intent.putExtra("Exp",info.getExperiance());
-                activity.startActivity(intent);
-            }
-        });
+
 
 
 
@@ -98,11 +78,9 @@ public class LabourSearchAdaptor extends RecyclerView.Adapter<LabourSearchAdapto
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView tv_slno,tv_skill_cat,tv_start_date, tv_exp, tv_exp_max, tv_salary, tv_salary_max, tv_block, tv_supervisor_name, tv_super_no;
-        TextView iv_call,tv_is_verified,tv_req_per,tv_pin,_noof_labour_found,tv_req_gen;
+        ImageView iv_call,tv_is_verified,tv_req_per,tv_pin,_noof_labour_found;
 
         TextView tv_workdetl_name,tv_district;
-
-
         Button btn_accpt, btn_rjct;
         LinearLayout ll_btn, ll_status, ll_selection;
 
@@ -129,8 +107,6 @@ public class LabourSearchAdaptor extends RecyclerView.Adapter<LabourSearchAdapto
             tv_block = itemView.findViewById(R.id.tv_block);
             tv_pin = itemView.findViewById(R.id.tv_pin);
             _noof_labour_found = itemView.findViewById(R.id._noof_labour_found);
-            tv_req_gen = itemView.findViewById(R.id.tv_req_gen);
-            ll_selection = itemView.findViewById(R.id.ll_selection);
 
         }
 
@@ -147,7 +123,7 @@ public class LabourSearchAdaptor extends RecyclerView.Adapter<LabourSearchAdapto
         return gender;
     }
 
- /*   private class AcceptRecordsFromPacs extends AsyncTask<String, Void, DefaultResponse> {
+    private class AcceptRecordsFromPacs extends AsyncTask<String, Void, DefaultResponse> {
         JobListEntity data;
         String rowid;
         int position;
@@ -219,7 +195,7 @@ public class LabourSearchAdaptor extends RecyclerView.Adapter<LabourSearchAdapto
             }
 
         }
-    }*/
+    }
 
 
 }
