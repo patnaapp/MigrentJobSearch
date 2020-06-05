@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.bih.nic.MigrentJobSearch.Model.AcptdRjctdJobOfferEntity;
 import com.bih.nic.MigrentJobSearch.Model.BenDetails;
+import com.bih.nic.MigrentJobSearch.Model.BlkCompanyJobDetailsEntity;
 import com.bih.nic.MigrentJobSearch.Model.BlockJobOfferPostedEntity;
 import com.bih.nic.MigrentJobSearch.Model.BlockWeb;
 import com.bih.nic.MigrentJobSearch.Model.DefaultResponse;
@@ -58,6 +59,7 @@ public class WebserviceHelper implements KvmSerializable {
     private static final String GET_JOB_Offer_Posted_METHOD="GetJobOfferOrg";
     private static final String GET_JOB_Offer_block_Posted_METHOD="GetJobOfferBlockwise";
     private static final String GET_Acpt_Rjct_Job_By_Labour="GetJobOfferLabourDetails";
+    private static final String GET_Blk_Wise_company_Jobs="GetCompanayBlockWise";
     private static final String UPDATE_PROFILE_IMAGE_METHOD="UpdateImage";
     private static final String SUBSKILL_METHOD="SubSkilMasterList";
     private static final String DISTRICT_METHOD="getDistrict";
@@ -1367,5 +1369,57 @@ public class WebserviceHelper implements KvmSerializable {
 
         return pvmArrayList;
     }
+
+    public static ArrayList<BlkCompanyJobDetailsEntity> BlkCompanyWiseJobOffers(String distid, String blkid, String orgid, String role) {
+
+
+        SoapObject request = new SoapObject(SERVICENAMESPACE, GET_Blk_Wise_company_Jobs);
+
+        request.addProperty("Distcode", distid);
+        request.addProperty("BlockCode", blkid);
+        request.addProperty("orgId", orgid);
+        request.addProperty("Role", role);
+
+        SoapObject res1;
+        try {
+
+            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
+                    SoapEnvelope.VER11);
+            envelope.dotNet = true;
+            envelope.setOutputSoapObject(request);
+
+            envelope.addMapping(SERVICENAMESPACE, BlkCompanyJobDetailsEntity.BlockCompanyJobs_CLASS.getSimpleName(), BlkCompanyJobDetailsEntity.BlockCompanyJobs_CLASS);
+
+            HttpTransportSE androidHttpTransport = new HttpTransportSE(
+                    SERVICEURL);
+            androidHttpTransport.call(SERVICENAMESPACE + GET_Blk_Wise_company_Jobs,
+                    envelope);
+
+            res1 = (SoapObject) envelope.getResponse();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        int TotalProperty = res1.getPropertyCount();
+
+        ArrayList<BlkCompanyJobDetailsEntity> pvmArrayList = new ArrayList<BlkCompanyJobDetailsEntity>();
+
+        for (int ii = 0; ii < TotalProperty; ii++) {
+            if (res1.getProperty(ii) != null) {
+                Object property = res1.getProperty(ii);
+                if (property instanceof SoapObject) {
+                    SoapObject final_object = (SoapObject) property;
+                    BlkCompanyJobDetailsEntity panchayat = new BlkCompanyJobDetailsEntity(final_object);
+                    pvmArrayList.add(panchayat);
+                }
+            } else
+                return pvmArrayList;
+        }
+
+
+        return pvmArrayList;
+    }
+
 
 }

@@ -85,6 +85,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="6dp"
                     android:textAlignment="center"
+
                     android:background="@drawable/textboxshape"
                     android:textStyle="bold"
                     android:text="10071201202"

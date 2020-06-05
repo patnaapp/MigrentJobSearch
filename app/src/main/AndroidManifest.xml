@@ -76,6 +76,8 @@
         <activity android:name=".ui.labour.RequestOtpActivity" />
         <activity android:name=".ui.labour.MainHomeActivity" />
         <activity android:name=".ui.employer.JobOfferPostedActivity" />
+        <activity android:name=".ui.employer.LegacyTableViewActivity" />
+        <activity android:name=".ui.employer.BlocJobOfferActivity" />
         <activity android:name=".ui.employer.JobOfferPosted_BlockActivity" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".VerifyAadhaar1" />

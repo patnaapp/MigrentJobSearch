@@ -13,12 +13,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bih.nic.MigrentJobSearch.LegacyTableViewActivity;
+import com.bih.nic.MigrentJobSearch.ui.employer.BlocJobOfferActivity;
+import com.bih.nic.MigrentJobSearch.ui.employer.LegacyTableViewActivity;
 import com.bih.nic.MigrentJobSearch.Model.BlockJobOfferPostedEntity;
-import com.bih.nic.MigrentJobSearch.Model.JobOfferPostedEntity;
 import com.bih.nic.MigrentJobSearch.R;
-import com.bih.nic.MigrentJobSearch.ui.employer.AcceptedRejctd_Job_Activity;
-import com.bih.nic.MigrentJobSearch.ui.employer.JobOfferPosted_BlockActivity;
 
 import java.util.ArrayList;
 
@@ -56,6 +54,20 @@ public class PostedJobBlockAdapter extends RecyclerView.Adapter<PostedJobBlockAd
         holder.tv_rejected.setText(info.getTtlRegR());
 
 //
+        holder.tv_blk_name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, BlocJobOfferActivity.class);
+                String distid = activity.getIntent().getStringExtra("DistCode");
+                intent.putExtra("distid",distid);
+               // intent.putExtra("StatusFlag","SHRG");
+                intent.putExtra("BlockCode",info.getBlockCode());
+                intent.putExtra("BlockNAme",info.getBlockName());
+                activity.startActivity(intent);
+            }
+        });
+
+
         holder.total_reg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
