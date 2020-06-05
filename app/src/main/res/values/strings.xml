@@ -35,4 +35,14 @@
     <string name="title_home">श्रमिक लॉगिन</string>
     <string name="title_dashboard">नियोक्ता लॉगिन</string>
     <string name="title_notifications">Notifications</string>
+
+
+    <string name="invalid_email">This email address is invalid</string>
+    <string name="invalid_password">Password is too short</string>
+    <string name="invalid_password_pattern">Password must contains alphabet and numeric characters"</string>
+    <string name="incorrect_password">Password is incorrect</string>
+    <string name="field_required">This field is required</string>
+    <string name="valid_password">Enter valid Current Password</string>
+    <string name="password_not_match">Password did not match</string>
+    <string name="Invalid_Number">Mobile Number is Incorrect</string>
 </resources>

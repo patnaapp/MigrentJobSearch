@@ -10,6 +10,7 @@ import com.bih.nic.MigrentJobSearch.Model.BlockJobOfferPostedEntity;
 import com.bih.nic.MigrentJobSearch.Model.BlockWeb;
 import com.bih.nic.MigrentJobSearch.Model.DefaultResponse;
 import com.bih.nic.MigrentJobSearch.Model.District;
+import com.bih.nic.MigrentJobSearch.Model.EmpRegDetails;
 import com.bih.nic.MigrentJobSearch.Model.EmployerDetails;
 import com.bih.nic.MigrentJobSearch.Model.JobListEntity;
 import com.bih.nic.MigrentJobSearch.Model.JobOfferPostedEntity;
@@ -83,6 +84,8 @@ public class WebserviceHelper implements KvmSerializable {
     public static final  String GetWorkDetails = "GetWorkDetails";
     public static final  String GetRequirmentData = "GetRequirmentData";
     public static final  String GetLoadLabourData = "GetLoadLabourData";
+    public static final  String EmployerRegistration_METHOD = "InsertCompanyDtls";
+    public static final  String REGISTRATION_EMP_MOB_METHOD = "OrgsendOtp";
     static String rest;
 
 
@@ -1423,5 +1426,80 @@ public class WebserviceHelper implements KvmSerializable {
         return pvmArrayList;
     }
 
+    public static String EmpRegistration(EmpRegDetails user) {
+        try {
+            SoapObject request = new SoapObject(SERVICENAMESPACE,
+                    EmployerRegistration_METHOD);
+            request.addProperty("_CompanyName", user.getOrgName());
+            request.addProperty("_CommpanyType", user.getOrgCode());
+            request.addProperty("_DistCode", user.getDistCode());
+            request.addProperty("_AddressName", user.getCrosspondance_address());
+            request.addProperty("_CommpanyContactName", user.getContact_Person());
+            request.addProperty("_ContactNo", user.getMobile_Number());
+            request.addProperty("_OtherMobileNo", user.getAlternative_Mobile_Number());
+            request.addProperty("_EmailId", user.getEmail());
+            request.addProperty("_Password", user.getPassword());
+            //request.addProperty("_OrgCode", user.getOtp());
+            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
+                    SoapEnvelope.VER11);
+            envelope.dotNet = true;
+            envelope.setOutputSoapObject(request);
+            envelope.addMapping(SERVICENAMESPACE,
+                    EmpRegDetails.UserDetails_CLASS.getSimpleName(),
+                    EmpRegDetails.UserDetails_CLASS);
+            HttpTransportSE androidHttpTransport = new HttpTransportSE(
+                    SERVICEURL);
+            androidHttpTransport.call(SERVICENAMESPACE + EmployerRegistration_METHOD,
+                    envelope);
 
+            Object result = envelope.getResponse();
+
+            if (result != null) {
+                // Log.d("", result.toString());
+
+                return result.toString();
+            } else
+                return null;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+    public static String Registration_Mob(String mob,String otp) {
+        try {
+            SoapObject request = new SoapObject(SERVICENAMESPACE,REGISTRATION_EMP_MOB_METHOD);
+
+
+            request.addProperty("_MobileNo",mob);
+            request.addProperty("_OTP",otp);
+
+            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
+                    SoapEnvelope.VER11);
+            envelope.dotNet = true;
+            envelope.setOutputSoapObject(request);
+            envelope.addMapping(SERVICENAMESPACE,
+                    EmpRegDetails.UserDetails_CLASS.getSimpleName(),
+                    EmpRegDetails.UserDetails_CLASS);
+            HttpTransportSE androidHttpTransport = new HttpTransportSE(
+                    SERVICEURL);
+            androidHttpTransport.call(SERVICENAMESPACE + REGISTRATION_EMP_MOB_METHOD,
+                    envelope);
+
+            Object result = envelope.getResponse();
+
+            if (result != null) {
+                // Log.d("", result.toString());
+
+                return result.toString();
+            } else
+                return null;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
 }

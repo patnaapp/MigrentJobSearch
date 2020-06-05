@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+
+        android:id="@+id/reg_form"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginTop="2dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:id="@+id/ll_all"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_marginBottom="12dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="संस्था का नाम*"
+            android:textColor="@color/black"
+            android:textSize="12sp"/>
+
+        <EditText
+            android:layout_marginTop="4dp"
+            android:id="@+id/et_org_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/textboxshape"
+            android:hint="संस्था का नाम डाले "
+            android:padding="10dp"
+            android:inputType="number"
+            android:maxLength="12"
+            android:singleLine="true"
+            android:textColor="#222222"
+            android:focusableInTouchMode="true"
+            android:textSize="15sp" />
+    </LinearLayout>
+        <LinearLayout
+            android:layout_marginBottom="12dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="संस्था का प्रकार*"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textSize="14sp"
+                    android:textStyle="normal"
+                    android:textColor="@color/black"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="45dp"
+                android:orientation="vertical">
+
+                <Spinner
+
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:id="@+id/sp_type_of_org"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorPrimary"/>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginBottom="12dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ज़िला*"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textSize="14sp"
+                    android:textStyle="normal"
+                    android:textColor="@color/black"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="45dp"
+                android:orientation="vertical">
+
+                <Spinner
+
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:id="@+id/sp_district"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorPrimary"/>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="पत्राचार का पता*"
+                android:textColor="@color/black"
+                android:textSize="12sp"/>
+
+            <EditText
+                android:layout_marginTop="4dp"
+                android:id="@+id/et_crosspondance_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/textboxshape"
+                android:hint="पत्राचार का पता डाले "
+                android:padding="10dp"
+                android:inputType="text"
+                android:maxLength="75"
+                android:singleLine="true"
+                android:textColor="#222222"
+                android:focusableInTouchMode="true"
+                android:textSize="15sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="संस्था के संपर्क व्यक्ति का नाम *"
+                android:textColor="@color/black"
+                android:textSize="12sp"/>
+
+            <EditText
+                android:layout_marginTop="4dp"
+                android:id="@+id/et_contact_person"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/textboxshape"
+                android:hint="संस्था के संपर्क व्यक्ति का नाम  डाले "
+                android:padding="10dp"
+                android:inputType="text"
+                android:maxLength="20"
+                android:singleLine="true"
+                android:textColor="#222222"
+                android:focusableInTouchMode="true"
+                android:textSize="15sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="संपर्क मोबाइल नंबर *"
+                android:textColor="@color/black"
+                android:textSize="12sp"/>
+
+            <EditText
+                android:layout_marginTop="4dp"
+                android:id="@+id/et_mobile_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/textboxshape"
+                android:hint="संपर्क मोबाइल नंबर डाले "
+                android:padding="10dp"
+                android:inputType="number"
+                android:maxLength="10"
+                android:singleLine="true"
+                android:textColor="#222222"
+                android:focusableInTouchMode="true"
+                android:textSize="15sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="अन्य मोबाइल नंबर "
+                android:textColor="@color/black"
+                android:textSize="12sp"/>
+
+            <EditText
+                android:layout_marginTop="4dp"
+                android:id="@+id/et_alternative_mobile_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/textboxshape"
+                android:hint="अन्य मोबाइल नंबर  डाले "
+                android:padding="10dp"
+                android:inputType="number"
+                android:maxLength="10"
+                android:singleLine="true"
+                android:textColor="#222222"
+                android:focusableInTouchMode="true"
+                android:textSize="15sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ईमेल "
+                android:textColor="@color/black"
+                android:textSize="12sp"/>
+
+            <EditText
+                android:layout_marginTop="4dp"
+                android:id="@+id/et_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/textboxshape"
+                android:hint="ईमेल डाले "
+                android:padding="10dp"
+                android:inputType="textEmailAddress"
+                android:maxLength="25"
+                android:singleLine="true"
+                android:textColor="#222222"
+                android:focusableInTouchMode="true"
+                android:textSize="15sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="पासवर्ड *"
+                android:textColor="@color/black"
+                android:textSize="12sp"/>
+
+            <EditText
+                android:layout_marginTop="4dp"
+                android:id="@+id/et_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/textboxshape"
+                android:hint="पासवर्ड  डाले "
+                android:padding="10dp"
+                android:inputType="text"
+                android:maxLength="15"
+                android:singleLine="true"
+                android:textColor="#222222"
+                android:focusableInTouchMode="true"
+                android:textSize="15sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="पुनः पासवर्ड दर्ज करे *"
+                android:textColor="@color/black"
+                android:textSize="12sp"/>
+
+            <EditText
+                android:layout_marginTop="4dp"
+                android:id="@+id/et_reenter_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/textboxshape"
+                android:hint="पुनः पासवर्ड डाले "
+                android:padding="10dp"
+                android:inputType="text"
+                android:maxLength="15"
+                android:singleLine="true"
+                android:textColor="#222222"
+                android:focusableInTouchMode="true"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_verify_new"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_margin="20dp"
+            android:background="#522f54"
+            android:text="Submit"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            android:textSize="18sp" />
+    </LinearLayout>
+    </LinearLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

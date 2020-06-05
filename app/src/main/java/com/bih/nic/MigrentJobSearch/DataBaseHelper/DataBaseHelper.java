@@ -14,6 +14,7 @@ import com.bih.nic.MigrentJobSearch.BenfiList;
 import com.bih.nic.MigrentJobSearch.Model.BlockWeb;
 import com.bih.nic.MigrentJobSearch.Model.CategoryMaster;
 import com.bih.nic.MigrentJobSearch.Model.District;
+import com.bih.nic.MigrentJobSearch.Model.Organisation;
 import com.bih.nic.MigrentJobSearch.Model.SkillMaster;
 import com.bih.nic.MigrentJobSearch.Model.SubSkillMaster;
 import com.bih.nic.MigrentJobSearch.Model.UserDetails;
@@ -1316,5 +1317,79 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
         }
         return c;
     }
+
+    public ArrayList<District> getDistrictLocal() {
+
+        ArrayList<District> districtList = new ArrayList<District>();
+
+        try {
+
+            SQLiteDatabase db = this.getReadableDatabase();
+            Cursor cur = db
+                    .rawQuery(
+                            "SELECT * from  Districts order by DistNameHN", null);
+            int x = cur.getCount();
+
+            while (cur.moveToNext()) {
+
+                District district = new District();
+                district.set_DistCode(cur.getString(cur
+                        .getColumnIndex("DistCode")));
+                district.set_DistNameHN(cur.getString(cur.getColumnIndex("DistNameHN")));
+                //district.setDistrictName(cur.getString(cur.getColumnIndex("DistName")));
+
+
+
+                districtList.add(district);
+            }
+
+            cur.close();
+            db.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            // TODO: handle exception
+
+        }
+        return districtList;
+
+    }
+    public ArrayList<Organisation> getorg() {
+
+        ArrayList<Organisation> districtList = new ArrayList<Organisation>();
+
+        try {
+
+            SQLiteDatabase db = this.getReadableDatabase();
+            Cursor cur = db
+                    .rawQuery(
+                            "SELECT * from  Organisation order by OrgCode", null);
+            int x = cur.getCount();
+
+            while (cur.moveToNext()) {
+
+                Organisation district = new Organisation();
+                district.set_OrgCode(cur.getString(cur
+                        .getColumnIndex("OrgCode")));
+                district.set_OrgName(cur.getString(cur.getColumnIndex("OrgName")));
+                //district.setDistrictName(cur.getString(cur.getColumnIndex("DistName")));
+
+
+
+                districtList.add(district);
+            }
+
+            cur.close();
+            db.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            // TODO: handle exception
+
+        }
+        return districtList;
+
+    }
+
 
 }
