@@ -114,7 +114,7 @@
 
                 <TextView
                     android:id="@+id/total_reg_blk"
-                    android:layout_width="55dp"
+                    android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
                     android:layout_marginLeft="6dp"

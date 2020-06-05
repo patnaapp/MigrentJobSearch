@@ -23,7 +23,7 @@ import android.widget.Toast;
 
 import com.bih.nic.MigrentJobSearch.CommonPref;
 import com.bih.nic.MigrentJobSearch.DataBaseHelper.DataBaseHelper;
-import com.bih.nic.MigrentJobSearch.EmployerMainHomeActivity;
+import com.bih.nic.MigrentJobSearch.ui.employer.EmployerMainHomeActivity;
 import com.bih.nic.MigrentJobSearch.MarshmallowPermission;
 import com.bih.nic.MigrentJobSearch.Model.Versioninfo;
 import com.bih.nic.MigrentJobSearch.R;

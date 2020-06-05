@@ -66,9 +66,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".ui.employer.AcceptedRejctd_Job_Activity"></activity>
-        <activity android:name=".LabourDetailActivity"
-            android:theme="@style/NoActionBar"/>
-        <activity android:name=".LabourSearchActivity" android:theme="@style/NoActionBar"/>
+        <activity android:name=".ui.employer.LabourSearchActivity" />
+        <activity android:name=".ui.employer.LabourDetailActivity"/>
+        <activity android:name=".LegacyTableViewActivity"/>
         <activity android:name=".ui.labour.PaymentStatusActivity" />
         <activity android:name=".ui.labour.JobSearchActivity" />
         <activity android:name=".ui.labour.ModifyDocumentActivity" />
@@ -105,7 +105,7 @@
         <activity android:name=".ui.labour.ChangeMobileNumberActivity" />
         <activity android:name=".CameraActivity" />
         <activity android:name=".ui.labour.UpdateMobileNumberActivity" />
-        <activity android:name=".EmployerMainHomeActivity" />
+        <activity android:name=".ui.employer.EmployerMainHomeActivity" />
         <activity
             android:name=".ui.MultiLoginActivity"
             android:theme="@style/Theme.AppCompat.Light" />

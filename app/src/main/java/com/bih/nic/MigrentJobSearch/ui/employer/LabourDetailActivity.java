@@ -1,4 +1,4 @@
-package com.bih.nic.MigrentJobSearch;
+package com.bih.nic.MigrentJobSearch.ui.employer;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -6,37 +6,40 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bih.nic.MigrentJobSearch.DataBaseHelper.DataBaseHelper;
+import com.bih.nic.MigrentJobSearch.GlobalVariables;
 import com.bih.nic.MigrentJobSearch.Model.District;
 import com.bih.nic.MigrentJobSearch.Model.JobListEntity;
 import com.bih.nic.MigrentJobSearch.Model.WorkerModel;
-import com.bih.nic.MigrentJobSearch.Model.workListModel;
-import com.bih.nic.MigrentJobSearch.adapter.JobSearchAdapter;
-import com.bih.nic.MigrentJobSearch.adapter.LabourSearchAdaptor;
+import com.bih.nic.MigrentJobSearch.R;
+import com.bih.nic.MigrentJobSearch.Utiilties;
+import com.bih.nic.MigrentJobSearch.WebserviceHelper;
+import com.bih.nic.MigrentJobSearch.adapter.LabourDetailAdaptor;
 
 import java.util.ArrayList;
 
-public class LabourSearchActivity extends Activity implements AdapterView.OnItemSelectedListener {
+public class LabourDetailActivity  extends Activity implements AdapterView.OnItemSelectedListener {
 
     RecyclerView listView;
     TextView tv_Norecord;
     Spinner spn_skill, spn_sub_skill;
     ImageView img_back;
-    LabourSearchAdaptor labourSearchAdaptor;
+    LabourDetailAdaptor labourDetailAdaptor;
 
     ProgressDialog dialog;
     ArrayList<WorkerModel> data;
@@ -44,28 +47,45 @@ public class LabourSearchActivity extends Activity implements AdapterView.OnItem
 
     String skillId, subSkillId;
     String DistId = "", RegNo;
-    String JobID="",ORHNID="",DistCode="";
+    String JobID="",SkillId="",Gender="",Exp="";
+    String ORGNID="";
 
     DataBaseHelper dataBaseHelper;
-    ArrayList<workListModel> WorkJobList = new ArrayList<>();
+    LinearLayout lin_sub_skill;
+     ArrayList<WorkerModel> WorkJobList = new ArrayList<>();
+    String  DistCode="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_labour_search);
 
-        // getActionBar().hide();
+        getActionBar().hide();
         Utiilties.setStatusBarColor(this);
 
         initialise();
-
-        ORHNID = getIntent().getStringExtra("ORGNID");
+        try {
+            SkillId = getIntent().getStringExtra("SkillId");
+            Gender = getIntent().getStringExtra("Gender");
+            Exp = getIntent().getStringExtra("Exp");
+            if(Gender.equalsIgnoreCase("Male")){
+                Gender="1";
+            }else if(Gender.equalsIgnoreCase("Female")){
+                Gender="2";
+            }else if(Gender.equalsIgnoreCase("Other")){
+                Gender="0";
+            }else if(Gender.equalsIgnoreCase("Any")){
+                Gender="0";
+            }
+        }catch (NullPointerException e){
+            e.printStackTrace();
+        }
 
         DistCode= PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("DistCode", "");
 
-
-
-        new LoadJonList(ORHNID).execute();
+        Log.d("GUHUHuu","&&&"+DistCode+"##"+SkillId+"##"+Gender+"##"+Exp);
+        String distName = getIntent().getStringExtra("DistName");
+        lin_sub_skill.setVisibility(View.GONE);
 
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,12 +93,19 @@ public class LabourSearchActivity extends Activity implements AdapterView.OnItem
                 finish();
             }
         });
+        if(Utiilties.isOnline(LabourDetailActivity.this)) {
+
+            new LoadLabourDetail(DistCode, SkillId, Exp, Gender).execute();
+        }else {
+            showAlertForInternet();
+        }
 
     }
 
     public void initialise() {
         dataBaseHelper = new DataBaseHelper(this);
 
+        lin_sub_skill = findViewById(R.id.lin_sub_skill);
         spn_skill = findViewById(R.id.spn_skill);
         spn_sub_skill = findViewById(R.id.spn_sub_skill);
         tv_Norecord = findViewById(R.id.tv_Norecord);
@@ -96,9 +123,9 @@ public class LabourSearchActivity extends Activity implements AdapterView.OnItem
             tv_Norecord.setVisibility(View.GONE);
             listView.setVisibility(View.VISIBLE);
 
-            labourSearchAdaptor = new LabourSearchAdaptor(this, data, RegNo);
+            labourDetailAdaptor = new LabourDetailAdaptor(this, data, RegNo);
             listView.setLayoutManager(new LinearLayoutManager(this));
-            listView.setAdapter(labourSearchAdaptor);
+            listView.setAdapter(labourDetailAdaptor);
 
         } else {
             listView.setVisibility(View.GONE);
@@ -108,33 +135,9 @@ public class LabourSearchActivity extends Activity implements AdapterView.OnItem
 
 
 
-   /* public void setDistrictSpinner(String DistName){
-        DistrictList=dataBaseHelper.getDistDetail();
-        ArrayList<String> list = new ArrayList<String>();
-        list.add("-Select-");
-        for (District info: DistrictList){
-            list.add(info.get_DistName());
-        }
-
-        ArrayAdapter adaptor = new ArrayAdapter(this, android.R.layout.simple_spinner_item, list);
-        adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spn_sub_skill.setAdapter(adaptor);
-
-        try{
-            if(!DistName.isEmpty()){
-                spn_sub_skill.setSelection(list.indexOf(DistName));
-            }
-        }catch (Exception e){
-            new SyncJobSearchData().execute();
-        }*/
-
-
-
-
-
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        switch (parent.getId()) {
+       /* switch (parent.getId()) {
 
             case R.id.spn_sub_skill:
                 if (position > 0) {
@@ -142,7 +145,7 @@ public class LabourSearchActivity extends Activity implements AdapterView.OnItem
                     new SyncSearchLabourData().execute();
                 }
                 break;
-        }
+        }*/
     }
 
     @Override
@@ -150,35 +153,7 @@ public class LabourSearchActivity extends Activity implements AdapterView.OnItem
 
     }
 
-    private class SyncSearchLabourData extends AsyncTask<String, Void, ArrayList<WorkerModel>> {
-        private final ProgressDialog dialog = new ProgressDialog(LabourSearchActivity.this);
-        int optionType;
 
-        @Override
-        protected void onPreExecute() {
-            this.dialog.setCanceledOnTouchOutside(false);
-            this.dialog.setMessage("लोड हो रहा है...");
-            this.dialog.show();
-        }
-
-        @Override
-        protected ArrayList<WorkerModel> doInBackground(String...arg) {
-            return WebserviceHelper.GetRequirmentData(DistCode, JobID,ORHNID);
-        }
-
-        @Override
-        protected void onPostExecute(ArrayList<WorkerModel> result) {
-            if (this.dialog.isShowing()) {
-                this.dialog.dismiss();
-            }
-
-           if(result!=null) {
-               data=result;
-               populateData();
-           }
-
-        }
-    }
 
     public void showAlertForInternet(){
         AlertDialog.Builder ab = new AlertDialog.Builder(this);
@@ -214,15 +189,21 @@ public class LabourSearchActivity extends Activity implements AdapterView.OnItem
 
         return list;
     }
-    private class LoadJonList extends AsyncTask<String, Void, ArrayList<workListModel>>
+    private class LoadLabourDetail extends AsyncTask<String, Void, ArrayList<WorkerModel>>
     {
-        String OrgnId = "";
-        ArrayList<workListModel> blocklist = new ArrayList<>();
+        String DistrictCode = "";
+        String SkillId = "";
+        String Experiance = "";
+        String Gender = "";
+        ArrayList<WorkerModel> WorkerModel = new ArrayList<>();
         private final ProgressDialog dialog = new ProgressDialog(
-                LabourSearchActivity.this);
+                LabourDetailActivity.this);
 
-        LoadJonList(String OrganId) {
-            this.OrgnId = OrganId;
+        LoadLabourDetail(String DistrictCode,String SkillId,String Experiance,String Gender) {
+            this.DistrictCode = DistrictCode;
+            this.SkillId = SkillId;
+            this.Experiance = Experiance;
+            this.Gender = Gender;
         }
 
         @Override
@@ -234,16 +215,16 @@ public class LabourSearchActivity extends Activity implements AdapterView.OnItem
         }
 
         @Override
-        protected ArrayList<workListModel> doInBackground(String... param)
+        protected ArrayList<WorkerModel> doInBackground(String... param)
         {
 
-            this.blocklist = WebserviceHelper.GetWorkDetails(OrgnId);
+            this.WorkerModel = WebserviceHelper.GetLoadLabourData(DistrictCode,SkillId,Experiance,Gender);
 
-            return this.blocklist;
+            return this.WorkerModel;
         }
 
         @Override
-        protected void onPostExecute(ArrayList<workListModel> result)
+        protected void onPostExecute(ArrayList<WorkerModel> result)
         {
             if (this.dialog.isShowing())
             {
@@ -255,12 +236,9 @@ public class LabourSearchActivity extends Activity implements AdapterView.OnItem
             {
                 if (result.size() > 0)
                 {
-                    WorkJobList=result;
-                    DataBaseHelper placeData = new DataBaseHelper(LabourSearchActivity.this);
-
-                    //   long i = placeData.setPanchayatLocal(result, PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("District", ""),blockcode);
-                    if (result.size() > 0) setJobList(WorkJobList);
-                }
+                    data=result;
+                    populateData();
+                              }
                 else
                 {
                     Toast.makeText(getApplicationContext(), getResources().getString(R.string.loading_fail),Toast.LENGTH_LONG).show();
@@ -271,27 +249,5 @@ public class LabourSearchActivity extends Activity implements AdapterView.OnItem
         }
 
     }
-    public void setJobList(ArrayList<workListModel>joblist){
-
-        ArrayList<String> list = new ArrayList<String>();
-        list.add("-Select-");
-        for (workListModel info: joblist){
-            list.add(info.getWorl_Name());
-        }
-
-        ArrayAdapter adaptor = new ArrayAdapter(this, android.R.layout.simple_spinner_item, list);
-        adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spn_sub_skill.setAdapter(adaptor);
-
-        /*try{
-            if(!DistName.isEmpty()){
-                spn_sub_skill.setSelection(list.indexOf(DistName));
-            }
-        }catch (Exception e){
-            new SyncJobSearchData().execute();
-        }*/
-
-    }
-
 
 }

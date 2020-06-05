@@ -18,12 +18,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bih.nic.MigrentJobSearch.LabourDetailActivity;
-import com.bih.nic.MigrentJobSearch.Model.DefaultResponse;
-import com.bih.nic.MigrentJobSearch.Model.JobListEntity;
 import com.bih.nic.MigrentJobSearch.Model.WorkerModel;
 import com.bih.nic.MigrentJobSearch.R;
-import com.bih.nic.MigrentJobSearch.WebserviceHelper;
+import com.bih.nic.MigrentJobSearch.ui.employer.LabourDetailActivity;
 
 
 import java.util.ArrayList;
