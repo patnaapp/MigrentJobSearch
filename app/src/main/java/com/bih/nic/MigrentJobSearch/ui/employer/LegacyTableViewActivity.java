@@ -199,7 +199,6 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
 
                 }
 
-
                 legacyTableView = (LegacyTableView)findViewById(R.id.legacy_table_view);
                 legacyTableView.setTitle(LegacyTableView.readLegacyTitle());
                 legacyTableView.setContent(LegacyTableView.readLegacyContent());
