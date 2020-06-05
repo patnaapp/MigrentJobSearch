@@ -59,8 +59,7 @@ public class Utiilties {
 		if (Utiilties.isOnline(context) == false) {
 			AlertDialog.Builder ab = new AlertDialog.Builder(context);
 			ab.setCancelable(false);
-			ab.setMessage(Html
-					.fromHtml("<font color=#000000>Internet Connection is not avaliable..Please Turn ON Network Connection OR Continue With Off-line Mode..\nTo Turn ON Network Connection Press Yes Button else To Continue With Off-Line Mode Press No Button..</font>"));
+			ab.setMessage(Html.fromHtml("<font color=#000000>Internet Connection is not avaliable..Please Turn ON Network Connection OR Continue With Off-line Mode..\nTo Turn ON Network Connection Press Yes Button else To Continue With Off-Line Mode Press No Button..</font>"));
 			ab.setPositiveButton("Turn On Network Connection",
 					new DialogInterface.OnClickListener() {
 						@Override

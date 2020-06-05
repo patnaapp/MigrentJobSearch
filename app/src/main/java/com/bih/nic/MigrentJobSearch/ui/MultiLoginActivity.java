@@ -1,0 +1,65 @@
+package com.bih.nic.MigrentJobSearch.ui;
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+
+import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
+
+
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
+
+import com.bih.nic.MigrentJobSearch.Login;
+import com.bih.nic.MigrentJobSearch.R;
+import com.bih.nic.MigrentJobSearch.Utiilties;
+
+public class MultiLoginActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.activity_multi_login);
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+
+        Utiilties.setStatusBarColor(this);
+
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.navigation_labour, R.id.navigation_employer)
+                .build();
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        NavigationUI.setupWithNavController(navView, navController);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        return false;
+    }
+
+    public void onExit(){
+        new AlertDialog.Builder(this)
+                .setTitle("अलर्ट!!")
+                .setMessage("क्या आप ऐप बन्द करना चाहते हैं??\n ")
+                .setCancelable(false)
+                .setPositiveButton("हाँ", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        finish();
+                    }
+                })
+                .setNegativeButton("नहीं", null)
+                .show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        onExit();
+    }
+}

@@ -19,6 +19,9 @@ import android.widget.Toast;
 import com.bih.nic.MigrentJobSearch.DataBaseHelper.DataBaseHelper;
 import com.bih.nic.MigrentJobSearch.Model.UserDetails;
 import com.bih.nic.MigrentJobSearch.Model.panchayat;
+import com.bih.nic.MigrentJobSearch.ui.labour.ChangeMobileNumberActivity;
+import com.bih.nic.MigrentJobSearch.ui.labour.MainHomeActivity;
+import com.bih.nic.MigrentJobSearch.ui.labour.RequestOtpActivity;
 
 import java.util.ArrayList;
 
@@ -171,8 +174,7 @@ public class Login extends Activity {
                     PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("PanchayatName",result.getPanchayatName()).commit();
                     PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("Photo",result.getProfileImg()).commit();
 
-
-                    Intent intent=new Intent(Login.this,MainHomeActivity.class);
+                    Intent intent=new Intent(Login.this, MainHomeActivity.class);
                     startActivity(intent);
                     finish();
 
@@ -184,6 +186,7 @@ public class Login extends Activity {
             }
         }
     }
+
     public  void BlinkTextView(TextView txt)
     {
         Animation anim = new AlphaAnimation(0.0f, 1.0f);

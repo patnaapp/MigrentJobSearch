@@ -1,4 +1,4 @@
-package com.bih.nic.MigrentJobSearch;
+package com.bih.nic.MigrentJobSearch.ui;
 
 import android.Manifest;
 import android.app.Activity;
@@ -21,8 +21,15 @@ import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.bih.nic.MigrentJobSearch.CommonPref;
 import com.bih.nic.MigrentJobSearch.DataBaseHelper.DataBaseHelper;
+import com.bih.nic.MigrentJobSearch.ui.employer.EmployerMainHomeActivity;
+import com.bih.nic.MigrentJobSearch.MarshmallowPermission;
 import com.bih.nic.MigrentJobSearch.Model.Versioninfo;
+import com.bih.nic.MigrentJobSearch.R;
+import com.bih.nic.MigrentJobSearch.Utiilties;
+import com.bih.nic.MigrentJobSearch.WebserviceHelper;
+import com.bih.nic.MigrentJobSearch.ui.labour.MainHomeActivity;
 
 import java.io.IOException;
 
@@ -37,13 +44,9 @@ public class SplashActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        //getActionBar().hide();
 
-        //Utiilties.setActionBarBackground(SplashActivity.this);
-     Utiilties.setStatusBarColor(SplashActivity.this);
+        Utiilties.setStatusBarColor(SplashActivity.this);
 
-        //ActionBar actionBar = getActionBar();
-        //actionBar.setTitle(" ");
 
 
         databaseHelper=new DataBaseHelper(getApplicationContext());
@@ -243,35 +246,26 @@ public class SplashActivity extends Activity {
 
             @Override
             public void run() {
-                    /*if (check_ROLE.equalsIgnoreCase("COLL")) {
-                        Intent i = new Intent(SplashActivity.this, MainActivity.class);
-                        startActivity(i);
-                    } else {
-                        // This method will be executed once the timer is over
-                        // Start your app main activity
-                        Intent i = new Intent(SplashActivity.this, AdminActivity.class);
-                        startActivity(i);
-                    }*/
-
-                // This method will be executed once the timer is over
-                // Start your app main activity
 
                 // close this activity
                 if(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserId", "").equals("")) {
-
-                    Intent i = new Intent(SplashActivity.this, Login.class);
+                    Intent i = new Intent(SplashActivity.this, MultiLoginActivity.class);
                     startActivity(i);
                     finish();
                 }else {
-//                    if(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserId", "").equalsIgnoreCase("BLKADM")) {
-//                        Intent i = new Intent(SplashActivity.this, VerifyAadhaar.class);
-//                        startActivity(i);
-//                        finish();
-//                    }else {
+                    if(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserRole", "").equals("Labour")){
                         Intent i = new Intent(SplashActivity.this, MainHomeActivity.class);
                         startActivity(i);
                         finish();
-                   // }
+                    }else if(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserRole", "").equals("ORG")){
+                        Intent i = new Intent(SplashActivity.this, EmployerMainHomeActivity.class);
+                        startActivity(i);
+                        finish();
+                    }else {
+                        Intent i = new Intent(SplashActivity.this, MultiLoginActivity.class);
+                        startActivity(i);
+                        finish();
+                    }
                 }
             }
         }, SPLASH_TIME_OUT);

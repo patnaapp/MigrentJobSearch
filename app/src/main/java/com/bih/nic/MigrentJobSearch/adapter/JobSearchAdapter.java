@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.Image;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
@@ -20,7 +19,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bih.nic.MigrentJobSearch.MainHomeActivity;
 import com.bih.nic.MigrentJobSearch.Model.DefaultResponse;
 import com.bih.nic.MigrentJobSearch.Model.JobListEntity;
 import com.bih.nic.MigrentJobSearch.R;
@@ -104,6 +102,9 @@ public class JobSearchAdapter extends RecyclerView.Adapter<JobSearchAdapter.View
             }else if(info.getIsAccepted().equals("R")){
                 holder.tv_status.setText("आपने आवेदन अस्वीकृत किया");
                 holder.tv_status.setTextColor(activity.getResources().getColor(R.color.holo_red_dark));
+
+                holder.btn_rjct.setVisibility(View.GONE);
+                holder.ll_btn.setVisibility(View.VISIBLE);
             }
         }else{
             holder.ll_btn.setVisibility(View.VISIBLE);
@@ -210,7 +211,8 @@ public class JobSearchAdapter extends RecyclerView.Adapter<JobSearchAdapter.View
     }
 
     @Override
-    public int getItemCount() {
+    public int getItemCount()
+    {
         return ThrList.size();
     }
 
@@ -255,8 +257,8 @@ public class JobSearchAdapter extends RecyclerView.Adapter<JobSearchAdapter.View
     }
 
 
-    public String getGenderHindi(String gender){
-
+    public String getGenderHindi(String gender)
+    {
         return gender;
     }
 
@@ -377,7 +379,7 @@ public class JobSearchAdapter extends RecyclerView.Adapter<JobSearchAdapter.View
             if (result != null) {
                 if(result.getStatus()){
                     ThrList.get(position).setIsAccepted("R");
-                   notifyDataSetChanged();
+                    notifyDataSetChanged();
 
                     new android.app.AlertDialog.Builder(activity)
                             .setTitle("सूचना")

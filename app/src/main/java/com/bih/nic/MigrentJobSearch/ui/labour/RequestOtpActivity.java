@@ -1,4 +1,4 @@
-package com.bih.nic.MigrentJobSearch;
+package com.bih.nic.MigrentJobSearch.ui.labour;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -13,7 +13,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bih.nic.MigrentJobSearch.Login;
 import com.bih.nic.MigrentJobSearch.Model.DefaultResponse;
+import com.bih.nic.MigrentJobSearch.R;
+import com.bih.nic.MigrentJobSearch.Utiilties;
+import com.bih.nic.MigrentJobSearch.WebserviceHelper;
 
 public class RequestOtpActivity extends Activity {
 
@@ -123,7 +127,7 @@ public class RequestOtpActivity extends Activity {
                     ab.setPositiveButton("[OK]", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int whichButton) {
-                            Intent intent = new Intent(getBaseContext(),Login.class);
+                            Intent intent = new Intent(getBaseContext(), Login.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
                             //setFinishOnTouchOutside(false);

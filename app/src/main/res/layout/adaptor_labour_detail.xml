@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -9,6 +10,15 @@
     <!--android:layout_height="80dp"-->
     <!--android:layout_marginLeft="5dp"-->
     <!--android:layout_marginTop="5dp">-->
+    <android.support.v7.widget.CardView
+        android:layout_marginLeft="2dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="2dp"
+        android:elevation="100dp"
+        card_view:cardBackgroundColor="@android:color/white"
+        card_view:cardCornerRadius="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_marginTop="8dp"
@@ -17,7 +27,7 @@
         android:layout_height="wrap_content"
         android:padding="5dp"
         android:weightSum="2"
-        android:background="@color/holo_gray_light"
+        android:background="@color/color_white"
         android:orientation="vertical">
 
         <LinearLayout
@@ -77,10 +87,10 @@
                             android:textSize="13sp"
                             android:textStyle="bold"
                             android:textColor="@color/colorPrimary"
-                            android:text="कुशलता श्रेणी"/>
+                            android:text="पंजीकरण संख्या:-"/>
 
                         <TextView
-                            android:id="@+id/tv_skill_cat"
+                            android:id="@+id/tv_regNo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textAlignment="center"
@@ -101,12 +111,12 @@
                             android:layout_height="wrap_content"
                             android:textAlignment="center"
                             android:textSize="13sp"
-                            android:text="कौशल"
+                            android:text=" नाम "
                             android:textStyle="bold"
                             android:textColor="@color/colorPrimary"/>
 
                         <TextView
-                            android:id="@+id/tv_skill_name"
+                            android:id="@+id/tv_vchname"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textAlignment="center"
@@ -167,7 +177,7 @@
                         android:textSize="13sp"
                         android:textStyle="bold"
                         android:textColor="@color/colorPrimary"
-                        android:layout_width="88dp"
+                        android:layout_width="108dp"
                         android:layout_height="wrap_content"
                         android:text="जिला " />
 
@@ -199,7 +209,7 @@
                         android:textSize="13sp"
                         android:textStyle="bold"
                         android:textColor="@color/colorPrimary"
-                        android:layout_width="88dp"
+                        android:layout_width="108dp"
                         android:layout_height="wrap_content"
                         android:text="प्रखंड" />
 
@@ -221,6 +231,37 @@
 
                 </LinearLayout>
 
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="3dp">
+
+                    <TextView
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_width="108dp"
+                        android:layout_height="wrap_content"
+                        android:text="पता" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:textStyle="bold"
+                        android:text=":"/>
+
+                    <TextView
+                        android:id="@+id/tv_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="6dp"
+                        android:text="New Text"
+                        android:textColor="@color/color_black" />
+                </LinearLayout>
                 <LinearLayout
 
                     android:layout_width="match_parent"
@@ -229,10 +270,10 @@
                     android:padding="3dp">
 
                     <TextView
-                        android:layout_width="88dp"
+                        android:layout_width="108dp"
                         android:layout_height="wrap_content"
                         android:textSize="13sp"
-                        android:text="कार्य स्थल"
+                        android:text="आयु "
                         android:textStyle="bold"
                         android:textColor="@color/colorPrimary"/>
 
@@ -244,49 +285,53 @@
                         android:text=":"/>
 
                     <TextView
-                        android:id="@+id/tv_work_site"
+                        android:id="@+id/tv_perage"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="6dp"
                         android:text="New Text"
                         android:textColor="@android:color/black" />
                 </LinearLayout>
-
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="3dp">
-
-                    <TextView
-                        android:textSize="13sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/colorPrimary"
-                        android:layout_width="88dp"
-                        android:layout_height="wrap_content"
-                        android:text="रिक्त पद" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="4dp"
-                        android:textStyle="bold"
-                        android:text=":"/>
-
-                    <TextView
-                        android:id="@+id/tv_person_no"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="6dp"
-                        android:text="New Text"
-                        android:textColor="@color/color_black" />
-                </LinearLayout>
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/ll_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                android:padding="3dp">
+
+                <TextView
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_width="108dp"
+                    android:layout_height="wrap_content"
+                    android:text=" मोबाइल नंबर" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:textStyle="bold"
+                    android:text=":"/>
+
+                <TextView
+                    android:id="@+id/tv_candidate_mobile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="6dp"
+                    android:text="New Text"
+                    android:textColor="@color/color_black" />
+
+                <ImageView
+                    android:id="@+id/iv_call_candidate"
+                    android:layout_width="22dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_call_black"
+                    android:layout_marginLeft="4dp"
+                    android:tint="@color/holo_green_dark"/>
+            </LinearLayout>
+            </LinearLayout>
+
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -297,39 +342,9 @@
                         android:textSize="13sp"
                         android:textStyle="bold"
                         android:textColor="@color/colorPrimary"
-                        android:layout_width="88dp"
+                        android:layout_width="108dp"
                         android:layout_height="wrap_content"
-                        android:text="आरंभ तिथि" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="4dp"
-                        android:textStyle="bold"
-                        android:text=":"/>
-
-                    <TextView
-                        android:id="@+id/tv_start_date"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="6dp"
-                        android:text="New Text"
-                        android:textColor="@color/color_black" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="3dp">
-
-                    <TextView
-                        android:textSize="13sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/colorPrimary"
-                        android:layout_width="88dp"
-                        android:layout_height="wrap_content"
-                        android:text="सुपरवाइज़र" />
+                        android:text="अभिभावक का नाम" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -357,9 +372,9 @@
                         android:textSize="13sp"
                         android:textStyle="bold"
                         android:textColor="@color/colorPrimary"
-                        android:layout_width="88dp"
+                        android:layout_width="108dp"
                         android:layout_height="wrap_content"
-                        android:text="सुपरवाइज़र नंबर" />
+                        android:text="अभिभावक का मोबाइल नंबर" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -398,7 +413,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:weightSum="4">
+                    android:weightSum="3">
 
                     <LinearLayout
                         android:layout_weight="1"
@@ -410,12 +425,12 @@
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
                             android:textAlignment="center"
-                            android:text="अनुभव"
+                            android:text="कौशल का नाम"
                             android:textStyle="bold"
                             android:textColor="@color/colorPrimary"/>
 
                         <TextView
-                            android:id="@+id/tv_exp"
+                            android:id="@+id/tv_skillname"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textAlignment="center"
@@ -425,21 +440,6 @@
                             android:text="New Text"
                             android:textColor="@android:color/black" />
                     </LinearLayout>
-
-                    <!--                    <RelativeLayout-->
-                    <!--                        android:layout_width="match_parent"-->
-                    <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:layout_weight="1">-->
-                    <!--                        -->
-                    <!--                        -->
-
-                    <!--                        <LinearLayout-->
-                    <!--                            android:layout_alignParentRight="true"-->
-                    <!--                            android:layout_centerVertical="true"-->
-                    <!--                            android:layout_width="1dp"-->
-                    <!--                            android:layout_height="30dp"-->
-                    <!--                            android:background="@color/colorPrimary"/>-->
-                    <!--                    </RelativeLayout>-->
 
 
                     <LinearLayout
@@ -452,7 +452,7 @@
                             android:layout_height="wrap_content"
                             android:textSize="11sp"
                             android:lines="1"
-                            android:text="अधिकतम अनुभव"
+                            android:text="काम का अनुभव"
                             android:textAlignment="center"
                             android:textStyle="bold"
                             android:textColor="@color/colorPrimary"/>
@@ -470,6 +470,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -479,7 +480,7 @@
                             android:layout_height="wrap_content"
                             android:textAlignment="center"
                             android:textSize="12sp"
-                            android:text="वेतन"
+                            android:text="अन्य पेशे"
                             android:textStyle="bold"
                             android:textColor="@color/colorPrimary"/>
 
@@ -495,31 +496,7 @@
                             android:textColor="@android:color/black" />
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textAlignment="center"
-                            android:textSize="12sp"
-                            android:text="अधिकतम वेतन"
-                            android:textStyle="bold"
-                            android:textColor="@color/colorPrimary"/>
 
-                        <TextView
-                            android:id="@+id/tv_salary_max"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textAlignment="center"
-                            android:lines="1"
-                            android:textSize="14sp"
-                            android:textStyle="normal"
-                            android:text="New Text"
-                            android:textColor="@android:color/black" />
-                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
@@ -571,7 +548,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:visibility="visible"
+                android:visibility="gone"
                 android:id="@+id/ll_btn"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -611,7 +588,7 @@
                 android:layout_marginTop="4dp"
                 android:background="@color/colorText"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:orientation="horizontal"
                 android:padding="4dp"
                 android:weightSum="2">
@@ -621,6 +598,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
+                    android:layout_gravity="center"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     android:text="आप तिथि 12/12/12 को इस नौकरी के लिए चुने गए हैं"
@@ -628,7 +606,6 @@
 
             </LinearLayout>
         </LinearLayout>
-
+    </android.support.v7.widget.CardView>
     </LinearLayout>
     <!--</android.support.v7.widget.CardView>-->
-</LinearLayout>
