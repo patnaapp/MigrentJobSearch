@@ -20,7 +20,15 @@ import com.levitnudi.legacytableview.LegacyTableView;
 import java.util.ArrayList;
 
 import static com.levitnudi.legacytableview.LegacyTableView.BOLD;
+import static com.levitnudi.legacytableview.LegacyTableView.DESKTOP;
+import static com.levitnudi.legacytableview.LegacyTableView.ECOKENYA;
 import static com.levitnudi.legacytableview.LegacyTableView.GOLDALINE;
+import static com.levitnudi.legacytableview.LegacyTableView.LAVICI;
+import static com.levitnudi.legacytableview.LegacyTableView.MAASAI;
+import static com.levitnudi.legacytableview.LegacyTableView.MESH;
+import static com.levitnudi.legacytableview.LegacyTableView.OCEAN;
+import static com.levitnudi.legacytableview.LegacyTableView.ORIO;
+import static com.levitnudi.legacytableview.LegacyTableView.SKELETON;
 
 public class BlocJobOfferActivity extends Activity implements AdapterView.OnItemSelectedListener  {
 
@@ -152,7 +160,7 @@ public class BlocJobOfferActivity extends Activity implements AdapterView.OnItem
                 legacyTableView = (LegacyTableView)findViewById(R.id.legacy_table_view);
                 legacyTableView.setTitle(LegacyTableView.readLegacyTitle());
                 legacyTableView.setContent(LegacyTableView.readLegacyContent());
-                legacyTableView.setTheme(GOLDALINE);
+                legacyTableView.setTheme(OCEAN);
                 legacyTableView.setTablePadding(20);
                 legacyTableView.setHighlight(1);
 

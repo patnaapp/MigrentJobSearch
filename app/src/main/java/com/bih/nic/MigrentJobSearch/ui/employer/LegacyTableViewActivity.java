@@ -21,7 +21,15 @@ import com.levitnudi.legacytableview.LegacyTableView;
 import java.util.ArrayList;
 
 import static com.levitnudi.legacytableview.LegacyTableView.BOLD;
+import static com.levitnudi.legacytableview.LegacyTableView.DESKTOP;
+import static com.levitnudi.legacytableview.LegacyTableView.ECOKENYA;
 import static com.levitnudi.legacytableview.LegacyTableView.GOLDALINE;
+import static com.levitnudi.legacytableview.LegacyTableView.LAVICI;
+import static com.levitnudi.legacytableview.LegacyTableView.MAASAI;
+import static com.levitnudi.legacytableview.LegacyTableView.MESH;
+import static com.levitnudi.legacytableview.LegacyTableView.OCEAN;
+import static com.levitnudi.legacytableview.LegacyTableView.ORIO;
+import static com.levitnudi.legacytableview.LegacyTableView.SKELETON;
 
 public class LegacyTableViewActivity extends Activity implements AdapterView.OnItemSelectedListener  {
 
@@ -47,7 +55,7 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
         getActionBar().hide();
 
         distid = getIntent().getStringExtra("distid");
-       // distid1 = getIntent().getStringExtra("distid");
+        // distid1 = getIntent().getStringExtra("distid");
         status = getIntent().getStringExtra("StatusFlag");
         blkcode = getIntent().getStringExtra("BlockCode");
         blkname = getIntent().getStringExtra("BlockNAme");
