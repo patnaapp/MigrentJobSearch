@@ -134,6 +134,7 @@ public class BlocJobOfferActivity extends Activity implements AdapterView.OnItem
             if(data != null && data.size()> 0)
             {
                 tv_Norecord_accpt.setVisibility(View.GONE);
+                //tv_Norecord_accpt.setVisibility(View.GONE);
 
                     LegacyTableView.insertLegacyTitle("क्रम सं.","कंपनी", "कंपनी का पता", "कार्य स्थल", "व्यक्तियों की संख्या","वेतन","स्थान","कौशल");
                     //,"अभिभावक का नाम","अभिभावक का मोबाइल नंबर"

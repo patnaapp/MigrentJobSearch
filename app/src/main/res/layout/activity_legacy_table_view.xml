@@ -44,7 +44,7 @@
 
                 android:id="@+id/tv_skill"
 
-                android:text="समेकित विवरण जिले वाइज नौकरी"
+                android:text="Text"
                 android:textColor="#222222"
                 android:textSize="17sp"
                 android:textStyle="bold" />
