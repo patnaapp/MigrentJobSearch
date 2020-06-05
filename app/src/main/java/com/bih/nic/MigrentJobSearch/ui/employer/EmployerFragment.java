@@ -18,6 +18,7 @@ import android.support.v4.app.Fragment;
 import android.widget.Toast;
 
 import com.bih.nic.MigrentJobSearch.DataBaseHelper.DataBaseHelper;
+import com.bih.nic.MigrentJobSearch.EmployerRegistrartionActivity;
 import com.bih.nic.MigrentJobSearch.Model.EmployerDetails;
 import com.bih.nic.MigrentJobSearch.R;
 import com.bih.nic.MigrentJobSearch.Utiilties;
@@ -69,7 +70,7 @@ public class EmployerFragment extends Fragment {
         tv_registration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), ChangeMobileNumberActivity.class);
+                Intent intent = new Intent(getContext(), EmployerRegistrartionActivity.class);
                 startActivity(intent);
             }
         });

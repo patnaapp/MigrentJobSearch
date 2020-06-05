@@ -53,6 +53,9 @@ public class EmployerRegistrartionActivity extends Activity {
         setContentView(R.layout.activity_employer_registrartion);
         localDBHelper= new DataBaseHelper(EmployerRegistrartionActivity.this);
 
+        Utiilties.setStatusBarColor(this);
+        getActionBar().hide();
+
         initialization();
         loadDistrictSpinnerdata();
         loadOrgdata();
@@ -68,7 +71,7 @@ public class EmployerRegistrartionActivity extends Activity {
         et_email=(EditText)findViewById(R.id.et_email);
         et_password=(EditText)findViewById(R.id.et_password);
         et_reenter_password=(EditText)findViewById(R.id.et_reenter_password);
-        btn_verify=(Button)findViewById(R.id.btn_verify);
+        btn_verify=(Button)findViewById(R.id.btn_verify_new);
 
         sp_type_of_org.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
