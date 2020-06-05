@@ -63,6 +63,7 @@
         android:layout_above="@+id/footer"/>
 
 
+
     <TextView
         android:id="@+id/tv_Norecord_accpt"
         android:layout_width="fill_parent"

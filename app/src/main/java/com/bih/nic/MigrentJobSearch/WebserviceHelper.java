@@ -362,6 +362,7 @@ public class WebserviceHelper implements KvmSerializable {
         try {
             SoapObject request = new SoapObject(SERVICENAMESPACE,methodName);
             SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+           // SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
             envelope.dotNet = true;
             envelope.setOutputSoapObject(request);
             envelope.addMapping(SERVICENAMESPACE,bindClass.getSimpleName(),bindClass);
@@ -1379,6 +1380,7 @@ public class WebserviceHelper implements KvmSerializable {
         request.addProperty("BlockCode", blkid);
         request.addProperty("orgId", orgid);
         request.addProperty("Role", role);
+       // request.addProperty("Role", role);
 
         SoapObject res1;
         try {

@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bih.nic.MigrentJobSearch.Model.BlkCompanyJobDetailsEntity;
 import com.bih.nic.MigrentJobSearch.R;
@@ -19,16 +20,10 @@ import com.levitnudi.legacytableview.LegacyTableView;
 
 import java.util.ArrayList;
 
+
 import static com.levitnudi.legacytableview.LegacyTableView.BOLD;
-import static com.levitnudi.legacytableview.LegacyTableView.DESKTOP;
-import static com.levitnudi.legacytableview.LegacyTableView.ECOKENYA;
-import static com.levitnudi.legacytableview.LegacyTableView.GOLDALINE;
-import static com.levitnudi.legacytableview.LegacyTableView.LAVICI;
-import static com.levitnudi.legacytableview.LegacyTableView.MAASAI;
-import static com.levitnudi.legacytableview.LegacyTableView.MESH;
+
 import static com.levitnudi.legacytableview.LegacyTableView.OCEAN;
-import static com.levitnudi.legacytableview.LegacyTableView.ORIO;
-import static com.levitnudi.legacytableview.LegacyTableView.SKELETON;
 
 public class BlocJobOfferActivity extends Activity implements AdapterView.OnItemSelectedListener  {
 
@@ -54,12 +49,12 @@ public class BlocJobOfferActivity extends Activity implements AdapterView.OnItem
         getActionBar().hide();
 
         distid = getIntent().getStringExtra("distid");
-       // status = getIntent().getStringExtra("StatusFlag");
+        // status = getIntent().getStringExtra("StatusFlag");
         blkcode = getIntent().getStringExtra("BlockCode");
         blkname = getIntent().getStringExtra("BlockNAme");
 
-            tv_skill11.setText("नौकरी प्रस्ताव");
-            tv_skill11.setTextColor(getApplicationContext().getResources().getColor(R.color.green));
+        tv_skill11.setText("नौकरी प्रस्ताव");
+        tv_skill11.setTextColor(getApplicationContext().getResources().getColor(R.color.green));
 
         OrgId= PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("OrgId", "");
         UserId=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserId", "");
@@ -98,14 +93,12 @@ public class BlocJobOfferActivity extends Activity implements AdapterView.OnItem
 
     }
 
-
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId()){
+        switch (item.getItemId())
+        {
             case android.R.id.home:
                 //finish activity once user presses back button
-
                 finish();
                 return true;
 
@@ -144,18 +137,16 @@ public class BlocJobOfferActivity extends Activity implements AdapterView.OnItem
                 tv_Norecord_accpt.setVisibility(View.GONE);
                 //tv_Norecord_accpt.setVisibility(View.GONE);
 
-                    LegacyTableView.insertLegacyTitle("क्रम सं.","कंपनी", "कंपनी का पता", "कार्य स्थल", "व्यक्तियों की संख्या","वेतन","स्थान","कौशल");
-                    //,"अभिभावक का नाम","अभिभावक का मोबाइल नंबर"
+                LegacyTableView.insertLegacyTitle("क्रम सं.","कंपनी", "कंपनी का पता", "कार्य स्थल", "व्यक्तियों की संख्या","वेतन","स्थान","कौशल");
+                //,"अभिभावक का नाम","अभिभावक का मोबाइल नंबर"
 
-                    int i=1;
-                    for (BlkCompanyJobDetailsEntity info: data)
-                    {
+                int i=1;
+                for (BlkCompanyJobDetailsEntity info: data)
+                {
 
-                        LegacyTableView.insertLegacyContent(String.valueOf(i),info.getComanyNameEn(),info.getAddressEn(),info.getWorkSiteNameHn(),info.getNoOfPerson(),info.getSalary(),info.getLocation(),info.getSkillName());
-                        i++;
-                    }
-
-
+                    LegacyTableView.insertLegacyContent(String.valueOf(i),info.getComanyNameEn(),info.getAddressEn(),info.getWorkSiteNameHn(),info.getNoOfPerson(),info.getSalary(),info.getLocation(),info.getSkillName());
+                    i++;
+                }
 
                 legacyTableView = (LegacyTableView)findViewById(R.id.legacy_table_view);
                 legacyTableView.setTitle(LegacyTableView.readLegacyTitle());
@@ -170,7 +161,6 @@ public class BlocJobOfferActivity extends Activity implements AdapterView.OnItem
                 legacyTableView.setContentTextSize(30);
                 legacyTableView.setTitleTextSize(35);
 
-
                 legacyTableView.build();
 
                 if (this.dialog.isShowing())
@@ -178,8 +168,8 @@ public class BlocJobOfferActivity extends Activity implements AdapterView.OnItem
                     this.dialog.dismiss();
                 }
             }
-            else {
-
+            else
+            {
                 tv_Norecord_accpt.setVisibility(View.VISIBLE);
             }
 
