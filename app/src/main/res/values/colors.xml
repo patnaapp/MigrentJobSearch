@@ -6,6 +6,7 @@
 
 
     <color name="holo_blue_light">#2B9CC5</color>
+    <color name="black">#000000</color>
     <!-- A light Holo shade of gray -->
     <color name="back">#84d2ef</color>
     <color name="holo_gray_light">#33999999</color>

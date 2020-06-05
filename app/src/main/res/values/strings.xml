@@ -26,6 +26,14 @@
     <string name="do_you_want_to_upload">Do You Want TO Upload..</string>
     <string name="save">Save</string>
     <string name="Error_in_Network">Error in Network</string>
+    <string name="invalid_email">This email address is invalid</string>
+    <string name="invalid_password">Password is too short</string>
+    <string name="invalid_password_pattern">Password must contains alphabet and numeric characters"</string>
+    <string name="incorrect_password">Password is incorrect</string>
+    <string name="field_required">This field is required</string>
+    <string name="valid_password">Enter valid Current Password</string>
+    <string name="password_not_match">Password did not match</string>
+    <string name="Invalid_Number">Mobile Number is Incorrect</string>
     <string-array name="image_ids">
         <item>@drawable/verify_aadhar_copy</item>
         <item>@drawable/uploade_verifi_data</item>
