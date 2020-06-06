@@ -68,7 +68,6 @@
         <activity android:name=".ui.employer.AcceptedRejctd_Job_Activity"></activity>
         <activity android:name=".ui.employer.LabourSearchActivity" />
         <activity android:name=".ui.employer.LabourDetailActivity"/>
-        <activity android:name=".LegacyTableViewActivity"/>
         <activity android:name=".ui.labour.PaymentStatusActivity" />
         <activity android:name=".ui.labour.JobSearchActivity" />
         <activity android:name=".ui.labour.ModifyDocumentActivity" />

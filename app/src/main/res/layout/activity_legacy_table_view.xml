@@ -41,17 +41,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-
                 android:id="@+id/tv_skill"
-
                 android:text="Text"
                 android:textColor="#222222"
-                android:textSize="17sp"
+                android:textSize="22dp"
                 android:textStyle="bold" />
 
+
         </LinearLayout>
-
-
     </LinearLayout>
 
 
@@ -60,21 +57,58 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/ll_skill"
-        android:layout_above="@+id/footer"/>
+        android:layout_above="@+id/ll_btn"/>
+
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/backarrow"
+        android:id="@+id/btn_previous"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp"
+        android:layout_marginLeft="15dp"
+        android:padding="4dp"
+        android:background="@drawable/circular_shape_white1"
+        ></ImageView>
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/nextarrow"
+        android:id="@+id/btn_next"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="50dp"
+        android:layout_marginRight="15dp"
+        android:padding="4dp"
+        android:background="@drawable/circular_shape_white1"
+        ></ImageView>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/ll_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+
+        android:orientation="horizontal"
+
+        android:layout_above="@+id/footer"
+        android:padding="4dp"
+        android:weightSum="2">
 
 
 
-    <TextView
-        android:id="@+id/tv_Norecord_accpt"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:background="@android:color/background_light"
-        android:gravity="center"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#FF4B4B"
-        android:text="No Record Found"
-        android:visibility="visible"
-        android:layout_below="@+id/ll_skill"
-        android:layout_above="@+id/footer"/>
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/nextarrow"
+            android:background="@drawable/circular_shape_white1"
+            android:layout_gravity="right"
+
+            ></ImageView>
+
+    </LinearLayout>
 
 </RelativeLayout>

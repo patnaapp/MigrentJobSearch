@@ -35,7 +35,7 @@ public class BlocJobOfferActivity extends Activity implements AdapterView.OnItem
 
     String DistId="",DistNAme="";
     TextView tv_skill11,tv_Norecord_accpt;
-    ImageView img_back;
+    ImageView img_back,btn_previous,btn_next;
 
 
     @Override
@@ -43,8 +43,12 @@ public class BlocJobOfferActivity extends Activity implements AdapterView.OnItem
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_legacy_table_view);
         tv_skill11=findViewById(R.id.tv_skill);
-        tv_Norecord_accpt=findViewById(R.id.tv_Norecord_accpt);
+       // tv_Norecord_accpt=findViewById(R.id.tv_Norecord_accpt);
         img_back=(ImageView) findViewById(R.id.img);
+        btn_previous=(ImageView) findViewById(R.id.btn_previous);
+        btn_next=(ImageView) findViewById(R.id.btn_next);
+        btn_next.setVisibility(View.GONE);
+        btn_previous.setVisibility(View.GONE);
         Utiilties.setStatusBarColor(this);
         getActionBar().hide();
 
@@ -77,24 +81,27 @@ public class BlocJobOfferActivity extends Activity implements AdapterView.OnItem
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed()
+    {
         super.onBackPressed();
-        //do something when user presses back
         finish();
     }
 
     @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+    {
 
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> parent) {
+    public void onNothingSelected(AdapterView<?> parent)
+    {
 
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
         switch (item.getItemId())
         {
             case android.R.id.home:
@@ -129,21 +136,15 @@ public class BlocJobOfferActivity extends Activity implements AdapterView.OnItem
         @Override
         protected void onPostExecute(ArrayList<BlkCompanyJobDetailsEntity> result)
         {
-
-
             data = result;
             if(data != null && data.size()> 0)
             {
-                tv_Norecord_accpt.setVisibility(View.GONE);
                 //tv_Norecord_accpt.setVisibility(View.GONE);
-
                 LegacyTableView.insertLegacyTitle("क्रम सं.","कंपनी", "कंपनी का पता", "कार्य स्थल", "व्यक्तियों की संख्या","वेतन","स्थान","कौशल");
-                //,"अभिभावक का नाम","अभिभावक का मोबाइल नंबर"
 
                 int i=1;
                 for (BlkCompanyJobDetailsEntity info: data)
                 {
-
                     LegacyTableView.insertLegacyContent(String.valueOf(i),info.getComanyNameEn(),info.getAddressEn(),info.getWorkSiteNameHn(),info.getNoOfPerson(),info.getSalary(),info.getLocation(),info.getSkillName());
                     i++;
                 }
@@ -170,7 +171,7 @@ public class BlocJobOfferActivity extends Activity implements AdapterView.OnItem
             }
             else
             {
-                tv_Norecord_accpt.setVisibility(View.VISIBLE);
+               // tv_Norecord_accpt.setVisibility(View.VISIBLE);
             }
 
         }

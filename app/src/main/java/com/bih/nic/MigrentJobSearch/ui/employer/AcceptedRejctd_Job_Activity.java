@@ -38,7 +38,7 @@ public class AcceptedRejctd_Job_Activity extends Activity implements AdapterView
     String DistId="",DistNAme="";
 
     DataBaseHelper dataBaseHelper;
-    String status="",blkcode="", blkname="";
+    String status="",blkcode="", blkname="",serialno="0";
     String OrgId="",user_name="", mobile="", address="", DistName="", ProfileImg="",CompanyName="", UserId="",UserRole="",distid="";
 
 
@@ -105,7 +105,7 @@ public class AcceptedRejctd_Job_Activity extends Activity implements AdapterView
         protected ArrayList<AcptdRjctdJobOfferEntity> doInBackground(String...arg)
         {
 
-            return WebserviceHelper.JobOfferAcptdRjctd(distid,blkcode, OrgId,UserRole,status);
+            return WebserviceHelper.JobOfferAcptdRjctd(distid,blkcode, OrgId,UserRole,status,serialno);
         }
 
         @Override
