@@ -90,7 +90,18 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
         mobile=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("Mobile", "");
         address=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("Address", "");
 
+
+//        String[] Title={"क्रम सं.","पंजीकरण संख्या", "कौशल", "नाम", "लिंग","मोबाइल नंबर","कार्य स्थल का नाम"};
+//
+//        legacyTableView = (LegacyTableView)findViewById(R.id.legacy_table_view);
+//
+//        // legacyTableView.setTitle(LegacyTableView.readLegacyTitle());
+//        legacyTableView.setTitle(Title);
+
         new SyncAcceptedRjctdJobsOffers("0").execute();
+
+
+
 
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -181,19 +192,19 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
         protected void onPostExecute(ArrayList<AcptdRjctdJobOfferEntity> result)
         {
 
-            String[] Title={"क्रम सं.","पंजीकरण संख्या", "कौशल", "नाम", "लिंग","मोबाइल नंबर","कार्य स्थल का नाम"};
-            ArrayList<String>  Content=new ArrayList<>();
+
 
             data = result;
-
+            ArrayList<String>  Content=new ArrayList<>();
             if(data != null && data.size()> 0)
             {
                 // tv_Norecord_accpt.setVisibility(View.GONE);
                 if (status.equals("SHRGJ")){
 
-                    // LegacyTableView.insertLegacyTitle("क्रम सं.","पंजीकरण संख्या", "कौशल", "नाम", "लिंग","मोबाइल नंबर","कार्य स्थल का नाम");
+                     LegacyTableView.insertLegacyTitle("क्रम सं.","पंजीकरण संख्या", "कौशल", "नाम", "लिंग","मोबाइल नंबर","कार्य स्थल का नाम");
                     //  LegacyTableView.insertLegacyTitle("क्रम सं.","पंजीकरण संख्या", "कौशल", "नाम", "लिंग","मोबाइल नंबर","कार्य स्थल का नाम");
                     //,"अभिभावक का नाम","अभिभावक का मोबाइल नंबर"
+
 
                     int i=1;
 
@@ -201,17 +212,17 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
 
                     for (AcptdRjctdJobOfferEntity info: data)
                     {
-                        Content.add(info.getRow_num());
-                        Content.add(info.getVchregnum());
-                        Content.add(info.getSkillName());
-                        Content.add(info.getVchName());
-                        Content.add(info.getGender());
-                        Content.add(info.getVchMobile());
-                        Content.add(info.getWorkSiteNameHn());
+//                        Content.add(info.getRow_num());
+//                        Content.add(info.getVchregnum());
+//                        Content.add(info.getSkillName());
+//                        Content.add(info.getVchName());
+//                        Content.add(info.getGender());
+//                        Content.add(info.getVchMobile());
+//                        Content.add(info.getWorkSiteNameHn());
 
                         //  Content={info.getRow_num(),info.getVchregnum(),info.getSkillName(),info.getVchName(),info.getGender(),info.getVchMobile(),info.getWorkSiteNameHn()};
-                        //LegacyTableView.insertLegacyContent(info.getRow_num(),info.getVchregnum(),info.getSkillName(),info.getVchName(),info.getGender(),info.getVchMobile(),info.getWorkSiteNameHn());
-                        //i++;
+                        LegacyTableView.insertLegacyContent(info.getRow_num(),info.getVchregnum(),info.getSkillName(),info.getVchName(),info.getGender(),info.getVchMobile(),info.getWorkSiteNameHn());
+                        i++;
                     }
 
                 }
@@ -242,14 +253,15 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
 
                 }
 
-                legacyTableView = (LegacyTableView)findViewById(R.id.legacy_table_view);
 
-                // legacyTableView.setTitle(LegacyTableView.readLegacyTitle());
-                legacyTableView.setTitle(Title);
-                String[] stockArr = new String[Content.size()];
-                stockArr = Content.toArray(stockArr);
                 String[] arr = Content.toArray(new String[Content.size()]);
-                legacyTableView.setContent(arr);
+
+                //legacyTableView.setContent(arr);
+                legacyTableView = (LegacyTableView)findViewById(R.id.legacy_table_view);
+                legacyTableView.resetVariables();
+                legacyTableView.setTitle(LegacyTableView.readLegacyTitle());
+                legacyTableView.setContent(LegacyTableView.readLegacyContent());
+
                 legacyTableView.setTheme(GOLDALINE);
                 legacyTableView.setTablePadding(20);
                 legacyTableView.setHighlight(1);
