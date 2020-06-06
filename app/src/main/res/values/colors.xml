@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#2C3673</color>
+    <color name="colorPrimarynew">#344955</color>
     <color name="colorPrimaryDark">#10163A</color>
     <color name="colorPrimaryLight">#A1A4B6</color>
     <color name="colorAccent">#ff33b5e5</color>
@@ -62,7 +63,6 @@
     <color name="colorText">#6db425</color>
     <color name="green">#268e28</color>
 
-    <color name="black">#000000</color>
     <color name="colorwhite">#ffffff</color>
     <color name="blue">#00abea</color>
     <color name="black_overlay">#66000000</color>

@@ -1426,47 +1426,6 @@ public class WebserviceHelper implements KvmSerializable {
         return pvmArrayList;
     }
 
-    public static String EmpRegistration(EmpRegDetails user) {
-        try {
-            SoapObject request = new SoapObject(SERVICENAMESPACE,
-                    EmployerRegistration_METHOD);
-            request.addProperty("_CompanyName", user.getOrgName());
-            request.addProperty("_CommpanyType", user.getOrgCode());
-            request.addProperty("_DistCode", user.getDistCode());
-            request.addProperty("_AddressName", user.getCrosspondance_address());
-            request.addProperty("_CommpanyContactName", user.getContact_Person());
-            request.addProperty("_ContactNo", user.getMobile_Number());
-            request.addProperty("_OtherMobileNo", user.getAlternative_Mobile_Number());
-            request.addProperty("_EmailId", user.getEmail());
-            request.addProperty("_Password", user.getPassword());
-            //request.addProperty("_OrgCode", user.getOtp());
-            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
-                    SoapEnvelope.VER11);
-            envelope.dotNet = true;
-            envelope.setOutputSoapObject(request);
-            envelope.addMapping(SERVICENAMESPACE,
-                    EmpRegDetails.UserDetails_CLASS.getSimpleName(),
-                    EmpRegDetails.UserDetails_CLASS);
-            HttpTransportSE androidHttpTransport = new HttpTransportSE(
-                    SERVICEURL);
-            androidHttpTransport.call(SERVICENAMESPACE + EmployerRegistration_METHOD,
-                    envelope);
-
-            Object result = envelope.getResponse();
-
-            if (result != null) {
-                // Log.d("", result.toString());
-
-                return result.toString();
-            } else
-                return null;
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-
-    }
     public static String Registration_Mob(String mob,String otp) {
         try {
             SoapObject request = new SoapObject(SERVICENAMESPACE,REGISTRATION_EMP_MOB_METHOD);
@@ -1501,5 +1460,60 @@ public class WebserviceHelper implements KvmSerializable {
             return null;
         }
 
+    }
+    public static DefaultResponse EmpRegistration(EmpRegDetails user) {
+        SoapObject request = new SoapObject(SERVICENAMESPACE, EmployerRegistration_METHOD);
+        request.addProperty("_CompanyName", user.getOrgName());
+        request.addProperty("_CommpanyType", user.getOrgCode());
+        request.addProperty("_DistCode", user.getDistCode());
+        request.addProperty("_AddressName", user.getCrosspondance_address());
+        request.addProperty("_CommpanyContactName", user.getContact_Person());
+        request.addProperty("_ContactNo", user.getMobile_Number());
+        request.addProperty("_OtherMobileNo", user.getAlternative_Mobile_Number());
+        request.addProperty("_EmailId", user.getEmail());
+        request.addProperty("_Password", user.getPassword());
+        DefaultResponse userDetails;
+        SoapObject res1;
+        try {
+
+            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+            envelope.dotNet = true;
+            envelope.setOutputSoapObject(request);
+            envelope.addMapping(SERVICENAMESPACE, DefaultResponse.DefaultResponse_CLASS.getSimpleName(), DefaultResponse.DefaultResponse_CLASS);
+            HttpTransportSE androidHttpTransport = new HttpTransportSE(SERVICEURL);
+            androidHttpTransport.call(SERVICENAMESPACE + EmployerRegistration_METHOD, envelope);
+
+            res1 = (SoapObject) envelope.getResponse();
+
+            int TotalProperty = res1.getPropertyCount();
+
+            userDetails = new DefaultResponse(res1);
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return userDetails;
+//        try {
+//            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
+//                    SoapEnvelope.VER11);
+//            envelope.dotNet = true;
+//            envelope.implicitTypes = true;
+//            envelope.setOutputSoapObject(request);
+//
+//            HttpTransportSE androidHttpTransport = new HttpTransportSE(
+//                    SERVICEURL);
+//            androidHttpTransport.call(SERVICENAMESPACE + UPLOAD_METHOD,
+//                    envelope);
+//            // res2 = (SoapObject) envelope.getResponse();
+//            rest = envelope.getResponse().toString();
+//
+//            // rest=res2.toString();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return "0";
+//        }
+//        return rest;
     }
 }

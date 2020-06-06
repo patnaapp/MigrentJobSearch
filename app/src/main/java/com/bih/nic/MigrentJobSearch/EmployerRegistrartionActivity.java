@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,12 +22,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bih.nic.MigrentJobSearch.DataBaseHelper.DataBaseHelper;
+import com.bih.nic.MigrentJobSearch.Model.DefaultResponse;
 import com.bih.nic.MigrentJobSearch.Model.District;
 import com.bih.nic.MigrentJobSearch.Model.EmpRegDetails;
 import com.bih.nic.MigrentJobSearch.Model.Organisation;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class EmployerRegistrartionActivity extends Activity {
@@ -46,6 +49,8 @@ public class EmployerRegistrartionActivity extends Activity {
     Button btn_reg , btn_cancel,buttonConfirm_OTP,buttonResend_OTP;
     TextView viewmobile;
     EditText et_OTP;
+    String type_0f_org[] = {"-चयन करे-","Goverment","Private","Semi-Goverment"};
+    ArrayAdapter Type_0f_org;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +63,10 @@ public class EmployerRegistrartionActivity extends Activity {
 
         initialization();
         loadDistrictSpinnerdata();
-        loadOrgdata();
+        Type_0f_org = new ArrayAdapter<String>(this, R.layout.spinner_textview, type_0f_org);
+        Type_0f_org.setDropDownViewResource(R.layout.spinner_textview);
+        sp_type_of_org.setAdapter(Type_0f_org);
+        //loadOrgdata();
     }
     public void initialization(){
         et_org_name=(EditText)findViewById(R.id.et_org_name);
@@ -80,9 +88,15 @@ public class EmployerRegistrartionActivity extends Activity {
                 // TODO Auto-generated method stub
                 int pos = position;
                 if (pos > 0) {
-                    Organisation organisation = OrgList.get(position-1);
-                    OrgCode = organisation.get_OrgCode();
-                    OrgName = organisation.get_OrgName();
+                    OrgName = type_0f_org[position].toString();
+                    if (OrgName.equals("Goverment")) {
+                        OrgCode = "1";
+                    } else if (OrgName.equals("Private")) {
+                        OrgCode = "2";
+                    }else if (OrgName.equals("Semi-Goverment")) {
+                        OrgCode = "3";
+                    }
+
                 }
 
             }
@@ -156,12 +170,12 @@ public class EmployerRegistrartionActivity extends Activity {
         View focusView = null;
 
         if (TextUtils.isEmpty(et_org_name.getText().toString())) {
-            et_org_name.setError("कृपया पंचायत का नाम दर्ज करे|");
+            et_org_name.setError(getString(R.string.field_required));
             focusView = et_org_name;
             cancelRegistration = true;
         }
         if (TextUtils.isEmpty(OrgCode)) {
-            Toast.makeText(getApplicationContext(), "कृपया राज्य का नाम का चयन करे |", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "कृपया संस्था का प्रकार चयन करे |", Toast.LENGTH_LONG).show();
             focusView = sp_type_of_org;
             cancelRegistration = true;
         }
@@ -174,13 +188,12 @@ public class EmployerRegistrartionActivity extends Activity {
         }
 
         if (TextUtils.isEmpty(et_crosspondance_address.getText().toString())) {
-            et_crosspondance_address.setError("कृपया लाभार्थी का नाम (आधार के अनुसार) डाले |");
+            et_crosspondance_address.setError(getString(R.string.field_required));
             focusView = et_crosspondance_address;
             cancelRegistration = true;
         }
         if (TextUtils.isEmpty(contact_person)) {
-            et_contact_person.setError("कृपया जन्म का वर्ष डाले |");
-            et_mobile_number.setError(getString(R.string.field_required));
+            et_contact_person.setError(getString(R.string.field_required));
             focusView = et_contact_person;
             cancelRegistration = true;
         }
@@ -232,8 +245,6 @@ public class EmployerRegistrartionActivity extends Activity {
             focusView = et_reenter_password;
             cancelRegistration = true;
         }
-
-
 
         if (cancelRegistration) {
             focusView.requestFocus();
@@ -299,7 +310,7 @@ public class EmployerRegistrartionActivity extends Activity {
         return false;
     }
 
-    private class EmployerReg extends AsyncTask<EmpRegDetails, Void, String> {
+    private class EmployerReg extends AsyncTask<EmpRegDetails, Void, DefaultResponse> {
 
         private final ProgressDialog dialog = new ProgressDialog(
                 EmployerRegistrartionActivity.this);
@@ -316,47 +327,63 @@ public class EmployerRegistrartionActivity extends Activity {
         }
 
         @Override
-        protected String doInBackground(EmpRegDetails... param) {
+        protected DefaultResponse doInBackground(EmpRegDetails... param) {
 
             return WebserviceHelper.EmpRegistration(param[0]);
 
         }
 
         @Override
-        protected void onPostExecute(String result) {
+        protected void onPostExecute(DefaultResponse result) {
 
             if (this.dialog.isShowing()) {
                 this.dialog.dismiss();
 
-                if (result == null || !(result.equals("1"))) {
+                if (result != null) {
+                    if (result.getStatus()==true) {
 
-                    alertDialog.setTitle("Failed");
-                    alertDialog.setMessage("Registration Failed");
-                    alertDialog.show();
+                                Toast.makeText(getApplicationContext(), result.getMessage(), Toast.LENGTH_SHORT).show();
+                             finish();
+
+                        }  if (result.getStatus()==false) {
+                            Toast.makeText(getApplicationContext(), result.getMessage(), Toast.LENGTH_SHORT).show();
+
+                        }
 
                 } else {
-                    try {
-                        Toast.makeText(EmployerRegistrartionActivity.this, "You have successfully registered", Toast.LENGTH_LONG).show();
-
-                        Intent i = new Intent(getBaseContext(), EmployerRegistrartionActivity.class);
-                        startActivity(i);
-                        finish();
-
-                    } catch (Exception ex) {
-                        Toast.makeText(EmployerRegistrartionActivity.this,
-                                "Registration failed", Toast.LENGTH_SHORT)
-                                .show();
-                    }
-
+                    //chk_msg_OK_networkdata("Uploading failed.Please Try Again Later");
+                    Toast.makeText(getApplicationContext(), "Result Null..Please Try Later", Toast.LENGTH_SHORT).show();
                 }
+
+//                if (result == null || !(result.equals("1"))) {
+//
+//                    alertDialog.setTitle("Failed");
+//                    alertDialog.setMessage("Registration Failed");
+//                    alertDialog.show();
+//
+//                } else {
+//                    try {
+//                        Toast.makeText(EmployerRegistrartionActivity.this, "You have successfully registered", Toast.LENGTH_LONG).show();
+//
+//                        Intent i = new Intent(getBaseContext(), EmployerRegistrartionActivity.class);
+//                        startActivity(i);
+//                        finish();
+//
+//                    } catch (Exception ex) {
+//                        Toast.makeText(EmployerRegistrartionActivity.this,
+//                                "Registration failed", Toast.LENGTH_SHORT)
+//                                .show();
+//                    }
+//
+//                }
             }
         }
     }
     public void loadDistrictSpinnerdata() {
 
-        DistrictList = localDBHelper.getDistrictLocal();
+        DistrictList = localDBHelper.getDistrictLocal_new();
         districtNameArray = new ArrayList<String>();
-        districtNameArray.add("-जिला का नाम-");
+        districtNameArray.add("-चयन करे-");
         int i = 1;
         for (District district : DistrictList) {
             districtNameArray.add(district.get_DistNameHN());
@@ -367,21 +394,21 @@ public class EmployerRegistrartionActivity extends Activity {
         sp_district.setAdapter(districtadapter);
 
     }
-    public void loadOrgdata() {
-
-        OrgList = localDBHelper.getorg();
-        orgNameArray = new ArrayList<String>();
-        orgNameArray.add("-संस्था का प्रकार-");
-        int i = 1;
-        for (Organisation district : OrgList) {
-            orgNameArray.add(district.get_OrgName());
-            i++;
-        }
-        orgadapter = new ArrayAdapter<String>(this, R.layout.spinner_textview, orgNameArray);
-        orgadapter.setDropDownViewResource(R.layout.spinner_textview);
-        sp_type_of_org.setAdapter(orgadapter);
-
-    }
+//    public void loadOrgdata() {
+//
+//        OrgList = localDBHelper.getorg_new();
+//        orgNameArray = new ArrayList<String>();
+//        orgNameArray.add("-संस्था का प्रकार-");
+//        int i = 1;
+//        for (Organisation district : OrgList) {
+//            orgNameArray.add(district.get_OrgName());
+//            i++;
+//        }
+//        orgadapter = new ArrayAdapter<String>(this, R.layout.spinner_textview, orgNameArray);
+//        orgadapter.setDropDownViewResource(R.layout.spinner_textview);
+//        sp_type_of_org.setAdapter(orgadapter);
+//
+//    }
     private class RegistrationTask extends AsyncTask<EmpRegDetails, Void, String> {
 
         private final ProgressDialog dialog = new ProgressDialog(EmployerRegistrartionActivity.this);
@@ -414,8 +441,9 @@ public class EmployerRegistrartionActivity extends Activity {
             }
 
             if (result != null) {
+                //if (result.getStatus()==true) {
+                if (result.equalsIgnoreCase("Success")){
 
-                if (result.contains("1")){
 
                     try {
 
@@ -428,7 +456,7 @@ public class EmployerRegistrartionActivity extends Activity {
                     }
 
                 }
-                else if(result.contains("2")){
+                else if(result.equalsIgnoreCase("failure")){
 
                     Toast.makeText(EmployerRegistrartionActivity.this,
                             "!! URT !! Invalid user", Toast.LENGTH_SHORT)
@@ -469,14 +497,14 @@ public class EmployerRegistrartionActivity extends Activity {
         //  viewmobile.setText(" OTP मोबाइल नंबर: "+showmobile+" पर भेजा गया ");
 
         //Creating an alertdialog builder
-        android.support.v7.app.AlertDialog.Builder alert = new android.support.v7.app.AlertDialog.Builder(this);
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
         //Adding our dialog box to the view of alert dialog
         alert.setView(confirmDialog);
         alert.setCancelable(false);
 
         //Creating an alert dialog
-        final android.support.v7.app.AlertDialog alertDialog = alert.create();
+        final AlertDialog alertDialog = alert.create();
 
         //Displaying the alert dialog
         alertDialog.show();

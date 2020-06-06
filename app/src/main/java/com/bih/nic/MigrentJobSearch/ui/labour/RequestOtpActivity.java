@@ -119,6 +119,7 @@ public class RequestOtpActivity extends Activity {
 
                 if (result.getStatus()==true) {
 
+
                     AlertDialog.Builder ab = new AlertDialog.Builder(RequestOtpActivity.this);
                     ab.setCancelable(false);
                     ab.setTitle("OTP SENT");

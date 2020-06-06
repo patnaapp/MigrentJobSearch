@@ -1317,7 +1317,7 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
         }
         return c;
     }
-    public ArrayList<District> getDistrictLocal() {
+    public ArrayList<District> getDistrictLocal_new() {
 
         ArrayList<District> districtList = new ArrayList<District>();
 
@@ -1353,7 +1353,7 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
         return districtList;
 
     }
-    public ArrayList<Organisation> getorg() {
+    public ArrayList<Organisation> getorg_new() {
 
         ArrayList<Organisation> districtList = new ArrayList<Organisation>();
 
