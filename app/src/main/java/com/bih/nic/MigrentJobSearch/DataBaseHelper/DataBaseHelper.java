@@ -495,6 +495,7 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
                 distClass.setBlockCode(cur.getString(cur.getColumnIndex("BlockCode")));
                 distClass.setBlockName(cur.getString(cur.getColumnIndex("BlockName")));
                 distClass.setDistCode(cur.getString(cur.getColumnIndex("DistCode")));
+                distClass.setBlockNameHn(cur.getString(cur.getColumnIndex("BlockNameHN")));
                 DistList.add(distClass);
             }
 

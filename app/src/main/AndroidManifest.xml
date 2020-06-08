@@ -65,9 +65,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.employer.AcceptedRejctd_Job_Activity"></activity>
+        <activity android:name=".ui.SplashActivity"></activity>
+        <activity android:name=".ui.employer.AcceptedRejctd_Job_Activity" />
         <activity android:name=".ui.employer.LabourSearchActivity" />
-        <activity android:name=".ui.employer.LabourDetailActivity"/>
+        <activity android:name=".ui.employer.LabourDetailActivity" />
         <activity android:name=".ui.labour.PaymentStatusActivity" />
         <activity android:name=".ui.labour.JobSearchActivity" />
         <activity android:name=".ui.labour.ModifyDocumentActivity" />
@@ -82,7 +83,7 @@
         <activity android:name=".VerifyAadhaar1" />
         <activity android:name=".ui.employer.EmployerRegistrartionActivity" />
         <activity
-            android:name=".ui.SplashActivity"
+            android:name=".ui.employer.AddWorkSiteDetails_Activity"
             android:theme="@style/NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -12,6 +12,7 @@ public class BlockWeb {
 	private String DistCode = "";
 	private String BlockCode = "";
 	private String BlockName = "";
+	private String BlockNameHn = "";
 	private String PacsBankId = "";
 	private String UserId;
 
@@ -93,5 +94,13 @@ public class BlockWeb {
 
 	public void setUserId(String userId) {
 		UserId = userId;
+	}
+
+	public String getBlockNameHn() {
+		return BlockNameHn;
+	}
+
+	public void setBlockNameHn(String blockNameHn) {
+		BlockNameHn = blockNameHn;
 	}
 }
