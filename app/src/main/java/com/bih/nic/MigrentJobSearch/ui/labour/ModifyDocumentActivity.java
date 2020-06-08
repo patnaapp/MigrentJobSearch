@@ -418,7 +418,7 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
         list.add("-Select-");
         int index = 0;
         for (SkillMaster info: skillList){
-            list.add(info.getSkillName());
+            list.add(info.getSkillNameHn().trim());
             //if(benDetails.get)
         }
 
@@ -426,7 +426,8 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
         adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spn_skill.setAdapter(adaptor);
         if(benDetails.getSkill_Id()!=null){
-            spn_skill.setSelection(((ArrayAdapter<String>) spn_skill.getAdapter()).getPosition(benDetails.getSkill_Name()));
+            String skill_hn = dataBaseHelper.getNameFor("SkilMaster", "Id", "SkillNameHn", benDetails.getSkill_Id());
+            spn_skill.setSelection(((ArrayAdapter<String>) spn_skill.getAdapter()).getPosition(skill_hn.trim()));
 
         }
 
@@ -435,15 +436,18 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
     public void setSubSkillSpinner(){
         ArrayList<String> list = new ArrayList<String>();
         list.add("-Select-");
+
         for (SubSkillMaster info: subSkillList){
-            list.add(info.getSkillName());
+
+            list.add(info.getSkillNameHn().trim());
         }
 
         ArrayAdapter adaptor = new ArrayAdapter(this, android.R.layout.simple_spinner_item, list);
         adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spn_sub_skill.setAdapter(adaptor);
         if(benDetails.getSubSkillName()!=null){
-            spn_sub_skill.setSelection(((ArrayAdapter<String>) spn_sub_skill.getAdapter()).getPosition(benDetails.getSubSkillName()));
+            String sub_skill_hn = dataBaseHelper.getNameFor("SubSkillMaster", "SubskillId", "Sub_SkillNameHn", benDetails.getSubSkillId());
+            spn_sub_skill.setSelection(((ArrayAdapter<String>) spn_sub_skill.getAdapter()).getPosition(sub_skill_hn.trim()));
 
         }
     }
@@ -460,7 +464,8 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
         ArrayAdapter adaptor = new ArrayAdapter(this, android.R.layout.simple_spinner_item, list);
         adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spn_category.setAdapter(adaptor);
-    } public void loadQualification(){
+    }
+    public void loadQualification(){
         Qualification = dataBaseHelper.Qualification();
         ArrayList<String> list = new ArrayList<String>();
         list.add("-Select-");
@@ -630,7 +635,7 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
         private final ProgressDialog dialog = new ProgressDialog(ModifyDocumentActivity.this);
 
 
-       // int optionType;
+        // int optionType;
 
         @Override
         protected void onPreExecute() {
@@ -755,28 +760,28 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
                 String substring=res.substring(0,1);
                 Log.d("upldddoddata",""+substring);
 
-              if(substring.equalsIgnoreCase("1")){
-                  PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("UserName",edt_aadharn_name.getText().toString().trim()).commit();
-                  PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("Mobile",edt_mobileno.getText().toString().trim()).commit();
-                  new AlertDialog.Builder(ModifyDocumentActivity.this)
-                          .setTitle("सूचना")
-                          .setMessage(res)
-                          .setCancelable(false)
-                          .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                              public void onClick(DialogInterface dialog, int id) {
-                                  finish();
-                              }
-                          })
-                          .show();
-                 // Toast.makeText(getApplicationContext(),res,Toast.LENGTH_LONG).show();
+                if(substring.equalsIgnoreCase("1")){
+                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("UserName",edt_aadharn_name.getText().toString().trim()).commit();
+                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("Mobile",edt_mobileno.getText().toString().trim()).commit();
+                    new AlertDialog.Builder(ModifyDocumentActivity.this)
+                            .setTitle("सूचना")
+                            .setMessage(res)
+                            .setCancelable(false)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    finish();
+                                }
+                            })
+                            .show();
+                    // Toast.makeText(getApplicationContext(),res,Toast.LENGTH_LONG).show();
 
-              }else if(substring.equalsIgnoreCase("2")){
-                  Toast.makeText(getApplicationContext(),res,Toast.LENGTH_LONG).show();
+                }else if(substring.equalsIgnoreCase("2")){
+                    Toast.makeText(getApplicationContext(),res,Toast.LENGTH_LONG).show();
 
-              }else if(substring.equalsIgnoreCase("4")){
-                  Toast.makeText(getApplicationContext(),res,Toast.LENGTH_LONG).show();
+                }else if(substring.equalsIgnoreCase("4")){
+                    Toast.makeText(getApplicationContext(),res,Toast.LENGTH_LONG).show();
 
-              }
+                }
 
             }
 
@@ -904,7 +909,7 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
             this._adhaar=adhaar;
             this._name=name;
 
-           // Log.e("Pid  ", pid + " ");
+            // Log.e("Pid  ", pid + " ");
         }
 
         @Override
@@ -929,7 +934,7 @@ public class ModifyDocumentActivity extends Activity implements AdapterView.OnIt
         protected void onPostExecute(String result) {
             if (this.dialog.isShowing()) {
                 this.dialog.dismiss();
-               // Log.d("gdfgggv",result);
+                // Log.d("gdfgggv",result);
 
                 try {
                     if (result != null) {

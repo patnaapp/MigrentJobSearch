@@ -37,7 +37,7 @@ public class MainHomeActivity extends Activity {
     CircleImageView profile_image;
     //ImageView profile_image;
 
-   BenDetails BenDetails;
+    BenDetails BenDetails;
     DataBaseHelper dataBaseHelper;
     @Override
 
@@ -66,7 +66,7 @@ public class MainHomeActivity extends Activity {
         }else{
             tv_version.setText("");
         }
-        
+
         ll_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -157,7 +157,7 @@ public class MainHomeActivity extends Activity {
                 Log.e("imgUrl", url);
                 Picasso.with(this).load(url).into(profile_image);
             }else {
-               // profile_image.setBackgroundResource(R.drawable.profile);
+                // profile_image.setBackgroundResource(R.drawable.profile);
 
             }
         }

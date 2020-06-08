@@ -1463,5 +1463,22 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
 
     }
 
+    public String getNameFor(String tblName, String whereColumnName, String returnColumnValue, String thisID) {
+        String thisValue = "";
+        try {
+            SQLiteDatabase db = this.getReadableDatabase();
+            Cursor cur = db.rawQuery("select * from " + tblName + " WHERE " + whereColumnName + "='" + thisID.trim() + "'", null);
+            int x = cur.getCount();
+            while (cur.moveToNext()) {
+                thisValue = cur.getString(cur.getColumnIndex(returnColumnValue));
+            }
+            cur.close();
+            db.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return thisValue.trim();
+    }
+
 
 }

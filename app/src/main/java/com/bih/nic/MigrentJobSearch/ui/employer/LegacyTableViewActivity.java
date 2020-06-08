@@ -229,15 +229,7 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
 
                     for (AcptdRjctdJobOfferEntity info: data)
                     {
-//                        Content.add(info.getRow_num());
-//                        Content.add(info.getVchregnum());
-//                        Content.add(info.getSkillName());
-//                        Content.add(info.getVchName());
-//                        Content.add(info.getGender());
-//                        Content.add(info.getVchMobile());
-//                        Content.add(info.getWorkSiteNameHn());
 
-                        //  Content={info.getRow_num(),info.getVchregnum(),info.getSkillName(),info.getVchName(),info.getGender(),info.getVchMobile(),info.getWorkSiteNameHn()};
                         LegacyTableView.insertLegacyContent(info.getRow_num(),info.getVchregnum(),info.getSkillName(),info.getVchName(),info.getGender(),info.getVchMobile(),info.getWorkSiteNameHn());
                         i++;
                     }
@@ -246,7 +238,7 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
                 else if (status.equals("SHRG")){
 
                     LegacyTableView.insertLegacyTitle("क्रम सं.","पंजीकरण संख्या", "नाम","मोबाइल नंबर", "लिंग");
-                    //,"अभिभावक का नाम","अभिभावक का मोबाइल नंबर"
+                    //,"अभिभावक का नाम","अभिभावक क                      ा मोबाइल नंबर"
 
                     int i=1;
                     for (AcptdRjctdJobOfferEntity info: data){
@@ -270,10 +262,6 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
 
                 }
 
-
-                String[] arr = Content.toArray(new String[Content.size()]);
-
-                //legacyTableView.setContent(arr);
                 legacyTableView = (LegacyTableView)findViewById(R.id.legacy_table_view);
                 legacyTableView.resetVariables();
                 legacyTableView.setTitle(LegacyTableView.readLegacyTitle());
