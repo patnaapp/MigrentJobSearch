@@ -11,9 +11,9 @@
         android:icon="@drawable/ic_dashboard_black_24dp"
         android:title="संस्था" />
 
-<!--    <item-->
-<!--        android:id="@+id/navigation_hq"-->
-<!--        android:icon="@drawable/ic_notifications_black_24dp"-->
-<!--        android:title="Hq" />-->
+    <item
+        android:id="@+id/navigation_hq"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="आधिकारिक/Official" />
 
 </menu>
