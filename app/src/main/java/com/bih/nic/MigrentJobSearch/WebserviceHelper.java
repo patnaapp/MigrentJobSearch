@@ -9,6 +9,7 @@ import com.bih.nic.MigrentJobSearch.Model.BlkCompanyJobDetailsEntity;
 import com.bih.nic.MigrentJobSearch.Model.BlockJobOfferPostedEntity;
 import com.bih.nic.MigrentJobSearch.Model.BlockWeb;
 import com.bih.nic.MigrentJobSearch.Model.DefaultResponse;
+import com.bih.nic.MigrentJobSearch.Model.DepartmentMaster;
 import com.bih.nic.MigrentJobSearch.Model.District;
 import com.bih.nic.MigrentJobSearch.Model.EmpRegDetails;
 import com.bih.nic.MigrentJobSearch.Model.EmployerDetails;
@@ -55,6 +56,7 @@ public class WebserviceHelper implements KvmSerializable {
     private static final String UpdateMobile_UID="UpdateMobile_UID";
     private static final String BLOCK_METHOD="getBlock";
     private static final String SKILL_METHOD="SkilMasterList";
+    private static final String Dept_METHOD="DepartmentList";
     private static final String JOB_SEARCH_METHOD="JobSearchDetails1";
     private static final String GET_JOB_REQUEST_METHOD="GetJobRequest";
     private static final String GET_JOB_Offer_Posted_METHOD="GetJobOfferOrg";
@@ -1520,5 +1522,30 @@ public class WebserviceHelper implements KvmSerializable {
 //            return "0";
 //        }
 //        return rest;
+    }
+
+
+    public static ArrayList<DepartmentMaster> getDeptData() {
+
+        SoapObject res1;
+        res1=getServerData(Dept_METHOD, DepartmentMaster.DeptMaster_CLASS);
+        int TotalProperty=0;
+        if(res1!=null) TotalProperty= res1.getPropertyCount();
+
+        ArrayList<DepartmentMaster> fieldList = new ArrayList<DepartmentMaster>();
+
+        for (int i = 0; i < TotalProperty; i++) {
+            if (res1.getProperty(i) != null) {
+                Object property = res1.getProperty(i);
+                if (property instanceof SoapObject) {
+                    SoapObject final_object = (SoapObject) property;
+                    DepartmentMaster block= new DepartmentMaster(final_object);
+                    fieldList.add(block);
+                }
+            } else
+                return fieldList;
+        }
+
+        return fieldList;
     }
 }

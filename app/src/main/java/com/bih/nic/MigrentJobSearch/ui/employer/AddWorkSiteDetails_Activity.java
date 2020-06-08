@@ -1,11 +1,19 @@
 package com.bih.nic.MigrentJobSearch.ui.employer;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.database.SQLException;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,11 +22,19 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.bih.nic.MigrentJobSearch.DataBaseHelper.DataBaseHelper;
+import com.bih.nic.MigrentJobSearch.GlobalVariables;
 import com.bih.nic.MigrentJobSearch.Model.BlockWeb;
+import com.bih.nic.MigrentJobSearch.Model.DepartmentMaster;
 import com.bih.nic.MigrentJobSearch.Model.District;
+import com.bih.nic.MigrentJobSearch.Model.SkillMaster;
+import com.bih.nic.MigrentJobSearch.Model.SubSkillMaster;
+import com.bih.nic.MigrentJobSearch.Model.WorkDetailsEntity;
 import com.bih.nic.MigrentJobSearch.R;
 import com.bih.nic.MigrentJobSearch.Utiilties;
+import com.bih.nic.MigrentJobSearch.WebserviceHelper;
+import com.bih.nic.MigrentJobSearch.ui.labour.ModifyDocumentActivity;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,9 +46,12 @@ public class AddWorkSiteDetails_Activity extends Activity {
     ArrayList<District>DistrictList=new ArrayList<>();
     ArrayList<BlockWeb>BlockList=new ArrayList<>();
     DataBaseHelper dataBaseHelper;
-    String Dist_id="",Dist_name="",block_id="",block_name="";
+    String Dist_id="",Dist_name="",block_id="",block_name="",Dept_id="",Dept_name="";
     String work_site_en="",work_site_hn="",work_loc_en="",work_loc_hn="",pincode="",supervisor_name="",supervisor_name_hn="",supervisor_mob="";
-
+    ArrayList<DepartmentMaster> deptList;
+    String fin_yr[] = {"-चयन करे-","2020-2021"};
+    String fin_yr_id="",fin_yr_name="";
+    ArrayAdapter ben_type_aangan_aaray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,11 +60,74 @@ public class AddWorkSiteDetails_Activity extends Activity {
 
         //    getActionBar().hide();
         Utiilties.setStatusBarColor(this);
-        dataBaseHelper=new DataBaseHelper(this);
+
+        dataBaseHelper = new DataBaseHelper(AddWorkSiteDetails_Activity.this);
+        try {
+            dataBaseHelper.createDataBase();
+        } catch (IOException ioe) {
+
+            throw new Error("Unable to create database");
+        }
+        try {
+
+            dataBaseHelper.openDataBase();
+
+        } catch (SQLException sqle) {
+
+            throw sqle;
+
+        }
 
         initialise();
         loadDistrictSpinnerData();
+        loadDeptSpinnerData();
 
+        spin_fin_yr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Log.e("arg2",""+position);
+                if (position > 0) {
+                    fin_yr_name = fin_yr[position].toString();
+
+                    if (fin_yr_name.equals("2020-2021"))
+                    {
+                        fin_yr_id = "1";
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // TODO Auto-generated method stub
+
+            }
+
+        });
+
+        spin_dept.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position > 0) {
+                    Dept_id = deptList.get(position-1).getDeptId();
+                    Dept_name = deptList.get(position-1).getDeptNameHn();
+
+                } else {
+                    Dept_id = "";
+                    Dept_name = "";
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Dept_id = "";
+                Dept_name = "";
+            }
+
+        });
         spin_district.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -115,6 +197,9 @@ public class AddWorkSiteDetails_Activity extends Activity {
         et_supervisor_name_hn=findViewById(R.id.et_supervisor_name_hn);
         et_supervisor_name_hn.addTextChangedListener(inputTextWatcher6);
         et_supervisor_mob=findViewById(R.id.et_supervisor_mob);
+
+        ben_type_aangan_aaray = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, fin_yr);
+        spin_fin_yr.setAdapter(ben_type_aangan_aaray);
 
     }
 
@@ -323,12 +408,13 @@ public class AddWorkSiteDetails_Activity extends Activity {
     };
 
 
-    public void SaveData() {
+    public void SaveData()
+    {
         //Toast.makeText(this, "Register", Toast.LENGTH_SHORT).show();
-       work_site_en = et_work_site_en.getText().toString();
-     work_site_hn = et_work_site_hn.getText().toString();
-       work_loc_en = et_work_loc_en.getText().toString();
-       work_loc_hn = et_work_loc_hn.getText().toString();
+        work_site_en = et_work_site_en.getText().toString();
+        work_site_hn = et_work_site_hn.getText().toString();
+        work_loc_en = et_work_loc_en.getText().toString();
+        work_loc_hn = et_work_loc_hn.getText().toString();
         pincode = et_pincode.getText().toString();
         supervisor_name = et_supervisor_name.getText().toString();
         supervisor_name_hn = et_supervisor_name_hn.getText().toString();
@@ -336,18 +422,226 @@ public class AddWorkSiteDetails_Activity extends Activity {
         boolean cancelRegistration = false;
         String isValied = "yes";
         View focusView = null;
-//        if (TextUtils.isEmpty(StateCode)) {
-//            Toast.makeText(getApplicationContext(), "कृपया राज्य का नाम का चयन करे |", Toast.LENGTH_LONG).show();
-//            // sp_district.setError("कृपया जिला का नाम का चयन करे |");
-//            focusView = sp_state;
-//            cancelRegistration = true;
-//        }
-//
-//        if (TextUtils.isEmpty(DistCode)) {
-//            Toast.makeText(getApplicationContext(), "कृपया जिला का नाम का चयन करे |", Toast.LENGTH_LONG).show();
-//            // sp_district.setError("कृपया जिला का नाम का चयन करे |");
-//            focusView = sp_district;
-//            cancelRegistration = true;
-//        }
+        if (TextUtils.isEmpty(work_site_en)) {
+            Toast.makeText(getApplicationContext(), "कृपया कार्य स्थल का नाम दर्ज करे", Toast.LENGTH_LONG).show();
+            // sp_district.setError("कृपया जिला का नाम का चयन करे |");
+            focusView = et_work_site_en;
+            cancelRegistration = true;
+        }
+
+        if (TextUtils.isEmpty(work_site_hn)) {
+            Toast.makeText(getApplicationContext(), "कृपया कार्य स्थल का नाम दर्ज करे|", Toast.LENGTH_LONG).show();
+            // sp_district.setError("कृपया जिला का नाम का चयन करे |");
+            focusView = et_work_site_hn;
+            cancelRegistration = true;
+        }
+
+        if (TextUtils.isEmpty(work_loc_en)) {
+            Toast.makeText(getApplicationContext(), "कृपया कार्य स्थल का पता दर्ज करे |", Toast.LENGTH_LONG).show();
+            // sp_district.setError("कृपया जिला का नाम का चयन करे |");
+            focusView = et_work_loc_en;
+            cancelRegistration = true;
+        }
+        if (TextUtils.isEmpty(work_loc_hn)) {
+            Toast.makeText(getApplicationContext(), "कृपया कार्य स्थल का पता दर्ज करे |", Toast.LENGTH_LONG).show();
+            // sp_district.setError("कृपया जिला का नाम का चयन करे |");
+            focusView = et_work_loc_hn;
+            cancelRegistration = true;
+        }
+        if (TextUtils.isEmpty(pincode)) {
+            Toast.makeText(getApplicationContext(), "कृपया PINCODE दर्ज करे |", Toast.LENGTH_LONG).show();
+            // sp_district.setError("कृपया जिला का नाम का चयन करे |");
+            focusView = et_pincode;
+            cancelRegistration = true;
+        }
+        else if (et_pincode.getText().toString().length() < 6)
+        {
+            et_pincode.setError("कृपया PINCODE सही डाले |");
+            focusView = et_pincode;
+            cancelRegistration = true;
+        }
+        if (TextUtils.isEmpty(supervisor_name)) {
+            Toast.makeText(getApplicationContext(), "कृपया सुपरवाइजर का नाम दर्ज करे|", Toast.LENGTH_LONG).show();
+            // sp_district.setError("कृपया जिला का नाम का चयन करे |");
+            focusView = et_supervisor_name;
+            cancelRegistration = true;
+        }
+        if (TextUtils.isEmpty(supervisor_name_hn)) {
+            Toast.makeText(getApplicationContext(), "कृपया सुपरवाइजर का नाम दर्ज करे|", Toast.LENGTH_LONG).show();
+            // sp_district.setError("कृपया जिला का नाम का चयन करे |");
+            focusView = et_supervisor_name_hn;
+            cancelRegistration = true;
+        }
+
+        if (TextUtils.isEmpty(supervisor_mob)) {
+            Toast.makeText(getApplicationContext(), "कृपया सुपरवाइजर का नंबर दर्ज करे|", Toast.LENGTH_LONG).show();
+            // sp_district.setError("कृपया जिला का नाम का चयन करे |");
+            focusView = et_supervisor_mob;
+            cancelRegistration = true;
+        }
+        else if (et_supervisor_mob.getText().toString().length() <10)
+        {
+            et_supervisor_mob.setError("कृपया सुपरवाइजर का नंबर सही डाले |");
+            focusView = et_supervisor_mob;
+            cancelRegistration = true;
+        }
+
+        if (TextUtils.isEmpty(Dist_name)) {
+            Toast.makeText(getApplicationContext(), "कृपया जिला का चयन करे|", Toast.LENGTH_LONG).show();
+            // sp_district.setError("कृपया जिला का नाम का चयन करे |");
+            focusView = spin_district;
+            cancelRegistration = true;
+        }
+        if (TextUtils.isEmpty(block_name)) {
+            Toast.makeText(getApplicationContext(), "कृपया प्रखंड का चयन करे|", Toast.LENGTH_LONG).show();
+            // sp_district.setError("कृपया जिला का नाम का चयन करे |");
+            focusView = spin_block;
+            cancelRegistration = true;
+        }
+
+        else {
+
+            moveToNext();
+
+
+        }
     }
+
+    public void loadDeptSpinnerData(){
+        deptList = dataBaseHelper.getDepartmentMasterList();
+        if (deptList.size() > 0){
+            setDeptSpinner();
+        }else{
+            if (Utiilties.isOnline(this) == false) {
+                showAlertForInternet();
+            } else {
+                new SyncDeptMasterData().execute();
+            }
+        }
+    }
+
+    public void showAlertForInternet(){
+        AlertDialog.Builder ab = new AlertDialog.Builder(this);
+        ab.setTitle("Internet Connnection Error!!!");
+        ab.setMessage("Please turn on your mobile data or wifi connection");
+        ab.setPositiveButton("Turn On", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog,
+                                int whichButton) {
+                GlobalVariables.isOffline = false;
+                Intent I = new Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS);
+                startActivity(I);
+                finish();
+            }
+        });
+        ab.setNegativeButton("Cancel",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,
+                                        int whichButton) {
+                        finish();
+                    }
+                });
+
+        ab.show();
+    }
+
+    private class SyncDeptMasterData extends AsyncTask<String, Void, ArrayList<DepartmentMaster>> {
+        private final ProgressDialog dialog = new ProgressDialog(AddWorkSiteDetails_Activity.this);
+        int optionType;
+
+        @Override
+        protected void onPreExecute() {
+            this.dialog.setCanceledOnTouchOutside(false);
+            this.dialog.setMessage("Syncing Department Data...");
+            this.dialog.show();
+        }
+
+        @Override
+        protected ArrayList<DepartmentMaster> doInBackground(String...arg) {
+            return WebserviceHelper.getDeptData();
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<DepartmentMaster> result) {
+            if (this.dialog.isShowing()) {
+                this.dialog.dismiss();
+            }
+
+            if(result.size() > 0){
+
+                DataBaseHelper helper=new DataBaseHelper(AddWorkSiteDetails_Activity.this);
+                long i= helper.setDeptMasterData(result);
+                if (i>0){
+                    deptList = helper.getDepartmentMasterList();
+                    setDeptSpinner();
+                }
+
+
+
+                if(i>0) {
+                    Toast.makeText(getApplicationContext(), "Data Synced Successfully",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Failed to save Data! Try again",Toast.LENGTH_SHORT).show();
+                }
+            }else{
+                Toast.makeText(getApplicationContext(), "No Data Found!!",Toast.LENGTH_SHORT).show();
+            }
+
+        }
+    }
+
+
+
+    public void setDeptSpinner(){
+        ArrayList<String> list = new ArrayList<String>();
+        list.add("-Select-");
+        int index = 0;
+        for (DepartmentMaster info: deptList){
+            list.add(info.getDeptNameHn().trim());
+            //if(benDetails.get)
+        }
+
+        ArrayAdapter adaptor = new ArrayAdapter(this, android.R.layout.simple_spinner_item, list);
+        adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spin_dept.setAdapter(adaptor);
+//        if(benDetails.getSkill_Id()!=null){
+//            String skill_hn = dataBaseHelper.getNameFor("SkilMaster", "Id", "SkillNameHn", benDetails.getSkill_Id());
+//            spn_skill.setSelection(((ArrayAdapter<String>) spn_skill.getAdapter()).getPosition(skill_hn.trim()));
+//
+//        }
+
+    }
+    public void moveToNext()
+    {
+        WorkDetailsEntity info = new WorkDetailsEntity();
+        try{
+            info.setDist_id(Dist_id);
+            info.setDist_name(Dist_name);
+            info.setBlk_id(block_id);
+            info.setBlk_name(block_name);
+            info.setFin_yr(fin_yr_id);
+            info.setRelated_dept(Dept_id);
+            info.setWork_site_eng(work_site_en);
+            info.setWork_site_hn(work_site_hn);
+            info.setLocation_en(work_loc_en);
+            info.setLocation_hn(work_loc_hn);
+            info.setPincode(pincode);
+            info.setSupervisor_nm_en(supervisor_name);
+            info.setSupervisor_nm_hn(supervisor_name_hn);
+            info.setSupervisor_mob(supervisor_mob);
+
+
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+
+        Intent i = new Intent(AddWorkSiteDetails_Activity.this,AddWorkRequirementActivity.class);
+        i.putExtra("data", info);
+        startActivity(i);
+
+    }
+
 }

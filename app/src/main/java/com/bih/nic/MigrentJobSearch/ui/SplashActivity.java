@@ -62,6 +62,7 @@ public class SplashActivity extends Activity {
 
             databaseHelper.openDataBase();
             modifyTable();
+            modifyTable1();
         } catch (SQLException sqle) {
 
             throw sqle;
@@ -119,6 +120,37 @@ public class SplashActivity extends Activity {
             AlterTable(UserTable, "Long1");
         }
     }
+
+    public void modifyTable1(){
+        String UserTable = "MasterDept";
+
+        if(isColumnExists(UserTable, "Dept_Id") == false){
+            AlterTable(UserTable, "Dept_Id");
+        }
+
+        if(isColumnExists(UserTable, "Dept_Name") == false){
+            AlterTable(UserTable, "Dept_Name");
+        }
+
+        if(isColumnExists(UserTable, "DeptName_Hn") == false){
+            AlterTable(UserTable, "DeptName_Hn");
+        }
+
+        if(isColumnExists(UserTable, "Dept_Abbrev") == false){
+            AlterTable(UserTable, "Dept_Abbrev");
+        }
+
+        if(isColumnExists(UserTable, "NameSymbol") == false){
+            AlterTable(UserTable, "NameSymbol");
+        }
+
+        if(isColumnExists(UserTable, "status") == false){
+            AlterTable(UserTable, "status");
+        }
+
+
+    }
+
 
     public void AlterTable(String tableName,String columnName)
     {

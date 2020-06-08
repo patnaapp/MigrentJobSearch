@@ -4,8 +4,11 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -28,6 +31,7 @@ public class EmployerMainHomeActivity extends Activity {
 
     BenDetails BenDetails;
     DataBaseHelper dataBaseHelper;
+    SQLiteDatabase db;
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,7 @@ public class EmployerMainHomeActivity extends Activity {
 
         BenDetails=new BenDetails();
         dataBaseHelper=new DataBaseHelper(EmployerMainHomeActivity.this);
+        modifyTable1();
         Utiilties.setStatusBarColor(EmployerMainHomeActivity.this);
 
         ll_profile=(LinearLayout)findViewById(R.id.ll_profile);
@@ -135,6 +140,7 @@ public class EmployerMainHomeActivity extends Activity {
 
     private void confirmLogout(){
         PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("UserId","").commit();
+        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("UserRole","").commit();
 
         Intent intent = new Intent(this, MultiLoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK| Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -163,12 +169,64 @@ public class EmployerMainHomeActivity extends Activity {
     }
 
 
-//    public void onJobOffers(View view){
-//        Intent intent = new Intent(this, LegacyTableViewActivity.class);
-//
-//        startActivity(intent);
-//        finish();
-//    }
+    public void modifyTable1(){
+        String UserTable = "MasterDept";
+
+        if(isColumnExists(UserTable, "Dept_Id") == false){
+            AlterTable(UserTable, "Dept_Id");
+        }
+
+        if(isColumnExists(UserTable, "Dept_Name") == false){
+            AlterTable(UserTable, "Dept_Name");
+        }
+
+        if(isColumnExists(UserTable, "DeptName_Hn") == false){
+            AlterTable(UserTable, "DeptName_Hn");
+        }
+
+        if(isColumnExists(UserTable, "Dept_Abbrev") == false){
+            AlterTable(UserTable, "Dept_Abbrev");
+        }
+
+        if(isColumnExists(UserTable, "NameSymbol") == false){
+            AlterTable(UserTable, "NameSymbol");
+        }
+
+        if(isColumnExists(UserTable, "status") == false){
+            AlterTable(UserTable, "status");
+        }
 
 
+    }
+
+
+
+    public void AlterTable(String tableName,String columnName)
+    {
+        db = dataBaseHelper.getReadableDatabase();
+
+        try{
+            db.execSQL("ALTER TABLE "+tableName+" ADD COLUMN "+columnName+" TEXT");
+            Log.e("ALTER Done",tableName +"-"+ columnName);
+        }
+        catch (Exception e)
+        {
+            Log.e("ALTER Failed",tableName +"-"+ columnName);
+        }
+    }
+
+    public boolean isColumnExists (String table, String column) {
+        db = dataBaseHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery("PRAGMA table_info("+ table +")", null);
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                String name = cursor.getString(cursor.getColumnIndex("name"));
+                if (column.equalsIgnoreCase(name)) {
+                    return true;
+                }
+            }
+        }
+        cursor.close();
+        return false;
+    }
 }

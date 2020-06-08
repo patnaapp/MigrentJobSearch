@@ -13,6 +13,7 @@ import android.util.Log;
 import com.bih.nic.MigrentJobSearch.BenfiList;
 import com.bih.nic.MigrentJobSearch.Model.BlockWeb;
 import com.bih.nic.MigrentJobSearch.Model.CategoryMaster;
+import com.bih.nic.MigrentJobSearch.Model.DepartmentMaster;
 import com.bih.nic.MigrentJobSearch.Model.District;
 import com.bih.nic.MigrentJobSearch.Model.Organisation;
 import com.bih.nic.MigrentJobSearch.Model.SkillMaster;
@@ -30,7 +31,7 @@ import java.util.ArrayList;
 
 public class DataBaseHelper  extends SQLiteOpenHelper {
     private static String DB_PATH = "";
-    private static String DB_NAME = "AadharVer.db";
+    private static String DB_NAME = "AadharVer1.db";
 ///////private static String DB_NAME = "InspAwasN.db";
 
     private SQLiteDatabase myDataBase;
@@ -41,11 +42,12 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
     public DataBaseHelper(Context context) {
 
         super(context, DB_NAME, null, 1);
-        if (android.os.Build.VERSION.SDK_INT >= 4.2) {
-
-
+        if (android.os.Build.VERSION.SDK_INT >= 4.2)
+        {
             DB_PATH = context.getApplicationInfo().dataDir + "/databases/";
-        } else {
+        }
+        else
+            {
             DB_PATH = "/data/data/" + context.getPackageName() + "/databases/";
         }
         this.myContext = context;
@@ -1362,8 +1364,7 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
 
             SQLiteDatabase db = this.getReadableDatabase();
             Cursor cur = db
-                    .rawQuery(
-                            "SELECT * from  Organisation order by OrgCode", null);
+                    .rawQuery("SELECT * from  Organisation order by OrgCode", null);
             int x = cur.getCount();
 
             while (cur.moveToNext()) {
@@ -1481,5 +1482,66 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
         return thisValue.trim();
     }
 
+
+    public ArrayList<DepartmentMaster> getDepartmentMasterList() {
+
+        ArrayList<DepartmentMaster> list = new ArrayList<DepartmentMaster>();
+
+        try {
+
+            SQLiteDatabase db = this.getReadableDatabase();
+
+            Cursor cur = db.rawQuery("SELECT * FROM  MasterDept", null);
+            int x = cur.getCount();
+
+            while (cur.moveToNext()) {
+                DepartmentMaster info = new DepartmentMaster();
+
+                info.setDeptId(cur.getString(cur.getColumnIndex("Dept_Id")));
+                info.setDeptName(cur.getString(cur.getColumnIndex("Dept_Name")));
+                info.setDeptNameHn(cur.getString(cur.getColumnIndex("DeptName_Hn")));
+                info.setDept_Abb(cur.getString(cur.getColumnIndex("Dept_Abbrev")));
+                info.setStatus(cur.getString(cur.getColumnIndex("status")));
+                list.add(info);
+            }
+
+            cur.close();
+            db.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            // TODO: handle exception
+        }
+        return list;
+    }
+
+
+    public long setDeptMasterData(ArrayList<DepartmentMaster> distlist)
+    {
+
+        long c = -1;
+        ArrayList<DepartmentMaster> dist = distlist;
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        db.delete("MasterDept",null,null);
+        if (dist != null) {
+            try {
+                for (int i = 0; i < dist.size(); i++) {
+                    values.put("Dept_Id", dist.get(i).getDeptId());
+                    values.put("Dept_Name", dist.get(i).getDeptName());
+                    values.put("DeptName_Hn", dist.get(i).getDeptNameHn());
+                    values.put("Dept_Abbrev", dist.get(i).getDept_Abb());
+                    values.put("NameSymbol", dist.get(i).getName_Symbol());
+                    values.put("status", dist.get(i).getStatus());
+                    c = db.insert("MasterDept", null, values);
+                }
+                db.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+                return c;
+            }
+        }
+        return c;
+    }
 
 }
