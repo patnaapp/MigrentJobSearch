@@ -77,6 +77,7 @@ public class PostedJobBlockAdapter extends RecyclerView.Adapter<PostedJobBlockAd
                 intent.putExtra("StatusFlag","SHRG");
                 intent.putExtra("BlockCode",info.getBlockCode());
                 intent.putExtra("BlockNAme",info.getBlockName());
+                intent.putExtra("Count",info.getTtlReg());
                 activity.startActivity(intent);
             }
         });
@@ -90,6 +91,7 @@ public class PostedJobBlockAdapter extends RecyclerView.Adapter<PostedJobBlockAd
                 intent.putExtra("StatusFlag","SHRGJ");
                 intent.putExtra("BlockCode",info.getBlockCode());
                 intent.putExtra("BlockNAme",info.getBlockName());
+                intent.putExtra("Count",info.getTotalJobOffer());
                 activity.startActivity(intent);
             }
         });
@@ -110,6 +112,7 @@ public class PostedJobBlockAdapter extends RecyclerView.Adapter<PostedJobBlockAd
                     intent.putExtra("StatusFlag","SHRGJA");
                     intent.putExtra("BlockCode",info.getBlockCode());
                     intent.putExtra("BlockNAme",info.getBlockName());
+                    intent.putExtra("Count",info.getTtlRegA());
                     activity.startActivity(intent);
                 }
                 else {
@@ -129,6 +132,7 @@ public class PostedJobBlockAdapter extends RecyclerView.Adapter<PostedJobBlockAd
                     intent.putExtra("StatusFlag", "SHRGJR");
                     intent.putExtra("BlockCode", info.getBlockCode());
                     intent.putExtra("BlockNAme", info.getBlockName());
+                    intent.putExtra("Count",info.getTtlRegR());
                     activity.startActivity(intent);
                 }
                 else {

@@ -43,7 +43,8 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
     TextView tv_skill11,tv_Norecord_accpt;
     ImageView img_back;
     ImageView btn_previous,btn_next;
-    String serialno="0";
+    String serialno="0", count="";
+
 
 
     @Override
@@ -63,6 +64,7 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
         status = getIntent().getStringExtra("StatusFlag");
         blkcode = getIntent().getStringExtra("BlockCode");
         blkname = getIntent().getStringExtra("BlockNAme");
+        count = getIntent().getStringExtra("Count");
 
         if (status.equals("SHRGJA")){
             tv_skill11.setText("प्रखंड वाइज स्वीकृत नौकरी प्रस्ताव");
@@ -163,6 +165,20 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
         return super.onOptionsItemSelected(item);
     }
 
+    public void handleButtonView(String start, String end){
+        if(start.equals("1")){
+            btn_previous.setVisibility(View.GONE);
+        }else{
+            btn_previous.setVisibility(View.VISIBLE);
+        }
+
+        if(end.equals(count)){
+            btn_next.setVisibility(View.GONE);
+        }else{
+            btn_next.setVisibility(View.VISIBLE);
+        }
+    }
+
 
     private class SyncAcceptedRjctdJobsOffers extends AsyncTask<String, Void, ArrayList<AcptdRjctdJobOfferEntity>>
     {
@@ -193,11 +209,12 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
         {
 
 
-
             data = result;
             ArrayList<String>  Content=new ArrayList<>();
+
             if(data != null && data.size()> 0)
             {
+                handleButtonView(data.get(0).getRow_num(), data.get(data.size() - 1).getRow_num());
                 // tv_Norecord_accpt.setVisibility(View.GONE);
                 if (status.equals("SHRGJ")){
 
