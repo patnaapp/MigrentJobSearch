@@ -31,7 +31,7 @@ public class MultiLoginActivity extends AppCompatActivity implements BottomNavig
         Utiilties.setStatusBarColor(this);
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_labour, R.id.navigation_employer)
+                R.id.navigation_labour, R.id.navigation_employer, R.id.navigation_hq)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
