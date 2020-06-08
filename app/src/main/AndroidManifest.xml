@@ -65,7 +65,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.SplashActivity"></activity>
+        <activity android:name=".ui.employer.AddWorkRequirementActivity"></activity>
+        <activity
+            android:name=".ui.SplashActivity"
+            android:theme="@style/NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".ui.employer.AcceptedRejctd_Job_Activity" />
         <activity android:name=".ui.employer.LabourSearchActivity" />
         <activity android:name=".ui.employer.LabourDetailActivity" />
@@ -84,13 +93,7 @@
         <activity android:name=".ui.employer.EmployerRegistrartionActivity" />
         <activity
             android:name=".ui.employer.AddWorkSiteDetails_Activity"
-            android:theme="@style/NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:theme="@style/NoActionBar"></activity>
         <activity android:name=".Login" /> <!-- <activity -->
         <!-- android:name=".UpdateAdhaar" -->
         <!-- android:exported="true"> -->

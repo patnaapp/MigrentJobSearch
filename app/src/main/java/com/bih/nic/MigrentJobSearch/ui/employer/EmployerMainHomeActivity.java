@@ -110,6 +110,15 @@ public class EmployerMainHomeActivity extends Activity {
         startActivity(intent);
     }
 
+    public void onAddWorkSite(View view){
+        Intent intent = new Intent(this, AddWorkSiteDetails_Activity.class);
+        startActivity(intent);
+    }
+
+    public void onModifyWorkSite(View view){
+        Intent intent = new Intent(this, AddWorkSiteDetails_Activity.class);
+        startActivity(intent);
+    }
     public void OnClick_goToLoginScreen(View view){
         new AlertDialog.Builder(this)
                 .setTitle("लॉग आउट ?")

@@ -56,22 +56,6 @@
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/iv_footer"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:src="@drawable/nic"
-        android:layout_alignParentBottom="true"/>
-
-    <TextView
-        android:id="@+id/tv_version"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ऐप वर्ज़न 1.0"
-        android:layout_above="@+id/iv_footer"
-        android:layout_centerHorizontal="true"
-        android:textColor="@color/colorPrimary"/>
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -110,7 +94,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="8dp"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -129,7 +113,7 @@
                         android:id="@+id/spin_fin_yr"
                         android:layout_width="fill_parent"
                         android:layout_height="42dp"
-                        android:background="@drawable/spinner_bg"
+                        android:background="@drawable/spinner_bg1"
                         android:textColor="#222222"
                         android:textSize="14sp"
                         android:textStyle="bold" />
@@ -153,7 +137,7 @@
                         android:id="@+id/spin_dept"
                         android:layout_width="fill_parent"
                         android:layout_height="42dp"
-                        android:background="@drawable/spinner_bg"
+                        android:background="@drawable/spinner_bg1"
                         android:textColor="#222222"
                         android:textSize="14sp"
                         android:textStyle="bold" />
@@ -177,7 +161,7 @@
                         android:id="@+id/spin_district"
                         android:layout_width="fill_parent"
                         android:layout_height="42dp"
-                        android:background="@drawable/spinner_bg"
+                        android:background="@drawable/spinner_bg1"
                         android:textColor="#222222"
                         android:textSize="14sp"
                         android:textStyle="bold" />
@@ -201,7 +185,7 @@
                         android:id="@+id/spin_block"
                         android:layout_width="fill_parent"
                         android:layout_height="42dp"
-                        android:background="@drawable/spinner_bg"
+                        android:background="@drawable/spinner_bg1"
                         android:textColor="#222222"
                         android:textSize="14sp"
                         android:textStyle="bold" />
@@ -446,6 +430,37 @@
                         android:textColor="#222222"
                         android:focusableInTouchMode="true"
                         android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="12dp"
+                    android:padding="4dp"
+                    android:background="@drawable/shape_adapter_cell"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:text="वर्क साइट में विभिन्न कामगारों से सम्बंधित जानकारी की एंट्री (Requirements)"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="15sp"/>
+
+                    <Button
+                        android:layout_gravity="center"
+                        android:id="@+id/add_requirement"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@color/holo_orange_dark"
+                        android:text="Add Requirement"
+                        android:textColor="#ffff"
+                        android:textSize="17sp" />
                 </LinearLayout>
 
                 <Button
