@@ -9,7 +9,7 @@
     <item
         android:id="@+id/navigation_employer"
         android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="नियोक्ता" />
+        android:title="संस्था" />
 
 <!--    <item-->
 <!--        android:id="@+id/navigation_hq"-->

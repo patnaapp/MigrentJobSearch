@@ -19,7 +19,6 @@
 
     <LinearLayout
         android:id="@+id/ll_skill"
-        android:layout_marginTop="4dp"
         android:layout_below="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -99,8 +98,6 @@
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
-
-        android:layout_marginTop="25dp"
         android:id="@+id/listviewshow"
         android:layout_margin="8dp"
         android:layout_width="match_parent"
@@ -109,11 +106,9 @@
         android:layout_above="@+id/footer"/>
 
     <TextView
-
         android:id="@+id/tv_Norecord"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-
         android:gravity="center"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#FF4B4B"

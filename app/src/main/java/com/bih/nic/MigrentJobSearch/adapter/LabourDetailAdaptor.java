@@ -95,8 +95,6 @@ public class LabourDetailAdaptor extends RecyclerView.Adapter<LabourDetailAdapto
         ViewHolder(View itemView) {
             super(itemView);
 
-
-
             ll_selection = itemView.findViewById(R.id.ll_selection);
             tv_slno = itemView.findViewById(R.id.tv_slno);
             tv_gendar = itemView.findViewById(R.id.tv_gendar);

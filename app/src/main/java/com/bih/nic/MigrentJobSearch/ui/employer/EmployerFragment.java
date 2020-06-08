@@ -18,12 +18,10 @@ import android.support.v4.app.Fragment;
 import android.widget.Toast;
 
 import com.bih.nic.MigrentJobSearch.DataBaseHelper.DataBaseHelper;
-import com.bih.nic.MigrentJobSearch.EmployerRegistrartionActivity;
 import com.bih.nic.MigrentJobSearch.Model.EmployerDetails;
 import com.bih.nic.MigrentJobSearch.R;
 import com.bih.nic.MigrentJobSearch.Utiilties;
 import com.bih.nic.MigrentJobSearch.WebserviceHelper;
-import com.bih.nic.MigrentJobSearch.ui.labour.ChangeMobileNumberActivity;
 
 public class EmployerFragment extends Fragment {
 

@@ -234,7 +234,7 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
                     int i=1;
                     for (AcptdRjctdJobOfferEntity info: data){
 
-                        LegacyTableView.insertLegacyContent(String.valueOf(i),info.getVchregnum(),info.getVchName(),info.getVchMobile(),info.getGender());
+                        LegacyTableView.insertLegacyContent(info.getRow_num(),info.getVchregnum(),info.getVchName(),info.getVchMobile(),info.getGender());
                         i++;
                     }
 
@@ -247,7 +247,7 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
                     int i=1;
                     for (AcptdRjctdJobOfferEntity info: data){
 
-                        LegacyTableView.insertLegacyContent(String.valueOf(i),info.getVchregnum(),info.getSkillName(),info.getVchName(),info.getGender(),info.getVchMobile());
+                        LegacyTableView.insertLegacyContent(info.getRow_num(),info.getVchregnum(),info.getSkillName(),info.getVchName(),info.getGender(),info.getVchMobile());
                         i++;
                     }
 

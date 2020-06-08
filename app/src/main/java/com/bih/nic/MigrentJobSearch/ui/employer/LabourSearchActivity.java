@@ -282,9 +282,9 @@ public class LabourSearchActivity extends Activity implements AdapterView.OnItem
     public void setJobList(ArrayList<workListModel>joblist){
 
         ArrayList<String> list = new ArrayList<String>();
-        list.add("-Select-");
+        list.add("-चयन करें-");
         for (workListModel info: joblist){
-            list.add(info.getWorl_Name());
+            list.add(info.getWorksite_nameHn());
         }
 
         ArrayAdapter adaptor = new ArrayAdapter(this, android.R.layout.simple_spinner_item, list);
