@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -52,6 +53,7 @@ public class AddWorkSiteDetails_Activity extends Activity {
     String fin_yr[] = {"-चयन करे-","2020-2021"};
     String fin_yr_id="",fin_yr_name="";
     ArrayAdapter ben_type_aangan_aaray;
+    Button add_requirement;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -174,6 +176,14 @@ public class AddWorkSiteDetails_Activity extends Activity {
 
         });
 
+        add_requirement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(AddWorkSiteDetails_Activity.this,AddWorkRequirementActivity.class);
+                startActivity(i);
+            }
+        });
+
     }
 
     public void initialise()
@@ -197,6 +207,7 @@ public class AddWorkSiteDetails_Activity extends Activity {
         et_supervisor_name_hn=findViewById(R.id.et_supervisor_name_hn);
         et_supervisor_name_hn.addTextChangedListener(inputTextWatcher6);
         et_supervisor_mob=findViewById(R.id.et_supervisor_mob);
+        add_requirement=findViewById(R.id.add_requirement);
 
         ben_type_aangan_aaray = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, fin_yr);
         spin_fin_yr.setAdapter(ben_type_aangan_aaray);
