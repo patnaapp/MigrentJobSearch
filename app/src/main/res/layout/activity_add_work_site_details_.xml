@@ -16,6 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
+        android:background="@drawable/shape_adapter_cell"
         android:orientation="vertical">
 
         <TextView
@@ -472,6 +473,7 @@
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/buttonshape"
                     android:text="    सेव करेंं    "
+                    android:onClick="SaveData"
                     android:textColor="#ffff"
                     android:textSize="17sp" />
 

@@ -644,4 +644,8 @@ public class AddWorkSiteDetails_Activity extends Activity {
 
     }
 
+    public void SaveData(View view){
+        SaveData();
+    }
+
 }
