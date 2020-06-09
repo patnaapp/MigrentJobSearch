@@ -1576,7 +1576,7 @@ public class WebserviceHelper implements KvmSerializable {
             envelope.dotNet = true;
             envelope.setOutputSoapObject(request);
             envelope.addMapping(SERVICENAMESPACE,
-                    BenfiList.BENFICLASS.getSimpleName(), BenfiList.BENFICLASS);
+                    WorkDetailsEntity.Work_details_CLASS.getSimpleName(), WorkDetailsEntity.Work_details_CLASS);
             HttpTransportSE androidHttpTransport = new HttpTransportSE(SERVICEURL,60000);
             androidHttpTransport.call(SERVICENAMESPACE + WorkSite_eDit, envelope);
 

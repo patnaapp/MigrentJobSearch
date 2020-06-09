@@ -43,7 +43,7 @@ public class WorkSite_Edit_activity extends Activity implements AdapterView.OnIt
     ArrayList<District> DistrictList;
     ArrayList<WorkDetailsEntity> WorkJobList = new ArrayList<>();
     String WorkStatus="";
-    String fin_yr[] = {"All","Not Started","Work In Progress","Suspended","Completed"};
+    String fin_yr[] = {"-select-","All","Not Started","Work In Progress","Suspended","Completed"};
     String work_status_id="",work_status_name="";
     ArrayAdapter ben_type_aangan_aaray;
 
@@ -64,6 +64,13 @@ public class WorkSite_Edit_activity extends Activity implements AdapterView.OnIt
         dataBaseHelper = new DataBaseHelper(this);
 
         spn_work_status = findViewById(R.id.spn_work_status);
+        tv_Norecord = findViewById(R.id.tv_Norecord);
+
+        listView = findViewById(R.id.listviewshow);
+        spn_work_status.setOnItemSelectedListener(this);
+        ben_type_aangan_aaray = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, fin_yr);
+        spn_work_status.setAdapter(ben_type_aangan_aaray);
+
 
     }
     @Override
@@ -137,7 +144,7 @@ public class WorkSite_Edit_activity extends Activity implements AdapterView.OnIt
 
         @Override
         protected ArrayList<WorkDetailsEntity> doInBackground(String...arg) {
-            return WebserviceHelper.GetWorkDetailDataForEdit(WorkStatus,ORG_ID);
+            return WebserviceHelper.GetWorkDetailDataForEdit(work_status_id,ORG_ID);
         }
 
         @Override
