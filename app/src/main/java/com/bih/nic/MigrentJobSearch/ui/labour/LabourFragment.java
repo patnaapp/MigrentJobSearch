@@ -18,6 +18,7 @@ import android.support.v4.app.Fragment;
 import android.widget.Toast;
 
 import com.bih.nic.MigrentJobSearch.DataBaseHelper.DataBaseHelper;
+import com.bih.nic.MigrentJobSearch.GlobalVariables;
 import com.bih.nic.MigrentJobSearch.Model.UserDetails;
 import com.bih.nic.MigrentJobSearch.R;
 import com.bih.nic.MigrentJobSearch.Utiilties;
@@ -171,6 +172,7 @@ public class LabourFragment extends Fragment {
                     PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putString("PanchayatName",result.getPanchayatName()).commit();
                     PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putString("Photo",result.getProfileImg()).commit();
                     PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putString("UserRole","Labour").commit();
+                    GlobalVariables.isLogin=true;
 
                     Intent intent=new Intent(getContext(), MainHomeActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK| Intent.FLAG_ACTIVITY_CLEAR_TASK);

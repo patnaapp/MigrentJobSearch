@@ -3,8 +3,10 @@ package com.bih.nic.MigrentJobSearch.ui.labour;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -188,10 +190,13 @@ public class MainHomeActivity extends Activity {
                 .show();
     }
 
-    private void confirmLogout(){
-        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("UserId","").commit();
-        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("UserRole","").commit();
-
+    private void confirmLogout()
+    {
+        SharedPreferences settings = this.getSharedPreferences("PreferencesName", Context.MODE_PRIVATE);
+        settings.edit().clear().commit();
+        GlobalVariables.isLogin=false;
+//        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("UserId","").commit();
+//        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("UserRole","").commit();
         Intent intent = new Intent(this, MultiLoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK| Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);

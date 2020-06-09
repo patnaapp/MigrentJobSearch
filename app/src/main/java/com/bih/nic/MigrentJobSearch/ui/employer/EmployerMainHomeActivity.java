@@ -2,8 +2,10 @@ package com.bih.nic.MigrentJobSearch.ui.employer;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -14,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bih.nic.MigrentJobSearch.DataBaseHelper.DataBaseHelper;
+import com.bih.nic.MigrentJobSearch.GlobalVariables;
 import com.bih.nic.MigrentJobSearch.Model.BenDetails;
 import com.bih.nic.MigrentJobSearch.R;
 import com.bih.nic.MigrentJobSearch.Utiilties;
@@ -138,23 +141,29 @@ public class EmployerMainHomeActivity extends Activity {
                 .show();
     }
 
-    private void confirmLogout(){
-        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("UserId","").commit();
-        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("UserRole","").commit();
-
+    private void confirmLogout()
+    {
+        SharedPreferences settings = this.getSharedPreferences("PreferencesName", Context.MODE_PRIVATE);
+        settings.edit().clear().commit();
+        GlobalVariables.isLogin=false;
+//        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("UserId","").commit();
+//        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("UserRole","").commit();
         Intent intent = new Intent(this, MultiLoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK| Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
     }
 
-    public void onExit(){
+    public void onExit()
+    {
         new AlertDialog.Builder(this)
                 .setTitle("अलर्ट!!")
                 .setMessage("क्या आप ऐप बन्द करना चाहते हैं??\n ")
                 .setCancelable(false)
-                .setPositiveButton("हाँ", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
+                .setPositiveButton("हाँ", new DialogInterface.OnClickListener()
+                {
+                    public void onClick(DialogInterface dialog, int id)
+                    {
                         finish();
                     }
                 })
@@ -163,7 +172,8 @@ public class EmployerMainHomeActivity extends Activity {
     }
 
     @Override
-    public void onBackPressed() {
+    public void onBackPressed()
+    {
         //super.onBackPressed();
         onExit();
     }

@@ -225,8 +225,6 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
 
                     int i=1;
 
-
-
                     for (AcptdRjctdJobOfferEntity info: data)
                     {
 

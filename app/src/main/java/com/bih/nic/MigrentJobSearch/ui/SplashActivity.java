@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.bih.nic.MigrentJobSearch.CommonPref;
 import com.bih.nic.MigrentJobSearch.DataBaseHelper.DataBaseHelper;
+import com.bih.nic.MigrentJobSearch.GlobalVariables;
 import com.bih.nic.MigrentJobSearch.ui.employer.EmployerMainHomeActivity;
 import com.bih.nic.MigrentJobSearch.MarshmallowPermission;
 import com.bih.nic.MigrentJobSearch.Model.Versioninfo;
@@ -279,8 +280,17 @@ public class SplashActivity extends Activity {
             @Override
             public void run() {
 
+
                 // close this activity
-                if(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserId", "").equals("")) {
+                if (!GlobalVariables.isLogin){
+                    Intent i = new Intent(SplashActivity.this, MultiLoginActivity.class);
+                    startActivity(i);
+                    finish();
+                }
+                else {
+
+
+                if(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserId", "").equals("") ) {
                     Intent i = new Intent(SplashActivity.this, MultiLoginActivity.class);
                     startActivity(i);
                     finish();
@@ -298,6 +308,7 @@ public class SplashActivity extends Activity {
                         startActivity(i);
                         finish();
                     }
+                }
                 }
             }
         }, SPLASH_TIME_OUT);
