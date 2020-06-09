@@ -99,19 +99,24 @@ public class WebserviceHelper implements KvmSerializable {
         if(res1!=null) TotalProperty= res1.getPropertyCount();
         ArrayList<District> fieldList = new ArrayList<District>();
 
-        for (int i = 0; i < TotalProperty; i++) {
-            if (res1.getProperty(i) != null) {
+        for (int i = 0; i < TotalProperty; i++)
+        {
+            if (res1.getProperty(i) != null)
+            {
                 Object property = res1.getProperty(i);
-                if (property instanceof SoapObject) {
+                if (property instanceof SoapObject)
+                {
                     SoapObject final_object = (SoapObject) property;
                     District sm = new District(final_object);
                     fieldList.add(sm);
                 }
-            } else
+            }
+            else
+            {
                 return fieldList;
+            }
+
         }
-
-
 
         return fieldList;
     }
@@ -141,7 +146,8 @@ public class WebserviceHelper implements KvmSerializable {
 
             userDetails = new DefaultResponse(res1);
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
             e.printStackTrace();
             return null;
         }
@@ -220,7 +226,8 @@ public class WebserviceHelper implements KvmSerializable {
         return fieldList;
     }
 
-    public static ArrayList<BlockWeb> getBlockData(String distCode) {
+    public static ArrayList<BlockWeb> getBlockData(String distCode)
+    {
 
         SoapObject res1;
         res1=getServerData(BLOCK_METHOD, BlockWeb.BlockWeb_CLASS,"District_Code",distCode);

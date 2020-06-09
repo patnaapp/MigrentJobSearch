@@ -65,8 +65,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.employer.AddWorkRequirementActivity"
-            android:theme="@style/NoActionBar"></activity>
+        <activity android:name=".ui.employer.WorkSite_Edit_activity"></activity>
+        <activity
+            android:name=".ui.employer.AddWorkRequirementActivity"
+            android:theme="@style/NoActionBar" />
         <activity
             android:name=".ui.SplashActivity"
             android:theme="@style/NoActionBar">
@@ -94,7 +96,7 @@
         <activity android:name=".ui.employer.EmployerRegistrartionActivity" />
         <activity
             android:name=".ui.employer.AddWorkSiteDetails_Activity"
-            android:theme="@style/NoActionBar"></activity>
+            android:theme="@style/NoActionBar" />
         <activity android:name=".Login" /> <!-- <activity -->
         <!-- android:name=".UpdateAdhaar" -->
         <!-- android:exported="true"> -->

@@ -280,13 +280,12 @@ public class SplashActivity extends Activity {
             @Override
             public void run() {
 
-
-                // close this activity
-                if (!GlobalVariables.isLogin){
+               if (PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean("isLogin", false)==false){
                     Intent i = new Intent(SplashActivity.this, MultiLoginActivity.class);
                     startActivity(i);
                     finish();
                 }
+
                 else {
 
 

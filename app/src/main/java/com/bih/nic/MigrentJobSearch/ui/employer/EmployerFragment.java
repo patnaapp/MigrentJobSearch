@@ -160,6 +160,7 @@ public class EmployerFragment extends Fragment {
                     PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putString("DistCode",result.getDistCode()).commit();
                     PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putString("Mobile",result.getMobile()).commit();
                     PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putString("UserRole",result.getUserRole()).commit();
+                    PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putBoolean("isLogin",true).commit();
 //                    PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putString("BlockName",result.getBlockName()).commit();
 //                    PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putString("PanchayatName",result.getPanchayatName()).commit();
 //                    PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putString("Photo",result.getProfileImg()).commit();

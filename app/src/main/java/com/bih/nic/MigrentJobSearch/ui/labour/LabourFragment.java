@@ -172,6 +172,7 @@ public class LabourFragment extends Fragment {
                     PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putString("PanchayatName",result.getPanchayatName()).commit();
                     PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putString("Photo",result.getProfileImg()).commit();
                     PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putString("UserRole","Labour").commit();
+                    PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putBoolean("isLogin",true).commit();
                     GlobalVariables.isLogin=true;
 
                     Intent intent=new Intent(getContext(), MainHomeActivity.class);

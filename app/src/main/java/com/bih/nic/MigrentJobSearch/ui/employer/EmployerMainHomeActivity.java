@@ -143,6 +143,7 @@ public class EmployerMainHomeActivity extends Activity {
 
     private void confirmLogout()
     {
+        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putBoolean("isLogin",false).commit();
         SharedPreferences settings = this.getSharedPreferences("PreferencesName", Context.MODE_PRIVATE);
         settings.edit().clear().commit();
         GlobalVariables.isLogin=false;

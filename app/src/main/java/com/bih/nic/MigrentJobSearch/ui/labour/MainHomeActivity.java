@@ -195,7 +195,7 @@ public class MainHomeActivity extends Activity {
         SharedPreferences settings = this.getSharedPreferences("PreferencesName", Context.MODE_PRIVATE);
         settings.edit().clear().commit();
         GlobalVariables.isLogin=false;
-//        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("UserId","").commit();
+        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putBoolean("isLogin",false).commit();
 //        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("UserRole","").commit();
         Intent intent = new Intent(this, MultiLoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK| Intent.FLAG_ACTIVITY_CLEAR_TASK);
