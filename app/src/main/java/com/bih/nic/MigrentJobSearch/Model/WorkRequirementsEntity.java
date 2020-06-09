@@ -9,15 +9,19 @@ import java.util.Hashtable;
 
 public class WorkRequirementsEntity implements KvmSerializable, Serializable {
     public static Class<WorkRequirementsEntity> Work_req_CLASS = WorkRequirementsEntity.class;
+    private String skill_categId="";
     private String skill_categ="";
+    private String skill_sub_categId="";
     private String skill_sub_categ="";
     private String no_of_persons="";
     private String min_exp="";
     private String max_exp="";
     private String min_salary="";
     private String max_salary="";
+    private String genderId="";
     private String gender="";
     private String start_date ="";
+    private String isActiveId="";
     private String isActive="";
     private String pincode="";
     private String supervisor_nm_en="";
@@ -62,6 +66,38 @@ public class WorkRequirementsEntity implements KvmSerializable, Serializable {
 
     public static void setWork_req_CLASS(Class<WorkRequirementsEntity> work_req_CLASS) {
         Work_req_CLASS = work_req_CLASS;
+    }
+
+    public String getSkill_categId() {
+        return skill_categId;
+    }
+
+    public void setSkill_categId(String skill_categId) {
+        this.skill_categId = skill_categId;
+    }
+
+    public String getSkill_sub_categId() {
+        return skill_sub_categId;
+    }
+
+    public void setSkill_sub_categId(String skill_sub_categId) {
+        this.skill_sub_categId = skill_sub_categId;
+    }
+
+    public String getGenderId() {
+        return genderId;
+    }
+
+    public void setGenderId(String genderId) {
+        this.genderId = genderId;
+    }
+
+    public String getIsActiveId() {
+        return isActiveId;
+    }
+
+    public void setIsActiveId(String isActiveId) {
+        this.isActiveId = isActiveId;
     }
 
     public String getSkill_categ() {

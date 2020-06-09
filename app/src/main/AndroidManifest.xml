@@ -65,7 +65,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.employer.AddWorkRequirementActivity"></activity>
+        <activity android:name=".ui.employer.AddWorkRequirementActivity"
+            android:theme="@style/NoActionBar"></activity>
         <activity
             android:name=".ui.SplashActivity"
             android:theme="@style/NoActionBar">

@@ -172,7 +172,7 @@
                 android:hint="पासवर्ड"
                 android:inputType="textPassword"
                 android:maxLength="12"
-                android:padding="10dp"
+                android:padding="8dp"
                 android:singleLine="true"
                 android:textColor="#222222"
                 android:textSize="15sp" />

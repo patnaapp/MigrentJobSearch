@@ -124,7 +124,7 @@ public class EmployerMainHomeActivity extends Activity {
     }
 
     public void onModifyWorkSite(View view){
-        Intent intent = new Intent(this, AddWorkSiteDetails_Activity.class);
+        Intent intent = new Intent(this, AddWorkRequirementActivity.class);
         startActivity(intent);
     }
     public void OnClick_goToLoginScreen(View view){
