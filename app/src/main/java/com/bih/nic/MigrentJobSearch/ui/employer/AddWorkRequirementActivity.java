@@ -129,7 +129,18 @@ public class AddWorkRequirementActivity extends Activity implements AdapterView.
             requirement.setGenderId(Gender_Code);
             requirement.setGender(Gender_Name);
             requirement.setStart_date(startDate);
+            requirement.setIsActiveId(statusCode);
+            requirement.setIsActive(statusStr);
             requirement.setNo_of_persons(et_no_person.getText().toString().trim());
+            requirement.setMin_exp(et_exp_mnm.getText().toString().trim());
+            requirement.setMax_exp(et_exp_mxm.getText().toString().trim());
+            requirement.setMin_salary(et_salary_mnm.getText().toString().trim());
+            requirement.setMax_salary(et_salary_mxm.getText().toString().trim());
+
+            Intent returnIntent = new Intent();
+            returnIntent.putExtra("data",requirement);
+            setResult(Activity.RESULT_OK,returnIntent);
+            finish();
         }else{
             Toast.makeText(getApplicationContext(), "कृपया सही डेटा दर्ज करें", Toast.LENGTH_LONG).show();
         }

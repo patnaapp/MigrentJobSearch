@@ -9,6 +9,8 @@ import android.database.SQLException;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextUtils;
@@ -19,6 +21,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -30,9 +33,13 @@ import com.bih.nic.MigrentJobSearch.Model.District;
 import com.bih.nic.MigrentJobSearch.Model.SkillMaster;
 import com.bih.nic.MigrentJobSearch.Model.SubSkillMaster;
 import com.bih.nic.MigrentJobSearch.Model.WorkDetailsEntity;
+import com.bih.nic.MigrentJobSearch.Model.WorkRequirementsEntity;
 import com.bih.nic.MigrentJobSearch.R;
 import com.bih.nic.MigrentJobSearch.Utiilties;
 import com.bih.nic.MigrentJobSearch.WebserviceHelper;
+import com.bih.nic.MigrentJobSearch.adapter.LabourSearchAdaptor;
+import com.bih.nic.MigrentJobSearch.adapter.WorkReqrmntEntryAdapter;
+import com.bih.nic.MigrentJobSearch.listener.WorkReqrmntListener;
 import com.bih.nic.MigrentJobSearch.ui.labour.ModifyDocumentActivity;
 
 import java.io.IOException;
@@ -40,7 +47,7 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class AddWorkSiteDetails_Activity extends Activity {
+public class AddWorkSiteDetails_Activity extends Activity implements WorkReqrmntListener {
 
     Spinner spin_fin_yr,spin_dept,spin_district,spin_block;
     EditText et_work_site_en,et_work_site_hn,et_work_loc_en,et_work_loc_hn,et_pincode,et_supervisor_name,et_supervisor_name_hn,et_supervisor_mob;
@@ -54,6 +61,13 @@ public class AddWorkSiteDetails_Activity extends Activity {
     String fin_yr_id="",fin_yr_name="";
     ArrayAdapter ben_type_aangan_aaray;
     Button add_requirement;
+    int REQUESTCODE = 1;
+
+    RecyclerView rv_requirements;
+    ImageView img_back;
+    ArrayList<WorkRequirementsEntity> requirements;
+
+    WorkReqrmntEntryAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -180,7 +194,7 @@ public class AddWorkSiteDetails_Activity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(AddWorkSiteDetails_Activity.this,AddWorkRequirementActivity.class);
-                startActivity(i);
+                startActivityForResult(i, REQUESTCODE);
             }
         });
 
@@ -209,9 +223,28 @@ public class AddWorkSiteDetails_Activity extends Activity {
         et_supervisor_mob=findViewById(R.id.et_supervisor_mob);
         add_requirement=findViewById(R.id.add_requirement);
 
+        rv_requirements=findViewById(R.id.rv_requirements);
+
+        img_back = (ImageView) findViewById(R.id.img);
+
         ben_type_aangan_aaray = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, fin_yr);
         spin_fin_yr.setAdapter(ben_type_aangan_aaray);
 
+        img_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        requirements = new ArrayList<>();
+        setupRequiremntRecycler();
+    }
+
+    public void setupRequiremntRecycler(){
+        adapter = new WorkReqrmntEntryAdapter(this, requirements, this);
+        rv_requirements.setLayoutManager(new LinearLayoutManager(this));
+        rv_requirements.setAdapter(adapter);
     }
 
 
@@ -557,6 +590,38 @@ public class AddWorkSiteDetails_Activity extends Activity {
         ab.show();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUESTCODE) {
+            if(resultCode == Activity.RESULT_OK){
+                if(data != null){
+                    WorkRequirementsEntity reqrmnt = (WorkRequirementsEntity) data.getSerializableExtra("data");
+                    requirements.add(reqrmnt);
+                    adapter.notifyDataSetChanged();
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onRemoveRequirement(final int index) {
+        new AlertDialog.Builder(this)
+                .setTitle("Remove Requirement")
+                .setMessage("Are you sure? ")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        requirements.remove(index);
+                        adapter.notifyDataSetChanged();
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
+
+    }
+
     private class SyncDeptMasterData extends AsyncTask<String, Void, ArrayList<DepartmentMaster>> {
         private final ProgressDialog dialog = new ProgressDialog(AddWorkSiteDetails_Activity.this);
         int optionType;
@@ -649,9 +714,9 @@ public class AddWorkSiteDetails_Activity extends Activity {
             e.printStackTrace();
         }
 
-        Intent i = new Intent(AddWorkSiteDetails_Activity.this,AddWorkRequirementActivity.class);
-        i.putExtra("data", info);
-        startActivity(i);
+//        Intent i = new Intent(AddWorkSiteDetails_Activity.this,AddWorkRequirementActivity.class);
+//        i.putExtra("data", info);
+//        startActivity(i);
 
     }
 
