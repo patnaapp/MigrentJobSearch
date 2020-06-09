@@ -20,6 +20,7 @@ import com.bih.nic.MigrentJobSearch.Model.SkillMaster;
 import com.bih.nic.MigrentJobSearch.Model.SubSkillMaster;
 import com.bih.nic.MigrentJobSearch.Model.UserDetails;
 import com.bih.nic.MigrentJobSearch.Model.Versioninfo;
+import com.bih.nic.MigrentJobSearch.Model.WorkDetailsEntity;
 import com.bih.nic.MigrentJobSearch.Model.WorkerModel;
 import com.bih.nic.MigrentJobSearch.Model.panchayat;
 import com.bih.nic.MigrentJobSearch.Model.ward_model;
@@ -85,6 +86,7 @@ public class WebserviceHelper implements KvmSerializable {
     public static final  String AcceptRjctRecordsFromPacs = "UpdateRequest";
     public static final  String GetWorkDetails = "GetWorkDetails";
     public static final  String GetRequirmentData = "GetRequirmentData";
+    public static final  String WorkSite_eDit = "WorkSiteSearchList";
     public static final  String GetLoadLabourData = "GetLoadLabourData";
     public static final  String EmployerRegistration_METHOD = "InsertCompanyDtls";
     public static final  String REGISTRATION_EMP_MOB_METHOD = "OrgsendOtp";
@@ -1554,5 +1556,55 @@ public class WebserviceHelper implements KvmSerializable {
         }
 
         return fieldList;
+    }
+
+    public static ArrayList<WorkDetailsEntity> GetWorkDetailDataForEdit(String status, String orgid) {
+
+
+
+        SoapObject request = new SoapObject(SERVICENAMESPACE, WorkSite_eDit);
+
+
+        request.addProperty("Status",status);
+        request.addProperty("orgId",orgid);
+
+
+        SoapObject res1;
+        try {
+
+            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+            envelope.dotNet = true;
+            envelope.setOutputSoapObject(request);
+            envelope.addMapping(SERVICENAMESPACE,
+                    BenfiList.BENFICLASS.getSimpleName(), BenfiList.BENFICLASS);
+            HttpTransportSE androidHttpTransport = new HttpTransportSE(SERVICEURL,60000);
+            androidHttpTransport.call(SERVICENAMESPACE + WorkSite_eDit, envelope);
+
+            res1 = (SoapObject) envelope.getResponse();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        int TotalProperty = res1.getPropertyCount();
+        ArrayList<WorkDetailsEntity> pvmArrayList = new ArrayList<WorkDetailsEntity>();
+        if(TotalProperty>0) {
+
+
+            for (int ii = 0; ii < TotalProperty; ii++) {
+                if (res1.getProperty(ii) != null) {
+                    Object property = res1.getProperty(ii);
+                    if (property instanceof SoapObject) {
+                        SoapObject final_object = (SoapObject) property;
+                        WorkDetailsEntity state = new WorkDetailsEntity(final_object);
+                        pvmArrayList.add(state);
+                    }
+                } else
+                    return pvmArrayList;
+            }
+        }
+
+
+        return pvmArrayList;
     }
 }

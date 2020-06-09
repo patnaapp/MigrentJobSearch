@@ -23,6 +23,10 @@ public class WorkDetailsEntity implements KvmSerializable, Serializable {
     private String supervisor_nm_en="";
     private String supervisor_nm_hn="";
     private String supervisor_mob="";
+    private String WorksId="";
+    private String DeptId="";
+    private String OfficeId="";
+    private String Workstatus="";
 
 
     public WorkDetailsEntity() {
@@ -30,9 +34,15 @@ public class WorkDetailsEntity implements KvmSerializable, Serializable {
     }
 
     public WorkDetailsEntity(SoapObject res1) {
-//        this.Password=res1.getProperty("Password").toString();
-//        this.DistrictCode=res1.getProperty("DistrictCode").toString();
-//        this.DistrictName=res1.getProperty("DistrictName").toString();
+        this.WorksId=res1.getProperty("WorksId").toString();
+        this.DeptId=res1.getProperty("DeptId").toString();
+        this.OfficeId=res1.getProperty("OfficeId").toString();
+        this.work_site_eng=res1.getProperty("WorkSiteName").toString();
+        this.Location_en=res1.getProperty("Location").toString();
+        this.pincode=res1.getProperty("PinNo").toString();
+        this.supervisor_nm_en=res1.getProperty("ContactPerson").toString();
+        this.supervisor_mob=res1.getProperty("CPMobileNo").toString();
+        this.Workstatus=res1.getProperty("Workstatus").toString();
 
     }
 
@@ -174,5 +184,37 @@ public class WorkDetailsEntity implements KvmSerializable, Serializable {
 
     public void setSupervisor_mob(String supervisor_mob) {
         this.supervisor_mob = supervisor_mob;
+    }
+
+    public String getWorksId() {
+        return WorksId;
+    }
+
+    public void setWorksId(String worksId) {
+        WorksId = worksId;
+    }
+
+    public String getDeptId() {
+        return DeptId;
+    }
+
+    public void setDeptId(String deptId) {
+        DeptId = deptId;
+    }
+
+    public String getOfficeId() {
+        return OfficeId;
+    }
+
+    public void setOfficeId(String officeId) {
+        OfficeId = officeId;
+    }
+
+    public String getWorkstatus() {
+        return Workstatus;
+    }
+
+    public void setWorkstatus(String workstatus) {
+        Workstatus = workstatus;
     }
 }
