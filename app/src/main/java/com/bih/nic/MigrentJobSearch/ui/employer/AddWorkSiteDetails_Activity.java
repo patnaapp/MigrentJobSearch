@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.SQLException;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -27,7 +28,9 @@ import android.widget.Toast;
 
 import com.bih.nic.MigrentJobSearch.DataBaseHelper.DataBaseHelper;
 import com.bih.nic.MigrentJobSearch.GlobalVariables;
+import com.bih.nic.MigrentJobSearch.Model.BenDetails;
 import com.bih.nic.MigrentJobSearch.Model.BlockWeb;
+import com.bih.nic.MigrentJobSearch.Model.DefaultResponse;
 import com.bih.nic.MigrentJobSearch.Model.DepartmentMaster;
 import com.bih.nic.MigrentJobSearch.Model.District;
 import com.bih.nic.MigrentJobSearch.Model.SkillMaster;
@@ -43,6 +46,7 @@ import com.bih.nic.MigrentJobSearch.listener.WorkReqrmntListener;
 import com.bih.nic.MigrentJobSearch.ui.labour.ModifyDocumentActivity;
 
 import java.io.IOException;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -467,34 +471,34 @@ public class AddWorkSiteDetails_Activity extends Activity implements WorkReqrmnt
         String isValied = "yes";
         View focusView = null;
         if (TextUtils.isEmpty(work_site_en)) {
-            Toast.makeText(getApplicationContext(), "कृपया कार्य स्थल का नाम दर्ज करे", Toast.LENGTH_LONG).show();
-            // sp_district.setError("कृपया जिला का नाम का चयन करे |");
+            //Toast.makeText(getApplicationContext(), "कृपया कार्य स्थल का नाम दर्ज करे", Toast.LENGTH_LONG).show();
+            et_work_site_en.setError("कृपया कार्य स्थल का नाम दर्ज करे");
             focusView = et_work_site_en;
             cancelRegistration = true;
         }
 
         if (TextUtils.isEmpty(work_site_hn)) {
-            Toast.makeText(getApplicationContext(), "कृपया कार्य स्थल का नाम दर्ज करे|", Toast.LENGTH_LONG).show();
-            // sp_district.setError("कृपया जिला का नाम का चयन करे |");
+            //Toast.makeText(getApplicationContext(), "कृपया कार्य स्थल का नाम दर्ज करे|", Toast.LENGTH_LONG).show();
+            et_work_site_hn.setError("कृपया कार्य स्थल का नाम दर्ज करे|");
             focusView = et_work_site_hn;
             cancelRegistration = true;
         }
 
         if (TextUtils.isEmpty(work_loc_en)) {
-            Toast.makeText(getApplicationContext(), "कृपया कार्य स्थल का पता दर्ज करे |", Toast.LENGTH_LONG).show();
-            // sp_district.setError("कृपया जिला का नाम का चयन करे |");
+            //Toast.makeText(getApplicationContext(), "कृपया कार्य स्थल का पता दर्ज करे |", Toast.LENGTH_LONG).show();
+            et_work_loc_en.setError("कृपया कार्य स्थल का पता दर्ज करे |");
             focusView = et_work_loc_en;
             cancelRegistration = true;
         }
         if (TextUtils.isEmpty(work_loc_hn)) {
-            Toast.makeText(getApplicationContext(), "कृपया कार्य स्थल का पता दर्ज करे |", Toast.LENGTH_LONG).show();
-            // sp_district.setError("कृपया जिला का नाम का चयन करे |");
+           // Toast.makeText(getApplicationContext(), "कृपया कार्य स्थल का पता दर्ज करे |", Toast.LENGTH_LONG).show();
+            et_work_loc_hn.setError("कृपया कार्य स्थल का पता दर्ज करे |");
             focusView = et_work_loc_hn;
             cancelRegistration = true;
         }
         if (TextUtils.isEmpty(pincode)) {
-            Toast.makeText(getApplicationContext(), "कृपया PINCODE दर्ज करे |", Toast.LENGTH_LONG).show();
-            // sp_district.setError("कृपया जिला का नाम का चयन करे |");
+            //Toast.makeText(getApplicationContext(), "कृपया PINCODE दर्ज करे |", Toast.LENGTH_LONG).show();
+            et_pincode.setError("कृपया PINCODE दर्ज करे |");
             focusView = et_pincode;
             cancelRegistration = true;
         }
@@ -505,21 +509,21 @@ public class AddWorkSiteDetails_Activity extends Activity implements WorkReqrmnt
             cancelRegistration = true;
         }
         if (TextUtils.isEmpty(supervisor_name)) {
-            Toast.makeText(getApplicationContext(), "कृपया सुपरवाइजर का नाम दर्ज करे|", Toast.LENGTH_LONG).show();
-            // sp_district.setError("कृपया जिला का नाम का चयन करे |");
+            //Toast.makeText(getApplicationContext(), "कृपया सुपरवाइजर का नाम दर्ज करे|", Toast.LENGTH_LONG).show();
+            et_supervisor_name.setError("कृपया सुपरवाइजर का नाम दर्ज करे|");
             focusView = et_supervisor_name;
             cancelRegistration = true;
         }
         if (TextUtils.isEmpty(supervisor_name_hn)) {
-            Toast.makeText(getApplicationContext(), "कृपया सुपरवाइजर का नाम दर्ज करे|", Toast.LENGTH_LONG).show();
-            // sp_district.setError("कृपया जिला का नाम का चयन करे |");
+            //Toast.makeText(getApplicationContext(), "कृपया सुपरवाइजर का नाम दर्ज करे|", Toast.LENGTH_LONG).show();
+            et_supervisor_name_hn.setError("कृपया सुपरवाइजर का नाम दर्ज करे|");
             focusView = et_supervisor_name_hn;
             cancelRegistration = true;
         }
 
         if (TextUtils.isEmpty(supervisor_mob)) {
-            Toast.makeText(getApplicationContext(), "कृपया सुपरवाइजर का नंबर दर्ज करे|", Toast.LENGTH_LONG).show();
-            // sp_district.setError("कृपया जिला का नाम का चयन करे |");
+            //Toast.makeText(getApplicationContext(), "कृपया सुपरवाइजर का नंबर दर्ज करे|", Toast.LENGTH_LONG).show();
+            et_supervisor_mob.setError("कृपया सुपरवाइजर का नंबर दर्ज करे|");
             focusView = et_supervisor_mob;
             cancelRegistration = true;
         }
@@ -540,6 +544,22 @@ public class AddWorkSiteDetails_Activity extends Activity implements WorkReqrmnt
             Toast.makeText(getApplicationContext(), "कृपया प्रखंड का चयन करे|", Toast.LENGTH_LONG).show();
             // sp_district.setError("कृपया जिला का नाम का चयन करे |");
             focusView = spin_block;
+            cancelRegistration = true;
+        }
+        if (TextUtils.isEmpty(Dept_name)) {
+            Toast.makeText(getApplicationContext(), "कृपया विभाग का चयन करे|", Toast.LENGTH_LONG).show();
+            // sp_district.setError("कृपया जिला का नाम का चयन करे |");
+            focusView = spin_dept;
+            cancelRegistration = true;
+        }
+        if (TextUtils.isEmpty(fin_yr_name)) {
+            Toast.makeText(getApplicationContext(), "कृपया वित्तीय वर्ष का चयन करे|", Toast.LENGTH_LONG).show();
+            // sp_district.setError("कृपया जिला का नाम का चयन करे |");
+            focusView = spin_fin_yr;
+            cancelRegistration = true;
+        }
+        if(requirements.size() <=0){
+            Toast.makeText(getApplicationContext(), "कृपया कामगारों से सम्बंधित जानकारी की एंट्री करे|", Toast.LENGTH_LONG).show();
             cancelRegistration = true;
         }
 
@@ -697,7 +717,7 @@ public class AddWorkSiteDetails_Activity extends Activity implements WorkReqrmnt
             info.setDist_name(Dist_name);
             info.setBlk_id(block_id);
             info.setBlk_name(block_name);
-            info.setFin_yr(fin_yr_id);
+            info.setFin_yr(fin_yr_name);
             info.setRelated_dept(Dept_id);
             info.setWork_site_eng(work_site_en);
             info.setWork_site_hn(work_site_hn);
@@ -724,4 +744,83 @@ public class AddWorkSiteDetails_Activity extends Activity implements WorkReqrmnt
         SaveData();
     }
 
+    private class UploadWorkDetailTask extends AsyncTask<String, Void, String> {
+        private final ProgressDialog dialog = new ProgressDialog(AddWorkSiteDetails_Activity.this);
+
+        WorkDetailsEntity workInfo;
+        ArrayList<WorkRequirementsEntity> reqrmnts;
+
+        public UploadWorkDetailTask(WorkDetailsEntity workInfo, ArrayList<WorkRequirementsEntity> reqrmnts) {
+            this.workInfo = workInfo;
+            this.reqrmnts = reqrmnts;
+        }
+
+        @Override
+        protected void onPreExecute() {
+
+            this.dialog.setCanceledOnTouchOutside(false);
+            this.dialog.setMessage(getApplicationContext().getResources().getString(R.string.uploading));
+            this.dialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... param) {
+
+            return WebserviceHelper.UploadWorkSiteDetail(AddWorkSiteDetails_Activity.this,workInfo,reqrmnts, PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("OrgId", ""));
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            if (this.dialog.isShowing()) {
+                this.dialog.dismiss();
+            }
+
+            if (result != null) {
+
+                if(result.contains("1")){
+                    new AlertDialog.Builder(AddWorkSiteDetails_Activity.this)
+                            .setTitle("Success")
+                            .setMessage("Work Site detailed has been succesfully added")
+                            .setCancelable(false)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    finish();
+                                }
+                            })
+                            .show();
+                }else{
+                    new AlertDialog.Builder(AddWorkSiteDetails_Activity.this)
+                            .setTitle("Failed!!")
+                            .setMessage(result)
+                            .setCancelable(true)
+                            .show();
+                }
+
+//                if(result.getStatus()){
+//                    new AlertDialog.Builder(AddWorkSiteDetails_Activity.this)
+//                            .setTitle("Success")
+//                            .setMessage("Work Site detailed has been succesfully added")
+//                            .setCancelable(false)
+//                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//                                public void onClick(DialogInterface dialog, int id) {
+//                                    finish();
+//                                }
+//                            })
+//                            .show();
+//                }else{
+//                    new AlertDialog.Builder(AddWorkSiteDetails_Activity.this)
+//                            .setTitle("Failed!!")
+//                            .setMessage(result.getMessage())
+//                            .setCancelable(true)
+//                            .show();
+//                }
+
+            }else{
+                Toast.makeText(getApplicationContext(),"Failed!! Null Response. Try again later",Toast.LENGTH_LONG).show();
+            }
+
+
+        }
+
+    }
 }

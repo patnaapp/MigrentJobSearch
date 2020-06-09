@@ -21,20 +21,49 @@ import com.bih.nic.MigrentJobSearch.Model.SubSkillMaster;
 import com.bih.nic.MigrentJobSearch.Model.UserDetails;
 import com.bih.nic.MigrentJobSearch.Model.Versioninfo;
 import com.bih.nic.MigrentJobSearch.Model.WorkDetailsEntity;
+import com.bih.nic.MigrentJobSearch.Model.WorkRequirementsEntity;
 import com.bih.nic.MigrentJobSearch.Model.WorkerModel;
 import com.bih.nic.MigrentJobSearch.Model.panchayat;
 import com.bih.nic.MigrentJobSearch.Model.ward_model;
 import com.bih.nic.MigrentJobSearch.Model.workListModel;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.ParseException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicHttpResponse;
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.KvmSerializable;
 import org.ksoap2.serialization.PropertyInfo;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
+import org.w3c.dom.DOMImplementation;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Hashtable;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import static org.apache.http.util.EntityUtils.getContentCharSet;
 
 
 /**
@@ -80,6 +109,7 @@ public class WebserviceHelper implements KvmSerializable {
     private static final String UpdateAliveCertificate="UpdateAliveCertificate";
     private static final String UPLOAD_METHOD="InsertDetails";
     private static final String BindWard="BindWard";
+    private static final String INSERT_WORK_DETAIL="InsertWorkDataNew";
 
     public static final  String APPVERSION_METHOD = "getAppLatest";
     public static final  String UpdateUserDetails = "UpdateUserDetails";
@@ -1057,7 +1087,229 @@ public class WebserviceHelper implements KvmSerializable {
 
     }
 
+    public static Element getSoapPropert(Document doc, String key, String value){
+        Element eid = doc.createElement(key);
+        eid.appendChild(doc.createTextNode(value));
+        return eid;
+    }
 
+    public static String UploadWorkSiteDetail(Context context, WorkDetailsEntity workDetail, ArrayList<WorkRequirementsEntity> requirements, String orgId) {
+
+        context=context;
+        DocumentBuilderFactory dbfac = DocumentBuilderFactory.newInstance();
+        dbfac.setNamespaceAware(true);
+        DocumentBuilder docBuilder = null;
+
+        try {
+            docBuilder = dbfac.newDocumentBuilder();
+        } catch (ParserConfigurationException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return "0, ParserConfigurationException!!";
+        }
+        DOMImplementation domImpl = docBuilder.getDOMImplementation();
+        Document doc = domImpl.createDocument(SERVICENAMESPACE,    INSERT_WORK_DETAIL, null);
+        doc.setXmlVersion("1.0");
+        doc.setXmlStandalone(true);
+
+        Element poleElement = doc.getDocumentElement();
+
+        poleElement.appendChild(getSoapPropert(doc, "_FinYear", workDetail.getFin_yr()));
+        poleElement.appendChild(getSoapPropert(doc, "_DistCode",workDetail.getDist_id()));
+
+        poleElement.appendChild(getSoapPropert(doc, "_BlockCode",workDetail.getBlk_id()));
+        poleElement.appendChild(getSoapPropert(doc, "_worksiteEn",workDetail.getWork_site_eng()));
+        poleElement.appendChild(getSoapPropert(doc, "_worksiteHn",workDetail.getWork_site_hn()));
+        poleElement.appendChild(getSoapPropert(doc, "_locEn",workDetail.getLocation_en()));
+        poleElement.appendChild(getSoapPropert(doc, "_locHn",workDetail.getLocation_hn()));
+        poleElement.appendChild(getSoapPropert(doc, "_pin",workDetail.getPincode()));
+        poleElement.appendChild(getSoapPropert(doc, "_conperEn",workDetail.getSupervisor_nm_en()));
+        poleElement.appendChild(getSoapPropert(doc, "_conperHn",workDetail.getSupervisor_nm_hn()));
+
+        poleElement.appendChild(getSoapPropert(doc, "_mobile",workDetail.getSupervisor_mob()));
+        poleElement.appendChild(getSoapPropert(doc, "_workStatus",""));
+
+        poleElement.appendChild(getSoapPropert(doc, "_OrgId",orgId));
+        poleElement.appendChild(getSoapPropert(doc, "_RelatedDept",workDetail.getDeptId()));
+
+        //--------------Array-----------------//
+
+        Element pdlsElement = doc.createElement("InsertFamilyNew");
+        ArrayList<WorkRequirementsEntity> list = requirements;
+
+        for(int x=0;x<list.size();x++){
+            Element pdElement = doc.createElement("InsertFamily");
+
+            Element fid = doc.createElement("SkillCat");
+            fid.appendChild(doc.createTextNode(list.get(x).getSkill_categId()));
+
+            pdElement.appendChild(fid);
+
+            Element vLebel = doc.createElement("SkillSubCat");
+            vLebel.appendChild(doc.createTextNode(list.get(x).getSkill_sub_categId()));
+            //vLebel.appendChild(doc.createTextNode("1234"));
+            pdElement.appendChild(vLebel);
+
+            Element vLebel2 = doc.createElement("NumPerson");
+            vLebel2.appendChild(doc.createTextNode(list.get(x).getNo_of_persons()));
+            pdElement.appendChild(vLebel2);
+
+            Element vLebel3 = doc.createElement("Active");
+            vLebel3.appendChild(doc.createTextNode(list.get(x).getIsActiveId()));
+            pdElement.appendChild(vLebel3);
+
+            Element vLebel4 = doc.createElement("Salary");
+            vLebel4.appendChild(doc.createTextNode(list.get(x).getMin_salary()));
+            pdElement.appendChild(vLebel4);
+
+            Element vLebel5 = doc.createElement("StartDate");
+            vLebel5.appendChild(doc.createTextNode(list.get(x).getStart_date()));
+            pdElement.appendChild(vLebel5);
+
+            Element vLebel6 = doc.createElement("SalaryMax");
+            vLebel6.appendChild(doc.createTextNode(list.get(x).getMax_salary()));
+            pdElement.appendChild(vLebel6);
+
+            Element vLebel7 = doc.createElement("PersonExp");
+            vLebel7.appendChild(doc.createTextNode(list.get(x).getMin_exp()));
+            pdElement.appendChild(vLebel7);
+
+            Element vLebel8 = doc.createElement("ExperianceMax");
+            vLebel8.appendChild(doc.createTextNode(list.get(x).getMax_exp()));
+            pdElement.appendChild(vLebel8);
+
+            Element vLebel9 = doc.createElement("Gender");
+            vLebel9.appendChild(doc.createTextNode(list.get(x).getGenderId()));
+            pdElement.appendChild(vLebel9);
+
+            pdlsElement.appendChild(pdElement);
+        }
+        poleElement.appendChild(pdlsElement);
+
+        TransformerFactory transfac = TransformerFactory.newInstance();
+        Transformer trans = null;
+        String res = "0";
+        try {
+
+            try {
+                trans = transfac.newTransformer();
+            } catch (TransformerConfigurationException e1) {
+
+                // TODO Auto-generated catch block
+
+                e1.printStackTrace();
+                return "0, TransformerConfigurationException";
+            }
+
+            trans.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+            trans.setOutputProperty(OutputKeys.INDENT, "yes");
+
+            // create string from xml tree
+            StringWriter sw = new StringWriter();
+            StreamResult result = new StreamResult(sw);
+            DOMSource source = new DOMSource(doc);
+
+            BasicHttpResponse httpResponse = null;
+
+            try {
+                trans.transform(source, result);
+            } catch (TransformerException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+                return "0, TransformerException";
+            }
+
+            String SOAPRequestXML = sw.toString();
+
+            String startTag = "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
+                    + "xmlns:xsd=\"http://www.w3.org/2001/XMLSchem\" "
+                    + "xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" >  "
+                    + "<soap:Body > ";
+            String endTag = "</soap:Body > " + "</soap:Envelope>";
+
+            try{
+                HttpPost httppost = new HttpPost(SERVICEURL);
+
+                StringEntity sEntity = new StringEntity(startTag + SOAPRequestXML+ endTag);
+
+                sEntity.setContentType("text/xml");
+                httppost.setEntity(sEntity);
+                HttpClient httpClient = new DefaultHttpClient();
+                httpResponse = (BasicHttpResponse) httpClient.execute(httppost);
+                HttpEntity entity = httpResponse.getEntity();
+
+                if (httpResponse.getStatusLine().getStatusCode() == 200|| httpResponse.getStatusLine().getReasonPhrase().toString().equals("OK")) {
+                    String output = _getResponseBody(entity);
+                    String result1 = output.replace("<?xml version=\"1.0\" encoding=\"utf-8\"?><soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"><soap:Body><InsertWorkDataNewResponse xmlns=\"http://10.133.20.159\"><InsertWorkDataNewResult>", "");
+                    result1 = result1.replace("</InsertWorkDataNewResult></InsertWorkDataNewResponse></soap:Body></soap:Envelope>","");
+                    Log.e("Result", result1);
+                    //SoapResponseEntity result = new SoapResponseEntity(httpResponse.getEntity());
+                    //res = "1";
+                    res = result1;
+                } else {
+                    res = "0, Server no reponse";
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+                return "0, Error";
+            }
+
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return "0, Error";
+        }
+
+        // response.put("HTTPStatus",httpResponse.getStatusLine().toString());
+
+        return res;
+    }
+
+    public static String _getResponseBody(final HttpEntity entity) throws IOException, ParseException {
+
+        if (entity == null) { throw new IllegalArgumentException("HTTP entity may not be null"); }
+
+        InputStream instream = entity.getContent();
+
+        if (instream == null) { return ""; }
+
+        if (entity.getContentLength() > Integer.MAX_VALUE) { throw new IllegalArgumentException(
+
+                "HTTP entity too large to be buffered in memory"); }
+
+        String charset = getContentCharSet(entity);
+
+        if (charset == null) {
+
+            charset = org.apache.http.protocol.HTTP.DEFAULT_CONTENT_CHARSET;
+
+        }
+
+        Reader reader = new InputStreamReader(instream, charset);
+
+        StringBuilder buffer = new StringBuilder();
+
+        try {
+
+            char[] tmp = new char[1024];
+
+            int l;
+
+            while ((l = reader.read(tmp)) != -1) {
+
+                buffer.append(tmp, 0, l);
+
+            }
+
+        } finally {
+
+            reader.close();
+
+        }
+
+        return buffer.toString();
+
+    }
 
     public static DefaultResponse UploadAcceptedRecordsFromPacs(JobListEntity data, String regNo) {
 

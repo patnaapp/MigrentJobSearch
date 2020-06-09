@@ -65,6 +65,7 @@ public class WorkReqrmntEntryAdapter extends RecyclerView.Adapter<WorkReqrmntEnt
         holder.tv_exp_max.setText(info.getMax_exp());
         holder.tv_salary.setText(info.getMin_salary());
         holder.tv_salary_max.setText(info.getMax_salary());
+        holder.tv_status1.setText(info.getIsActive());
 
         holder.iv_delete.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -51,7 +51,7 @@ public class AddWorkRequirementActivity extends Activity implements AdapterView.
     ArrayList<SkillMaster> skillList;
     ArrayList<SubSkillMaster> subSkillList;
 
-    String gender[] = {"-चयन करे-","पुरुष","महिला","ट्रांसजेंडर"};
+    String gender[] = {"-चयन करे-","अन्य","पुरुष","महिला"};
     String status[] = {"-चयन करे-","हाँ","नहीं"};
 
     ArrayAdapter gender_aaray,status_array;
@@ -294,24 +294,28 @@ public class AddWorkRequirementActivity extends Activity implements AdapterView.
                     skillId = skillList.get(position -1).getId();
                     skillName = skillList.get(position -1).getSkillNameHn();
                     loadSubSkillSpinnerData(skillId);
+                    tv_skill.setError(null);
                 }
                 break;
             case R.id.spn_sub_skill:
                 if (position > 0) {
                     subSkillId = subSkillList.get(position - 1).getId();
                     SubSkillName = subSkillList.get(position - 1).getSkillNameHn();
+                    tv_t_subcat.setError(null);
                 }
                 break;
             case R.id.spn_gender:
                 if (position > 0) {
-                    Gender_Code = ""+position;
+                    Gender_Code = String.valueOf(position-1);
                     Gender_Name = gender[position];
+                    tv_t_gender.setError(null);
                 }
                 break;
             case R.id.spin_active:
                 if (position > 0) {
                     statusCode = ""+position;
                     statusStr = status[position];
+                    tv_t_status.setError(null);
                 }
                 break;
         }
@@ -439,6 +443,7 @@ public class AddWorkRequirementActivity extends Activity implements AdapterView.
 
 
                 tv_start_date.setText(smDay + "-" + smMonth + "-" + mYear);
+                tv_t_date.setError(null);
                 //_DOB = mYear + "-" + smMonth + "-" + smDay + " " + newString;
                 startDate = mYear + smMonth + smDay;
 
