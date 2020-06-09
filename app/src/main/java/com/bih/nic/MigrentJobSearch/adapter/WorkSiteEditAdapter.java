@@ -1,6 +1,7 @@
 package com.bih.nic.MigrentJobSearch.adapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import com.bih.nic.MigrentJobSearch.Model.WorkRequirementsEntity;
 import com.bih.nic.MigrentJobSearch.Model.workListModel;
 import com.bih.nic.MigrentJobSearch.R;
 import com.bih.nic.MigrentJobSearch.listener.WorkReqrmntListener;
+import com.bih.nic.MigrentJobSearch.ui.employer.AddWorkSiteDetails_Activity;
 
 import java.util.ArrayList;
 
@@ -53,12 +55,14 @@ public class WorkSiteEditAdapter extends RecyclerView.Adapter<WorkSiteEditAdapte
         holder.tv_wrk_stat.setText(info.getWorkstatus());
 
 
-//        holder.iv_delete.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                listener.onRemoveRequirement(position);
-//            }
-//        });
+        holder.iv_edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(activity, AddWorkSiteDetails_Activity.class);
+                activity.startActivity(i);
+
+            }
+        });
     }
 
     @Override
@@ -69,7 +73,7 @@ public class WorkSiteEditAdapter extends RecyclerView.Adapter<WorkSiteEditAdapte
 
     public class ViewHolder  extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView tv_slno,tv_skill_cat,tv_skill_name,tv_no_perosn,tv_gendar,tv_start_date,tv_exp,tv_exp_max,tv_salary,tv_salary_max,tv_status1;
-        ImageView iv_delete;
+        ImageView iv_edit;
         TextView tv_wrk_id,tv_work_site,tv_wrk_location,tv_pincode,tv_cntct_prson,tv_mob,tv_wrk_stat;
 
         ViewHolder(View itemView) {
@@ -82,6 +86,7 @@ public class WorkSiteEditAdapter extends RecyclerView.Adapter<WorkSiteEditAdapte
             tv_cntct_prson=itemView.findViewById(R.id.tv_cntct_prson);
             tv_mob=itemView.findViewById(R.id.tv_mob);
             tv_wrk_stat=itemView.findViewById(R.id.tv_wrk_stat);
+            iv_edit=itemView.findViewById(R.id.iv_edit);
 
         }
 
