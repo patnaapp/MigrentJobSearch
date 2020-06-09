@@ -445,7 +445,7 @@ public class AddWorkRequirementActivity extends Activity implements AdapterView.
                 tv_start_date.setText(smDay + "-" + smMonth + "-" + mYear);
                 tv_t_date.setError(null);
                 //_DOB = mYear + "-" + smMonth + "-" + smDay + " " + newString;
-                startDate = mYear + smMonth + smDay;
+                startDate = mYear + "-" + smMonth + "-" + smDay;
 
             } catch (Exception e) {
                 e.printStackTrace();

@@ -74,11 +74,11 @@ public class WebserviceHelper implements KvmSerializable {
 
     private Context ctx;
 
-//    public static final String SERVICENAMESPACE = "http://shramsadhan.bih.nic.in/";
-//    public static final String SERVICEURL = "http://shramsadhan.bih.nic.in/MigrantJobSearchWebservice.asmx";
+    public static final String SERVICENAMESPACE = "http://shramsadhan.bih.nic.in/";
+    public static final String SERVICEURL = "http://shramsadhan.bih.nic.in/MigrantJobSearchWebservice.asmx";
 
-    public static final String SERVICENAMESPACE = "http://10.133.20.159/";
-    public static final String SERVICEURL = "http://10.133.20.159/TestService/MigrantJobSearchWebservice.asmx";
+//    public static final String SERVICENAMESPACE = "http://10.133.20.159/";
+//    public static final String SERVICEURL = "http://10.133.20.159/TestService/MigrantJobSearchWebservice.asmx";
 
     private static final String AuthenticateUser = "Authenticate";
     private static final String AuthenticateORGUser = "AuthenticateOrgLogin";
@@ -1126,11 +1126,15 @@ public class WebserviceHelper implements KvmSerializable {
         poleElement.appendChild(getSoapPropert(doc, "_conperEn",workDetail.getSupervisor_nm_en()));
         poleElement.appendChild(getSoapPropert(doc, "_conperHn",workDetail.getSupervisor_nm_hn()));
 
+        poleElement.appendChild(getSoapPropert(doc, "_designationEn",""));
+        poleElement.appendChild(getSoapPropert(doc, "_designationHn",""));
+
         poleElement.appendChild(getSoapPropert(doc, "_mobile",workDetail.getSupervisor_mob()));
-        poleElement.appendChild(getSoapPropert(doc, "_workStatus",""));
+        poleElement.appendChild(getSoapPropert(doc, "_depId",""));
+        //poleElement.appendChild(getSoapPropert(doc, "_workStatus",""));
 
         poleElement.appendChild(getSoapPropert(doc, "_OrgId",orgId));
-        poleElement.appendChild(getSoapPropert(doc, "_RelatedDept",workDetail.getDeptId()));
+        poleElement.appendChild(getSoapPropert(doc, "_RelatedDept",workDetail.getRelated_dept()));
 
         //--------------Array-----------------//
 
@@ -1142,7 +1146,6 @@ public class WebserviceHelper implements KvmSerializable {
 
             Element fid = doc.createElement("SkillCat");
             fid.appendChild(doc.createTextNode(list.get(x).getSkill_categId()));
-
             pdElement.appendChild(fid);
 
             Element vLebel = doc.createElement("SkillSubCat");
@@ -1240,7 +1243,7 @@ public class WebserviceHelper implements KvmSerializable {
 
                 if (httpResponse.getStatusLine().getStatusCode() == 200|| httpResponse.getStatusLine().getReasonPhrase().toString().equals("OK")) {
                     String output = _getResponseBody(entity);
-                    String result1 = output.replace("<?xml version=\"1.0\" encoding=\"utf-8\"?><soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"><soap:Body><InsertWorkDataNewResponse xmlns=\"http://10.133.20.159\"><InsertWorkDataNewResult>", "");
+                    String result1 = output.replace("<?xml version=\"1.0\" encoding=\"utf-8\"?><soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"><soap:Body><InsertWorkDataNewResponse xmlns=\"http://10.133.20.159/\"><InsertWorkDataNewResult>", "");
                     result1 = result1.replace("</InsertWorkDataNewResult></InsertWorkDataNewResponse></soap:Body></soap:Envelope>","");
                     Log.e("Result", result1);
                     //SoapResponseEntity result = new SoapResponseEntity(httpResponse.getEntity());

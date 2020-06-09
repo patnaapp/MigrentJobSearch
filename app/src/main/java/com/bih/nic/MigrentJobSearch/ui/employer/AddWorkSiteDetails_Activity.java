@@ -112,7 +112,7 @@ public class AddWorkSiteDetails_Activity extends Activity implements WorkReqrmnt
 
                     if (fin_yr_name.equals("2020-2021"))
                     {
-                        fin_yr_id = "1";
+                        fin_yr_id = "2021";
                     }
 
                 }
@@ -717,7 +717,7 @@ public class AddWorkSiteDetails_Activity extends Activity implements WorkReqrmnt
             info.setDist_name(Dist_name);
             info.setBlk_id(block_id);
             info.setBlk_name(block_name);
-            info.setFin_yr(fin_yr_name);
+            info.setFin_yr(fin_yr_id);
             info.setRelated_dept(Dept_id);
             info.setWork_site_eng(work_site_en);
             info.setWork_site_hn(work_site_hn);
@@ -728,7 +728,7 @@ public class AddWorkSiteDetails_Activity extends Activity implements WorkReqrmnt
             info.setSupervisor_nm_hn(supervisor_name_hn);
             info.setSupervisor_mob(supervisor_mob);
 
-
+            new UploadWorkDetailTask(info, requirements).execute();
         }
         catch(Exception e){
             e.printStackTrace();
