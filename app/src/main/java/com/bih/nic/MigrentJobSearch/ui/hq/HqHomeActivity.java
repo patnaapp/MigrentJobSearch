@@ -33,7 +33,7 @@ public class HqHomeActivity extends Activity {
         setContentView(R.layout.activity_hq_home);
 
 
-        getActionBar().hide();
+       // getActionBar().hide();
         Utiilties.setStatusBarColor(this);
         dataBaseHelper=new DataBaseHelper(HqHomeActivity.this);
         tv_email=findViewById(R.id.tv_email);
