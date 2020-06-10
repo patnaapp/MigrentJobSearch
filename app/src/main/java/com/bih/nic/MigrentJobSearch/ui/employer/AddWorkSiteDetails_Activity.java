@@ -70,8 +70,11 @@ public class AddWorkSiteDetails_Activity extends Activity implements WorkReqrmnt
     RecyclerView rv_requirements;
     ImageView img_back;
     ArrayList<WorkRequirementsEntity> requirements;
+    WorkDetailsEntity schemeInfo;
 
     WorkReqrmntEntryAdapter adapter;
+    String keyid = "";
+    boolean edit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,8 +102,30 @@ public class AddWorkSiteDetails_Activity extends Activity implements WorkReqrmnt
         }
 
         initialise();
+
+        try {
+
+            keyid = getIntent().getExtras().getString("KeyId");
+            String isEdit = "";
+            isEdit = getIntent().getExtras().getString("isEdit");
+            Log.d("kvfrgv", "" + keyid + "" + isEdit);
+            if (Integer.parseInt(keyid) > 0 && isEdit.equals("Yes")) {
+                edit = true;
+
+                extractDataFromItent();
+                loadDistrictSpinnerData();
+                loadDeptSpinnerData();
+              //  new SyncWorkRequirementsforedit().execute();
+
+            }
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
         loadDistrictSpinnerData();
         loadDeptSpinnerData();
+
 
         spin_fin_yr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -258,17 +283,22 @@ public class AddWorkSiteDetails_Activity extends Activity implements WorkReqrmnt
         list.add("-Select-");
         int index = 0;
         for (District info: DistrictList){
-            list.add(info.get_DistNameHN());
+            list.add(info.get_DistNameHN().trim());
             //if(benDetails.get)
         }
         ArrayAdapter adaptor = new ArrayAdapter(this, android.R.layout.simple_spinner_item, list);
         adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spin_district.setAdapter(adaptor);
 
-//        if(benDetails.getDistrictName()!=null){
-//            spin_district.setSelection(((ArrayAdapter<String>) spin_district.getAdapter()).getPosition(benDetails.getDistrictName()));
-//
-//        }
+
+
+        if (getIntent().hasExtra("KeyId")) {
+            String distname = dataBaseHelper.getNameFor("Districts", "DistCode", "DistNameHN", schemeInfo.getDistCode());
+            spin_district.setSelection(((ArrayAdapter<String>) spin_district.getAdapter()).getPosition(distname.trim()));
+
+
+
+        }
 
     }
 
@@ -279,16 +309,20 @@ public class AddWorkSiteDetails_Activity extends Activity implements WorkReqrmnt
         list.add("-Select-");
         int index = 0;
         for (BlockWeb info: BlockList){
-            list.add(info.getBlockNameHn());
+            list.add(info.getBlockNameHn().trim());
             //if(benDetails.get)
         }
         ArrayAdapter adaptor = new ArrayAdapter(this, android.R.layout.simple_spinner_item, list);
         adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spin_block.setAdapter(adaptor);
-//        if(benDetails.getBlockName()!=null){
-//            spn_block_name.setSelection(((ArrayAdapter<String>) spn_block_name.getAdapter()).getPosition(benDetails.getBlockName()));
-//
-//        }
+
+
+        if (getIntent().hasExtra("KeyId")) {
+            String blockname = dataBaseHelper.getNameFor("Blocks", "BlockCode", "BlockNameHN", schemeInfo.getBlockCode());
+            spin_block.setSelection(((ArrayAdapter<String>) spin_block.getAdapter()).getPosition(blockname.trim()));
+        }
+
+
 
     }
 
@@ -491,7 +525,7 @@ public class AddWorkSiteDetails_Activity extends Activity implements WorkReqrmnt
             cancelRegistration = true;
         }
         if (TextUtils.isEmpty(work_loc_hn)) {
-           // Toast.makeText(getApplicationContext(), "कृपया कार्य स्थल का पता दर्ज करे |", Toast.LENGTH_LONG).show();
+            // Toast.makeText(getApplicationContext(), "कृपया कार्य स्थल का पता दर्ज करे |", Toast.LENGTH_LONG).show();
             et_work_loc_hn.setError("कृपया कार्य स्थल का पता दर्ज करे |");
             focusView = et_work_loc_hn;
             cancelRegistration = true;
@@ -708,6 +742,13 @@ public class AddWorkSiteDetails_Activity extends Activity implements WorkReqrmnt
 //
 //        }
 
+
+        if (getIntent().hasExtra("KeyId")) {
+            String deptname = dataBaseHelper.getNameFor("MasterDept", "Dept_Id", "DeptName_Hn", schemeInfo.getDeptId());
+            spin_dept.setSelection(((ArrayAdapter<String>) spin_dept.getAdapter()).getPosition(deptname.trim()));
+
+        }
+
     }
     public void moveToNext()
     {
@@ -823,4 +864,56 @@ public class AddWorkSiteDetails_Activity extends Activity implements WorkReqrmnt
         }
 
     }
+
+    public void extractDataFromItent()
+    {
+        schemeInfo = (WorkDetailsEntity) getIntent().getSerializableExtra("workdata");
+
+        et_work_site_en.setText(schemeInfo.getWork_site_eng());
+        et_work_site_hn.setText(schemeInfo.getWorkSiteNameHn());
+        et_work_loc_en.setText(schemeInfo.getLocation_en());
+        et_work_loc_hn.setText(schemeInfo.getLocationHn());
+        et_pincode.setText(schemeInfo.getPincode());
+        et_supervisor_name.setText(schemeInfo.getSupervisor_nm_en());
+        et_supervisor_name_hn.setText(schemeInfo.getContactPersonHn());
+        et_supervisor_mob.setText(schemeInfo.getSupervisor_mob());
+        if (getIntent().hasExtra("KeyId")) {
+            if (schemeInfo.getFYearID().equals("2021")){
+                spin_fin_yr.setSelection(1);
+            }
+
+        }
+    }
+
+
+//    private class SyncWorkRequirementsforedit extends AsyncTask<String, Void, ArrayList<WorkDetailsEntity>> {
+//        private final ProgressDialog dialog = new ProgressDialog(AddWorkSiteDetails_Activity.this);
+//        int optionType;
+//
+//        @Override
+//        protected void onPreExecute() {
+//            this.dialog.setCanceledOnTouchOutside(false);
+//            this.dialog.setMessage("लोड हो रहा है...");
+//            this.dialog.show();
+//        }
+//
+//        @Override
+//        protected ArrayList<WorkDetailsEntity> doInBackground(String...arg) {
+//            return WebserviceHelper.GetWorkDetailDataForEdit(work_status_id,ORG_ID);
+//        }
+//
+//        @Override
+//        protected void onPostExecute(ArrayList<WorkDetailsEntity> result) {
+//            if (this.dialog.isShowing()) {
+//                this.dialog.dismiss();
+//            }
+//
+//            if(result!=null) {
+//                data=result;
+//
+//                populateData();
+//            }
+//
+//        }
+//    }
 }

@@ -28,6 +28,14 @@ public class WorkDetailsEntity implements KvmSerializable, Serializable {
     private String OfficeId="";
     private String Workstatus="";
 
+    private String WorkSiteNameHn="";
+    private String LocationHn="";
+    private String ContactPersonHn="";
+    private String RelatedDept="";
+    private String FYearID="";
+    private String BlockCode="";
+    private String DistCode="";
+
 
     public WorkDetailsEntity() {
 
@@ -43,6 +51,14 @@ public class WorkDetailsEntity implements KvmSerializable, Serializable {
         this.supervisor_nm_en=res1.getProperty("ContactPerson").toString();
         this.supervisor_mob=res1.getProperty("CPMobileNo").toString();
         this.Workstatus=res1.getProperty("Workstatus").toString();
+
+        this.WorkSiteNameHn=res1.getProperty("WorkSiteNameHn").toString();
+        this.LocationHn=res1.getProperty("LocationHn").toString();
+        this.ContactPersonHn=res1.getProperty("ContactPersonHn").toString();
+        this.RelatedDept=res1.getProperty("RelatedDept").toString();
+        this.FYearID=res1.getProperty("FYearID").toString();
+        this.BlockCode=res1.getProperty("BlockCode").toString();
+        this.DistCode=res1.getProperty("DistCode").toString();
 
     }
 
@@ -216,5 +232,61 @@ public class WorkDetailsEntity implements KvmSerializable, Serializable {
 
     public void setWorkstatus(String workstatus) {
         Workstatus = workstatus;
+    }
+
+    public String getWorkSiteNameHn() {
+        return WorkSiteNameHn;
+    }
+
+    public void setWorkSiteNameHn(String workSiteNameHn) {
+        WorkSiteNameHn = workSiteNameHn;
+    }
+
+    public String getLocationHn() {
+        return LocationHn;
+    }
+
+    public void setLocationHn(String locationHn) {
+        LocationHn = locationHn;
+    }
+
+    public String getContactPersonHn() {
+        return ContactPersonHn;
+    }
+
+    public void setContactPersonHn(String contactPersonHn) {
+        ContactPersonHn = contactPersonHn;
+    }
+
+    public String getRelatedDept() {
+        return RelatedDept;
+    }
+
+    public void setRelatedDept(String relatedDept) {
+        RelatedDept = relatedDept;
+    }
+
+    public String getFYearID() {
+        return FYearID;
+    }
+
+    public void setFYearID(String FYearID) {
+        this.FYearID = FYearID;
+    }
+
+    public String getBlockCode() {
+        return BlockCode;
+    }
+
+    public void setBlockCode(String blockCode) {
+        BlockCode = blockCode;
+    }
+
+    public String getDistCode() {
+        return DistCode;
+    }
+
+    public void setDistCode(String distCode) {
+        DistCode = distCode;
     }
 }
