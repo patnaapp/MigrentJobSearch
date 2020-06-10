@@ -111,6 +111,7 @@ public class AddWorkRequirementActivity extends Activity implements AdapterView.
         spn_skill.setOnItemSelectedListener(this);
         spn_gender.setOnItemSelectedListener(this);
         spin_active.setOnItemSelectedListener(this);
+        spn_salary_type.setOnItemSelectedListener(this);
 
         gender_aaray = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, gender);
         spn_gender.setAdapter(gender_aaray);
@@ -341,7 +342,7 @@ public class AddWorkRequirementActivity extends Activity implements AdapterView.
 
             case R.id.spn_salary_type:
                 if (position > 0) {
-                    saltype_nm = gender[position];
+                    saltype_nm = sal_type[position];
                     if(saltype_nm.equals("Per Day")){
                         saltype_id = "D";
                     }else if(saltype_nm.equals("Per Month")){
