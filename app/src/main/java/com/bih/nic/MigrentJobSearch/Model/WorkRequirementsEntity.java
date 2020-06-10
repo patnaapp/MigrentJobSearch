@@ -27,6 +27,8 @@ public class WorkRequirementsEntity implements KvmSerializable, Serializable {
     private String supervisor_nm_en="";
     private String supervisor_nm_hn="";
     private String supervisor_mob="";
+    private String salaryTypeId="";
+    private String salaryTypename="";
 
 
     public WorkRequirementsEntity() {
@@ -66,6 +68,22 @@ public class WorkRequirementsEntity implements KvmSerializable, Serializable {
 
     public static void setWork_req_CLASS(Class<WorkRequirementsEntity> work_req_CLASS) {
         Work_req_CLASS = work_req_CLASS;
+    }
+
+    public String getSalaryTypeId() {
+        return salaryTypeId;
+    }
+
+    public void setSalaryTypeId(String salaryTypeId) {
+        this.salaryTypeId = salaryTypeId;
+    }
+
+    public String getSalaryTypename() {
+        return salaryTypename;
+    }
+
+    public void setSalaryTypename(String salaryTypename) {
+        this.salaryTypename = salaryTypename;
     }
 
     public String getSkill_categId() {

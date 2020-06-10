@@ -65,7 +65,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.hq.DeptJobVacencyReportActivity"></activity>
+        <activity android:name=".ui.hq.DeptJobVacencyReportActivity"
+            android:theme="@style/NoActionBar"></activity>
         <activity
             android:name=".ui.hq.HqHomeActivity"
             android:theme="@style/NoActionBar" />

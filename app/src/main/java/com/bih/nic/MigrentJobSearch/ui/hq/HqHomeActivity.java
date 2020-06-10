@@ -37,6 +37,19 @@ public class HqHomeActivity extends Activity {
         Utiilties.setStatusBarColor(this);
         dataBaseHelper=new DataBaseHelper(HqHomeActivity.this);
         tv_email=findViewById(R.id.tv_email);
+
+        OrgId=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("OrgId", "");
+        UserId=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserId", "");
+
+
+        //DistName=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("DistName", "");
+        Block_Code=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("BlockCode", "");
+        lvlone_id=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("LvlOne_Id", "");
+        lvltwo_id=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("Lvl_TwoId", "");
+        lvlthree_id=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("LvlThree_Id", "");
+        UserRole=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserRole", "");
+
+        tv_email.setText(UserId);
     }
 
     public void OnClick_goToLoginScreen(View view){
@@ -96,18 +109,7 @@ public class HqHomeActivity extends Activity {
     protected void onResume() {
         super.onResume();
 
-        OrgId=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("OrgId", "");
-        UserId=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserId", "");
 
-
-        //DistName=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("DistName", "");
-        Block_Code=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("BlockCode", "");
-        lvlone_id=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("LvlOne_Id", "");
-        lvltwo_id=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("Lvl_TwoId", "");
-        lvlthree_id=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("LvlThree_Id", "");
-        UserRole=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserRole", "");
-
-        tv_email.setText(UserId);
     }
 
     public  void onViewConsolidatedReport(View view){

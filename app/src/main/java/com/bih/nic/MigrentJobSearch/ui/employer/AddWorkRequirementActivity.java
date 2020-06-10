@@ -51,9 +51,9 @@ public class AddWorkRequirementActivity extends Activity implements AdapterView.
     ArrayList<SkillMaster> skillList;
     ArrayList<SubSkillMaster> subSkillList;
 
-    String gender[] = {"-चयन करे-","अन्य","पुरुष","महिला"};
-    String status[] = {"-चयन करे-","हाँ","नहीं"};
-    String sal_type[] = {"-चयन करे-","Per Day","Per Month","Per Year"};
+    String gender[] = {"-Select-","Any","Male","Female", "Transgender"};
+    String status[] = {"Yes","No"};
+    String sal_type[] = {"-Select-","Per Day","Per Month","Per Year"};
 
     ArrayAdapter gender_aaray,status_array,sal_type_array;
 
@@ -117,6 +117,7 @@ public class AddWorkRequirementActivity extends Activity implements AdapterView.
 
         status_array = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, status);
         spin_active.setAdapter(status_array);
+        spin_active.setSelection(0);
 
         sal_type_array = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, sal_type);
         spn_salary_type.setAdapter(sal_type_array);
@@ -141,6 +142,8 @@ public class AddWorkRequirementActivity extends Activity implements AdapterView.
             requirement.setMax_exp(et_exp_mxm.getText().toString().trim());
             requirement.setMin_salary(et_salary_mnm.getText().toString().trim());
             requirement.setMax_salary(et_salary_mxm.getText().toString().trim());
+            requirement.setSalaryTypeId(saltype_id);
+            requirement.setSalaryTypename(saltype_nm);
 
             Intent returnIntent = new Intent();
             returnIntent.putExtra("data",requirement);
@@ -221,7 +224,7 @@ public class AddWorkRequirementActivity extends Activity implements AdapterView.
             if (TextUtils.isEmpty(saltype_id)) {
                 Toast.makeText(getApplicationContext(), "please select salary type", Toast.LENGTH_LONG).show();
                 //spn_salary_type.setError("कृपया लिंग का चयन करे |");
-                focusView = tv_t_gender;
+                //focusView = tv_t_gender;
                 isValid = false;
             }
 
@@ -325,17 +328,27 @@ public class AddWorkRequirementActivity extends Activity implements AdapterView.
                 }
                 break;
             case R.id.spin_active:
-                if (position > 0) {
-                    statusCode = ""+position;
-                    statusStr = status[position];
-                    tv_t_status.setError(null);
+                //if (position > 0) {
+                statusStr = status[position];
+                tv_t_status.setError(null);
+                if(statusStr.equals("Yes")){
+                    statusCode = "Y";
+                }else if(statusStr.equals("No")){
+                    statusCode = "N";
                 }
+                //}
                 break;
 
             case R.id.spn_salary_type:
                 if (position > 0) {
-                    saltype_id = String.valueOf(position-1);
                     saltype_nm = gender[position];
+                    if(saltype_nm.equals("Per Day")){
+                        saltype_id = "D";
+                    }else if(saltype_nm.equals("Per Month")){
+                        saltype_id = "M";
+                    }else if(saltype_nm.equals("Per Year")){
+                        saltype_id = "Y";
+                    }
 
                 }
                 break;
