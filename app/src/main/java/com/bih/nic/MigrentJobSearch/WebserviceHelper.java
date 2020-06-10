@@ -1256,6 +1256,7 @@ public class WebserviceHelper implements KvmSerializable {
                     //SoapResponseEntity result = new SoapResponseEntity(httpResponse.getEntity());
                     //res = "1";
                     res = result1;
+
                 } else {
                     res = "0, Server no reponse";
                 }
