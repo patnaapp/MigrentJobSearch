@@ -1271,7 +1271,6 @@ public class WebserviceHelper implements KvmSerializable {
         }
 
         // response.put("HTTPStatus",httpResponse.getStatusLine().toString());
-
         return res;
     }
 

@@ -815,7 +815,7 @@ public class AddWorkSiteDetails_Activity extends Activity implements WorkReqrmnt
 
             if (result != null) {
 
-                if(result.contains("1")){
+                if(result.contains("Success")){
                     new AlertDialog.Builder(AddWorkSiteDetails_Activity.this)
                             .setTitle("Success")
                             .setMessage("Work Site detailed has been succesfully added")
