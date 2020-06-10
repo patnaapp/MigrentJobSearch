@@ -30,6 +30,7 @@ import com.bih.nic.MigrentJobSearch.Model.Versioninfo;
 import com.bih.nic.MigrentJobSearch.R;
 import com.bih.nic.MigrentJobSearch.Utiilties;
 import com.bih.nic.MigrentJobSearch.WebserviceHelper;
+import com.bih.nic.MigrentJobSearch.ui.hq.HqHomeActivity;
 import com.bih.nic.MigrentJobSearch.ui.labour.MainHomeActivity;
 
 import java.io.IOException;
@@ -302,7 +303,13 @@ public class SplashActivity extends Activity {
                         Intent i = new Intent(SplashActivity.this, EmployerMainHomeActivity.class);
                         startActivity(i);
                         finish();
-                    }else {
+                    }
+                    else if(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserRole", "").equals("HQ")){
+                        Intent i = new Intent(SplashActivity.this, HqHomeActivity.class);
+                        startActivity(i);
+                        finish();
+                    }
+                    else {
                         Intent i = new Intent(SplashActivity.this, MultiLoginActivity.class);
                         startActivity(i);
                         finish();
