@@ -141,7 +141,7 @@
                     android:textSize="12sp"/>
 
                 <TextView
-                    android:id="@+id/tv_email"
+                    android:id="@+id/tv_username"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="asgsdg"
@@ -264,7 +264,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:onClick="onSearchJob"
+                android:onClick="onViewConsolidatedReport"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -297,7 +297,7 @@
                 android:layout_height="match_parent"/>
 
             <RelativeLayout
-                android:onClick="onOfferJobReport"
+                android:onClick="onViewDeptJobVacency"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

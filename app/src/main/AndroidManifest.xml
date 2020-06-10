@@ -65,7 +65,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.hq.HqHomeActivity"></activity>
+        <activity android:name=".ui.hq.DeptJobVacencyReportActivity"></activity>
+        <activity
+            android:name=".ui.hq.HqHomeActivity"
+            android:theme="@style/NoActionBar" />
         <activity android:name=".ui.employer.WorkSite_Edit_activity" />
         <activity
             android:name=".ui.employer.AddWorkRequirementActivity"
