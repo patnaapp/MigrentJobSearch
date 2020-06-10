@@ -65,7 +65,7 @@ public class AddWorkSiteDetails_Activity extends Activity implements WorkReqrmnt
     String fin_yr[] = {"-चयन करे-","2020-2021"};
     String fin_yr_id="",fin_yr_name="";
     ArrayAdapter ben_type_aangan_aaray;
-    Button add_requirement;
+    Button add_requirement,email_sign_in_button2;
     int REQUESTCODE = 1;
 
     RecyclerView rv_requirements;
@@ -116,7 +116,7 @@ public class AddWorkSiteDetails_Activity extends Activity implements WorkReqrmnt
             if (Integer.parseInt(keyid) > 0 && isEdit.equals("Yes")) {
 
                 edit = true;
-
+                email_sign_in_button2.setText("अपडेट करे");
                 extractDataFromItent();
                 loadDistrictSpinnerData();
                 loadDeptSpinnerData();
@@ -256,6 +256,7 @@ public class AddWorkSiteDetails_Activity extends Activity implements WorkReqrmnt
         et_supervisor_name_hn.addTextChangedListener(inputTextWatcher6);
         et_supervisor_mob=findViewById(R.id.et_supervisor_mob);
         add_requirement=findViewById(R.id.add_requirement);
+        email_sign_in_button2=findViewById(R.id.email_sign_in_button2);
 
         rv_requirements=findViewById(R.id.rv_requirements);
 
@@ -794,8 +795,8 @@ public class AddWorkSiteDetails_Activity extends Activity implements WorkReqrmnt
         }
 
         @Override
-        protected void onPreExecute() {
-
+        protected void onPreExecute()
+        {
             this.dialog.setCanceledOnTouchOutside(false);
             this.dialog.setMessage(getApplicationContext().getResources().getString(R.string.uploading));
             this.dialog.show();
@@ -865,8 +866,6 @@ public class AddWorkSiteDetails_Activity extends Activity implements WorkReqrmnt
     public void extractDataFromItent()
     {
         schemeInfo = (WorkDetailsEntity) getIntent().getSerializableExtra("workdata");
-
-
 
         new SyncWorkRequirementsforedit().execute();
 

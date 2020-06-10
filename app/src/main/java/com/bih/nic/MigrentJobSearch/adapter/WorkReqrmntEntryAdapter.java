@@ -19,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bih.nic.MigrentJobSearch.DataBaseHelper.DataBaseHelper;
 import com.bih.nic.MigrentJobSearch.Model.DefaultResponse;
 import com.bih.nic.MigrentJobSearch.Model.JobListEntity;
 import com.bih.nic.MigrentJobSearch.Model.WorkRequirementsEntity;
@@ -40,6 +41,7 @@ public class WorkReqrmntEntryAdapter extends RecyclerView.Adapter<WorkReqrmntEnt
     Boolean isShowDetail = false;
     WorkReqrmntListener listener;
     String keyid;
+    DataBaseHelper dataBaseHelper;
 
     public WorkReqrmntEntryAdapter(Activity listViewshowedit, ArrayList<WorkRequirementsEntity> rlist, WorkReqrmntListener listener,String isEdit) {
         this.activity=listViewshowedit;
@@ -59,9 +61,18 @@ public class WorkReqrmntEntryAdapter extends RecyclerView.Adapter<WorkReqrmntEnt
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         final WorkRequirementsEntity info = ThrList.get(position);
 
+        dataBaseHelper = new DataBaseHelper(activity);
         holder.tv_slno.setText(String.valueOf(position+1));
-        holder.tv_skill_cat.setText(info.getSkill_categ());
-        holder.tv_skill_name.setText(info.getSkill_sub_categ());
+        if (keyid.equals("Yes")){
+            String skill = dataBaseHelper.getNameFor("SkilMaster", "Id", "SkillNameHn", info.getSkill_categId());
+            holder.tv_skill_cat.setText(skill);
+            String subskill = dataBaseHelper.getNameFor("SubSkillMaster", "SubskillId", "Sub_SkillNameHn", info.getSkill_sub_categId());
+            holder.tv_skill_name.setText(subskill);
+        }
+        else {
+            holder.tv_skill_cat.setText(info.getSkill_categ());
+            holder.tv_skill_name.setText(info.getSkill_sub_categ());
+        }
         holder.tv_no_perosn.setText(info.getNo_of_persons());
         holder.tv_gendar.setText(info.getGender());
         holder.tv_start_date.setText(info.getStart_date());
@@ -86,7 +97,6 @@ public class WorkReqrmntEntryAdapter extends RecyclerView.Adapter<WorkReqrmntEnt
                 i.putExtra("KeyId",info.getWorksId());
                 i.putExtra("isEdit", "Yes");
                 activity.startActivity(i);
-
             }
         });
     }

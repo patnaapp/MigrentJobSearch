@@ -8,6 +8,7 @@ import com.bih.nic.MigrentJobSearch.Model.BenDetails;
 import com.bih.nic.MigrentJobSearch.Model.BlkCompanyJobDetailsEntity;
 import com.bih.nic.MigrentJobSearch.Model.BlockJobOfferPostedEntity;
 import com.bih.nic.MigrentJobSearch.Model.BlockWeb;
+import com.bih.nic.MigrentJobSearch.Model.ConsolidatedReportModel;
 import com.bih.nic.MigrentJobSearch.Model.DefaultResponse;
 import com.bih.nic.MigrentJobSearch.Model.DepartmentLoginEntity;
 import com.bih.nic.MigrentJobSearch.Model.DepartmentMaster;
@@ -123,6 +124,8 @@ public class WebserviceHelper implements KvmSerializable {
     public static final  String GetLoadLabourData = "GetLoadLabourData";
     public static final  String EmployerRegistration_METHOD = "InsertCompanyDtls";
     public static final  String REGISTRATION_EMP_MOB_METHOD = "OrgsendOtp";
+    public static final  String ConsolidatedRptForStatus = "ConsolidatedRptForStatus";
+    public static final  String ConsolidatedRptForDistWiseBlockStatus = "ConsolidatedRptForDistWiseBlockStatus";
     static String rest;
 
 
@@ -409,7 +412,7 @@ public class WebserviceHelper implements KvmSerializable {
         try {
             SoapObject request = new SoapObject(SERVICENAMESPACE,methodName);
             SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
-           // SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+            // SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
             envelope.dotNet = true;
             envelope.setOutputSoapObject(request);
             envelope.addMapping(SERVICENAMESPACE,bindClass.getSimpleName(),bindClass);
@@ -1256,7 +1259,6 @@ public class WebserviceHelper implements KvmSerializable {
                     //SoapResponseEntity result = new SoapResponseEntity(httpResponse.getEntity());
                     //res = "1";
                     res = result1;
-
                 } else {
                     res = "0, Server no reponse";
                 }
@@ -1272,6 +1274,7 @@ public class WebserviceHelper implements KvmSerializable {
         }
 
         // response.put("HTTPStatus",httpResponse.getStatusLine().toString());
+
         return res;
     }
 
@@ -1929,6 +1932,112 @@ public class WebserviceHelper implements KvmSerializable {
                 } else
                     return pvmArrayList;
             }
+        }
+
+
+        return pvmArrayList;
+    }
+
+
+    public static ArrayList<ConsolidatedReportModel> ConsolidatedReportDistrictWise(String distid, String blkid) {
+
+
+        SoapObject request = new SoapObject(SERVICENAMESPACE, ConsolidatedRptForStatus);
+
+        request.addProperty("Status", distid);
+        request.addProperty("DistCode", blkid);
+
+
+        SoapObject res1;
+        try
+        {
+
+            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+            envelope.dotNet = true;
+            envelope.setOutputSoapObject(request);
+
+            envelope.addMapping(SERVICENAMESPACE, BlkCompanyJobDetailsEntity.BlockCompanyJobs_CLASS.getSimpleName(), BlkCompanyJobDetailsEntity.BlockCompanyJobs_CLASS);
+
+            HttpTransportSE androidHttpTransport = new HttpTransportSE(SERVICEURL);
+            androidHttpTransport.call(SERVICENAMESPACE + ConsolidatedRptForStatus,envelope);
+
+            res1 = (SoapObject) envelope.getResponse();
+
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+        int TotalProperty = res1.getPropertyCount();
+
+        ArrayList<ConsolidatedReportModel> pvmArrayList = new ArrayList<ConsolidatedReportModel>();
+
+        for (int ii = 0; ii < TotalProperty; ii++)
+        {
+            if (res1.getProperty(ii) != null) {
+                Object property = res1.getProperty(ii);
+                if (property instanceof SoapObject)
+                {
+                    SoapObject final_object = (SoapObject) property;
+                    ConsolidatedReportModel panchayat = new ConsolidatedReportModel(final_object);
+                    pvmArrayList.add(panchayat);
+                }
+            }
+
+
+        }
+
+
+        return pvmArrayList;
+    }
+    public static ArrayList<ConsolidatedReportModel> ConsolidatedReportBlockWise(String distid, String blkid) {
+
+
+        SoapObject request = new SoapObject(SERVICENAMESPACE, ConsolidatedRptForDistWiseBlockStatus);
+
+        request.addProperty("DistCode", distid);
+        request.addProperty("BlockCode", blkid);
+        request.addProperty("Status", "blk");
+
+        SoapObject res1;
+        try
+        {
+
+            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+            envelope.dotNet = true;
+            envelope.setOutputSoapObject(request);
+
+            envelope.addMapping(SERVICENAMESPACE, BlkCompanyJobDetailsEntity.BlockCompanyJobs_CLASS.getSimpleName(), BlkCompanyJobDetailsEntity.BlockCompanyJobs_CLASS);
+
+            HttpTransportSE androidHttpTransport = new HttpTransportSE(SERVICEURL);
+            androidHttpTransport.call(SERVICENAMESPACE + ConsolidatedRptForDistWiseBlockStatus,envelope);
+
+            res1 = (SoapObject) envelope.getResponse();
+
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+        int TotalProperty = res1.getPropertyCount();
+
+        ArrayList<ConsolidatedReportModel> pvmArrayList = new ArrayList<ConsolidatedReportModel>();
+
+        for (int ii = 0; ii < TotalProperty; ii++)
+        {
+            if (res1.getProperty(ii) != null) {
+                Object property = res1.getProperty(ii);
+                if (property instanceof SoapObject)
+                {
+                    SoapObject final_object = (SoapObject) property;
+                    ConsolidatedReportModel panchayat = new ConsolidatedReportModel(final_object,1);
+                    pvmArrayList.add(panchayat);
+                }
+            }
+
+
         }
 
 

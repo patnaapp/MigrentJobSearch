@@ -41,7 +41,9 @@ public class WorkDetailsEntity implements KvmSerializable, Serializable {
 
     }
 
-    public WorkDetailsEntity(SoapObject res1) {
+    public WorkDetailsEntity(SoapObject res1)
+    {
+
         this.WorksId=res1.getProperty("WorksId").toString();
         this.DeptId=res1.getProperty("DeptId").toString();
         this.OfficeId=res1.getProperty("OfficeId").toString();
@@ -51,7 +53,6 @@ public class WorkDetailsEntity implements KvmSerializable, Serializable {
         this.supervisor_nm_en=res1.getProperty("ContactPerson").toString();
         this.supervisor_mob=res1.getProperty("CPMobileNo").toString();
         this.Workstatus=res1.getProperty("Workstatus").toString();
-
         this.WorkSiteNameHn=res1.getProperty("WorkSiteNameHn").toString();
         this.LocationHn=res1.getProperty("LocationHn").toString();
         this.ContactPersonHn=res1.getProperty("ContactPersonHn").toString();
