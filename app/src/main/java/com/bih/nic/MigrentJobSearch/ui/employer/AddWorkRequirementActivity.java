@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -26,6 +27,7 @@ import com.bih.nic.MigrentJobSearch.GlobalVariables;
 import com.bih.nic.MigrentJobSearch.Model.CategoryMaster;
 import com.bih.nic.MigrentJobSearch.Model.SkillMaster;
 import com.bih.nic.MigrentJobSearch.Model.SubSkillMaster;
+import com.bih.nic.MigrentJobSearch.Model.WorkDetailsEntity;
 import com.bih.nic.MigrentJobSearch.Model.WorkRequirementsEntity;
 import com.bih.nic.MigrentJobSearch.Model.qualification;
 import com.bih.nic.MigrentJobSearch.R;
@@ -62,6 +64,10 @@ public class AddWorkRequirementActivity extends Activity implements AdapterView.
 
     private int mYear, mMonth, mDay;
     DatePickerDialog datedialog;
+    String keyid = "";
+    boolean edit;
+    String isEdit = "";
+    WorkRequirementsEntity schemeInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +76,27 @@ public class AddWorkRequirementActivity extends Activity implements AdapterView.
         Utiilties.setStatusBarColor(this);
 
         initiliazation();
+
+        try {
+
+            keyid = getIntent().getExtras().getString("KeyId");
+
+            isEdit = getIntent().getExtras().getString("isEdit");
+            Log.d("kvfrgv", "" + keyid + "" + isEdit);
+            if (Integer.parseInt(keyid) > 0 && isEdit.equals("Yes")) {
+
+                edit = true;
+
+                extractDataFromItent();
+                loadSkillSpinnerData();
+
+
+            }
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
 
         loadSkillSpinnerData();
     }
@@ -261,6 +288,12 @@ public class AddWorkRequirementActivity extends Activity implements AdapterView.
         ArrayAdapter adaptor = new ArrayAdapter(this, android.R.layout.simple_spinner_item, list);
         adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spn_skill.setAdapter(adaptor);
+        if (getIntent().hasExtra("KeyId")) {
+            String skilname = dataBaseHelper.getNameFor("SkilMaster", "Id", "SkillNameHn", schemeInfo.getSkill_categId());
+            spn_skill.setSelection(((ArrayAdapter<String>) spn_skill.getAdapter()).getPosition(skilname.trim()));
+
+        }
+
     }
 
     public void setSubSkillSpinner(){
@@ -275,6 +308,12 @@ public class AddWorkRequirementActivity extends Activity implements AdapterView.
         ArrayAdapter adaptor = new ArrayAdapter(this, android.R.layout.simple_spinner_item, list);
         adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spn_sub_skill.setAdapter(adaptor);
+
+        if (getIntent().hasExtra("KeyId")) {
+            String sub_skilname = dataBaseHelper.getNameFor("SubSkillMaster", "SubskillId", "Sub_SkillNameHn", schemeInfo.getSkill_sub_categId());
+            spn_sub_skill.setSelection(((ArrayAdapter<String>) spn_sub_skill.getAdapter()).getPosition(sub_skilname.trim()));
+
+        }
     }
 
     public void loadSkillSpinnerData(){
@@ -515,5 +554,28 @@ public class AddWorkRequirementActivity extends Activity implements AdapterView.
                 });
 
         ab.show();
+    }
+
+    public void extractDataFromItent()
+    {
+        schemeInfo = (WorkRequirementsEntity) getIntent().getSerializableExtra("requirementdata");
+
+        et_no_person.setText(schemeInfo.getNo_of_persons());
+        et_exp_mnm.setText(schemeInfo.getMin_exp());
+        et_exp_mxm.setText(schemeInfo.getMax_exp());
+        et_salary_mnm.setText(schemeInfo.getMin_salary());
+        et_salary_mxm.setText(schemeInfo.getMax_salary());
+        tv_start_date.setText(schemeInfo.getStart_date());
+//        et_supervisor_name_hn.setText(schemeInfo.getContactPersonHn());
+//        et_supervisor_mob.setText(schemeInfo.getSupervisor_mob());
+        if (getIntent().hasExtra("KeyId")) {
+
+            spn_gender.setSelection(((ArrayAdapter<String>) spn_gender.getAdapter()).getPosition(schemeInfo.getGender()));
+            spin_active.setSelection(((ArrayAdapter<String>) spin_active.getAdapter()).getPosition(schemeInfo.getIsActive()));
+            spn_salary_type.setSelection(((ArrayAdapter<String>) spn_salary_type.getAdapter()).getPosition(schemeInfo.getSalaryTypename()));
+
+
+        }
+
     }
 }

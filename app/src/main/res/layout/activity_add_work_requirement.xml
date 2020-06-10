@@ -184,6 +184,7 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/tv_start_date"
                             android:textSize="15sp"
+                            android:maxLength="10"
                             android:textColor="#222222"/>
 
                         <ImageView

@@ -59,7 +59,9 @@ public class WorkSiteEditAdapter extends RecyclerView.Adapter<WorkSiteEditAdapte
             @Override
             public void onClick(View v) {
                 Intent i=new Intent(activity, AddWorkSiteDetails_Activity.class);
-                i.putExtra("workdata",ThrList);
+                i.putExtra("workdata",ThrList.get(position));
+                i.putExtra("KeyId",info.getWorksId());
+                i.putExtra("isEdit", "Yes");
                 activity.startActivity(i);
 
             }

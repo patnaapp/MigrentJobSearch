@@ -119,6 +119,7 @@ public class WebserviceHelper implements KvmSerializable {
     public static final  String GetWorkDetails = "GetWorkDetails";
     public static final  String GetRequirmentData = "GetRequirmentData";
     public static final  String WorkSite_eDit = "WorkSiteSearchList";
+    public static final  String Work_req_edit = "WorkRequiremenDtl";
     public static final  String GetLoadLabourData = "GetLoadLabourData";
     public static final  String EmployerRegistration_METHOD = "InsertCompanyDtls";
     public static final  String REGISTRATION_EMP_MOB_METHOD = "OrgsendOtp";
@@ -1883,5 +1884,54 @@ public class WebserviceHelper implements KvmSerializable {
             return null;
         }
 
+    }
+
+
+    public static ArrayList<WorkRequirementsEntity> GetWorkRequirementtForEdit(String workid) {
+
+
+
+        SoapObject request = new SoapObject(SERVICENAMESPACE, Work_req_edit);
+
+
+        request.addProperty("WorksId",workid);
+
+        SoapObject res1;
+        try {
+
+            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+            envelope.dotNet = true;
+            envelope.setOutputSoapObject(request);
+            envelope.addMapping(SERVICENAMESPACE,
+                    WorkRequirementsEntity.Work_req_CLASS.getSimpleName(), WorkRequirementsEntity.Work_req_CLASS);
+            HttpTransportSE androidHttpTransport = new HttpTransportSE(SERVICEURL,60000);
+            androidHttpTransport.call(SERVICENAMESPACE + Work_req_edit, envelope);
+
+            res1 = (SoapObject) envelope.getResponse();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        int TotalProperty = res1.getPropertyCount();
+        ArrayList<WorkRequirementsEntity> pvmArrayList = new ArrayList<WorkRequirementsEntity>();
+        if(TotalProperty>0) {
+
+
+            for (int ii = 0; ii < TotalProperty; ii++) {
+                if (res1.getProperty(ii) != null) {
+                    Object property = res1.getProperty(ii);
+                    if (property instanceof SoapObject) {
+                        SoapObject final_object = (SoapObject) property;
+                        WorkRequirementsEntity state = new WorkRequirementsEntity(final_object);
+                        pvmArrayList.add(state);
+                    }
+                } else
+                    return pvmArrayList;
+            }
+        }
+
+
+        return pvmArrayList;
     }
 }

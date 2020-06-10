@@ -26,6 +26,8 @@ import com.bih.nic.MigrentJobSearch.R;
 import com.bih.nic.MigrentJobSearch.Utiilties;
 import com.bih.nic.MigrentJobSearch.WebserviceHelper;
 import com.bih.nic.MigrentJobSearch.listener.WorkReqrmntListener;
+import com.bih.nic.MigrentJobSearch.ui.employer.AddWorkRequirementActivity;
+import com.bih.nic.MigrentJobSearch.ui.employer.AddWorkSiteDetails_Activity;
 
 import java.util.ArrayList;
 
@@ -37,12 +39,14 @@ public class WorkReqrmntEntryAdapter extends RecyclerView.Adapter<WorkReqrmntEnt
 
     Boolean isShowDetail = false;
     WorkReqrmntListener listener;
+    String keyid;
 
-    public WorkReqrmntEntryAdapter(Activity listViewshowedit, ArrayList<WorkRequirementsEntity> rlist, WorkReqrmntListener listener) {
+    public WorkReqrmntEntryAdapter(Activity listViewshowedit, ArrayList<WorkRequirementsEntity> rlist, WorkReqrmntListener listener,String isEdit) {
         this.activity=listViewshowedit;
         this.ThrList=rlist;
         mInflater = (LayoutInflater)activity.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         this.listener = listener;
+        this.keyid = isEdit;
     }
 
     @Override
@@ -73,6 +77,18 @@ public class WorkReqrmntEntryAdapter extends RecyclerView.Adapter<WorkReqrmntEnt
                 listener.onRemoveRequirement(position);
             }
         });
+
+        holder.iv_edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(activity, AddWorkRequirementActivity.class);
+                i.putExtra("requirementdata",ThrList.get(position));
+                i.putExtra("KeyId",info.getWorksId());
+                i.putExtra("isEdit", "Yes");
+                activity.startActivity(i);
+
+            }
+        });
     }
 
     @Override
@@ -83,7 +99,7 @@ public class WorkReqrmntEntryAdapter extends RecyclerView.Adapter<WorkReqrmntEnt
 
     public class ViewHolder  extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView tv_slno,tv_skill_cat,tv_skill_name,tv_no_perosn,tv_gendar,tv_start_date,tv_exp,tv_exp_max,tv_salary,tv_salary_max,tv_status1;
-        ImageView iv_delete;
+        ImageView iv_delete,iv_edit;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -99,6 +115,16 @@ public class WorkReqrmntEntryAdapter extends RecyclerView.Adapter<WorkReqrmntEnt
             tv_salary_max=itemView.findViewById(R.id.tv_salary_max);
             tv_status1=itemView.findViewById(R.id.tv_status1);
             iv_delete=itemView.findViewById(R.id.iv_delete);
+            iv_edit=itemView.findViewById(R.id.iv_edit);
+            if (keyid.equals("Yes")){
+                iv_delete.setVisibility(View.GONE);
+                iv_edit.setVisibility(View.VISIBLE);
+            }
+            else {
+                iv_delete.setVisibility(View.VISIBLE);
+                iv_edit.setVisibility(View.GONE);
+            }
+
         }
 
         @Override

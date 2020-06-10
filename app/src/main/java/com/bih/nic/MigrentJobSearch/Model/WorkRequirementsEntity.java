@@ -29,6 +29,11 @@ public class WorkRequirementsEntity implements KvmSerializable, Serializable {
     private String supervisor_mob="";
     private String salaryTypeId="";
     private String salaryTypename="";
+    private String WorksRegId="";
+    private String WorksId="";
+    private String FYearID="";
+    private String SkillOther="";
+
 
 
     public WorkRequirementsEntity() {
@@ -36,9 +41,38 @@ public class WorkRequirementsEntity implements KvmSerializable, Serializable {
     }
 
     public WorkRequirementsEntity(SoapObject res1) {
-//        this.Password=res1.getProperty("Password").toString();
-//        this.DistrictCode=res1.getProperty("DistrictCode").toString();
-//        this.DistrictName=res1.getProperty("DistrictName").toString();
+        this.WorksRegId=res1.getProperty("WorksRegId").toString();
+        this.WorksId=res1.getProperty("WorksId").toString();
+        this.skill_categId=res1.getProperty("SkillId").toString();
+        this.no_of_persons=res1.getProperty("NoOfPerson").toString();
+        this.isActiveId=res1.getProperty("Active").toString();
+        if (this.isActiveId.equals("Y")){
+            this.isActive="Yes";
+        }
+        else if (this.isActiveId.equals("N")){
+            this.isActive="No";
+        }
+
+        this.skill_sub_categId=res1.getProperty("skillSub").toString();
+        this.start_date=res1.getProperty("StartDate").toString();
+        this.min_exp=res1.getProperty("Experiance").toString();
+        this.salaryTypeId=res1.getProperty("SalaryType").toString();
+        if (this.salaryTypeId.equals("D")){
+            this.salaryTypename="Per Day";
+        }
+        if (this.salaryTypeId.equals("M")){
+            this.salaryTypename="Per Month";
+        }
+        if (this.salaryTypeId.equals("Y")){
+            this.salaryTypename="Per Year";
+        }
+        this.min_salary=res1.getProperty("Salary").toString();
+        this.max_salary=res1.getProperty("SalaryMax").toString();
+        this.max_exp=res1.getProperty("ExperianceMax").toString();
+        this.gender=res1.getProperty("Gender").toString();
+        this.FYearID=res1.getProperty("FYearID").toString();
+        this.SkillOther=res1.getProperty("SkillOther").toString();
+
 
     }
 
@@ -228,5 +262,30 @@ public class WorkRequirementsEntity implements KvmSerializable, Serializable {
 
     public void setSupervisor_mob(String supervisor_mob) {
         this.supervisor_mob = supervisor_mob;
+    }
+
+
+    public String getWorksRegId() {
+        return WorksRegId;
+    }
+
+    public void setWorksRegId(String worksRegId) {
+        WorksRegId = worksRegId;
+    }
+
+    public String getWorksId() {
+        return WorksId;
+    }
+
+    public void setWorksId(String worksId) {
+        WorksId = worksId;
+    }
+
+    public String getFYearID() {
+        return FYearID;
+    }
+
+    public void setFYearID(String FYearID) {
+        this.FYearID = FYearID;
     }
 }

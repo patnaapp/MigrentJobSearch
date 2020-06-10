@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import com.bih.nic.MigrentJobSearch.DataBaseHelper.DataBaseHelper;
 import com.bih.nic.MigrentJobSearch.GlobalVariables;
+import com.bih.nic.MigrentJobSearch.Model.AcptdRjctdJobOfferEntity;
 import com.bih.nic.MigrentJobSearch.Model.BenDetails;
 import com.bih.nic.MigrentJobSearch.Model.BlockWeb;
 import com.bih.nic.MigrentJobSearch.Model.DefaultResponse;
@@ -75,6 +76,9 @@ public class AddWorkSiteDetails_Activity extends Activity implements WorkReqrmnt
     WorkReqrmntEntryAdapter adapter;
     String keyid = "";
     boolean edit;
+    ArrayList<WorkDetailsEntity> data;
+    ArrayList<WorkRequirementsEntity> requirementdata;
+    String isEdit = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,16 +110,17 @@ public class AddWorkSiteDetails_Activity extends Activity implements WorkReqrmnt
         try {
 
             keyid = getIntent().getExtras().getString("KeyId");
-            String isEdit = "";
+
             isEdit = getIntent().getExtras().getString("isEdit");
             Log.d("kvfrgv", "" + keyid + "" + isEdit);
             if (Integer.parseInt(keyid) > 0 && isEdit.equals("Yes")) {
+
                 edit = true;
 
                 extractDataFromItent();
                 loadDistrictSpinnerData();
                 loadDeptSpinnerData();
-              //  new SyncWorkRequirementsforedit().execute();
+
 
             }
 
@@ -271,7 +276,7 @@ public class AddWorkSiteDetails_Activity extends Activity implements WorkReqrmnt
     }
 
     public void setupRequiremntRecycler(){
-        adapter = new WorkReqrmntEntryAdapter(this, requirements, this);
+        adapter = new WorkReqrmntEntryAdapter(this, requirements, this,isEdit);
         rv_requirements.setLayoutManager(new LinearLayoutManager(this));
         rv_requirements.setAdapter(adapter);
     }
@@ -295,8 +300,6 @@ public class AddWorkSiteDetails_Activity extends Activity implements WorkReqrmnt
         if (getIntent().hasExtra("KeyId")) {
             String distname = dataBaseHelper.getNameFor("Districts", "DistCode", "DistNameHN", schemeInfo.getDistCode());
             spin_district.setSelection(((ArrayAdapter<String>) spin_district.getAdapter()).getPosition(distname.trim()));
-
-
 
         }
 
@@ -736,12 +739,6 @@ public class AddWorkSiteDetails_Activity extends Activity implements WorkReqrmnt
         ArrayAdapter adaptor = new ArrayAdapter(this, android.R.layout.simple_spinner_item, list);
         adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spin_dept.setAdapter(adaptor);
-//        if(benDetails.getSkill_Id()!=null){
-//            String skill_hn = dataBaseHelper.getNameFor("SkilMaster", "Id", "SkillNameHn", benDetails.getSkill_Id());
-//            spn_skill.setSelection(((ArrayAdapter<String>) spn_skill.getAdapter()).getPosition(skill_hn.trim()));
-//
-//        }
-
 
         if (getIntent().hasExtra("KeyId")) {
             String deptname = dataBaseHelper.getNameFor("MasterDept", "Dept_Id", "DeptName_Hn", schemeInfo.getDeptId());
@@ -869,6 +866,51 @@ public class AddWorkSiteDetails_Activity extends Activity implements WorkReqrmnt
     {
         schemeInfo = (WorkDetailsEntity) getIntent().getSerializableExtra("workdata");
 
+
+
+        new SyncWorkRequirementsforedit().execute();
+
+    }
+
+
+    private class SyncWorkRequirementsforedit extends AsyncTask<String, Void, ArrayList<WorkRequirementsEntity>> {
+        private final ProgressDialog dialog = new ProgressDialog(AddWorkSiteDetails_Activity.this);
+        int optionType;
+
+        @Override
+        protected void onPreExecute() {
+            this.dialog.setCanceledOnTouchOutside(false);
+            this.dialog.setMessage("लोड हो रहा है...");
+            this.dialog.show();
+        }
+
+        @Override
+        protected ArrayList<WorkRequirementsEntity> doInBackground(String...arg) {
+            return WebserviceHelper.GetWorkRequirementtForEdit(schemeInfo.getWorksId());
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<WorkRequirementsEntity> result) {
+            if (this.dialog.isShowing()) {
+                this.dialog.dismiss();
+            }
+
+            if(result!=null) {
+
+                requirementdata=result;
+                for (WorkRequirementsEntity info: requirementdata){
+                    requirements.add(info);
+                    adapter.notifyDataSetChanged();
+                }
+                setupRequiremntRecycler();
+                populateData();
+            }
+
+        }
+    }
+
+
+    public void populateData(){
         et_work_site_en.setText(schemeInfo.getWork_site_eng());
         et_work_site_hn.setText(schemeInfo.getWorkSiteNameHn());
         et_work_loc_en.setText(schemeInfo.getLocation_en());
@@ -885,35 +927,4 @@ public class AddWorkSiteDetails_Activity extends Activity implements WorkReqrmnt
         }
     }
 
-
-//    private class SyncWorkRequirementsforedit extends AsyncTask<String, Void, ArrayList<WorkDetailsEntity>> {
-//        private final ProgressDialog dialog = new ProgressDialog(AddWorkSiteDetails_Activity.this);
-//        int optionType;
-//
-//        @Override
-//        protected void onPreExecute() {
-//            this.dialog.setCanceledOnTouchOutside(false);
-//            this.dialog.setMessage("लोड हो रहा है...");
-//            this.dialog.show();
-//        }
-//
-//        @Override
-//        protected ArrayList<WorkDetailsEntity> doInBackground(String...arg) {
-//            return WebserviceHelper.GetWorkDetailDataForEdit(work_status_id,ORG_ID);
-//        }
-//
-//        @Override
-//        protected void onPostExecute(ArrayList<WorkDetailsEntity> result) {
-//            if (this.dialog.isShowing()) {
-//                this.dialog.dismiss();
-//            }
-//
-//            if(result!=null) {
-//                data=result;
-//
-//                populateData();
-//            }
-//
-//        }
-//    }
 }
