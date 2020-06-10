@@ -40,7 +40,7 @@ import java.util.Date;
 
 public class AddWorkRequirementActivity extends Activity implements AdapterView.OnItemSelectedListener{
 
-    Spinner spn_sub_skill,spn_skill,spn_gender,spin_active;
+    Spinner spn_sub_skill,spn_skill,spn_gender,spin_active,spn_salary_type;
     ImageView img_back;
     EditText et_no_person,et_exp_mnm,et_exp_mxm,et_salary_mnm,et_salary_mxm;
     TextView tv_start_date,tv_skill,tv_t_subcat,tv_t_gender,tv_t_date,tv_t_status;
@@ -53,10 +53,11 @@ public class AddWorkRequirementActivity extends Activity implements AdapterView.
 
     String gender[] = {"-चयन करे-","अन्य","पुरुष","महिला"};
     String status[] = {"-चयन करे-","हाँ","नहीं"};
+    String sal_type[] = {"-चयन करे-","Per Day","Per Month","Per Year"};
 
-    ArrayAdapter gender_aaray,status_array;
+    ArrayAdapter gender_aaray,status_array,sal_type_array;
 
-    String Gender_Name="",Gender_Code="",gendarNam="", statusCode="", statusStr="", startDate;
+    String Gender_Name="",Gender_Code="",gendarNam="", statusCode="", statusStr="", startDate,saltype_id="",saltype_nm="";
     String skillId="",skillName="",subSkillId="",SubSkillName="";
 
     private int mYear, mMonth, mDay;
@@ -80,6 +81,7 @@ public class AddWorkRequirementActivity extends Activity implements AdapterView.
         spn_skill=(Spinner)findViewById(R.id.spn_skill);
         spn_gender=(Spinner)findViewById(R.id.spn_gender);
         spin_active=(Spinner)findViewById(R.id.spin_active);
+        spn_salary_type=(Spinner)findViewById(R.id.spn_salary_type);
 
         img_back = (ImageView) findViewById(R.id.img);
         tv_start_date = (TextView) findViewById(R.id.tv_start_date);
@@ -115,7 +117,10 @@ public class AddWorkRequirementActivity extends Activity implements AdapterView.
 
         status_array = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, status);
         spin_active.setAdapter(status_array);
-        spin_active.setSelection(1);
+
+        sal_type_array = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, sal_type);
+        spn_salary_type.setAdapter(sal_type_array);
+
 
     }
 
@@ -212,6 +217,14 @@ public class AddWorkRequirementActivity extends Activity implements AdapterView.
                 focusView = et_salary_mxm;
                 isValid = false;
             }
+
+            if (TextUtils.isEmpty(saltype_id)) {
+                Toast.makeText(getApplicationContext(), "please select salary type", Toast.LENGTH_LONG).show();
+                //spn_salary_type.setError("कृपया लिंग का चयन करे |");
+                focusView = tv_t_gender;
+                isValid = false;
+            }
+
         }catch (Exception e){
             isValid = false;
             Toast.makeText(getApplicationContext(), e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
@@ -316,6 +329,14 @@ public class AddWorkRequirementActivity extends Activity implements AdapterView.
                     statusCode = ""+position;
                     statusStr = status[position];
                     tv_t_status.setError(null);
+                }
+                break;
+
+            case R.id.spn_salary_type:
+                if (position > 0) {
+                    saltype_id = String.valueOf(position-1);
+                    saltype_nm = gender[position];
+
                 }
                 break;
         }

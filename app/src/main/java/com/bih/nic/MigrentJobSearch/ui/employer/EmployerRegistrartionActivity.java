@@ -7,8 +7,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.Html;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -32,6 +34,8 @@ import com.bih.nic.MigrentJobSearch.WebserviceHelper;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class EmployerRegistrartionActivity extends Activity {
     Spinner sp_type_of_org,sp_district;
@@ -71,10 +75,13 @@ public class EmployerRegistrartionActivity extends Activity {
     }
     public void initialization(){
         et_org_name=(EditText)findViewById(R.id.et_org_name);
+        et_org_name.addTextChangedListener(inputTextWatcher1);
         sp_type_of_org=(Spinner)findViewById(R.id.sp_type_of_org);
         sp_district=(Spinner)findViewById(R.id.sp_district);
         et_crosspondance_address=(EditText)findViewById(R.id.et_crosspondance_address);
+        et_crosspondance_address.addTextChangedListener(inputTextWatcher2);
         et_contact_person=(EditText)findViewById(R.id.et_contact_person);
+        et_contact_person.addTextChangedListener(inputTextWatcher3);
         et_mobile_number=(EditText)findViewById(R.id.et_mobile_number);
         et_alternative_mobile_number=(EditText)findViewById(R.id.et_alternative_mobile_number);
         et_email=(EditText)findViewById(R.id.et_email);
@@ -157,6 +164,27 @@ public class EmployerRegistrartionActivity extends Activity {
             }
         });
     }
+
+    private TextWatcher inputTextWatcher1 = new TextWatcher()
+    {
+
+        public void beforeTextChanged(CharSequence s, int start, int count,int after)
+        {
+
+        }
+
+        public void onTextChanged(CharSequence s, int start, int before, int count)
+        {
+            if (et_org_name.getText().length() >0)
+            {
+                checkForEnglish(et_org_name);
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {}
+    };
+
     public void registration() {
         org_name = et_org_name.getText().toString();
         crosspondance_address = et_crosspondance_address.getText().toString();
@@ -572,4 +600,71 @@ public class EmployerRegistrartionActivity extends Activity {
 
         }
     }
+
+
+    public static boolean isInputInEnglish(String txtVal)
+    {
+
+        String regx = "^[a-zA-Z ]+$";
+        Pattern pattern = Pattern.compile(regx, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(txtVal);
+        return matcher.find();
+    }
+
+    public void checkForEnglish(EditText etxt)
+    {
+        if (etxt.getText().length() > 0)
+        {
+            String s = etxt.getText().toString();
+            if (isInputInEnglish(s))
+            {
+                //OK
+            }
+            else
+            {
+                Toast.makeText(this, "कृपया अंग्रेजी में लिखे", Toast.LENGTH_SHORT).show();
+                etxt.setText("");
+            }
+        }
+    }
+
+    private TextWatcher inputTextWatcher2 = new TextWatcher()
+    {
+
+        public void beforeTextChanged(CharSequence s, int start, int count,int after)
+        {
+
+        }
+
+        public void onTextChanged(CharSequence s, int start, int before, int count)
+        {
+            if (et_crosspondance_address.getText().length() >0)
+            {
+                checkForEnglish(et_crosspondance_address);
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {}
+    };
+
+    private TextWatcher inputTextWatcher3 = new TextWatcher()
+    {
+
+        public void beforeTextChanged(CharSequence s, int start, int count,int after)
+        {
+
+        }
+
+        public void onTextChanged(CharSequence s, int start, int before, int count)
+        {
+            if (et_contact_person.getText().length() >0)
+            {
+                checkForEnglish(et_contact_person);
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {}
+    };
 }
