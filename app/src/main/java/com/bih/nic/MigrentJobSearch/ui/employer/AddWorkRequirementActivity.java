@@ -64,10 +64,11 @@ public class AddWorkRequirementActivity extends Activity implements AdapterView.
 
     private int mYear, mMonth, mDay;
     DatePickerDialog datedialog;
-    String keyid = "";
+    String keyid = "0";
     boolean edit;
     String isEdit = "";
     WorkRequirementsEntity schemeInfo;
+    String reqId = "0";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,8 +90,6 @@ public class AddWorkRequirementActivity extends Activity implements AdapterView.
 
                 extractDataFromItent();
                 loadSkillSpinnerData();
-
-
             }
 
         }
@@ -156,6 +155,8 @@ public class AddWorkRequirementActivity extends Activity implements AdapterView.
     public void onSubmitData(View view){
         if(validateData()){
             WorkRequirementsEntity requirement = new WorkRequirementsEntity();
+            requirement.setWorksId(keyid);
+            requirement.setWorksRegId(reqId);
             requirement.setSkill_categId(skillId);
             requirement.setSkill_categ(skillName);
             requirement.setSkill_sub_categId(subSkillId);
@@ -559,7 +560,8 @@ public class AddWorkRequirementActivity extends Activity implements AdapterView.
     public void extractDataFromItent()
     {
         schemeInfo = (WorkRequirementsEntity) getIntent().getSerializableExtra("requirementdata");
-
+        reqId = schemeInfo.getWorksRegId();
+        startDate = schemeInfo.getStart_date();
         et_no_person.setText(schemeInfo.getNo_of_persons());
         et_exp_mnm.setText(schemeInfo.getMin_exp());
         et_exp_mxm.setText(schemeInfo.getMax_exp());

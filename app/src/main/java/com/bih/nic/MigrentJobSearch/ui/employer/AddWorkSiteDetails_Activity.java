@@ -67,7 +67,8 @@ public class AddWorkSiteDetails_Activity extends Activity implements WorkReqrmnt
     ArrayAdapter ben_type_aangan_aaray;
     Button add_requirement,email_sign_in_button2;
     int REQUESTCODE = 1;
-
+    int REQUESTCODEMODIFY = 2;
+    int reqIndex;
     RecyclerView rv_requirements;
     ImageView img_back;
     ArrayList<WorkRequirementsEntity> requirements;
@@ -79,6 +80,7 @@ public class AddWorkSiteDetails_Activity extends Activity implements WorkReqrmnt
     ArrayList<WorkDetailsEntity> data;
     ArrayList<WorkRequirementsEntity> requirementdata;
     String isEdit = "";
+    String workId="0";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,7 +116,7 @@ public class AddWorkSiteDetails_Activity extends Activity implements WorkReqrmnt
             isEdit = getIntent().getExtras().getString("isEdit");
             Log.d("kvfrgv", "" + keyid + "" + isEdit);
             if (Integer.parseInt(keyid) > 0 && isEdit.equals("Yes")) {
-
+                workId = keyid;
                 edit = true;
                 email_sign_in_button2.setText("अपडेट करे");
                 extractDataFromItent();
@@ -660,6 +662,14 @@ public class AddWorkSiteDetails_Activity extends Activity implements WorkReqrmnt
                     adapter.notifyDataSetChanged();
                 }
             }
+        }else if (requestCode == REQUESTCODEMODIFY) {
+            if(resultCode == Activity.RESULT_OK){
+                if(data != null){
+                    WorkRequirementsEntity reqrmnt = (WorkRequirementsEntity) data.getSerializableExtra("data");
+                    requirements.set(reqIndex, reqrmnt);
+                    adapter.notifyDataSetChanged();
+                }
+            }
         }
     }
 
@@ -678,6 +688,16 @@ public class AddWorkSiteDetails_Activity extends Activity implements WorkReqrmnt
                 .setNegativeButton("No", null)
                 .show();
 
+    }
+
+    @Override
+    public void onModifyRequirement(final int index) {
+        reqIndex = index;
+        Intent i=new Intent(this, AddWorkRequirementActivity.class);
+        i.putExtra("requirementdata",requirements.get(index));
+        i.putExtra("KeyId",schemeInfo.getWorksId());
+        i.putExtra("isEdit", "Yes");
+        startActivityForResult(i, REQUESTCODEMODIFY);
     }
 
     private class SyncDeptMasterData extends AsyncTask<String, Void, ArrayList<DepartmentMaster>> {
@@ -752,6 +772,7 @@ public class AddWorkSiteDetails_Activity extends Activity implements WorkReqrmnt
     {
         WorkDetailsEntity info = new WorkDetailsEntity();
         try{
+            info.setWorksId(workId);
             info.setDist_id(Dist_id);
             info.setDist_name(Dist_name);
             info.setBlk_id(block_id);
@@ -895,12 +916,13 @@ public class AddWorkSiteDetails_Activity extends Activity implements WorkReqrmnt
             }
 
             if(result!=null) {
-
-                requirementdata=result;
-                for (WorkRequirementsEntity info: requirementdata){
-                    requirements.add(info);
-                    adapter.notifyDataSetChanged();
-                }
+                requirements = result;
+                //adapter.notifyDataSetChanged();
+//                requirementdata=result;
+//                for (WorkRequirementsEntity info: requirementdata){
+//                    requirements.add(info);
+//                    adapter.notifyDataSetChanged();
+//                }
                 setupRequiremntRecycler();
                 populateData();
             }

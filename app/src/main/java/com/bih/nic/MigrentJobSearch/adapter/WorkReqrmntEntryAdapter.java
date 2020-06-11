@@ -92,11 +92,7 @@ public class WorkReqrmntEntryAdapter extends RecyclerView.Adapter<WorkReqrmntEnt
         holder.iv_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(activity, AddWorkRequirementActivity.class);
-                i.putExtra("requirementdata",ThrList.get(position));
-                i.putExtra("KeyId",info.getWorksId());
-                i.putExtra("isEdit", "Yes");
-                activity.startActivity(i);
+                listener.onModifyRequirement(position);
             }
         });
     }

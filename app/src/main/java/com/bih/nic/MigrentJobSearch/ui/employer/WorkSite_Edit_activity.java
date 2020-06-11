@@ -65,13 +65,19 @@ public class WorkSite_Edit_activity extends Activity implements AdapterView.OnIt
 
         spn_work_status = findViewById(R.id.spn_work_status);
         tv_Norecord = findViewById(R.id.tv_Norecord);
+        img_back = (ImageView) findViewById(R.id.img);
 
         listView = findViewById(R.id.listviewshow);
         spn_work_status.setOnItemSelectedListener(this);
         ben_type_aangan_aaray = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, fin_yr);
         spn_work_status.setAdapter(ben_type_aangan_aaray);
 
-
+        img_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

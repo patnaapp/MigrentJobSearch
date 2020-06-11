@@ -1120,6 +1120,7 @@ public class WebserviceHelper implements KvmSerializable {
 
         Element poleElement = doc.getDocumentElement();
 
+        poleElement.appendChild(getSoapPropert(doc, "workid", workDetail.getWorksId()));
         poleElement.appendChild(getSoapPropert(doc, "_FinYear", workDetail.getFin_yr()));
         poleElement.appendChild(getSoapPropert(doc, "_DistCode",workDetail.getDist_id()));
 
@@ -1194,6 +1195,10 @@ public class WebserviceHelper implements KvmSerializable {
             Element vLebel10 = doc.createElement("SalaryType");
             vLebel10.appendChild(doc.createTextNode(list.get(x).getSalaryTypeId()));
             pdElement.appendChild(vLebel10);
+
+            Element vLebel11 = doc.createElement("workredid");
+            vLebel11.appendChild(doc.createTextNode(list.get(x).getWorksId()));
+            pdElement.appendChild(vLebel11);
 
             pdlsElement.appendChild(pdElement);
         }
