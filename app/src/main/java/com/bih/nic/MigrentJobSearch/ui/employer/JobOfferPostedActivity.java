@@ -104,13 +104,11 @@ public class JobOfferPostedActivity extends Activity implements AdapterView.OnIt
         spn_skill = findViewById(R.id.spn_skill);
 
         spn_sub_skill = findViewById(R.id.spn_sub_skill);
-        tv_Norecord = findViewById(R.id.tv_Norecordjobposting);
+       // tv_Norecord = findViewById(R.id.tv_Norecordjobposting);
 
         listView = findViewById(R.id.listviewjobposting);
         img_back=(ImageView) findViewById(R.id.img);
 
-        spn_sub_skill.setOnItemSelectedListener(this);
-        spn_skill.setOnItemSelectedListener(this);
     }
 
     private class SyncJobOfferData extends AsyncTask<String, Void, ArrayList<JobOfferPostedEntity>> {
@@ -146,7 +144,7 @@ public class JobOfferPostedActivity extends Activity implements AdapterView.OnIt
     public void populateData(){
         if(data != null && data.size()> 0){
             Log.e("data", ""+data.size());
-            tv_Norecord.setVisibility(View.GONE);
+//            tv_Norecord.setVisibility(View.GONE);
             listView.setVisibility(View.VISIBLE);
 
             adaptor_showedit_listDetail = new PostedJobAdapter(this, data, OrgId);
@@ -155,7 +153,7 @@ public class JobOfferPostedActivity extends Activity implements AdapterView.OnIt
 
         }else{
             listView.setVisibility(View.GONE);
-            tv_Norecord.setVisibility(View.VISIBLE);
+          //  tv_Norecord.setVisibility(View.VISIBLE);
         }
     }
 

@@ -91,7 +91,7 @@ public class Job_Offer_activity_HQ extends Activity implements AdapterView.OnIte
         spn_skill = findViewById(R.id.spn_skill);
 
         spn_sub_skill = findViewById(R.id.spn_sub_skill);
-        tv_Norecord = findViewById(R.id.tv_Norecordjobposting);
+//        tv_Norecord = findViewById(R.id.tv_Norecordjobposting);
 
         listView = findViewById(R.id.listviewjobposting);
         img_back=(ImageView) findViewById(R.id.img);
@@ -135,7 +135,7 @@ public class Job_Offer_activity_HQ extends Activity implements AdapterView.OnIte
         if(data != null && data.size()> 0)
         {
             Log.e("data", ""+data.size());
-            tv_Norecord.setVisibility(View.GONE);
+           // tv_Norecord.setVisibility(View.GONE);
             listView.setVisibility(View.VISIBLE);
 
             adaptor_showedit_listDetail = new PostedJobAdapter(this, data, OrgId);
@@ -146,7 +146,7 @@ public class Job_Offer_activity_HQ extends Activity implements AdapterView.OnIte
         else
         {
             listView.setVisibility(View.GONE);
-            tv_Norecord.setVisibility(View.VISIBLE);
+         //   tv_Norecord.setVisibility(View.VISIBLE);
         }
     }
 

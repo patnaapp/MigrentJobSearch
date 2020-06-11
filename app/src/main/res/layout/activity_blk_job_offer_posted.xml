@@ -155,24 +155,125 @@
         </LinearLayout>
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/listviewjobposting"
-        android:layout_margin="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <HorizontalScrollView
         android:layout_below="@+id/ll_skill"
-        android:layout_above="@+id/footer"/>
 
-    <TextView
-        android:id="@+id/tv_Norecordjobposting"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:background="@android:color/background_light"
-        android:gravity="center"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#FF4B4B"
-        android:text="No Record Found"
-        android:visibility="visible"
-        android:layout_below="@+id/ll_skill"
-        android:layout_above="@+id/footer"/>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+
+            <LinearLayout
+                android:layout_width="550dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <TextView
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="0.4"
+                    android:text="Sl. No">
+
+                </TextView>
+                <View
+                    android:background="@color/colorPrimary"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"></View>
+
+                <TextView
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="0.9"
+                    android:text="प्रखंड">
+
+                </TextView>
+                <View
+                    android:background="@color/colorPrimary"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"></View>
+                <TextView
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="0.7"
+                    android:text="पंजीकृत">
+
+                </TextView>
+                <View
+                    android:background="@color/colorPrimary"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"></View>
+                <TextView
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="0.6"
+                    android:text="नौकरी प्रस्ताव">
+
+                </TextView>
+                <View
+                    android:background="@color/colorPrimary"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"></View>
+                <TextView
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="0.6"
+                    android:text="स्वीकृत">
+
+                </TextView>
+                <View
+                    android:background="@color/colorPrimary"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"></View>
+                <TextView
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="0.7"
+                    android:text="अस्वीकृत">
+
+                </TextView>
+                <View
+                    android:background="@color/colorPrimary"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"></View>
+
+            </LinearLayout>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/listviewjobposting"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/ll_skill"
+                android:layout_above="@+id/footer"/>
+        </LinearLayout>
+    </HorizontalScrollView>
 </RelativeLayout>

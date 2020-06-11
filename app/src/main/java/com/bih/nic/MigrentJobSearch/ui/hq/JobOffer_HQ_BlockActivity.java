@@ -97,7 +97,7 @@ public class JobOffer_HQ_BlockActivity extends Activity implements AdapterView.O
 
         spn_skill = findViewById(R.id.spn_skill);
         spn_sub_skill = findViewById(R.id.spn_sub_skill);
-        tv_Norecord = findViewById(R.id.tv_Norecordjobposting);
+        //tv_Norecord = findViewById(R.id.tv_Norecordjobposting);
 
         listView = findViewById(R.id.listviewjobposting);
         tv_distName = findViewById(R.id.tv_distName);
@@ -127,7 +127,8 @@ public class JobOffer_HQ_BlockActivity extends Activity implements AdapterView.O
 
         @Override
         protected void onPostExecute(ArrayList<BlockJobOfferPostedEntity> result) {
-            if (this.dialog.isShowing()) {
+            if (this.dialog.isShowing())
+            {
                 this.dialog.dismiss();
             }
 
@@ -144,7 +145,7 @@ public class JobOffer_HQ_BlockActivity extends Activity implements AdapterView.O
         if(data != null && data.size()> 0)
         {
             Log.e("data", ""+data.size());
-            tv_Norecord.setVisibility(View.GONE);
+          //  tv_Norecord.setVisibility(View.GONE);
             listView.setVisibility(View.VISIBLE);
 
             adaptor_showedit_listDetail = new PostedJobBlockAdapter(this, data, OrgId);
@@ -155,7 +156,7 @@ public class JobOffer_HQ_BlockActivity extends Activity implements AdapterView.O
         else
         {
             listView.setVisibility(View.GONE);
-            tv_Norecord.setVisibility(View.VISIBLE);
+            //tv_Norecord.setVisibility(View.VISIBLE);
         }
     }
 
