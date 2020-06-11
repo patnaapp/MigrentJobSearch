@@ -1198,7 +1198,7 @@ public class WebserviceHelper implements KvmSerializable {
             pdElement.appendChild(vLebel10);
 
             Element vLebel11 = doc.createElement("workredid");
-            vLebel11.appendChild(doc.createTextNode(list.get(x).getWorksId()));
+            vLebel11.appendChild(doc.createTextNode(list.get(x).getWorksRegId()));
             pdElement.appendChild(vLebel11);
 
             pdlsElement.appendChild(pdElement);
