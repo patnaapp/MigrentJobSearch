@@ -1,4 +1,4 @@
-package com.bih.nic.MigrentJobSearch.ui.employer;
+package com.bih.nic.MigrentJobSearch.ui.hq;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import com.bih.nic.MigrentJobSearch.DataBaseHelper.DataBaseHelper;
 import com.bih.nic.MigrentJobSearch.Model.BenDetails;
-import com.bih.nic.MigrentJobSearch.Model.BlockJobOfferPostedEntity;
 import com.bih.nic.MigrentJobSearch.Model.District;
 import com.bih.nic.MigrentJobSearch.Model.JobOfferPostedEntity;
 import com.bih.nic.MigrentJobSearch.Model.SkillMaster;
@@ -25,20 +24,19 @@ import com.bih.nic.MigrentJobSearch.R;
 import com.bih.nic.MigrentJobSearch.Utiilties;
 import com.bih.nic.MigrentJobSearch.WebserviceHelper;
 import com.bih.nic.MigrentJobSearch.adapter.PostedJobAdapter;
-import com.bih.nic.MigrentJobSearch.adapter.PostedJobBlockAdapter;
 
 import java.util.ArrayList;
 
-public class JobOfferPosted_BlockActivity extends Activity implements AdapterView.OnItemSelectedListener {
+public class Job_Offer_activity_HQ extends Activity implements AdapterView.OnItemSelectedListener {
 
     RecyclerView listView;
-    TextView tv_Norecord,tv_distName;
+    TextView tv_Norecord;
     Spinner spn_skill,spn_sub_skill;
     ImageView img_back;
-    PostedJobBlockAdapter adaptor_showedit_listDetail;
+    PostedJobAdapter adaptor_showedit_listDetail;
 
     ProgressDialog dialog;
-    ArrayList<BlockJobOfferPostedEntity> data;
+    ArrayList<JobOfferPostedEntity> data;
     BenDetails benDetails;
 
     ArrayList<SkillMaster> skillList, cateogryList;
@@ -46,37 +44,27 @@ public class JobOfferPosted_BlockActivity extends Activity implements AdapterVie
     ArrayList<District> DistrictList;
 
     String skillId,subSkillId;
-    String DistId="",DistNAme="";
+
+    String OrgId="",user_name="", mobile="", address="", DistName="", ProfileImg="",CompanyName="", UserId="",UserRole="";
 
     DataBaseHelper dataBaseHelper;
-    String OrgId="",user_name="", mobile="", address="", DistName="", ProfileImg="",CompanyName="", UserId="",UserRole="";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_blk_job_offer_posted);
+        setContentView(R.layout.activity_job_offer_posted);
 
         getActionBar().hide();
         Utiilties.setStatusBarColor(this);
 
-        DistId = getIntent().getStringExtra("DistCode");
-        DistNAme = getIntent().getStringExtra("DistName");
-
         initialise();
 
 
-        OrgId= PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("OrgId", "");
         UserId=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserId", "");
         UserRole=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserRole", "");
 
-        //DistName=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("DistName", "");
-        CompanyName=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("ComanyName", "");
-        mobile=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("Mobile", "");
-        address=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("Address", "");
-
-
-        new SyncJobOfferData().execute();
+        new SyncHQJobOfferData().execute();
 
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,21 +89,19 @@ public class JobOfferPosted_BlockActivity extends Activity implements AdapterVie
         dataBaseHelper=new DataBaseHelper(this);
 
         spn_skill = findViewById(R.id.spn_skill);
+
         spn_sub_skill = findViewById(R.id.spn_sub_skill);
         tv_Norecord = findViewById(R.id.tv_Norecordjobposting);
 
         listView = findViewById(R.id.listviewjobposting);
-        tv_distName = findViewById(R.id.tv_distName);
         img_back=(ImageView) findViewById(R.id.img);
-
-        tv_distName.setText("जिला का नाम:-"+DistNAme);
 
         spn_sub_skill.setOnItemSelectedListener(this);
         spn_skill.setOnItemSelectedListener(this);
     }
 
-    private class SyncJobOfferData extends AsyncTask<String, Void, ArrayList<BlockJobOfferPostedEntity>> {
-        private final ProgressDialog dialog = new ProgressDialog(JobOfferPosted_BlockActivity.this);
+    private class SyncHQJobOfferData extends AsyncTask<String, Void, ArrayList<JobOfferPostedEntity>> {
+        private final ProgressDialog dialog = new ProgressDialog(Job_Offer_activity_HQ.this);
         int optionType;
 
         @Override
@@ -126,12 +112,12 @@ public class JobOfferPosted_BlockActivity extends Activity implements AdapterVie
         }
 
         @Override
-        protected ArrayList<BlockJobOfferPostedEntity> doInBackground(String...arg) {
-            return WebserviceHelper.BlockJobOfferPosted(DistId, OrgId,UserRole);
+        protected ArrayList<JobOfferPostedEntity> doInBackground(String...arg) {
+            return WebserviceHelper.JobOffersHQ(UserRole, "");
         }
 
         @Override
-        protected void onPostExecute(ArrayList<BlockJobOfferPostedEntity> result) {
+        protected void onPostExecute(ArrayList<JobOfferPostedEntity> result) {
             if (this.dialog.isShowing()) {
                 this.dialog.dismiss();
             }
@@ -152,7 +138,7 @@ public class JobOfferPosted_BlockActivity extends Activity implements AdapterVie
             tv_Norecord.setVisibility(View.GONE);
             listView.setVisibility(View.VISIBLE);
 
-            adaptor_showedit_listDetail = new PostedJobBlockAdapter(this, data, OrgId);
+            adaptor_showedit_listDetail = new PostedJobAdapter(this, data, OrgId);
             listView.setLayoutManager(new LinearLayoutManager(this));
             listView.setAdapter(adaptor_showedit_listDetail);
 
@@ -168,4 +154,5 @@ public class JobOfferPosted_BlockActivity extends Activity implements AdapterVie
         super.onResume();
 
     }
+
 }

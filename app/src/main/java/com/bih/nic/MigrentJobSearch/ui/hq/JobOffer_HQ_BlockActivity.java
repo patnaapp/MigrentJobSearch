@@ -1,4 +1,4 @@
-package com.bih.nic.MigrentJobSearch.ui.employer;
+package com.bih.nic.MigrentJobSearch.ui.hq;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -18,18 +18,16 @@ import com.bih.nic.MigrentJobSearch.DataBaseHelper.DataBaseHelper;
 import com.bih.nic.MigrentJobSearch.Model.BenDetails;
 import com.bih.nic.MigrentJobSearch.Model.BlockJobOfferPostedEntity;
 import com.bih.nic.MigrentJobSearch.Model.District;
-import com.bih.nic.MigrentJobSearch.Model.JobOfferPostedEntity;
 import com.bih.nic.MigrentJobSearch.Model.SkillMaster;
 import com.bih.nic.MigrentJobSearch.Model.SubSkillMaster;
 import com.bih.nic.MigrentJobSearch.R;
 import com.bih.nic.MigrentJobSearch.Utiilties;
 import com.bih.nic.MigrentJobSearch.WebserviceHelper;
-import com.bih.nic.MigrentJobSearch.adapter.PostedJobAdapter;
 import com.bih.nic.MigrentJobSearch.adapter.PostedJobBlockAdapter;
 
 import java.util.ArrayList;
 
-public class JobOfferPosted_BlockActivity extends Activity implements AdapterView.OnItemSelectedListener {
+public class JobOffer_HQ_BlockActivity extends Activity implements AdapterView.OnItemSelectedListener {
 
     RecyclerView listView;
     TextView tv_Norecord,tv_distName;
@@ -66,17 +64,14 @@ public class JobOfferPosted_BlockActivity extends Activity implements AdapterVie
         initialise();
 
 
-        OrgId= PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("OrgId", "");
+
         UserId=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserId", "");
         UserRole=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserRole", "");
 
-        //DistName=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("DistName", "");
-        CompanyName=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("ComanyName", "");
-        mobile=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("Mobile", "");
-        address=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("Address", "");
 
 
-        new SyncJobOfferData().execute();
+
+        new SyncJobOfferBlkWise_HQ().execute();
 
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,8 +109,8 @@ public class JobOfferPosted_BlockActivity extends Activity implements AdapterVie
         spn_skill.setOnItemSelectedListener(this);
     }
 
-    private class SyncJobOfferData extends AsyncTask<String, Void, ArrayList<BlockJobOfferPostedEntity>> {
-        private final ProgressDialog dialog = new ProgressDialog(JobOfferPosted_BlockActivity.this);
+    private class SyncJobOfferBlkWise_HQ extends AsyncTask<String, Void, ArrayList<BlockJobOfferPostedEntity>> {
+        private final ProgressDialog dialog = new ProgressDialog(JobOffer_HQ_BlockActivity.this);
         int optionType;
 
         @Override
@@ -127,7 +122,7 @@ public class JobOfferPosted_BlockActivity extends Activity implements AdapterVie
 
         @Override
         protected ArrayList<BlockJobOfferPostedEntity> doInBackground(String...arg) {
-            return WebserviceHelper.BlockJobOfferPosted(DistId, OrgId,UserRole);
+            return WebserviceHelper.BlockJobOfferPosted_HQ(DistId, "",UserRole);
         }
 
         @Override

@@ -824,20 +824,25 @@ public class AddWorkSiteDetails_Activity extends Activity implements WorkReqrmnt
         }
 
         @Override
-        protected String doInBackground(String... param) {
+        protected String doInBackground(String... param)
+        {
 
             return WebserviceHelper.UploadWorkSiteDetail(AddWorkSiteDetails_Activity.this,workInfo,reqrmnts, PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("OrgId", ""));
         }
 
         @Override
-        protected void onPostExecute(String result) {
-            if (this.dialog.isShowing()) {
+        protected void onPostExecute(String result)
+        {
+            if (this.dialog.isShowing())
+            {
                 this.dialog.dismiss();
             }
 
-            if (result != null) {
+            if (result != null)
+            {
 
-                if(result.contains("Success")){
+                if(result.contains("Success"))
+                {
                     new AlertDialog.Builder(AddWorkSiteDetails_Activity.this)
                             .setTitle("Success")
                             .setMessage("Work Site detailed has been succesfully added")
@@ -848,7 +853,9 @@ public class AddWorkSiteDetails_Activity extends Activity implements WorkReqrmnt
                                 }
                             })
                             .show();
-                }else{
+                }
+                else
+                    {
                     new AlertDialog.Builder(AddWorkSiteDetails_Activity.this)
                             .setTitle("Failed!!")
                             .setMessage(result)
@@ -875,7 +882,9 @@ public class AddWorkSiteDetails_Activity extends Activity implements WorkReqrmnt
 //                            .show();
 //                }
 
-            }else{
+            }
+            else
+                {
                 Toast.makeText(getApplicationContext(),"Failed!! Null Response. Try again later",Toast.LENGTH_LONG).show();
             }
 

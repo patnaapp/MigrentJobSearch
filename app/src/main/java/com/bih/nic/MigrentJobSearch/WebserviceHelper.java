@@ -93,6 +93,7 @@ public class WebserviceHelper implements KvmSerializable {
     private static final String JOB_SEARCH_METHOD="JobSearchDetails1";
     private static final String GET_JOB_REQUEST_METHOD="GetJobRequest";
     private static final String GET_JOB_Offer_Posted_METHOD="GetJobOfferOrg";
+    private static final String GET_JOB_Offer_Posted_HQ="GetJobOfferOrg";
     private static final String GET_JOB_Offer_block_Posted_METHOD="GetJobOfferBlockwise";
     private static final String GET_Acpt_Rjct_Job_By_Labour="GetJobOfferLabourDetails";
     private static final String GET_Blk_Wise_company_Jobs="GetCompanayBlockWise";
@@ -1501,8 +1502,6 @@ public class WebserviceHelper implements KvmSerializable {
         return pvmArrayList;
     }
 
-
-
     public static ArrayList<AcptdRjctdJobOfferEntity> JobOfferAcptdRjctd(String distid,String blkid, String orgid, String role,String status,String serialno) {
 
 
@@ -1897,8 +1896,6 @@ public class WebserviceHelper implements KvmSerializable {
 
     public static ArrayList<WorkRequirementsEntity> GetWorkRequirementtForEdit(String workid) {
 
-
-
         SoapObject request = new SoapObject(SERVICENAMESPACE, Work_req_edit);
 
 
@@ -1917,7 +1914,9 @@ public class WebserviceHelper implements KvmSerializable {
 
             res1 = (SoapObject) envelope.getResponse();
 
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
             return null;
         }
@@ -2043,6 +2042,102 @@ public class WebserviceHelper implements KvmSerializable {
             }
 
 
+        }
+
+        return pvmArrayList;
+    }
+
+    public static ArrayList<JobOfferPostedEntity> JobOffersHQ(String role, String orgid) {
+
+
+        SoapObject request = new SoapObject(SERVICENAMESPACE, GET_JOB_Offer_Posted_HQ);
+
+        request.addProperty("Role", role);
+        request.addProperty("orgId", orgid);
+
+        SoapObject res1;
+        try {
+
+            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
+                    SoapEnvelope.VER11);
+            envelope.dotNet = true;
+            envelope.setOutputSoapObject(request);
+
+            envelope.addMapping(SERVICENAMESPACE, JobOfferPostedEntity.JobOffer_CLASS.getSimpleName(), JobOfferPostedEntity.JobOffer_CLASS);
+
+            HttpTransportSE androidHttpTransport = new HttpTransportSE(
+                    SERVICEURL);
+            androidHttpTransport.call(SERVICENAMESPACE + GET_JOB_Offer_Posted_HQ,
+                    envelope);
+
+            res1 = (SoapObject) envelope.getResponse();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        int TotalProperty = res1.getPropertyCount();
+
+        ArrayList<JobOfferPostedEntity> pvmArrayList = new ArrayList<JobOfferPostedEntity>();
+
+        for (int ii = 0; ii < TotalProperty; ii++) {
+            if (res1.getProperty(ii) != null) {
+                Object property = res1.getProperty(ii);
+                if (property instanceof SoapObject) {
+                    SoapObject final_object = (SoapObject) property;
+                    JobOfferPostedEntity panchayat = new JobOfferPostedEntity(final_object);
+                    pvmArrayList.add(panchayat);
+                }
+            } else
+                return pvmArrayList;
+        }
+        return pvmArrayList;
+    }
+
+    public static ArrayList<BlockJobOfferPostedEntity> BlockJobOfferPosted_HQ(String distid,String orgid,String role) {
+
+
+        SoapObject request = new SoapObject(SERVICENAMESPACE, GET_JOB_Offer_block_Posted_METHOD);
+
+        request.addProperty("DistCode", distid);
+        request.addProperty("orgId", orgid);
+        request.addProperty("Role", role);
+
+        SoapObject res1;
+        try {
+
+            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
+                    SoapEnvelope.VER11);
+            envelope.dotNet = true;
+            envelope.setOutputSoapObject(request);
+
+            envelope.addMapping(SERVICENAMESPACE, BlockJobOfferPostedEntity.BlockJobOffer_CLASS.getSimpleName(), BlockJobOfferPostedEntity.BlockJobOffer_CLASS);
+
+            HttpTransportSE androidHttpTransport = new HttpTransportSE(
+                    SERVICEURL);
+            androidHttpTransport.call(SERVICENAMESPACE + GET_JOB_Offer_block_Posted_METHOD,
+                    envelope);
+
+            res1 = (SoapObject) envelope.getResponse();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        int TotalProperty = res1.getPropertyCount();
+
+        ArrayList<BlockJobOfferPostedEntity> pvmArrayList = new ArrayList<BlockJobOfferPostedEntity>();
+
+        for (int ii = 0; ii < TotalProperty; ii++) {
+            if (res1.getProperty(ii) != null) {
+                Object property = res1.getProperty(ii);
+                if (property instanceof SoapObject) {
+                    SoapObject final_object = (SoapObject) property;
+                    BlockJobOfferPostedEntity panchayat = new BlockJobOfferPostedEntity(final_object);
+                    pvmArrayList.add(panchayat);
+                }
+            } else
+                return pvmArrayList;
         }
 
 
