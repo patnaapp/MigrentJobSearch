@@ -90,7 +90,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="2dp"
-                    android:layout_weight="0.9"
+                    android:layout_weight="1.5"
                     android:text="जिला">
 
                 </TextView>
