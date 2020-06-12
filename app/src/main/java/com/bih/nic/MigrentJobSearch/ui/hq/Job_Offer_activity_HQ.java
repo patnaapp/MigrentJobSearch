@@ -88,16 +88,16 @@ public class Job_Offer_activity_HQ extends Activity implements AdapterView.OnIte
     public void initialise(){
         dataBaseHelper=new DataBaseHelper(this);
 
-        spn_skill = findViewById(R.id.spn_skill);
-
-        spn_sub_skill = findViewById(R.id.spn_sub_skill);
+//        spn_skill = findViewById(R.id.spn_skill);
+//
+//        spn_sub_skill = findViewById(R.id.spn_sub_skill);
 //        tv_Norecord = findViewById(R.id.tv_Norecordjobposting);
 
         listView = findViewById(R.id.listviewjobposting);
         img_back=(ImageView) findViewById(R.id.img);
 
-        spn_sub_skill.setOnItemSelectedListener(this);
-        spn_skill.setOnItemSelectedListener(this);
+//        spn_sub_skill.setOnItemSelectedListener(this);
+//        spn_skill.setOnItemSelectedListener(this);
     }
 
     private class SyncHQJobOfferData extends AsyncTask<String, Void, ArrayList<JobOfferPostedEntity>> {

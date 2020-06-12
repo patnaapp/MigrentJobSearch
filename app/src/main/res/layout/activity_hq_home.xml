@@ -366,7 +366,7 @@
 
 
     <LinearLayout
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -380,7 +380,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:onClick="onAddWorkSite"
+                android:onClick="onJobOfferReport"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -393,12 +393,12 @@
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:background="@drawable/worksite" />
+                    android:background="@drawable/offer_job" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="नई वर्क साइट जोड़ें"
+                    android:text="पोस्ट की गई नौकरी"
                     android:gravity="center"
                     android:textSize="13sp"
                     android:layout_marginTop="4dp"
@@ -447,7 +447,7 @@
                 android:layout_height="match_parent"/>
 
             <RelativeLayout
-                android:visibility="invisible"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

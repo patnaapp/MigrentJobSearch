@@ -120,4 +120,11 @@ public class HqHomeActivity extends Activity {
 
         startActivity(intent);
     }
+
+    public void  onJobOfferReport(View view){
+        Intent intent = new Intent(this, Job_Offer_activity_HQ.class);
+
+        startActivity(intent);
+
+    }
 }

@@ -95,8 +95,8 @@ public class JobOffer_HQ_BlockActivity extends Activity implements AdapterView.O
     public void initialise(){
         dataBaseHelper=new DataBaseHelper(this);
 
-        spn_skill = findViewById(R.id.spn_skill);
-        spn_sub_skill = findViewById(R.id.spn_sub_skill);
+//        spn_skill = findViewById(R.id.spn_skill);
+//        spn_sub_skill = findViewById(R.id.spn_sub_skill);
         //tv_Norecord = findViewById(R.id.tv_Norecordjobposting);
 
         listView = findViewById(R.id.listviewjobposting);
@@ -105,8 +105,8 @@ public class JobOffer_HQ_BlockActivity extends Activity implements AdapterView.O
 
         tv_distName.setText("जिला का नाम:-"+DistNAme);
 
-        spn_sub_skill.setOnItemSelectedListener(this);
-        spn_skill.setOnItemSelectedListener(this);
+//        spn_sub_skill.setOnItemSelectedListener(this);
+//        spn_skill.setOnItemSelectedListener(this);
     }
 
     private class SyncJobOfferBlkWise_HQ extends AsyncTask<String, Void, ArrayList<BlockJobOfferPostedEntity>> {
