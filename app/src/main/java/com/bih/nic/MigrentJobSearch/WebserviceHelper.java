@@ -2070,14 +2070,14 @@ public class WebserviceHelper implements KvmSerializable {
 
         return pvmArrayList;
     }
-    public static ArrayList<ConsolidatedReportModel> ConsolidatedReportBlockWise(String distid, String blkid) {
+    public static ArrayList<ConsolidatedReportModel> ConsolidatedReportBlockWise(String distid, String blkid,String type) {
 
 
         SoapObject request = new SoapObject(SERVICENAMESPACE, ConsolidatedRptForDistWiseBlockStatus);
 
         request.addProperty("DistCode", distid);
         request.addProperty("BlockCode", blkid);
-        request.addProperty("Status", "blk");
+        request.addProperty("Status", type);
 
         SoapObject res1;
         try
@@ -2111,13 +2111,26 @@ public class WebserviceHelper implements KvmSerializable {
                 if (property instanceof SoapObject)
                 {
                     SoapObject final_object = (SoapObject) property;
-                    ConsolidatedReportModel panchayat = new ConsolidatedReportModel(final_object,1);
-                    pvmArrayList.add(panchayat);
+                    if(type.equalsIgnoreCase("WRSA")) {
+                        ConsolidatedReportModel panchayat = new ConsolidatedReportModel(final_object, 2);
+                        pvmArrayList.add(panchayat);
+                    }else if(type.equalsIgnoreCase("WRS")) {
+                        ConsolidatedReportModel panchayat = new ConsolidatedReportModel(final_object, 1);
+                        pvmArrayList.add(panchayat);
+                    }else if(type.equalsIgnoreCase("WNPA")) {
+                        ConsolidatedReportModel panchayat = new ConsolidatedReportModel(final_object, 1);
+                        pvmArrayList.add(panchayat);
+                    }else {
+                        ConsolidatedReportModel panchayat = new ConsolidatedReportModel(final_object, 0);
+                        pvmArrayList.add(panchayat);
+                    }
+
                 }
             }
 
 
         }
+
 
         return pvmArrayList;
     }

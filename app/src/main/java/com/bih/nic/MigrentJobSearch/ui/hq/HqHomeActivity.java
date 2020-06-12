@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.bih.nic.MigrentJobSearch.DataBaseHelper.DataBaseHelper;
 import com.bih.nic.MigrentJobSearch.GlobalVariables;
+import com.bih.nic.MigrentJobSearch.OfficeReport.DistricWise;
 import com.bih.nic.MigrentJobSearch.R;
 import com.bih.nic.MigrentJobSearch.Utiilties;
 import com.bih.nic.MigrentJobSearch.ui.MultiLoginActivity;
@@ -113,7 +114,9 @@ public class HqHomeActivity extends Activity {
     }
 
     public  void onViewConsolidatedReport(View view){
+        Intent intent = new Intent(this, DistricWise.class);
 
+        startActivity(intent);
     }
     public  void onViewDeptJobVacency(View view){
         Intent intent = new Intent(this, DeptJobVacencyReportActivity.class);

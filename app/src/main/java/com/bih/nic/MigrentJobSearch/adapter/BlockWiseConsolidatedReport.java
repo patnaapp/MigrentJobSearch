@@ -20,6 +20,8 @@ import com.bih.nic.MigrentJobSearch.Model.ConsolidatedReportModel;
 import com.bih.nic.MigrentJobSearch.Model.DefaultResponse;
 import com.bih.nic.MigrentJobSearch.Model.JobListEntity;
 import com.bih.nic.MigrentJobSearch.OfficeReport.BlockWiseConsolidated;
+import com.bih.nic.MigrentJobSearch.OfficeReport.WorkSiteReport;
+import com.bih.nic.MigrentJobSearch.OfficeReport.WorkSiteReportNew;
 import com.bih.nic.MigrentJobSearch.R;
 import com.bih.nic.MigrentJobSearch.WebserviceHelper;
 
@@ -32,13 +34,13 @@ public class BlockWiseConsolidatedReport  extends RecyclerView.Adapter<BlockWise
     ArrayList<ConsolidatedReportModel> ThrList = new ArrayList<>();
     String panchayatCode, panchayatName = "";
     Boolean isShowDetail = false;
-    String regNo;
+    String DistCode="";
 
     public BlockWiseConsolidatedReport(Activity listViewshowedit, ArrayList<ConsolidatedReportModel> rlist, String regNo) {
         this.activity = listViewshowedit;
         this.ThrList = rlist;
         mInflater = (LayoutInflater) activity.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-        this.regNo = regNo;
+        this.DistCode = regNo;
     }
 
     @Override
@@ -61,10 +63,62 @@ public class BlockWiseConsolidatedReport  extends RecyclerView.Adapter<BlockWise
         holder.tv_tot_rej.setText(ThrList.get(position).getNoOfPersonApp());
      //   holder.tv_tot_per_rej.setText(ThrList.get(position).getTotalWorkPerRej());
 
-        holder.tv_distNam.setOnClickListener(new View.OnClickListener() {
+        holder.tv_PanjiNo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(activity, BlockWiseConsolidated.class);
+                Intent intent = new Intent(activity, WorkSiteReportNew.class);
+                intent.putExtra("DistCode",DistCode);
+                intent.putExtra("type","1");
+                intent.putExtra("Status","WRS");
+                intent.putExtra("BlockCode",ThrList.get(position).getBlockCode());
+                intent.putExtra("BlockName",ThrList.get(position).getBlockName());
+                activity.startActivity(intent);
+            }
+        });
+        holder.tv_tot_work.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, WorkSiteReport.class);
+                intent.putExtra("DistCode",DistCode);
+                intent.putExtra("type","2");
+                intent.putExtra("Status","WRSA");
+                intent.putExtra("BlockCode",ThrList.get(position).getBlockCode());
+                intent.putExtra("BlockName",ThrList.get(position).getBlockName());
+                activity.startActivity(intent);
+            }
+        });
+        holder.tv_tot_work_accept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, WorkSiteReport.class);
+                intent.putExtra("DistCode",DistCode);
+                intent.putExtra("type","3");
+                intent.putExtra("Status","WRSR");
+                intent.putExtra("BlockCode",ThrList.get(position).getBlockCode());
+                intent.putExtra("BlockName",ThrList.get(position).getBlockName());
+                activity.startActivity(intent);
+            }
+        });
+        holder.tv_tot_vac.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, WorkSiteReport.class);
+                intent.putExtra("DistCode",DistCode);
+                intent.putExtra("type","4");
+                intent.putExtra("Status","WRSF");
+                intent.putExtra("BlockCode",ThrList.get(position).getBlockCode());
+                intent.putExtra("BlockName",ThrList.get(position).getBlockName());
+                activity.startActivity(intent);
+            }
+        }); holder.tv_tot_rej.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, WorkSiteReportNew.class);
+                intent.putExtra("DistCode",DistCode);
+                intent.putExtra("type","5");
+                intent.putExtra("Status","WNPA");
+                intent.putExtra("BlockCode",ThrList.get(position).getBlockCode());
+                intent.putExtra("BlockName",ThrList.get(position).getBlockName());
                 activity.startActivity(intent);
             }
         });
@@ -110,51 +164,6 @@ public class BlockWiseConsolidatedReport  extends RecyclerView.Adapter<BlockWise
         return gender;
     }
 
-    private class AcceptRecordsFromPacs extends AsyncTask<String, Void, DefaultResponse> {
-        JobListEntity data;
-        String rowid;
-        int position;
-        private final ProgressDialog dialog = new ProgressDialog(activity);
-        private final android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(activity).create();
 
 
-        AcceptRecordsFromPacs(JobListEntity data, int position) {
-            this.data = data;
-            this.position = position;
-            //_uid = data.getId();
-            //rowid = data.get_phase1_id();
-
-        }
-
-        @Override
-        protected void onPreExecute() {
-
-            this.dialog.setCanceledOnTouchOutside(false);
-            this.dialog.setMessage("पुष्टि किया जा रहा हैं...");
-            this.dialog.show();
-        }
-
-        @Override
-        protected DefaultResponse doInBackground(String... param) {
-            DefaultResponse res = WebserviceHelper.UploadAcceptedRecordsFromPacs(data, regNo);
-            return res;
-
-        }
-
-        @Override
-        protected void onPostExecute(DefaultResponse result) {
-            if (this.dialog.isShowing()) {
-                this.dialog.dismiss();
-            }
-
-            Log.d("Responsevalue", "" + result);
-            if (result != null) {
-
-
-            } else {
-                Toast.makeText(activity, "Result:null ..Uploading failed...Please Try Later", Toast.LENGTH_SHORT).show();
-            }
-
-        }
-    }
 }

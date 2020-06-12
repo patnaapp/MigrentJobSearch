@@ -7,40 +7,51 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.bih.nic.MigrentJobSearch.Model.ConsolidatedReportModel;
 import com.bih.nic.MigrentJobSearch.R;
 import com.bih.nic.MigrentJobSearch.Utiilties;
 import com.bih.nic.MigrentJobSearch.WebserviceHelper;
-import com.bih.nic.MigrentJobSearch.adapter.BlockWiseConsolidatedReport;
-import com.bih.nic.MigrentJobSearch.adapter.DistrictWiseConsolidatedReportAdaptor;
+import com.bih.nic.MigrentJobSearch.adapter.WorkSiteAdaptor;
+import com.bih.nic.MigrentJobSearch.adapter.WorkSiteAdaptorNew;
 
 import java.util.ArrayList;
 
-public class BlockWiseConsolidated extends Activity {
+public class WorkSiteReportNew extends Activity {
+
     RecyclerView listView;
-    ArrayList<ConsolidatedReportModel>consolidatedReportList=new ArrayList<>();
-    BlockWiseConsolidatedReport blockWiseConsolidatedReport;
-    String DistrictName,DistrictCode;
+    ArrayList<ConsolidatedReportModel> consolidatedReportList=new ArrayList<>();
+    WorkSiteAdaptorNew workSiteAdaptor;
+    String DistCode="",BlockCode="",DistName="",BlockName="";
+    String type_="",_status="";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_block_wise_consolidated);
+        setContentView(R.layout.activity_work_site_report_new);
+
         Utiilties.setStatusBarColor(this);
         getActionBar().hide();
-        listView=(RecyclerView)findViewById(R.id.listviewacptrjct);
-        DistrictCode=getIntent().getStringExtra("DistCode");
-        DistrictName=getIntent().getStringExtra("DistName");
 
-        new  SyncBlockWiseConsolidated(DistrictCode).execute();
+        listView=(RecyclerView)findViewById(R.id.listviewacptrjct);
+
+        DistCode=getIntent().getStringExtra("DistCode");
+        BlockCode=getIntent().getStringExtra("BlockCode");
+        BlockName=getIntent().getStringExtra("BlockName");
+        type_=getIntent().getStringExtra("type");
+        _status=getIntent().getStringExtra("Status");
+
+             new WorkSiteReport2("").execute();
+
     }
 
-    private class SyncBlockWiseConsolidated extends AsyncTask<String, Void, ArrayList<ConsolidatedReportModel>> {
-        private final ProgressDialog dialog = new ProgressDialog(BlockWiseConsolidated.this);
+    private class WorkSiteReport2 extends AsyncTask<String, Void, ArrayList<ConsolidatedReportModel>> {
+        private final ProgressDialog dialog = new ProgressDialog(WorkSiteReportNew.this);
         int optionType;
         String Dist;
 
-        public SyncBlockWiseConsolidated(String serial_no) {
+        public WorkSiteReport2(String serial_no) {
             this.Dist = serial_no;
         }
 
@@ -53,7 +64,7 @@ public class BlockWiseConsolidated extends Activity {
 
         @Override
         protected ArrayList<ConsolidatedReportModel> doInBackground(String... arg) {
-            return WebserviceHelper.ConsolidatedReportBlockWise(Dist,"0","BLK");
+            return WebserviceHelper.ConsolidatedReportBlockWise(DistCode,BlockCode,_status);
         }
 
         @Override
@@ -62,13 +73,16 @@ public class BlockWiseConsolidated extends Activity {
                 this.dialog.dismiss();
             }
             consolidatedReportList.clear();
+
             consolidatedReportList = result;
             ArrayList<String> Content = new ArrayList<>();
 
+            Log.d("dsfcggv",""+result.size());
+
             if (consolidatedReportList != null && consolidatedReportList.size() > 0) {
-                blockWiseConsolidatedReport = new BlockWiseConsolidatedReport(BlockWiseConsolidated.this, consolidatedReportList, DistrictCode);
-                listView.setLayoutManager(new LinearLayoutManager(BlockWiseConsolidated.this));
-                listView.setAdapter(blockWiseConsolidatedReport);
+                workSiteAdaptor = new WorkSiteAdaptorNew(WorkSiteReportNew.this, consolidatedReportList, "",type_);
+                listView.setLayoutManager(new LinearLayoutManager(WorkSiteReportNew.this));
+                listView.setAdapter(workSiteAdaptor);
             }
         }
     }

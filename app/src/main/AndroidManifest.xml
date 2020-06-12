@@ -113,6 +113,11 @@
         <!-- </intent-filter> -->
         <!-- </activity> -->
         <activity android:name=".UpdateAdhaarMobile" />
+        <activity android:name=".OfficeReport.DistricWise"></activity>
+        <activity android:name=".OfficeReport.BlockWiseConsolidated"></activity>
+        <activity android:name=".OfficeReport.WorkSiteReport"></activity>
+        <activity android:name=".OfficeReport.WorkSiteReportNew"></activity>
+
         <activity android:name=".ChooseCenter" />
         <activity android:name=".VerifyAadhaar" />
         <activity android:name=".MultiplePhotoActivity" />

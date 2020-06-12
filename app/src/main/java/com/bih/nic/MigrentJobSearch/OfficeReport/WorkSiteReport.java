@@ -8,37 +8,48 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.bih.nic.MigrentJobSearch.Model.AcptdRjctdJobOfferEntity;
 import com.bih.nic.MigrentJobSearch.Model.ConsolidatedReportModel;
 import com.bih.nic.MigrentJobSearch.R;
+import com.bih.nic.MigrentJobSearch.Utiilties;
 import com.bih.nic.MigrentJobSearch.WebserviceHelper;
-import com.bih.nic.MigrentJobSearch.adapter.AccptedRctdJobAdapter;
 import com.bih.nic.MigrentJobSearch.adapter.DistrictWiseConsolidatedReportAdaptor;
+import com.bih.nic.MigrentJobSearch.adapter.WorkSiteAdaptor;
 
 import java.util.ArrayList;
 
-public class DistricWise extends Activity {
-
-    DistrictWiseConsolidatedReportAdaptor districtWiseConsolidatedReportAdaptor;
+public class WorkSiteReport extends Activity {
     RecyclerView listView;
     ArrayList<ConsolidatedReportModel>consolidatedReportList=new ArrayList<>();
+    WorkSiteAdaptor workSiteAdaptor;
+    String DistCode="",BlockCode="",DistName="",BlockName="";
+    String type_="",_status="";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_distric_wise);
+        setContentView(R.layout.activity_work_site_report);
+        Utiilties.setStatusBarColor(this);
+        getActionBar().hide();
+
         listView=(RecyclerView)findViewById(R.id.listviewacptrjct);
 
-       new  SyncAcceptedRjctdJobsOffers("").execute();
+        DistCode=getIntent().getStringExtra("DistCode");
+        BlockCode=getIntent().getStringExtra("BlockCode");
+        BlockName=getIntent().getStringExtra("BlockName");
+        type_=getIntent().getStringExtra("type");
+        _status=getIntent().getStringExtra("Status");
+
+        new WorkSiteReport2("").execute();
+
     }
 
-
-    private class SyncAcceptedRjctdJobsOffers extends AsyncTask<String, Void, ArrayList<ConsolidatedReportModel>> {
-        private final ProgressDialog dialog = new ProgressDialog(DistricWise.this);
+    private class WorkSiteReport2 extends AsyncTask<String, Void, ArrayList<ConsolidatedReportModel>> {
+        private final ProgressDialog dialog = new ProgressDialog(WorkSiteReport.this);
         int optionType;
         String Dist;
 
-        public SyncAcceptedRjctdJobsOffers(String serial_no) {
+        public WorkSiteReport2(String serial_no) {
             this.Dist = serial_no;
         }
 
@@ -51,7 +62,7 @@ public class DistricWise extends Activity {
 
         @Override
         protected ArrayList<ConsolidatedReportModel> doInBackground(String... arg) {
-            return WebserviceHelper.ConsolidatedReportDistrictWise("dis","");
+            return WebserviceHelper.ConsolidatedReportBlockWise(DistCode,BlockCode,_status);
         }
 
         @Override
@@ -59,16 +70,16 @@ public class DistricWise extends Activity {
             if (this.dialog.isShowing()) {
                 this.dialog.dismiss();
             }
+            consolidatedReportList.clear();
 
             consolidatedReportList = result;
             ArrayList<String> Content = new ArrayList<>();
 
             if (consolidatedReportList != null && consolidatedReportList.size() > 0) {
-                districtWiseConsolidatedReportAdaptor = new DistrictWiseConsolidatedReportAdaptor(DistricWise.this, consolidatedReportList, "");
-                listView.setLayoutManager(new LinearLayoutManager(DistricWise.this));
-                listView.setAdapter(districtWiseConsolidatedReportAdaptor);
+                workSiteAdaptor = new WorkSiteAdaptor(WorkSiteReport.this, consolidatedReportList, "",type_);
+                listView.setLayoutManager(new LinearLayoutManager(WorkSiteReport.this));
+                listView.setAdapter(workSiteAdaptor);
             }
         }
     }
-
 }
