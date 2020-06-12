@@ -578,12 +578,12 @@ public class AddWorkRequirementActivity extends Activity implements AdapterView.
         tv_start_date.setText(schemeInfo.getStart_date());
 //        et_supervisor_name_hn.setText(schemeInfo.getContactPersonHn());
 //        et_supervisor_mob.setText(schemeInfo.getSupervisor_mob());
-        if (getIntent().hasExtra("KeyId")) {
+        if (getIntent().hasExtra("KeyId"))
+        {
 
             spn_gender.setSelection(((ArrayAdapter<String>) spn_gender.getAdapter()).getPosition(schemeInfo.getGender()));
             spin_active.setSelection(((ArrayAdapter<String>) spin_active.getAdapter()).getPosition(schemeInfo.getIsActive()));
             spn_salary_type.setSelection(((ArrayAdapter<String>) spn_salary_type.getAdapter()).getPosition(schemeInfo.getSalaryTypename()));
-
 
         }
 

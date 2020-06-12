@@ -122,7 +122,7 @@ public class JobOffer_HQ_BlockActivity extends Activity implements AdapterView.O
 
         @Override
         protected ArrayList<BlockJobOfferPostedEntity> doInBackground(String...arg) {
-            return WebserviceHelper.BlockJobOfferPosted_HQ(DistId, "",UserRole);
+            return WebserviceHelper.BlockJobOfferPosted(DistId, "",UserRole);
         }
 
         @Override

@@ -113,7 +113,7 @@ public class Job_Offer_activity_HQ extends Activity implements AdapterView.OnIte
 
         @Override
         protected ArrayList<JobOfferPostedEntity> doInBackground(String...arg) {
-            return WebserviceHelper.JobOffersHQ(UserRole, "");
+            return WebserviceHelper.JobOfferPosted(UserRole, "");
         }
 
         @Override
