@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
@@ -26,6 +27,7 @@ import com.bih.nic.MigrentJobSearch.R;
 import com.bih.nic.MigrentJobSearch.Utiilties;
 import com.bih.nic.MigrentJobSearch.WebserviceHelper;
 import com.bih.nic.MigrentJobSearch.ui.employer.JobOfferPosted_BlockActivity;
+import com.bih.nic.MigrentJobSearch.ui.hq.JobOffer_HQ_BlockActivity;
 
 import java.util.ArrayList;
 
@@ -62,14 +64,28 @@ public class PostedJobAdapter extends RecyclerView.Adapter<PostedJobAdapter.View
         holder.tv_accpted.setText(info.getTtlRegA());
         holder.tv_rejected.setText(info.getTtlRegR());
 
+
+
+
         holder.tv_dise_name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(activity, JobOfferPosted_BlockActivity.class);
-                //intent.putExtra("data",Reg_No);
-                intent.putExtra("DistCode",info.getDistrictCode());
-                intent.putExtra("DistName",info.getDistrictName());
-                activity.startActivity(intent);
+                String UserRole= PreferenceManager.getDefaultSharedPreferences(activity).getString("UserRole", "");
+                if (UserRole.equals("HQ")){
+                    Intent intent = new Intent(activity, JobOffer_HQ_BlockActivity.class);
+                    //intent.putExtra("data",Reg_No);
+                    intent.putExtra("DistCode",info.getDistrictCode());
+                    intent.putExtra("DistName",info.getDistrictName());
+                    activity.startActivity(intent);
+                }
+                else {
+                    Intent intent = new Intent(activity, JobOfferPosted_BlockActivity.class);
+                    //intent.putExtra("data",Reg_No);
+                    intent.putExtra("DistCode",info.getDistrictCode());
+                    intent.putExtra("DistName",info.getDistrictName());
+                    activity.startActivity(intent);
+                }
+
             }
         });
 

@@ -2,6 +2,7 @@ package com.bih.nic.MigrentJobSearch.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -57,6 +58,7 @@ public class PostedJobBlockAdapter extends RecyclerView.Adapter<PostedJobBlockAd
         holder.tv_blk_name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent(activity, BlocJobOfferActivity.class);
                 String distid = activity.getIntent().getStringExtra("DistCode");
                 intent.putExtra("distid",distid);

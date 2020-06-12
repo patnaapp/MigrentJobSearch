@@ -1345,7 +1345,8 @@ public class WebserviceHelper implements KvmSerializable {
 
         String charset = getContentCharSet(entity);
 
-        if (charset == null) {
+        if (charset == null)
+        {
 
             charset = org.apache.http.protocol.HTTP.DEFAULT_CONTENT_CHARSET;
 
@@ -1367,7 +1368,9 @@ public class WebserviceHelper implements KvmSerializable {
 
             }
 
-        } finally {
+        }
+        finally
+        {
 
             reader.close();
 
@@ -1501,16 +1504,14 @@ public class WebserviceHelper implements KvmSerializable {
 
     public static ArrayList<BlockJobOfferPostedEntity> BlockJobOfferPosted(String distid,String orgid,String role) {
 
-
         SoapObject request = new SoapObject(SERVICENAMESPACE, GET_JOB_Offer_block_Posted_METHOD);
-
         request.addProperty("DistCode", distid);
         request.addProperty("orgId", orgid);
         request.addProperty("Role", role);
 
         SoapObject res1;
-        try {
-
+        try
+        {
             SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
                     SoapEnvelope.VER11);
             envelope.dotNet = true;
@@ -1525,7 +1526,9 @@ public class WebserviceHelper implements KvmSerializable {
 
             res1 = (SoapObject) envelope.getResponse();
 
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
             return null;
         }
@@ -1533,44 +1536,45 @@ public class WebserviceHelper implements KvmSerializable {
 
         ArrayList<BlockJobOfferPostedEntity> pvmArrayList = new ArrayList<BlockJobOfferPostedEntity>();
 
-        for (int ii = 0; ii < TotalProperty; ii++) {
-            if (res1.getProperty(ii) != null) {
+        for (int ii = 0; ii < TotalProperty; ii++)
+        {
+            if (res1.getProperty(ii) != null)
+            {
                 Object property = res1.getProperty(ii);
-                if (property instanceof SoapObject) {
+                if (property instanceof SoapObject)
+                {
                     SoapObject final_object = (SoapObject) property;
                     BlockJobOfferPostedEntity panchayat = new BlockJobOfferPostedEntity(final_object);
                     pvmArrayList.add(panchayat);
                 }
-            } else
+            }
+            else
+            {
                 return pvmArrayList;
-        }
+            }
 
+        }
 
         return pvmArrayList;
     }
 
-    public static ArrayList<AcptdRjctdJobOfferEntity> JobOfferAcptdRjctd(String distid,String blkid, String orgid, String role,String status,String serialno) {
-
-
+    public static ArrayList<AcptdRjctdJobOfferEntity> JobOfferAcptdRjctd(String distid,String blkid, String orgid, String role,String status,String serialno)
+    {
         SoapObject request = new SoapObject(SERVICENAMESPACE, GET_Acpt_Rjct_Job_By_Labour);
-
         request.addProperty("Distcode", distid);
         request.addProperty("BlockCode", blkid);
         request.addProperty("orgId", orgid);
         request.addProperty("Role", role);
         request.addProperty("Status", status);
         request.addProperty("SerialNo", serialno);
-
         SoapObject res1;
-        try {
+        try
+        {
 
-            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
-                    SoapEnvelope.VER11);
+            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
             envelope.dotNet = true;
             envelope.setOutputSoapObject(request);
-
             envelope.addMapping(SERVICENAMESPACE, AcptdRjctdJobOfferEntity.AcptdRjctdOffer_CLASS.getSimpleName(), AcptdRjctdJobOfferEntity.AcptdRjctdOffer_CLASS);
-
             HttpTransportSE androidHttpTransport = new HttpTransportSE(
                     SERVICEURL);
             androidHttpTransport.call(SERVICENAMESPACE + GET_Acpt_Rjct_Job_By_Labour,
@@ -1578,7 +1582,9 @@ public class WebserviceHelper implements KvmSerializable {
 
             res1 = (SoapObject) envelope.getResponse();
 
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
             return null;
         }
@@ -1586,29 +1592,32 @@ public class WebserviceHelper implements KvmSerializable {
 
         ArrayList<AcptdRjctdJobOfferEntity> pvmArrayList = new ArrayList<AcptdRjctdJobOfferEntity>();
 
-        for (int ii = 0; ii < TotalProperty; ii++) {
-            if (res1.getProperty(ii) != null) {
+        for (int ii = 0; ii < TotalProperty; ii++)
+        {
+            if (res1.getProperty(ii) != null)
+            {
                 Object property = res1.getProperty(ii);
-                if (property instanceof SoapObject) {
+                if (property instanceof SoapObject)
+                {
                     SoapObject final_object = (SoapObject) property;
                     AcptdRjctdJobOfferEntity panchayat = new AcptdRjctdJobOfferEntity(final_object);
                     pvmArrayList.add(panchayat);
                 }
-            } else
+            }
+            else
+            {
                 return pvmArrayList;
-        }
+            }
 
+        }
 
         return pvmArrayList;
     }
 
-    public static ArrayList<WorkerModel> GetRequirmentData(String distcode, String blockcode, String panchayatID) {
+    public static ArrayList<WorkerModel> GetRequirmentData(String distcode, String blockcode, String panchayatID)
 
-
-
+    {
         SoapObject request = new SoapObject(SERVICENAMESPACE, GetRequirmentData);
-
-
         request.addProperty("DistrictCode",distcode);
         request.addProperty("WorkId",blockcode);
         request.addProperty("OrgId",panchayatID);
@@ -1619,53 +1628,56 @@ public class WebserviceHelper implements KvmSerializable {
             SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
             envelope.dotNet = true;
             envelope.setOutputSoapObject(request);
-            envelope.addMapping(SERVICENAMESPACE,
-                    BenfiList.BENFICLASS.getSimpleName(), BenfiList.BENFICLASS);
+            envelope.addMapping(SERVICENAMESPACE,BenfiList.BENFICLASS.getSimpleName(), BenfiList.BENFICLASS);
             HttpTransportSE androidHttpTransport = new HttpTransportSE(SERVICEURL,60000);
             androidHttpTransport.call(SERVICENAMESPACE + GetRequirmentData, envelope);
 
             res1 = (SoapObject) envelope.getResponse();
 
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
             return null;
         }
         int TotalProperty = res1.getPropertyCount();
         ArrayList<WorkerModel> pvmArrayList = new ArrayList<WorkerModel>();
-        if(TotalProperty>0) {
+        if(TotalProperty>0)
+        {
 
-
-            for (int ii = 0; ii < TotalProperty; ii++) {
-                if (res1.getProperty(ii) != null) {
+            for (int ii = 0; ii < TotalProperty; ii++)
+            {
+                if (res1.getProperty(ii) != null)
+                {
                     Object property = res1.getProperty(ii);
-                    if (property instanceof SoapObject) {
+                    if (property instanceof SoapObject)
+                    {
                         SoapObject final_object = (SoapObject) property;
                         WorkerModel state = new WorkerModel(final_object);
                         pvmArrayList.add(state);
                     }
-                } else
+                }
+                else{
                     return pvmArrayList;
+                }
+
             }
         }
-
-
         return pvmArrayList;
+
     }
-    public static ArrayList<WorkerModel> GetLoadLabourData(String distcode, String SkillId, String Experiance, String Gender) {
 
 
-
+    public static ArrayList<WorkerModel> GetLoadLabourData(String distcode, String SkillId, String Experiance, String Gender)
+    {
         SoapObject request = new SoapObject(SERVICENAMESPACE, GetLoadLabourData);
-
-
         request.addProperty("DistrictCode",distcode);
         request.addProperty("SkillId",SkillId);
         request.addProperty("Experiance",Experiance);
         request.addProperty("Gender",Gender);
-
         SoapObject res1;
-        try {
-
+        try
+        {
             SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
             envelope.dotNet = true;
             envelope.setOutputSoapObject(request);
@@ -1676,25 +1688,33 @@ public class WebserviceHelper implements KvmSerializable {
 
             res1 = (SoapObject) envelope.getResponse();
 
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
             return null;
         }
         int TotalProperty = res1.getPropertyCount();
         ArrayList<WorkerModel> pvmArrayList = new ArrayList<WorkerModel>();
-        if(TotalProperty>0) {
-
-
-            for (int ii = 0; ii < TotalProperty; ii++) {
-                if (res1.getProperty(ii) != null) {
+        if(TotalProperty>0)
+        {
+            for (int ii = 0; ii < TotalProperty; ii++)
+            {
+                if (res1.getProperty(ii) != null)
+                {
                     Object property = res1.getProperty(ii);
-                    if (property instanceof SoapObject) {
+                    if (property instanceof SoapObject)
+                    {
                         SoapObject final_object = (SoapObject) property;
                         WorkerModel state = new WorkerModel(final_object,"1");
                         pvmArrayList.add(state);
                     }
-                } else
+                }
+                else
+                {
                     return pvmArrayList;
+                }
+
             }
         }
 
@@ -1806,8 +1826,8 @@ public class WebserviceHelper implements KvmSerializable {
         request.addProperty("_Password", user.getPassword());
         DefaultResponse userDetails;
         SoapObject res1;
-        try {
-
+        try
+        {
             SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
             envelope.dotNet = true;
             envelope.setOutputSoapObject(request);
@@ -1822,7 +1842,8 @@ public class WebserviceHelper implements KvmSerializable {
             userDetails = new DefaultResponse(res1);
 
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
             e.printStackTrace();
             return null;
         }
@@ -1850,7 +1871,8 @@ public class WebserviceHelper implements KvmSerializable {
     }
 
 
-    public static ArrayList<DepartmentMaster> getDeptData() {
+    public static ArrayList<DepartmentMaster> getDeptData()
+    {
 
         SoapObject res1;
         res1=getServerData(Dept_METHOD, DepartmentMaster.DeptMaster_CLASS);
@@ -1859,16 +1881,22 @@ public class WebserviceHelper implements KvmSerializable {
 
         ArrayList<DepartmentMaster> fieldList = new ArrayList<DepartmentMaster>();
 
-        for (int i = 0; i < TotalProperty; i++) {
-            if (res1.getProperty(i) != null) {
+        for (int i = 0; i < TotalProperty; i++)
+        {
+            if (res1.getProperty(i) != null)
+            {
                 Object property = res1.getProperty(i);
-                if (property instanceof SoapObject) {
+                if (property instanceof SoapObject)
+                {
                     SoapObject final_object = (SoapObject) property;
                     DepartmentMaster block= new DepartmentMaster(final_object);
                     fieldList.add(block);
                 }
-            } else
+            }
+            else{
                 return fieldList;
+            }
+
         }
 
         return fieldList;

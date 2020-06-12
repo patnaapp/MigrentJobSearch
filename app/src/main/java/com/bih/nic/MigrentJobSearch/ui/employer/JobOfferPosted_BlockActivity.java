@@ -51,9 +51,9 @@ public class JobOfferPosted_BlockActivity extends Activity implements AdapterVie
     DataBaseHelper dataBaseHelper;
     String OrgId="",user_name="", mobile="", address="", DistName="", ProfileImg="",CompanyName="", UserId="",UserRole="";
 
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_blk_job_offer_posted);
 
@@ -65,16 +65,14 @@ public class JobOfferPosted_BlockActivity extends Activity implements AdapterVie
 
         initialise();
 
-
-        OrgId= PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("OrgId", "");
         UserId=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserId", "");
+        OrgId=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("OrgId", "");
         UserRole=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserRole", "");
 
         //DistName=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("DistName", "");
         CompanyName=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("ComanyName", "");
         mobile=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("Mobile", "");
         address=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("Address", "");
-
 
         new SyncJobOfferData().execute();
 
@@ -95,21 +93,17 @@ public class JobOfferPosted_BlockActivity extends Activity implements AdapterVie
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
-
-
-    public void initialise(){
+    public void initialise()
+    {
         dataBaseHelper=new DataBaseHelper(this);
 
         spn_skill = findViewById(R.id.spn_skill);
         spn_sub_skill = findViewById(R.id.spn_sub_skill);
        // tv_Norecord = findViewById(R.id.tv_Norecordjobposting);
-
         listView = findViewById(R.id.listviewjobposting);
         tv_distName = findViewById(R.id.tv_distName);
         img_back=(ImageView) findViewById(R.id.img);
-
         tv_distName.setText("जिला का नाम:-"+DistNAme);
-
         spn_sub_skill.setOnItemSelectedListener(this);
         spn_skill.setOnItemSelectedListener(this);
     }
@@ -119,7 +113,8 @@ public class JobOfferPosted_BlockActivity extends Activity implements AdapterVie
         int optionType;
 
         @Override
-        protected void onPreExecute() {
+        protected void onPreExecute()
+        {
             this.dialog.setCanceledOnTouchOutside(false);
             this.dialog.setMessage("लोड हो रहा है...");
             this.dialog.show();
@@ -132,7 +127,8 @@ public class JobOfferPosted_BlockActivity extends Activity implements AdapterVie
 
         @Override
         protected void onPostExecute(ArrayList<BlockJobOfferPostedEntity> result) {
-            if (this.dialog.isShowing()) {
+            if (this.dialog.isShowing())
+            {
                 this.dialog.dismiss();
             }
 

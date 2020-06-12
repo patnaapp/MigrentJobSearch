@@ -130,6 +130,9 @@ public class BlocJobOfferActivity extends Activity implements AdapterView.OnItem
         @Override
         protected ArrayList<BlkCompanyJobDetailsEntity> doInBackground(String...arg)
         {
+            if(OrgId.equals("NA")){
+                OrgId="";
+            }
             return WebserviceHelper.BlkCompanyWiseJobOffers(distid,blkcode, OrgId,UserRole);
         }
 
