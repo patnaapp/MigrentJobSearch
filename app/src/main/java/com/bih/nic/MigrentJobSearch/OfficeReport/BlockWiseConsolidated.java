@@ -23,8 +23,10 @@ public class BlockWiseConsolidated extends Activity {
     BlockWiseConsolidatedReport blockWiseConsolidatedReport;
     String DistrictName,DistrictCode;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
+        //------
         setContentView(R.layout.activity_block_wise_consolidated);
         Utiilties.setStatusBarColor(this);
         getActionBar().hide();

@@ -27,7 +27,8 @@ import com.bih.nic.MigrentJobSearch.WebserviceHelper;
 
 import java.util.ArrayList;
 
-public class BlockWiseConsolidatedReport  extends RecyclerView.Adapter<BlockWiseConsolidatedReport.ViewHolder> {
+public class BlockWiseConsolidatedReport  extends RecyclerView.Adapter<BlockWiseConsolidatedReport.ViewHolder>
+{
 
     Activity activity;
     LayoutInflater mInflater;
@@ -35,6 +36,7 @@ public class BlockWiseConsolidatedReport  extends RecyclerView.Adapter<BlockWise
     String panchayatCode, panchayatName = "";
     Boolean isShowDetail = false;
     String DistCode="";
+
 
     public BlockWiseConsolidatedReport(Activity listViewshowedit, ArrayList<ConsolidatedReportModel> rlist, String regNo) {
         this.activity = listViewshowedit;

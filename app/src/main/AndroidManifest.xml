@@ -126,6 +126,7 @@
         <activity android:name=".ui.labour.UpdateMobileNumberActivity" />
         <activity android:name=".ui.employer.EmployerMainHomeActivity" />
         <activity
+
             android:name=".ui.MultiLoginActivity"
             android:theme="@style/Theme.AppCompat.Light" />
 
