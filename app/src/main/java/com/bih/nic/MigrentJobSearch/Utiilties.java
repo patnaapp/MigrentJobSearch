@@ -30,6 +30,11 @@ import android.view.Window;
 import android.view.WindowManager;
 
 
+import org.ksoap2.SoapEnvelope;
+import org.ksoap2.SoapFault;
+import org.ksoap2.serialization.SoapObject;
+import org.ksoap2.serialization.SoapSerializationEnvelope;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
@@ -445,5 +450,19 @@ public class Utiilties {
 			isvalid = email.matches(regExp);
 		}
 		return isvalid;
+	}
+
+	public static SoapObject createSoapObjectFromSoapObjectString(String soapObjectString) throws SoapFault {
+// Create a SoapSerializationEnvelope with some config
+		SoapSerializationEnvelope env = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+		env.dotNet = true;
+
+// Set your string as output
+		env.setOutputSoapObject(soapObjectString);
+
+// Get response
+		SoapObject so = (SoapObject) env.getResponse();
+
+		return so;
 	}
 }

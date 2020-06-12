@@ -841,11 +841,10 @@ public class AddWorkSiteDetails_Activity extends Activity implements WorkReqrmnt
             if (result != null)
             {
 
-                if(result.contains("Success"))
-                {
+//                if(result.contains("1"))
+//                {
                     new AlertDialog.Builder(AddWorkSiteDetails_Activity.this)
-                            .setTitle("Success")
-                            .setMessage("Work Site detailed has been succesfully added")
+                            .setTitle(result)
                             .setCancelable(false)
                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
@@ -853,15 +852,15 @@ public class AddWorkSiteDetails_Activity extends Activity implements WorkReqrmnt
                                 }
                             })
                             .show();
-                }
-                else
-                    {
-                    new AlertDialog.Builder(AddWorkSiteDetails_Activity.this)
-                            .setTitle("Failed!!")
-                            .setMessage(result)
-                            .setCancelable(true)
-                            .show();
-                }
+               //}
+//                else
+//                    {
+//                    new AlertDialog.Builder(AddWorkSiteDetails_Activity.this)
+//                            .setTitle("Failed!!")
+//                            .setMessage(result)
+//                            .setCancelable(true)
+//                            .show();
+//                }
 
 //                if(result.getStatus()){
 //                    new AlertDialog.Builder(AddWorkSiteDetails_Activity.this)

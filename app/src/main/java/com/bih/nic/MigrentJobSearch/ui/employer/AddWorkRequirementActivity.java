@@ -236,16 +236,24 @@ public class AddWorkRequirementActivity extends Activity implements AdapterView.
                 et_exp_mxm.setError("कृपया अधिकतम अनुभव डाले |");
                 focusView = et_exp_mxm;
                 isValid = false;
+            }else if(Integer.parseInt(et_exp_mxm.getText().toString()) < Integer.parseInt(et_exp_mnm.getText().toString())){
+                et_exp_mxm.setError("अधिकतम अनुभव न्यूनतम अनुभव से अधिक होना चाहिए |");
+                focusView = et_exp_mxm;
+                isValid = false;
             }
 
             if (et_salary_mnm.getText().toString().isEmpty()){
-                et_salary_mnm.setError("कृपया न्यूनतम आय डाले |");
+                et_salary_mnm.setError("कृपया न्यूनतम वेतन डाले |");
                 focusView = et_salary_mnm;
                 isValid = false;
             }
 
             if (et_salary_mxm.getText().toString().isEmpty()){
                 et_salary_mxm.setError("कृपया अधिकतम वेतन डाले |");
+                focusView = et_salary_mxm;
+                isValid = false;
+            }else if(Integer.parseInt(et_salary_mxm.getText().toString()) < Integer.parseInt(et_salary_mnm.getText().toString())){
+                et_salary_mxm.setError("अधिकतम वेतन न्यूनतम वेतन से अधिक होना चाहिए |");
                 focusView = et_salary_mxm;
                 isValid = false;
             }

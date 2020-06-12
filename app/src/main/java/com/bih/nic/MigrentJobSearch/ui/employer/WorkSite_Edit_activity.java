@@ -119,6 +119,12 @@ public class WorkSite_Edit_activity extends Activity implements AdapterView.OnIt
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //new SyncWorkDetailsData().execute();
+    }
+
     public void populateData() {
         if (data != null && data.size() > 0) {
             Log.e("data", "" + data.size());

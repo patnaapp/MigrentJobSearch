@@ -32,10 +32,13 @@ import com.bih.nic.MigrentJobSearch.Model.workListModel;
 import org.apache.http.HttpEntity;
 import org.apache.http.ParseException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicHttpResponse;
+import org.apache.http.protocol.HTTP;
+import org.json.JSONObject;
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.KvmSerializable;
 import org.ksoap2.serialization.PropertyInfo;
@@ -1240,21 +1243,66 @@ public class WebserviceHelper implements KvmSerializable {
 
             String SOAPRequestXML = sw.toString();
 
-            String startTag = "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
+            String startTag = "<?xml version=\"1.0\" encoding=\"utf-8\"?><soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
                     + "xmlns:xsd=\"http://www.w3.org/2001/XMLSchem\" "
                     + "xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" >  "
                     + "<soap:Body > ";
             String endTag = "</soap:Body > " + "</soap:Envelope>";
 
+            //StringEntity sEntity = new StringEntity(startTag + SOAPRequestXML+ endTag);
+
+//            try {
+//                SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+//                envelope.dotNet = true;
+//                envelope.implicitTypes = true;
+//                envelope.setOutputSoapObject(Utiilties.createSoapObjectFromSoapObjectString(startTag + SOAPRequestXML+ endTag));
+//                //envelope.writeBody(startTag + SOAPRequestXML+ endTag);
+//                HttpTransportSE androidHttpTransport = new HttpTransportSE(SERVICEURL);
+//                androidHttpTransport.call(SERVICENAMESPACE + INSERT_WORK_DETAIL, envelope);
+//
+//                //String res1 = (String) envelope.getResponse();
+//
+//                Object res1 = envelope.getResponse();
+//                if (res1 != null) {
+//                    return res1.toString();
+//                } else
+//                    return null;
+//
+//                //response = new DefaultResponse(res1);
+//
+//            }
+//            catch (Exception e) {
+//                e.printStackTrace();
+//                //return "0";
+//                return null;
+//            }
+
             try{
+//                HttpPost httppost = new HttpPost(SERVICEURL);
+//                StringEntity se = new StringEntity(startTag + SOAPRequestXML+ endTag,HTTP.UTF_8);
+//
+//                se.setContentType("text/xml");
+//                httppost.setHeader("Content-Type","text/soap+xml;charset=UTF-8");
+//                httppost.setEntity(se);
+//
+//                HttpClient httpclient = new DefaultHttpClient();
+//                BasicHttpResponse httpResponse =  (BasicHttpResponse) httpclient.execute(httppost);
+
+//                JSONObject response = null;
+//                response.put("HTTPStatus",httpResponse.getStatusLine().toString());
+
+
                 HttpPost httppost = new HttpPost(SERVICEURL);
 
-                StringEntity sEntity = new StringEntity(startTag + SOAPRequestXML+ endTag);
+                StringEntity sEntity = new StringEntity(startTag + SOAPRequestXML+ endTag,HTTP.UTF_8);
 
-                sEntity.setContentType("text/xml");
+                sEntity.setContentType("text/xml;charset=UTF-8");
+                //httppost.setHeader("Content-Type","application/soap+xml;charset=UTF-8");
+                //httppost.setHeader("Content-Type","text/xml;charset=UTF-8");
                 httppost.setEntity(sEntity);
                 HttpClient httpClient = new DefaultHttpClient();
                 httpResponse = (BasicHttpResponse) httpClient.execute(httppost);
+
                 HttpEntity entity = httpResponse.getEntity();
 
                 if (httpResponse.getStatusLine().getStatusCode() == 200|| httpResponse.getStatusLine().getReasonPhrase().toString().equals("OK")) {
@@ -1280,7 +1328,6 @@ public class WebserviceHelper implements KvmSerializable {
         }
 
         // response.put("HTTPStatus",httpResponse.getStatusLine().toString());
-
         return res;
     }
 
