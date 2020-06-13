@@ -37,10 +37,8 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
     private SQLiteDatabase myDataBase;
     private final Context myContext;
 
-
-
-    public DataBaseHelper(Context context) {
-
+    public DataBaseHelper(Context context)
+    {
         super(context, DB_NAME, null, 1);
         if (android.os.Build.VERSION.SDK_INT >= 4.2)
         {
@@ -63,11 +61,13 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
 
         boolean dbExist = checkDataBase();
 
-        if (dbExist) {
+        if (dbExist)
+        {
             // do nothing - database already exist
 
-
-        } else {
+        }
+        else
+            {
 
             // By calling this method and empty database will be created into
             // the default system path

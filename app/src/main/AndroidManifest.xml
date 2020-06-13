@@ -119,7 +119,9 @@
         <activity android:name=".OfficeReport.WorkSiteReportNew"></activity>
 
         <activity android:name=".ChooseCenter" />
+
         <activity android:name=".VerifyAadhaar" />
+
         <activity android:name=".MultiplePhotoActivity" />
         <activity android:name=".ui.labour.ChangeMobileNumberActivity" />
         <activity android:name=".CameraActivity" />

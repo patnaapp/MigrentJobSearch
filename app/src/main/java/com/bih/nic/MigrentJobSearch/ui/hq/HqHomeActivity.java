@@ -113,12 +113,14 @@ public class HqHomeActivity extends Activity {
 
     }
 
-    public  void onViewConsolidatedReport(View view){
+    public  void onViewConsolidatedReport(View view)
+    {
         Intent intent = new Intent(this, DistricWise.class);
-
         startActivity(intent);
     }
-    public  void onViewDeptJobVacency(View view){
+
+    public  void onViewDeptJobVacency(View view)
+    {
         Intent intent = new Intent(this, DeptJobVacencyReportActivity.class);
 
         startActivity(intent);
