@@ -48,11 +48,15 @@ import org.ksoap2.transport.HttpTransportSE;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -1249,47 +1253,7 @@ public class WebserviceHelper implements KvmSerializable {
                     + "<soap:Body > ";
             String endTag = "</soap:Body > " + "</soap:Envelope>";
 
-            //StringEntity sEntity = new StringEntity(startTag + SOAPRequestXML+ endTag);
-
-//            try {
-//                SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
-//                envelope.dotNet = true;
-//                envelope.implicitTypes = true;
-//                envelope.setOutputSoapObject(Utiilties.createSoapObjectFromSoapObjectString(startTag + SOAPRequestXML+ endTag));
-//                //envelope.writeBody(startTag + SOAPRequestXML+ endTag);
-//                HttpTransportSE androidHttpTransport = new HttpTransportSE(SERVICEURL);
-//                androidHttpTransport.call(SERVICENAMESPACE + INSERT_WORK_DETAIL, envelope);
-//
-//                //String res1 = (String) envelope.getResponse();
-//
-//                Object res1 = envelope.getResponse();
-//                if (res1 != null) {
-//                    return res1.toString();
-//                } else
-//                    return null;
-//
-//                //response = new DefaultResponse(res1);
-//
-//            }
-//            catch (Exception e) {
-//                e.printStackTrace();
-//                //return "0";
-//                return null;
-//            }
-
             try{
-//                HttpPost httppost = new HttpPost(SERVICEURL);
-//                StringEntity se = new StringEntity(startTag + SOAPRequestXML+ endTag,HTTP.UTF_8);
-//
-//                se.setContentType("text/xml");
-//                httppost.setHeader("Content-Type","text/soap+xml;charset=UTF-8");
-//                httppost.setEntity(se);
-//
-//                HttpClient httpclient = new DefaultHttpClient();
-//                BasicHttpResponse httpResponse =  (BasicHttpResponse) httpclient.execute(httppost);
-
-//                JSONObject response = null;
-//                response.put("HTTPStatus",httpResponse.getStatusLine().toString());
 
 
                 HttpPost httppost = new HttpPost(SERVICEURL);
@@ -1297,8 +1261,6 @@ public class WebserviceHelper implements KvmSerializable {
                 StringEntity sEntity = new StringEntity(startTag + SOAPRequestXML+ endTag,HTTP.UTF_8);
 
                 sEntity.setContentType("text/xml;charset=UTF-8");
-                //httppost.setHeader("Content-Type","application/soap+xml;charset=UTF-8");
-                //httppost.setHeader("Content-Type","text/xml;charset=UTF-8");
                 httppost.setEntity(sEntity);
                 HttpClient httpClient = new DefaultHttpClient();
                 httpResponse = (BasicHttpResponse) httpClient.execute(httppost);
@@ -1307,28 +1269,44 @@ public class WebserviceHelper implements KvmSerializable {
 
                 if (httpResponse.getStatusLine().getStatusCode() == 200|| httpResponse.getStatusLine().getReasonPhrase().toString().equals("OK")) {
                     String output = _getResponseBody(entity);
-                    String result1 = output.replace("<?xml version=\"1.0\" encoding=\"utf-8\"?><soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"><soap:Body><InsertWorkDataNewResponse xmlns=\"http://10.133.20.159/\"><InsertWorkDataNewResult>", "");
-                    result1 = result1.replace("</InsertWorkDataNewResult></InsertWorkDataNewResponse></soap:Body></soap:Envelope>","");
-                    Log.e("Result", result1);
-                    //SoapResponseEntity result = new SoapResponseEntity(httpResponse.getEntity());
-                    //res = "1";
-                    res = result1;
+
+                    res = parseRespnse(output);
                 } else {
                     res = "0, Server no reponse";
                 }
             }catch (Exception e){
                 e.printStackTrace();
-                return "0, Error";
+                return "0, Exception Caught";
             }
 
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-            return "0, Error";
+            return "0, Exception Caught";
         }
 
         // response.put("HTTPStatus",httpResponse.getStatusLine().toString());
         return res;
+    }
+
+    public static String parseRespnse(String xml){
+        String result = "Failed to parse";
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder;
+        InputSource is;
+        try {
+            builder = factory.newDocumentBuilder();
+            is = new InputSource(new StringReader(xml));
+            Document doc = builder.parse(is);
+            NodeList list = doc.getElementsByTagName("InsertWorkDataNewResult");
+            result = list.item(0).getTextContent();
+            //System.out.println(list.item(0).getTextContent());
+        } catch (ParserConfigurationException e) {
+        } catch (SAXException e) {
+        } catch (IOException e) {
+        }
+
+        return result;
     }
 
     public static String _getResponseBody(final HttpEntity entity) throws IOException, ParseException {

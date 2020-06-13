@@ -844,7 +844,8 @@ public class AddWorkSiteDetails_Activity extends Activity implements WorkReqrmnt
 //                if(result.contains("1"))
 //                {
                     new AlertDialog.Builder(AddWorkSiteDetails_Activity.this)
-                            .setTitle(result)
+                            .setTitle("Message")
+                            .setMessage(result)
                             .setCancelable(false)
                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
