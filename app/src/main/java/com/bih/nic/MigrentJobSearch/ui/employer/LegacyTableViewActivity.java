@@ -40,7 +40,7 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
     String OrgId="",user_name="", mobile="", address="", DistName="", ProfileImg="",CompanyName="", UserId="",UserRole="",distid="";
 
     String DistId="",DistNAme="";
-    TextView tv_skill11,tv_Norecord_accpt;
+    TextView tv_skill11,tv_Norecord_accpt,tv_total_count;
     ImageView img_back;
     ImageView btn_previous,btn_next;
     String serialno="0", count="";
@@ -52,6 +52,7 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_legacy_table_view);
         tv_skill11=findViewById(R.id.tv_skill);
+        tv_total_count=findViewById(R.id.tv_total_count);
         //  tv_Norecord_accpt=findViewById(R.id.tv_Norecord_accpt);
         img_back=(ImageView) findViewById(R.id.img);
         btn_previous=(ImageView) findViewById(R.id.btn_previous);
@@ -213,7 +214,9 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
 
 
             data = result;
+
             ArrayList<String>  Content=new ArrayList<>();
+
 //
 //            if (status.equals("SHRGJ")){
 //
@@ -233,14 +236,14 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
 //                }
 //
 //            }
-             if (status.equals("SHRG")){
+            if (status.equals("SHRG")){
 
                 LegacyTableView.insertLegacyTitle("क्रम सं.","पंजीकरण संख्या", "नाम","मोबाइल नंबर", "लिंग");
                 //,"अभिभावक का नाम","अभिभावक क                      ा मोबाइल नंबर"
 
                 int i=1;
                 for (AcptdRjctdJobOfferEntity info: data){
-
+                    tv_total_count.setText(info.getCount());
                     LegacyTableView.insertLegacyContent(info.getRow_num(),info.getVchregnum(),info.getVchName(),info.getVchMobile(),info.getGender());
                     i++;
                 }
@@ -255,6 +258,7 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
 
                 int i=1;
                 for (AcptdRjctdJobOfferEntity info: data){
+                    tv_total_count.setText("Total Count:-"+info.getCount());
 //,info.getVchMobile(),info.getGender(),info.getSkillCategory(),info.getSkillName(),info.getWorkSiteNameHn()
                     // LegacyTableView.insertLegacyContent(info.getRow_num(),info.getVchregnum(),info.getSkillName(),info.getVchName(),info.getGender(),info.getVchMobile());
                     LegacyTableView.insertLegacyContent(info.getRow_num(),info.getComanyNameEn(),info.getAddressEn(),info.getWorkSiteNameHn(),info.getLocation(),info.getVchGuardian_name(),info.getVchGuardian_number(),info.getVchregnum(),info.getVchName(),info.getVchMobile(),info.getGender(),info.getSkillCategory(),info.getSkillName(),info.getWorkSiteNameHn());

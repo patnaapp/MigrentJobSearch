@@ -46,6 +46,16 @@
                 android:textColor="#222222"
                 android:textSize="22dp"
                 android:textStyle="bold" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:id="@+id/tv_total_count"
+                android:text="Text"
+                android:textColor="#222222"
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
 
         </LinearLayout>
