@@ -39,6 +39,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 public class AddWorkRequirementActivity extends Activity implements AdapterView.OnItemSelectedListener{
 
@@ -152,8 +153,10 @@ public class AddWorkRequirementActivity extends Activity implements AdapterView.
 
     }
 
-    public void onSubmitData(View view){
-        if(validateData()){
+    public void onSubmitData(View view)
+    {
+        if(validateData())
+        {
             WorkRequirementsEntity requirement = new WorkRequirementsEntity();
             requirement.setWorksId(keyid);
             requirement.setWorksRegId(reqId);
@@ -178,7 +181,9 @@ public class AddWorkRequirementActivity extends Activity implements AdapterView.
             returnIntent.putExtra("data",requirement);
             setResult(Activity.RESULT_OK,returnIntent);
             finish();
-        }else{
+        }
+        else
+        {
             Toast.makeText(getApplicationContext(), "कृपया सही डेटा दर्ज करें", Toast.LENGTH_LONG).show();
         }
     }
@@ -541,28 +546,29 @@ public class AddWorkRequirementActivity extends Activity implements AdapterView.
     };
 
 
-    public void showAlertForInternet(){
+    public void showAlertForInternet()
+    {
         AlertDialog.Builder ab = new AlertDialog.Builder(this);
         ab.setTitle("Internet Connnection Error!!!");
         ab.setMessage("Please turn on your mobile data or wifi connection");
         ab.setPositiveButton("Turn On", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog,
-                                int whichButton) {
+            public void onClick(DialogInterface dialog,int whichButton)
+            {
                 GlobalVariables.isOffline = false;
                 Intent I = new Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS);
                 startActivity(I);
                 finish();
             }
         });
-        ab.setNegativeButton("Cancel",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog,
-                                        int whichButton) {
-                        finish();
-                    }
-                });
+        ab.setNegativeButton("Cancel",new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog,int whichButton)
+            {
+                finish();
+            }
+        });
 
         ab.show();
     }
@@ -582,11 +588,9 @@ public class AddWorkRequirementActivity extends Activity implements AdapterView.
 //        et_supervisor_mob.setText(schemeInfo.getSupervisor_mob());
         if (getIntent().hasExtra("KeyId"))
         {
-
             spn_gender.setSelection(((ArrayAdapter<String>) spn_gender.getAdapter()).getPosition(schemeInfo.getGender()));
             spin_active.setSelection(((ArrayAdapter<String>) spin_active.getAdapter()).getPosition(schemeInfo.getIsActive()));
             spn_salary_type.setSelection(((ArrayAdapter<String>) spn_salary_type.getAdapter()).getPosition(schemeInfo.getSalaryTypename()));
-
         }
 
     }

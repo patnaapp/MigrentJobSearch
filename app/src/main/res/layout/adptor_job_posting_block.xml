@@ -59,7 +59,7 @@
                         <TextView
                             android:id="@+id/tv_blk_name"
                             android:layout_width="0dp"
-                            android:layout_height="24dp"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginRight="2dp"
                             android:layout_weight="1.7"

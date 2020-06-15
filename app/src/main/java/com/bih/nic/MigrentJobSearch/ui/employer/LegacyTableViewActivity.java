@@ -202,10 +202,12 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
         @Override
         protected ArrayList<AcptdRjctdJobOfferEntity> doInBackground(String...arg)
         {
-            if(OrgId.equals("NA")){
+            if(OrgId.equals("NA"))
+            {
                 OrgId="";
             }
             return WebserviceHelper.JobOfferAcptdRjctd(distid,blkcode, OrgId,UserRole,status,serial_no);
+
         }
 
         @Override
@@ -239,6 +241,7 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
             if (status.equals("SHRG")){
 
                 LegacyTableView.insertLegacyTitle("क्रम सं.","पंजीकरण संख्या", "नाम","मोबाइल नंबर", "लिंग");
+
                 //,"अभिभावक का नाम","अभिभावक क                      ा मोबाइल नंबर"
 
                 int i=1;
@@ -287,7 +290,6 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
                 legacyTableView.setTitleFont(BOLD);
                 legacyTableView.setContentTextSize(30);
                 legacyTableView.setTitleTextSize(35);
-
 
                 legacyTableView.build();
 

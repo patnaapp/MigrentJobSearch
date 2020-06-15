@@ -624,7 +624,8 @@ public class AddWorkSiteDetails_Activity extends Activity implements WorkReqrmnt
         }
     }
 
-    public void showAlertForInternet(){
+    public void showAlertForInternet()
+    {
         AlertDialog.Builder ab = new AlertDialog.Builder(this);
         ab.setTitle("Internet Connnection Error!!!");
         ab.setMessage("Please turn on your mobile data or wifi connection");
@@ -638,8 +639,7 @@ public class AddWorkSiteDetails_Activity extends Activity implements WorkReqrmnt
                 finish();
             }
         });
-        ab.setNegativeButton("Cancel",
-                new DialogInterface.OnClickListener() {
+        ab.setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog,
                                         int whichButton) {
@@ -655,14 +655,17 @@ public class AddWorkSiteDetails_Activity extends Activity implements WorkReqrmnt
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == REQUESTCODE) {
-            if(resultCode == Activity.RESULT_OK){
-                if(data != null){
+            if(resultCode == Activity.RESULT_OK)
+            {
+                if(data != null)
+                {
                     WorkRequirementsEntity reqrmnt = (WorkRequirementsEntity) data.getSerializableExtra("data");
                     requirements.add(reqrmnt);
                     adapter.notifyDataSetChanged();
                 }
             }
-        }else if (requestCode == REQUESTCODEMODIFY) {
+        }
+        else if (requestCode == REQUESTCODEMODIFY) {
             if(resultCode == Activity.RESULT_OK){
                 if(data != null){
                     WorkRequirementsEntity reqrmnt = (WorkRequirementsEntity) data.getSerializableExtra("data");
@@ -762,7 +765,7 @@ public class AddWorkSiteDetails_Activity extends Activity implements WorkReqrmnt
         spin_dept.setAdapter(adaptor);
 
         if (getIntent().hasExtra("KeyId")) {
-            String deptname = dataBaseHelper.getNameFor("MasterDept", "Dept_Id", "DeptName_Hn", schemeInfo.getDeptId());
+            String deptname = dataBaseHelper.getNameFor("MasterDept", "Dept_Id", "DeptName_Hn", schemeInfo.getRelatedDept());
             spin_dept.setSelection(((ArrayAdapter<String>) spin_dept.getAdapter()).getPosition(deptname.trim()));
 
         }
