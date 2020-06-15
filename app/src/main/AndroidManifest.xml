@@ -65,9 +65,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".OfficeReport.DistricWise"/>
-        <activity android:name=".ui.hq.DeptJobVacencyReportActivity"
-            android:theme="@style/NoActionBar"></activity>
+        <activity android:name=".ui.hq.OrganisationWorkDetailActivity"></activity>
+        <activity android:name=".OfficeReport.DistricWise" />
+        <activity
+            android:name=".ui.hq.DeptJobVacencyReportActivity"
+            android:theme="@style/NoActionBar" />
         <activity
             android:name=".ui.hq.HqHomeActivity"
             android:theme="@style/NoActionBar" />
@@ -114,22 +116,17 @@
         <!-- </intent-filter> -->
         <!-- </activity> -->
         <activity android:name=".UpdateAdhaarMobile" />
-
-        <activity android:name=".OfficeReport.BlockWiseConsolidated"></activity>
-        <activity android:name=".OfficeReport.WorkSiteReport"></activity>
-        <activity android:name=".OfficeReport.WorkSiteReportNew"></activity>
-
+        <activity android:name=".OfficeReport.BlockWiseConsolidated" />
+        <activity android:name=".OfficeReport.WorkSiteReport" />
+        <activity android:name=".OfficeReport.WorkSiteReportNew" />
         <activity android:name=".ChooseCenter" />
-
         <activity android:name=".VerifyAadhaar" />
-
         <activity android:name=".MultiplePhotoActivity" />
         <activity android:name=".ui.labour.ChangeMobileNumberActivity" />
         <activity android:name=".CameraActivity" />
         <activity android:name=".ui.labour.UpdateMobileNumberActivity" />
         <activity android:name=".ui.employer.EmployerMainHomeActivity" />
         <activity
-
             android:name=".ui.MultiLoginActivity"
             android:theme="@style/Theme.AppCompat.Light" />
 

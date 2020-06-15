@@ -119,17 +119,18 @@ public class HqHomeActivity extends Activity {
         startActivity(intent);
     }
 
-    public  void onViewDeptJobVacency(View view)
-    {
+    public  void onViewDeptJobVacency(View view){
         Intent intent = new Intent(this, DeptJobVacencyReportActivity.class);
-
         startActivity(intent);
     }
 
     public void  onJobOfferReport(View view){
         Intent intent = new Intent(this, Job_Offer_activity_HQ.class);
-
         startActivity(intent);
+    }
 
+    public void onViewWorkOrgDetail(View view){
+        Intent intent = new Intent(this, OrganisationWorkDetailActivity.class);
+        startActivity(intent);
     }
 }
