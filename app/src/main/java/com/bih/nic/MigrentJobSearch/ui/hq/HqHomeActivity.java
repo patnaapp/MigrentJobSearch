@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -20,7 +19,6 @@ import com.bih.nic.MigrentJobSearch.OfficeReport.DistricWise;
 import com.bih.nic.MigrentJobSearch.R;
 import com.bih.nic.MigrentJobSearch.Utiilties;
 import com.bih.nic.MigrentJobSearch.ui.MultiLoginActivity;
-import com.bih.nic.MigrentJobSearch.ui.employer.EmployerMainHomeActivity;
 
 public class HqHomeActivity extends Activity {
 
@@ -148,7 +146,7 @@ public class HqHomeActivity extends Activity {
     }
 
     public void onViewWorkOrgDetail(View view){
-        Intent intent = new Intent(this, OrganisationWorkDetailActivity.class);
+        Intent intent = new Intent(this, WorksiteEmplyeeReportActivity.class);
         startActivity(intent);
     }
 }

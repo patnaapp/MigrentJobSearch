@@ -283,7 +283,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Organiztion Worksite Reports"
+                    android:text="Organisation Worksite Reports"
                     android:gravity="center"
                     android:textSize="13sp"
                     android:layout_marginTop="4dp"
@@ -429,7 +429,7 @@
                     android:id="@+id/iv_upload1"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:background="@drawable/change_worksite"/>
+                    android:background="@drawable/employee"/>
                 <TextView
                     android:layout_below="@+id/iv_upload1"
                     android:layout_width="match_parent"
