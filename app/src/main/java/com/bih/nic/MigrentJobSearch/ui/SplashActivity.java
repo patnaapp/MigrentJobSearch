@@ -295,16 +295,17 @@ public class SplashActivity extends Activity {
                     startActivity(i);
                     finish();
                 }else {
-                    if(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserRole", "").equals("Labour")){
+                    String userRole = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserRole", "");
+                    if(userRole.equals("Labour")){
                         Intent i = new Intent(SplashActivity.this, MainHomeActivity.class);
                         startActivity(i);
                         finish();
-                    }else if(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserRole", "").equals("ORG")){
+                    }else if(userRole.equals("ORG")){
                         Intent i = new Intent(SplashActivity.this, EmployerMainHomeActivity.class);
                         startActivity(i);
                         finish();
                     }
-                    else if(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserRole", "").equals("HQ")){
+                    else if(userRole.equals("HQ") || userRole.equals("ORGADM")){
                         Intent i = new Intent(SplashActivity.this, HqHomeActivity.class);
                         startActivity(i);
                         finish();

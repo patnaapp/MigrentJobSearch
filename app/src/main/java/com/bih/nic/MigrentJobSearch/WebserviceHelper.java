@@ -12,6 +12,7 @@ import com.bih.nic.MigrentJobSearch.Model.ConsolidatedReportModel;
 import com.bih.nic.MigrentJobSearch.Model.DefaultResponse;
 import com.bih.nic.MigrentJobSearch.Model.DepartmentLoginEntity;
 import com.bih.nic.MigrentJobSearch.Model.DepartmentMaster;
+import com.bih.nic.MigrentJobSearch.Model.DepartmentWiseVacancy;
 import com.bih.nic.MigrentJobSearch.Model.District;
 import com.bih.nic.MigrentJobSearch.Model.EmpRegDetails;
 import com.bih.nic.MigrentJobSearch.Model.EmployerDetails;
@@ -100,6 +101,7 @@ public class WebserviceHelper implements KvmSerializable {
     private static final String JOB_SEARCH_METHOD="JobSearchDetails1";
     private static final String GET_JOB_REQUEST_METHOD="GetJobRequest";
     private static final String GET_JOB_Offer_Posted_METHOD="GetJobOfferOrg";
+    private static final String GET_DEPT_WISE_VACENCY_METHOD="rpt_DepartmentWiseVacancy";
     private static final String GET_JOB_Offer_Posted_HQ="GetJobOfferOrg";
     private static final String GET_JOB_Offer_block_Posted_METHOD="GetJobOfferBlockwise";
     private static final String GET_Acpt_Rjct_Job_By_Labour="GetJobOfferLabourDetails";
@@ -1541,7 +1543,58 @@ public class WebserviceHelper implements KvmSerializable {
         return pvmArrayList;
     }
 
+    public static ArrayList<DepartmentWiseVacancy> getDeptWiseVacencyReport(String status, String deptId) {
 
+
+        SoapObject request = new SoapObject(SERVICENAMESPACE, GET_DEPT_WISE_VACENCY_METHOD);
+
+        request.addProperty("_Status", status);
+        request.addProperty("_deptid", deptId);
+
+        SoapObject res1;
+        try {
+
+            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
+                    SoapEnvelope.VER11);
+            envelope.dotNet = true;
+            envelope.setOutputSoapObject(request);
+
+            envelope.addMapping(SERVICENAMESPACE, JobOfferPostedEntity.JobOffer_CLASS.getSimpleName(), JobOfferPostedEntity.JobOffer_CLASS);
+
+            HttpTransportSE androidHttpTransport = new HttpTransportSE(
+                    SERVICEURL);
+            androidHttpTransport.call(SERVICENAMESPACE + GET_DEPT_WISE_VACENCY_METHOD,
+                    envelope);
+
+            res1 = (SoapObject) envelope.getResponse();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        int TotalProperty = res1.getPropertyCount();
+
+        ArrayList<DepartmentWiseVacancy> pvmArrayList = new ArrayList<DepartmentWiseVacancy>();
+
+        for (int ii = 0; ii < TotalProperty; ii++) {
+            if (res1.getProperty(ii) != null) {
+                Object property = res1.getProperty(ii);
+                if (property instanceof SoapObject) {
+                    SoapObject final_object = (SoapObject) property;
+                    if(status.equalsIgnoreCase("ShowRec")) {
+                        DepartmentWiseVacancy panchayat = new DepartmentWiseVacancy(final_object,"1");
+                        pvmArrayList.add(panchayat);
+                    }else if(status.equalsIgnoreCase("ShowOrg")) {
+                        DepartmentWiseVacancy panchayat = new DepartmentWiseVacancy(final_object,"2");
+                        pvmArrayList.add(panchayat);
+                    }
+                }
+            } else
+                return pvmArrayList;
+        }
+
+        return pvmArrayList;
+    }
     public static ArrayList<BlockJobOfferPostedEntity> BlockJobOfferPosted(String distid,String orgid,String role) {
 
         SoapObject request = new SoapObject(SERVICENAMESPACE, GET_JOB_Offer_block_Posted_METHOD);
