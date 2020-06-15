@@ -14,26 +14,60 @@ public class AcptdRjctdJobOfferEntity implements KvmSerializable, Serializable {
     private String vchName = "";
     private String vchMobile = "";
     private String gender = "";
-    private String vchGuardian_name = "";
-    private String vchGuardian_number = "";
     private String SkillName = "";
     private String WorkSiteNameHn = "";
     private String count = "";
     private String row_num = "";
+    private String AddressEn = "";
+    private String Location = "";
+    private String ComanyNameEn = "";
+    private String Salary = "";
+    private String SkillCategory = "";
+    private String vchGuardian_name = "";
+    private String vchGuardian_number = "";
+    private String NoOfPerson = "";
 
 
     public AcptdRjctdJobOfferEntity(SoapObject obj) {
 
         this.vchregnum = obj.getProperty("vchregnum").toString();
+        if (this.vchregnum.equals("anyType{}")){
+            this.vchregnum="NA";
+        }
         this.vchName = obj.getProperty("vchName").toString();
         this.vchMobile = obj.getProperty("vchMobile").toString();
         this.gender = obj.getProperty("gender").toString();
-        this.vchGuardian_name = obj.getProperty("vchGuardian_name").toString();
-        this.vchGuardian_number = obj.getProperty("vchGuardian_number").toString();
         this.SkillName = obj.getProperty("SkillName").toString();
         this.WorkSiteNameHn = obj.getProperty("WorkSiteNameHn").toString();
+        if (this.WorkSiteNameHn.equals("anyType{}")){
+            this.WorkSiteNameHn="NA";
+        }
+
         this.count = obj.getProperty("count").toString();
         this.row_num = obj.getProperty("row_num").toString();
+        if (this.row_num.equals("anyType{}")){
+            this.row_num="NA";
+        }
+        this.AddressEn = obj.getProperty("AddressEn").toString();
+        if (this.AddressEn.equals("anyType{}")){
+            this.AddressEn="NA";
+        }
+        this.Location = obj.getProperty("Location").toString();
+        this.ComanyNameEn = obj.getProperty("ComanyNameEn").toString();
+        if (this.ComanyNameEn.equals("anyType{}")){
+            this.ComanyNameEn="NA";
+        }
+        this.Salary = obj.getProperty("Salary").toString();
+        this.SkillCategory = obj.getProperty("SkillCategory").toString();
+        this.vchGuardian_name = obj.getProperty("vchGuardian_name").toString();
+        if (this.vchGuardian_name.equals("anyType{}")){
+            this.vchGuardian_name="NA";
+        }
+        this.vchGuardian_number = obj.getProperty("vchGuardian_number").toString();
+        if (this.vchGuardian_number.equals("anyType{}")){
+            this.vchGuardian_number="NA";
+        }
+        this.NoOfPerson = obj.getProperty("NoOfPerson").toString();
         //this.skillName = obj.getProperty("SkillNameHn").toString();
 
 
@@ -80,24 +114,12 @@ public class AcptdRjctdJobOfferEntity implements KvmSerializable, Serializable {
         this.gender = gender;
     }
 
-    public String getVchGuardian_name() {
-        return vchGuardian_name;
-    }
-
-    public void setVchGuardian_name(String vchGuardian_name) {
-        this.vchGuardian_name = vchGuardian_name;
-    }
-
-    public String getVchGuardian_number() {
-        return vchGuardian_number;
-    }
-
-    public void setVchGuardian_number(String vchGuardian_number) {
-        this.vchGuardian_number = vchGuardian_number;
-    }
-
     public String getSkillName() {
         return SkillName;
+    }
+
+    public void setSkillName(String skillName) {
+        SkillName = skillName;
     }
 
     public String getWorkSiteNameHn() {
@@ -124,8 +146,68 @@ public class AcptdRjctdJobOfferEntity implements KvmSerializable, Serializable {
         this.row_num = row_num;
     }
 
-    public void setSkillName(String skillName) {
-        SkillName = skillName;
+    public String getAddressEn() {
+        return AddressEn;
+    }
+
+    public void setAddressEn(String addressEn) {
+        AddressEn = addressEn;
+    }
+
+    public String getLocation() {
+        return Location;
+    }
+
+    public void setLocation(String location) {
+        Location = location;
+    }
+
+    public String getComanyNameEn() {
+        return ComanyNameEn;
+    }
+
+    public void setComanyNameEn(String comanyNameEn) {
+        ComanyNameEn = comanyNameEn;
+    }
+
+    public String getSalary() {
+        return Salary;
+    }
+
+    public void setSalary(String salary) {
+        Salary = salary;
+    }
+
+    public String getSkillCategory() {
+        return SkillCategory;
+    }
+
+    public void setSkillCategory(String skillCategory) {
+        SkillCategory = skillCategory;
+    }
+
+    public String getVchGuardian_name() {
+        return vchGuardian_name;
+    }
+
+    public void setVchGuardian_name(String vchGuardian_name) {
+        this.vchGuardian_name = vchGuardian_name;
+    }
+
+    public String getVchGuardian_number() {
+        return vchGuardian_number;
+    }
+
+    public void setVchGuardian_number(String vchGuardian_number) {
+        this.vchGuardian_number = vchGuardian_number;
+    }
+
+    public String getNoOfPerson() {
+        return NoOfPerson;
+    }
+
+    public void setNoOfPerson(String noOfPerson) {
+        NoOfPerson = noOfPerson;
     }
 
     @Override

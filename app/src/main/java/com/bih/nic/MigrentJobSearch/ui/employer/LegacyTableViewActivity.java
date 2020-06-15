@@ -201,6 +201,9 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
         @Override
         protected ArrayList<AcptdRjctdJobOfferEntity> doInBackground(String...arg)
         {
+            if(OrgId.equals("NA")){
+                OrgId="";
+            }
             return WebserviceHelper.JobOfferAcptdRjctd(distid,blkcode, OrgId,UserRole,status,serial_no);
         }
 
@@ -211,54 +214,58 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
 
             data = result;
             ArrayList<String>  Content=new ArrayList<>();
+//
+//            if (status.equals("SHRGJ")){
+//
+//                // LegacyTableView.insertLegacyTitle("क्रम सं.","पंजीकरण संख्या", "कौशल", "नाम", "लिंग","मोबाइल नंबर","कार्य स्थल का नाम");
+//                LegacyTableView.insertLegacyTitle("क्रम सं.","कंपनी", "कंपनी का पता", "कार्य स्थल", "लोकेशन","संपर्क व्यक्ति","संपर्क व्यक्ति मोबाइल","पंजीकरण संख्या","लाभार्थी का नाम","लाभार्थी का मोबाइल","लिंग","कौशल","उप कौशल","कार्य स्थल का नाम");
+//                //  LegacyTableView.insertLegacyTitle("क्रम सं.","पंजीकरण संख्या", "कौशल", "नाम", "लिंग","मोबाइल नंबर","कार्य स्थल का नाम");
+//                //,"अभिभावक का नाम","अभिभावक का मोबाइल नंबर"
+//
+//
+//                int i=1;
+//
+//                for (AcptdRjctdJobOfferEntity info: data)
+//                {
+//
+//                    LegacyTableView.insertLegacyContent(info.getRow_num(),info.getComanyNameEn(),info.getLocation(),info.getWorkSiteNameHn(),info.getLocation(),info.getVchGuardian_name(),info.getVchGuardian_number(),info.getVchregnum(),info.getVchMobile(),info.getGender(),info.getSkillCategory(),info.getSkillName(),info.getWorkSiteNameHn());
+//                    i++;
+//                }
+//
+//            }
+             if (status.equals("SHRG")){
 
+                LegacyTableView.insertLegacyTitle("क्रम सं.","पंजीकरण संख्या", "नाम","मोबाइल नंबर", "लिंग");
+                //,"अभिभावक का नाम","अभिभावक क                      ा मोबाइल नंबर"
+
+                int i=1;
+                for (AcptdRjctdJobOfferEntity info: data){
+
+                    LegacyTableView.insertLegacyContent(info.getRow_num(),info.getVchregnum(),info.getVchName(),info.getVchMobile(),info.getGender());
+                    i++;
+                }
+
+            }
+            else {
+                //,"लाभार्थी का नाम","लाभार्थी का मोबाइल","लिंग","कौशल","उप कौशल","कार्य स्थल का नाम"
+                // LegacyTableView.insertLegacyTitle("क्रम सं.","पंजीकरण संख्या", "कौशल", "नाम", "लिंग","मोबाइल नंबर");
+                LegacyTableView.insertLegacyTitle("क्रम सं.","कंपनी", "कंपनी का पता", "कार्य स्थल", "लोकेशन","संपर्क व्यक्ति","संपर्क व्यक्ति मोबाइल","पंजीकरण संख्या","लाभार्थी का नाम","लाभार्थी का मोबाइल","लिंग","कौशल","उप कौशल","कार्य स्थल का नाम");
+                //,"अभिभावक का नाम","अभिभावक का मोबाइल नंबर"
+
+
+                int i=1;
+                for (AcptdRjctdJobOfferEntity info: data){
+//,info.getVchMobile(),info.getGender(),info.getSkillCategory(),info.getSkillName(),info.getWorkSiteNameHn()
+                    // LegacyTableView.insertLegacyContent(info.getRow_num(),info.getVchregnum(),info.getSkillName(),info.getVchName(),info.getGender(),info.getVchMobile());
+                    LegacyTableView.insertLegacyContent(info.getRow_num(),info.getComanyNameEn(),info.getAddressEn(),info.getWorkSiteNameHn(),info.getLocation(),info.getVchGuardian_name(),info.getVchGuardian_number(),info.getVchregnum(),info.getVchName(),info.getVchMobile(),info.getGender(),info.getSkillCategory(),info.getSkillName(),info.getWorkSiteNameHn());
+                    i++;
+                }
+
+            }
             if(data != null && data.size()> 0)
             {
                 handleButtonView(data.get(0).getRow_num(), data.get(data.size() - 1).getRow_num());
                 // tv_Norecord_accpt.setVisibility(View.GONE);
-                if (status.equals("SHRGJ")){
-
-                     LegacyTableView.insertLegacyTitle("क्रम सं.","पंजीकरण संख्या", "कौशल", "नाम", "लिंग","मोबाइल नंबर","कार्य स्थल का नाम");
-                    //  LegacyTableView.insertLegacyTitle("क्रम सं.","पंजीकरण संख्या", "कौशल", "नाम", "लिंग","मोबाइल नंबर","कार्य स्थल का नाम");
-                    //,"अभिभावक का नाम","अभिभावक का मोबाइल नंबर"
-
-
-                    int i=1;
-
-                    for (AcptdRjctdJobOfferEntity info: data)
-                    {
-
-                        LegacyTableView.insertLegacyContent(info.getRow_num(),info.getVchregnum(),info.getSkillName(),info.getVchName(),info.getGender(),info.getVchMobile(),info.getWorkSiteNameHn());
-                        i++;
-                    }
-
-                }
-                else if (status.equals("SHRG")){
-
-                    LegacyTableView.insertLegacyTitle("क्रम सं.","पंजीकरण संख्या", "नाम","मोबाइल नंबर", "लिंग");
-                    //,"अभिभावक का नाम","अभिभावक क                      ा मोबाइल नंबर"
-
-                    int i=1;
-                    for (AcptdRjctdJobOfferEntity info: data){
-
-                        LegacyTableView.insertLegacyContent(info.getRow_num(),info.getVchregnum(),info.getVchName(),info.getVchMobile(),info.getGender());
-                        i++;
-                    }
-
-                }
-                else {
-                    LegacyTableView.insertLegacyTitle("क्रम सं.","पंजीकरण संख्या", "कौशल", "नाम", "लिंग","मोबाइल नंबर");
-                    //,"अभिभावक का नाम","अभिभावक का मोबाइल नंबर"
-
-
-                    int i=1;
-                    for (AcptdRjctdJobOfferEntity info: data){
-
-                        LegacyTableView.insertLegacyContent(info.getRow_num(),info.getVchregnum(),info.getSkillName(),info.getVchName(),info.getGender(),info.getVchMobile());
-                        i++;
-                    }
-
-                }
 
                 legacyTableView = (LegacyTableView)findViewById(R.id.legacy_table_view);
                 legacyTableView.resetVariables();
