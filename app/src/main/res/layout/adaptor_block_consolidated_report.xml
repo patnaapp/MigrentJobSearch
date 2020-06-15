@@ -77,7 +77,7 @@
                             android:layout_gravity="center"
 
                             android:id="@+id/tv_PanjiNo"
-                            android:textColor="@color/colorPrimary"
+                            android:textColor="#0000EE"
                             android:textStyle="bold"
                             android:gravity="center"
                             android:layout_width="0dp"
@@ -95,7 +95,7 @@
                             android:layout_gravity="center"
 
                             android:id="@+id/tv_tot_work"
-                            android:textColor="@color/colorPrimary"
+                            android:textColor="#0000EE"
                             android:textStyle="bold"
                             android:gravity="center"
                             android:layout_width="0dp"
@@ -113,7 +113,7 @@
                             android:layout_gravity="center"
 
                             android:id="@+id/tv_tot_work_accept"
-                            android:textColor="@color/colorPrimary"
+                            android:textColor="#0000EE"
                             android:textStyle="bold"
                             android:gravity="center"
                             android:layout_width="0dp"
@@ -131,7 +131,7 @@
                             android:layout_gravity="center"
 
                             android:id="@+id/tv_tot_vac"
-                            android:textColor="@color/colorPrimary"
+                            android:textColor="#0000EE"
                             android:textStyle="bold"
                             android:gravity="center"
                             android:layout_width="0dp"
@@ -149,7 +149,7 @@
                             android:layout_gravity="center"
 
                             android:id="@+id/tv_tot_acc_vac"
-                            android:textColor="@color/colorPrimary"
+                            android:textColor="#0000EE"
                             android:textStyle="bold"
                             android:gravity="center"
                             android:layout_width="0dp"
@@ -167,7 +167,7 @@
                             android:id="@+id/tv_tot_rej"
                             android:layout_gravity="center"
 
-                            android:textColor="@color/colorPrimary"
+                            android:textColor="#0000EE"
                             android:textStyle="bold"
                             android:gravity="center"
                             android:layout_width="0dp"
