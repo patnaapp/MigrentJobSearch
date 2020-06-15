@@ -411,10 +411,12 @@
 
             <View
                 android:layout_width="8dp"
+                android:visibility="gone"
                 android:layout_height="match_parent"/>
 
             <RelativeLayout
                 android:onClick="onViewWorkOrgDetail"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

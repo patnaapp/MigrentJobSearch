@@ -25,7 +25,7 @@ public class PaymentStatusActivity extends Activity {
         setContentView(R.layout.activity_payment_status);
 
         getActionBar().hide();
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,WindowManager.LayoutParams.FLAG_SECURE);
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,WindowManager.LayoutParams.FLAG_SECURE);
         Utiilties.setStatusBarColor(this);
 
         tv_district = findViewById(R.id.tv_district);

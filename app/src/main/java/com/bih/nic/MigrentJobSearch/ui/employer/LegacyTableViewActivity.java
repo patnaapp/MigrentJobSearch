@@ -206,7 +206,7 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
             {
                 OrgId="";
             }
-            return WebserviceHelper.JobOfferAcptdRjctd(distid,blkcode, OrgId,UserRole,status,serial_no);
+            return WebserviceHelper.JobOfferAcptdRjctd(distid,blkcode,OrgId,UserRole,status,serial_no);
 
         }
 
