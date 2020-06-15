@@ -11,6 +11,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bih.nic.MigrentJobSearch.DataBaseHelper.DataBaseHelper;
@@ -25,7 +26,8 @@ public class HqHomeActivity extends Activity {
 
     DataBaseHelper dataBaseHelper;
     SQLiteDatabase db;
-    TextView tv_email;
+    TextView tv_email,tv_dept_name,tv_version;
+    LinearLayout ll_first,ll_username;
     String OrgId="",user_name="",lvlthree_id="", mobile="", address="", DistName="", ProfileImg="",CompanyName="", UserId,UserRole="",Block_Code="",lvlone_id="",lvltwo_id="";
 
     @Override
@@ -38,6 +40,17 @@ public class HqHomeActivity extends Activity {
         Utiilties.setStatusBarColor(this);
         dataBaseHelper=new DataBaseHelper(HqHomeActivity.this);
         tv_email=findViewById(R.id.tv_email);
+        tv_dept_name=findViewById(R.id.tv_dept_name);
+        ll_first=findViewById(R.id.ll_first);
+        ll_username=findViewById(R.id.ll_username);
+        tv_version=(TextView) findViewById(R.id.tv_version);
+
+        String version = Utiilties.getAppVersion(this);
+        if(version != null){
+            tv_version.setText("ऐप वर्ज़न "+version);
+        }else{
+            tv_version.setText("");
+        }
 
         OrgId=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("OrgId", "");
         UserId=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserId", "");
@@ -49,8 +62,15 @@ public class HqHomeActivity extends Activity {
         lvltwo_id=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("Lvl_TwoId", "");
         lvlthree_id=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("LvlThree_Id", "");
         UserRole=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserRole", "");
-
+        String username = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserName", "");
         tv_email.setText(UserId);
+        if(UserRole.equals("ORGADM")){
+            ll_first.setVisibility(View.GONE);
+            ll_username.setVisibility(View.VISIBLE);
+            tv_dept_name.setText(username);
+        }else{
+            ll_username.setVisibility(View.GONE);
+        }
     }
 
     public void OnClick_goToLoginScreen(View view){
@@ -73,8 +93,6 @@ public class HqHomeActivity extends Activity {
         SharedPreferences settings = this.getSharedPreferences("PreferencesName", Context.MODE_PRIVATE);
         settings.edit().clear().commit();
         GlobalVariables.isLogin=false;
-//        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("UserId","").commit();
-//        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("UserRole","").commit();
         Intent intent = new Intent(this, MultiLoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK| Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
