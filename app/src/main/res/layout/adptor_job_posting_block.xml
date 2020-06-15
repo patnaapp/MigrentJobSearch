@@ -76,7 +76,7 @@
                         <TextView
                             android:layout_gravity="center"
                             android:id="@+id/total_reg_blk"
-                            android:textColor="@color/colorPrimary"
+                            android:textColor="#0000EE"
                             android:textStyle="bold"
                             android:gravity="center"
                             android:layout_width="0dp"
@@ -93,7 +93,7 @@
                         <TextView
                             android:layout_gravity="center"
                             android:id="@+id/tv_joboffer_blk"
-                            android:textColor="@color/colorPrimary"
+                            android:textColor="#0000EE"
                             android:textStyle="bold"
                             android:gravity="center"
                             android:layout_width="0dp"

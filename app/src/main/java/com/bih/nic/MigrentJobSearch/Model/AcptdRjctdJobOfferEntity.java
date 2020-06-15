@@ -53,12 +53,18 @@ public class AcptdRjctdJobOfferEntity implements KvmSerializable, Serializable {
             this.AddressEn="NA";
         }
         this.Location = obj.getProperty("Location").toString();
+        if (this.Location.equals("anyType{}")){
+            this.Location="NA";
+        }
         this.ComanyNameEn = obj.getProperty("ComanyNameEn").toString();
         if (this.ComanyNameEn.equals("anyType{}")){
             this.ComanyNameEn="NA";
         }
         this.Salary = obj.getProperty("Salary").toString();
         this.SkillCategory = obj.getProperty("SkillCategory").toString();
+        if (this.SkillCategory.equals("anyType{}")){
+            this.SkillCategory="NA";
+        }
         this.vchGuardian_name = obj.getProperty("vchGuardian_name").toString();
         if (this.vchGuardian_name.equals("anyType{}")){
             this.vchGuardian_name="NA";
