@@ -244,7 +244,7 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
                 int i=1;
                 for (AcptdRjctdJobOfferEntity info: data)
                 {
-                    tv_total_count.setText(info.getCount());
+                    tv_total_count.setText("Total Count:-"+info.getCount());
 
                     LegacyTableView.insertLegacyContent(info.getRow_num(),info.getVchregnum(),info.getVchName(),info.getVchMobile(),info.getGender());
                     i++;
