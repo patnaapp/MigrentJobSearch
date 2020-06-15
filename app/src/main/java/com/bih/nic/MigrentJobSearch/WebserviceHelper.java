@@ -84,11 +84,11 @@ public class WebserviceHelper implements KvmSerializable {
 
     private Context ctx;
 
-//    public static final String SERVICENAMESPACE = "http://shramsadhan.bih.nic.in/";
-//    public static final String SERVICEURL = "http://shramsadhan.bih.nic.in/MigrantJobSearchWebservice.asmx";
+    public static final String SERVICENAMESPACE = "http://shramsadhan.bih.nic.in/";
+    public static final String SERVICEURL = "http://shramsadhan.bih.nic.in/MigrantJobSearchWebservice.asmx";
 
-    public static final String SERVICENAMESPACE = "http://10.133.20.159/";
-    public static final String SERVICEURL = "http://10.133.20.159/TestService/MigrantJobSearchWebservice.asmx";
+//    public static final String SERVICENAMESPACE = "http://10.133.20.159/";
+//    public static final String SERVICEURL = "http://10.133.20.159/TestService/MigrantJobSearchWebservice.asmx";
 
     private static final String AuthenticateUser = "Authenticate";
     private static final String AuthenticateORGUser = "AuthenticateOrgLogin";
@@ -1897,10 +1897,14 @@ public class WebserviceHelper implements KvmSerializable {
                 // Log.d("", result.toString());
 
                 return result.toString();
-            } else
+            }
+            else
+                {
                 return null;
-
-        } catch (Exception e) {
+            }
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
             return null;
         }

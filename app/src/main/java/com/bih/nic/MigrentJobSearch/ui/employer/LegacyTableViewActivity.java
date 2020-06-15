@@ -135,14 +135,16 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed()
+    {
         super.onBackPressed();
         //do something when user presses back
         finish();
     }
 
     @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+    {
 
     }
 
@@ -238,7 +240,8 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
 //                }
 //
 //            }
-            if (status.equals("SHRG")){
+            if (status.equals("SHRG"))
+            {
 
                 LegacyTableView.insertLegacyTitle("क्रम सं.","पंजीकरण संख्या", "नाम","मोबाइल नंबर", "लिंग");
 
@@ -254,7 +257,8 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
                 }
 
             }
-            else {
+            else
+            {
                 //,"लाभार्थी का नाम","लाभार्थी का मोबाइल","लिंग","कौशल","उप कौशल","कार्य स्थल का नाम"
                 // LegacyTableView.insertLegacyTitle("क्रम सं.","पंजीकरण संख्या", "कौशल", "नाम", "लिंग","मोबाइल नंबर");
                 LegacyTableView.insertLegacyTitle("क्रम सं.","कंपनी", "कंपनी का पता", "कार्य स्थल", "लोकेशन","संपर्क व्यक्ति","संपर्क व्यक्ति मोबाइल","पंजीकरण संख्या","लाभार्थी का नाम","लाभार्थी का मोबाइल","लिंग","कौशल","उप कौशल","कार्य स्थल का नाम");
@@ -262,7 +266,8 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
 
 
                 int i=1;
-                for (AcptdRjctdJobOfferEntity info: data){
+                for (AcptdRjctdJobOfferEntity info: data)
+                {
                     tv_total_count.setText("Total Count:-"+info.getCount());
 //,info.getVchMobile(),info.getGender(),info.getSkillCategory(),info.getSkillName(),info.getWorkSiteNameHn()
                     // LegacyTableView.insertLegacyContent(info.getRow_num(),info.getVchregnum(),info.getSkillName(),info.getVchName(),info.getGender(),info.getVchMobile());
@@ -275,12 +280,10 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
             {
                 handleButtonView(data.get(0).getRow_num(), data.get(data.size() - 1).getRow_num());
                 // tv_Norecord_accpt.setVisibility(View.GONE);
-
                 legacyTableView = (LegacyTableView)findViewById(R.id.legacy_table_view);
                 legacyTableView.resetVariables();
                 legacyTableView.setTitle(LegacyTableView.readLegacyTitle());
                 legacyTableView.setContent(LegacyTableView.readLegacyContent());
-
                 legacyTableView.setTheme(GOLDALINE);
                 legacyTableView.setTablePadding(20);
                 legacyTableView.setHighlight(1);
@@ -290,15 +293,14 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
                 legacyTableView.setTitleFont(BOLD);
                 legacyTableView.setContentTextSize(30);
                 legacyTableView.setTitleTextSize(35);
-
                 legacyTableView.build();
-
                 if (this.dialog.isShowing())
                 {
                     this.dialog.dismiss();
                 }
             }
-            else {
+            else
+            {
 
                 // tv_Norecord_accpt.setVisibility(View.VISIBLE);
             }
