@@ -242,8 +242,10 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
                 //,"अभिभावक का नाम","अभिभावक क                      ा मोबाइल नंबर"
 
                 int i=1;
-                for (AcptdRjctdJobOfferEntity info: data){
+                for (AcptdRjctdJobOfferEntity info: data)
+                {
                     tv_total_count.setText(info.getCount());
+
                     LegacyTableView.insertLegacyContent(info.getRow_num(),info.getVchregnum(),info.getVchName(),info.getVchMobile(),info.getGender());
                     i++;
                 }
