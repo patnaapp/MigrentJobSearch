@@ -65,7 +65,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.hq.OrganisationWorkDetailActivity"></activity>
+        <activity android:name=".ui.hq.SubDeptJobVacencyReportActivity"></activity>
+        <activity android:name=".ui.hq.OrganisationWorkDetailActivity" />
         <activity android:name=".OfficeReport.DistricWise" />
         <activity
             android:name=".ui.hq.DeptJobVacencyReportActivity"

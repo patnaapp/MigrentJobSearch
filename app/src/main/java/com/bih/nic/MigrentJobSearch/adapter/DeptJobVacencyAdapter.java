@@ -1,6 +1,7 @@
 package com.bih.nic.MigrentJobSearch.adapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import com.bih.nic.MigrentJobSearch.Model.DepartmentWiseVacancy;
 import com.bih.nic.MigrentJobSearch.Model.JobOfferPostedEntity;
 import com.bih.nic.MigrentJobSearch.R;
+import com.bih.nic.MigrentJobSearch.ui.hq.SubDeptJobVacencyReportActivity;
 
 import java.util.ArrayList;
 
@@ -46,27 +48,17 @@ public class DeptJobVacencyAdapter extends RecyclerView.Adapter<DeptJobVacencyAd
         holder.tv_worksite.setText(info.getDeptTotalWork());
         holder.tv_vacnecy.setText(info.getDeptTotalRequirement());
 
-//        holder.tv_dise_name.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String UserRole= PreferenceManager.getDefaultSharedPreferences(activity).getString("UserRole", "");
-//                if (UserRole.equals("HQ")){
-//                    Intent intent = new Intent(activity, JobOffer_HQ_BlockActivity.class);
-//                    //intent.putExtra("data",Reg_No);
-//                    intent.putExtra("DistCode",info.getDistrictCode());
-//                    intent.putExtra("DistName",info.getDistrictName());
-//                    activity.startActivity(intent);
-//                }
-//                else {
-//                    Intent intent = new Intent(activity, JobOfferPosted_BlockActivity.class);
-//                    //intent.putExtra("data",Reg_No);
-//                    intent.putExtra("DistCode",info.getDistrictCode());
-//                    intent.putExtra("DistName",info.getDistrictName());
-//                    activity.startActivity(intent);
-//                }
-//
-//            }
-//        });
+        holder.tv_dept_name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    Intent intent = new Intent(activity,SubDeptJobVacencyReportActivity.class);
+                    //intent.putExtra("data",Reg_No);
+                    intent.putExtra("DeptCode",info.getDeptId());
+                    intent.putExtra("DeptName",info.getDeptName());
+                    activity.startActivity(intent);
+
+            }
+        });
 
 
     }

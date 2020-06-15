@@ -1581,8 +1581,13 @@ public class WebserviceHelper implements KvmSerializable {
                 Object property = res1.getProperty(ii);
                 if (property instanceof SoapObject) {
                     SoapObject final_object = (SoapObject) property;
-                    DepartmentWiseVacancy panchayat = new DepartmentWiseVacancy(final_object);
-                    pvmArrayList.add(panchayat);
+                    if(status.equalsIgnoreCase("ShowRec")) {
+                        DepartmentWiseVacancy panchayat = new DepartmentWiseVacancy(final_object,"1");
+                        pvmArrayList.add(panchayat);
+                    }else if(status.equalsIgnoreCase("ShowOrg")) {
+                        DepartmentWiseVacancy panchayat = new DepartmentWiseVacancy(final_object,"2");
+                        pvmArrayList.add(panchayat);
+                    }
                 }
             } else
                 return pvmArrayList;
@@ -1590,7 +1595,6 @@ public class WebserviceHelper implements KvmSerializable {
 
         return pvmArrayList;
     }
-
     public static ArrayList<BlockJobOfferPostedEntity> BlockJobOfferPosted(String distid,String orgid,String role) {
 
         SoapObject request = new SoapObject(SERVICENAMESPACE, GET_JOB_Offer_block_Posted_METHOD);
