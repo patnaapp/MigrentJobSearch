@@ -55,6 +55,7 @@ public class DeptJobVacencyAdapter extends RecyclerView.Adapter<DeptJobVacencyAd
                     //intent.putExtra("data",Reg_No);
                     intent.putExtra("DeptCode",info.getDeptId());
                     intent.putExtra("DeptName",info.getDeptName());
+                    intent.putExtra("DeptName",info.getDeptName());
                     activity.startActivity(intent);
 
             }
