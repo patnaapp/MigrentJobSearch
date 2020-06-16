@@ -168,8 +168,8 @@
                 android:textSize="13sp"
                 android:textStyle="normal" />
             <EditText
-                android:maxLength="2"
-                android:inputType="number"
+                android:maxLength="100"
+                android:inputType="textCapWords"
                 android:id="@+id/edt_p_remarks"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
