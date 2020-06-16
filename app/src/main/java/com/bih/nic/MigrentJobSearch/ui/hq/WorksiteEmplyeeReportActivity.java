@@ -166,8 +166,7 @@ public class WorksiteEmplyeeReportActivity extends Activity implements AdapterVi
 
     public void populateData()
     {
-        if(data != null && data.size()> 0)
-        {
+        if(data != null && data.size()> 0){
             Log.e("data", ""+data.size());
             // tv_Norecord.setVisibility(View.GONE);
             ll_content.setVisibility(View.VISIBLE);

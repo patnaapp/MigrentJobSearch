@@ -25,6 +25,12 @@ public class WorkSiteEmployeeReportEntity implements KvmSerializable, Serializab
     private String supervisor_nm_hn="";
     private String supervisor_mob="";
 
+    private String Location="";
+    private String ContactPerson="";
+    private String Designaton="";
+    private String CPMobileNo="";
+    private String SubSkillName="";
+
 
     public WorkSiteEmployeeReportEntity() {
 
@@ -32,19 +38,31 @@ public class WorkSiteEmployeeReportEntity implements KvmSerializable, Serializab
 
     public WorkSiteEmployeeReportEntity(SoapObject res1, String status)
     {
-
-        this.WorksRegId=res1.getProperty("WorksRegId").toString();
-        this.WorksId=res1.getProperty("WorksId").toString();
         this.WorkSiteName=res1.getProperty("WorkSiteName").toString();
-        this.SkillCategory=res1.getProperty("SkillCategory").toString();
         this.SkillName=res1.getProperty("SkillName").toString();
         this.NoOfPerson=res1.getProperty("NoOfPerson").toString();
-        this.ttlReg=res1.getProperty("ttlReg").toString();
-        this.TotalJobOffer=res1.getProperty("TotalJobOffer").toString();
-        this.ttlRegA=res1.getProperty("ttlRegA").toString();
-        this.ttlRegR=res1.getProperty("ttlRegR").toString();
-        this.ttlPendinAppoint=res1.getProperty("ttlPendinAppoint").toString();
-        this.ttlAppointed=res1.getProperty("ttlAppointed").toString();
+
+        switch (status){
+            case "Detail":
+                this.WorksRegId=res1.getProperty("WorksRegId").toString();
+                this.WorksId=res1.getProperty("WorksId").toString();
+                this.SkillCategory=res1.getProperty("SkillCategory").toString();
+                this.ttlReg=res1.getProperty("ttlReg").toString();
+                this.TotalJobOffer=res1.getProperty("TotalJobOffer").toString();
+                this.ttlRegA=res1.getProperty("ttlRegA").toString();
+                this.ttlRegR=res1.getProperty("ttlRegR").toString();
+                this.ttlPendinAppoint=res1.getProperty("ttlPendinAppoint").toString();
+                this.ttlAppointed=res1.getProperty("ttlAppointed").toString();
+                break;
+            case "ShwNuP":
+                this.Location=res1.getProperty("Location").toString();
+                this.ContactPerson=res1.getProperty("ContactPerson").toString();
+                this.Designaton=res1.getProperty("Designaton").toString();
+                this.CPMobileNo=res1.getProperty("CPMobileNo").toString();
+                this.SubSkillName=res1.getProperty("SubSkillName").toString();
+                break;
+        }
+
 
     }
 
@@ -66,6 +84,46 @@ public class WorkSiteEmployeeReportEntity implements KvmSerializable, Serializab
     @Override
     public void getPropertyInfo(int index, Hashtable properties, PropertyInfo info) {
 
+    }
+
+    public String getLocation() {
+        return Location;
+    }
+
+    public void setLocation(String location) {
+        Location = location;
+    }
+
+    public String getContactPerson() {
+        return ContactPerson;
+    }
+
+    public void setContactPerson(String contactPerson) {
+        ContactPerson = contactPerson;
+    }
+
+    public String getDesignaton() {
+        return Designaton;
+    }
+
+    public void setDesignaton(String designaton) {
+        Designaton = designaton;
+    }
+
+    public String getCPMobileNo() {
+        return CPMobileNo;
+    }
+
+    public void setCPMobileNo(String CPMobileNo) {
+        this.CPMobileNo = CPMobileNo;
+    }
+
+    public String getSubSkillName() {
+        return SubSkillName;
+    }
+
+    public void setSubSkillName(String subSkillName) {
+        SubSkillName = subSkillName;
     }
 
     public String getWorksRegId() {

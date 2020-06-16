@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bih.nic.MigrentJobSearch.Model.DepartmentWiseVacancy;
 import com.bih.nic.MigrentJobSearch.Model.WorkSiteEmployeeReportEntity;
@@ -106,8 +108,9 @@ public class WorksiteEmployeeReportAdapter extends RecyclerView.Adapter<Worksite
     }
 
     public void onShowReport(String status, WorkSiteEmployeeReportEntity info){
+        Log.e("status-WorkId-RegId", distCode+"-"+status+"-"+info.getWorksId()+"-"+info.getWorksRegId());
+
         Intent intent = new Intent(activity, WorksiteEmployeeLegacyActivity.class);
-        //intent.putExtra("data",Reg_No);
         intent.putExtra("status",status);
         intent.putExtra("DistCode",distCode);
         intent.putExtra("blockCode",blockCode);
@@ -136,15 +139,12 @@ public class WorksiteEmployeeReportAdapter extends RecyclerView.Adapter<Worksite
             tv_accpted=itemView.findViewById(R.id.tv_accpted);
             tv_rejected=itemView.findViewById(R.id.tv_rejected);
             tv_appointed=itemView.findViewById(R.id.tv_appointed);
-
-
         }
 
         @Override
         public void onClick(View v) {
 
         }
-
     }
 
 
