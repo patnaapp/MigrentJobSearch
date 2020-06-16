@@ -19,13 +19,14 @@ import com.bih.nic.MigrentJobSearch.OfficeReport.DistricWise;
 import com.bih.nic.MigrentJobSearch.R;
 import com.bih.nic.MigrentJobSearch.Utiilties;
 import com.bih.nic.MigrentJobSearch.ui.MultiLoginActivity;
+import com.bih.nic.MigrentJobSearch.ui.dept.ApproveRejectWorkSite_activity;
 
 public class HqHomeActivity extends Activity {
 
     DataBaseHelper dataBaseHelper;
     SQLiteDatabase db;
     TextView tv_email,tv_dept_name,tv_version;
-    LinearLayout ll_first,ll_username;
+    LinearLayout ll_first,ll_username,aprove_rjct_worksite;
     String OrgId="",user_name="",lvlthree_id="", mobile="", address="", DistName="", ProfileImg="",CompanyName="", UserId,UserRole="",Block_Code="",lvlone_id="",lvltwo_id="";
 
     @Override
@@ -40,6 +41,7 @@ public class HqHomeActivity extends Activity {
         tv_email=findViewById(R.id.tv_email);
         tv_dept_name=findViewById(R.id.tv_dept_name);
         ll_first=findViewById(R.id.ll_first);
+        aprove_rjct_worksite=findViewById(R.id.aprove_rjct_worksite);
         ll_username=findViewById(R.id.ll_username);
         tv_version=(TextView) findViewById(R.id.tv_version);
 
@@ -65,9 +67,11 @@ public class HqHomeActivity extends Activity {
         if(UserRole.equals("ORGADM")){
             ll_first.setVisibility(View.GONE);
             ll_username.setVisibility(View.VISIBLE);
+            aprove_rjct_worksite.setVisibility(View.VISIBLE);
             tv_dept_name.setText(username);
         }else{
             ll_username.setVisibility(View.GONE);
+            aprove_rjct_worksite.setVisibility(View.GONE);
         }
     }
 
@@ -147,6 +151,11 @@ public class HqHomeActivity extends Activity {
 
     public void onViewWorkOrgDetail(View view){
         Intent intent = new Intent(this, WorksiteEmplyeeReportActivity.class);
+        startActivity(intent);
+    }
+
+    public void onApproveWorkSite(View view){
+        Intent intent = new Intent(this, ApproveRejectWorkSite_activity.class);
         startActivity(intent);
     }
 }
