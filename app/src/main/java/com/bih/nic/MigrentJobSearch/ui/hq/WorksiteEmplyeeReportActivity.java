@@ -19,10 +19,12 @@ import com.bih.nic.MigrentJobSearch.DataBaseHelper.DataBaseHelper;
 import com.bih.nic.MigrentJobSearch.Model.BlockWeb;
 import com.bih.nic.MigrentJobSearch.Model.DepartmentWiseVacancy;
 import com.bih.nic.MigrentJobSearch.Model.District;
+import com.bih.nic.MigrentJobSearch.Model.WorkSiteEmployeeReportEntity;
 import com.bih.nic.MigrentJobSearch.R;
 import com.bih.nic.MigrentJobSearch.Utiilties;
 import com.bih.nic.MigrentJobSearch.WebserviceHelper;
 import com.bih.nic.MigrentJobSearch.adapter.DeptJobVacencyAdapter;
+import com.bih.nic.MigrentJobSearch.adapter.WorksiteEmployeeReportAdapter;
 
 import java.util.ArrayList;
 
@@ -33,8 +35,8 @@ public class WorksiteEmplyeeReportActivity extends Activity implements AdapterVi
     Spinner sp_district,sp_block;
     LinearLayout ll_content;
 
-    DeptJobVacencyAdapter adaptor_showedit_listDetail;
-    ArrayList<DepartmentWiseVacancy> data;
+    WorksiteEmployeeReportAdapter adaptor_showedit_listDetail;
+    ArrayList<WorkSiteEmployeeReportEntity> data;
     ArrayList<District>DistrictList=new ArrayList<>();
     ArrayList<BlockWeb>BlockList=new ArrayList<>();
 
@@ -114,6 +116,7 @@ public class WorksiteEmplyeeReportActivity extends Activity implements AdapterVi
                 if(position > 0){
                     DistrictCode = DistrictList.get(position - 1).get_DistCode();
                     loadBlockSpinnerData(DistrictCode);
+                    new SyncWorksiteEmployeeData().execute();
                 }
                 break;
             case R.id.sp_block:
@@ -132,7 +135,7 @@ public class WorksiteEmplyeeReportActivity extends Activity implements AdapterVi
 
     }
 
-    private class SyncDepartmentWiseVacancyData extends AsyncTask<String, Void, ArrayList<DepartmentWiseVacancy>> {
+    private class SyncWorksiteEmployeeData extends AsyncTask<String, Void, ArrayList<WorkSiteEmployeeReportEntity>> {
         private final ProgressDialog dialog = new ProgressDialog(WorksiteEmplyeeReportActivity.this);
         int optionType;
 
@@ -144,12 +147,12 @@ public class WorksiteEmplyeeReportActivity extends Activity implements AdapterVi
         }
 
         @Override
-        protected ArrayList<DepartmentWiseVacancy> doInBackground(String...arg) {
-            return WebserviceHelper.getDeptWiseVacencyReport("ShowRec", "0");
+        protected ArrayList<WorkSiteEmployeeReportEntity> doInBackground(String...arg) {
+            return WebserviceHelper.getWorksiteEmployeeReport("Detail", DistrictCode, BlockCode,"","","" );
         }
 
         @Override
-        protected void onPostExecute(ArrayList<DepartmentWiseVacancy> result) {
+        protected void onPostExecute(ArrayList<WorkSiteEmployeeReportEntity> result) {
             if (this.dialog.isShowing()) {
                 this.dialog.dismiss();
             }
@@ -168,7 +171,7 @@ public class WorksiteEmplyeeReportActivity extends Activity implements AdapterVi
             Log.e("data", ""+data.size());
             // tv_Norecord.setVisibility(View.GONE);
             ll_content.setVisibility(View.VISIBLE);
-            adaptor_showedit_listDetail = new DeptJobVacencyAdapter(this, data, "0");
+            adaptor_showedit_listDetail = new WorksiteEmployeeReportAdapter(this, data, "0");
             listView.setLayoutManager(new LinearLayoutManager(this));
             listView.setAdapter(adaptor_showedit_listDetail);
         }

@@ -26,6 +26,7 @@ import com.bih.nic.MigrentJobSearch.Model.UserDetails;
 import com.bih.nic.MigrentJobSearch.Model.Versioninfo;
 import com.bih.nic.MigrentJobSearch.Model.WorkDetailsEntity;
 import com.bih.nic.MigrentJobSearch.Model.WorkRequirementsEntity;
+import com.bih.nic.MigrentJobSearch.Model.WorkSiteEmployeeReportEntity;
 import com.bih.nic.MigrentJobSearch.Model.WorkerModel;
 import com.bih.nic.MigrentJobSearch.Model.WrkReqApprovalDetailsEntity;
 import com.bih.nic.MigrentJobSearch.Model.panchayat;
@@ -105,6 +106,7 @@ public class WebserviceHelper implements KvmSerializable {
     private static final String GET_JOB_Offer_Posted_METHOD="GetJobOfferOrg";
     private static final String GET_Work_Details_Approval="BenApprovalbyOrgAdm";
     private static final String GET_DEPT_WISE_VACENCY_METHOD="rpt_DepartmentWiseVacancy";
+    private static final String GET_WORKSITE_EMPLOYEE="WorkEmployeeDtls";
     private static final String GET_JOB_Offer_Posted_HQ="GetJobOfferOrg";
     private static final String GET_JOB_Offer_block_Posted_METHOD="GetJobOfferBlockwise";
     private static final String GET_Acpt_Rjct_Job_By_Labour="GetJobOfferLabourDetails";
@@ -1543,6 +1545,58 @@ public class WebserviceHelper implements KvmSerializable {
                 return pvmArrayList;
         }
 
+
+        return pvmArrayList;
+    }
+
+    public static ArrayList<WorkSiteEmployeeReportEntity> getWorksiteEmployeeReport(String status, String districtCode, String blockCode, String deptId, String workId, String workRegId) {
+
+
+        SoapObject request = new SoapObject(SERVICENAMESPACE, GET_WORKSITE_EMPLOYEE);
+
+        request.addProperty("Status", status);
+        request.addProperty("DistCode", districtCode);
+        request.addProperty("blockCode", blockCode);
+        request.addProperty("orgId", deptId);
+        request.addProperty("WorkId", workId);
+        request.addProperty("WorksRegId", workRegId);
+
+        SoapObject res1;
+        try {
+
+            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
+                    SoapEnvelope.VER11);
+            envelope.dotNet = true;
+            envelope.setOutputSoapObject(request);
+
+            envelope.addMapping(SERVICENAMESPACE, JobOfferPostedEntity.JobOffer_CLASS.getSimpleName(), JobOfferPostedEntity.JobOffer_CLASS);
+
+            HttpTransportSE androidHttpTransport = new HttpTransportSE(
+                    SERVICEURL);
+            androidHttpTransport.call(SERVICENAMESPACE + GET_WORKSITE_EMPLOYEE,
+                    envelope);
+
+            res1 = (SoapObject) envelope.getResponse();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        int TotalProperty = res1.getPropertyCount();
+
+        ArrayList<WorkSiteEmployeeReportEntity> pvmArrayList = new ArrayList();
+
+        for (int ii = 0; ii < TotalProperty; ii++) {
+            if (res1.getProperty(ii) != null) {
+                Object property = res1.getProperty(ii);
+                if (property instanceof SoapObject) {
+                    SoapObject final_object = (SoapObject) property;
+                    WorkSiteEmployeeReportEntity result = new WorkSiteEmployeeReportEntity(final_object, status);
+                    pvmArrayList.add(result);
+                }
+            } else
+                return pvmArrayList;
+        }
 
         return pvmArrayList;
     }

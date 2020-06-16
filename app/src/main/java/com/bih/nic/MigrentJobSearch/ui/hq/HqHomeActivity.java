@@ -34,7 +34,6 @@ public class HqHomeActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hq_home);
 
-
        // getActionBar().hide();
         Utiilties.setStatusBarColor(this);
         dataBaseHelper=new DataBaseHelper(HqHomeActivity.this);
