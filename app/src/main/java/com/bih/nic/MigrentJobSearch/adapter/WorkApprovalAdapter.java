@@ -52,6 +52,7 @@ public class WorkApprovalAdapter extends RecyclerView.Adapter<WorkApprovalAdapte
         final ApproveWorkSiteEntity info = ThrList.get(position);
 
         dataBaseHelper = new DataBaseHelper(activity);
+
         holder.tv_slno.setText(String.valueOf(position+1));
 
         holder.tv_block.setText(info.getBlockName());
