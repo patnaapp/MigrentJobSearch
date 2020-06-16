@@ -135,7 +135,7 @@
             <Spinner
                 android:background="@drawable/spinner_bg"
                 style="@style/spinner"
-                android:id="@+id/spn_district"
+                android:id="@+id/spn_remarks"
                 android:layout_width="fill_parent"
                 android:layout_height="45dp"
                 android:layout_marginLeft="10dp"
@@ -145,6 +145,37 @@
                 android:textColor="#222222"
                 android:textSize="14sp"
                 android:textStyle="bold" />
+        </LinearLayout>
+        <LinearLayout
+            android:visibility="visible"
+            android:layout_weight="1"
+            android:id="@+id/lin_p_remarks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:orientation="vertical"
+            android:paddingTop="0dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/tv_p_remarks"
+                android:layout_marginStart="10dp"
+                android:text="Permanent Rejection Remarks :"
+                android:textColor="#222222"
+                android:textSize="13sp"
+                android:textStyle="normal" />
+            <EditText
+                android:maxLength="2"
+                android:inputType="number"
+                android:id="@+id/edt_p_remarks"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/edittext_box" />
         </LinearLayout>
         <LinearLayout
             android:visibility="visible"
@@ -164,6 +195,7 @@
                 android:layout_weight="1"
                 android:textColor="@color/color_white"
                 android:textStyle="bold"
+                android:onClick="onApprove"
                 android:textSize="15sp"
                 android:background="@drawable/buttonshapeaccept"
                 android:text="Approve" />
@@ -177,6 +209,7 @@
                 android:text="Reject"
                 android:textColor="@color/color_white"
                 android:textStyle="bold"
+                android:onClick="onReject"
                 android:textSize="15sp"
                 android:background="@drawable/buttonbackshape1"
                 />
@@ -190,6 +223,7 @@
                 android:text="Permanent Reject"
                 android:textColor="@color/color_white"
                 android:textStyle="bold"
+                android:onClick="onP_Reject"
                 android:textSize="15sp"
                 android:background="@drawable/buttonbackshape1"
                 />

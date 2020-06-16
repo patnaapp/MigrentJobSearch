@@ -160,7 +160,6 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
         switch (item.getItemId()){
             case android.R.id.home:
                 //finish activity once user presses back button
-
                 finish();
                 return true;
 

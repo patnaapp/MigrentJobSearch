@@ -1,26 +1,36 @@
 package com.bih.nic.MigrentJobSearch.ui.dept;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bih.nic.MigrentJobSearch.Login;
 import com.bih.nic.MigrentJobSearch.Model.BlkCompanyJobDetailsEntity;
+import com.bih.nic.MigrentJobSearch.Model.DefaultResponse;
 import com.bih.nic.MigrentJobSearch.Model.WrkReqApprovalDetailsEntity;
 import com.bih.nic.MigrentJobSearch.R;
 import com.bih.nic.MigrentJobSearch.Utiilties;
 import com.bih.nic.MigrentJobSearch.WebserviceHelper;
+import com.bih.nic.MigrentJobSearch.ui.labour.RequestOtpActivity;
 import com.levitnudi.legacytableview.LegacyTableView;
 
 import java.util.ArrayList;
@@ -42,8 +52,14 @@ public class WorkRequirementApproval_Activity extends Activity implements Adapte
     ImageView img_back,btn_previous,btn_next;
     String work_id="",a_Id="";
     CheckBox chk_approve,chk_reject;
-    LinearLayout lin_remarks,ll_btn;
+    LinearLayout lin_remarks,ll_btn,lin_p_remarks;
     Button btn_accpt,btn_rjct,btn_permannet_rjct;
+    String ben_type_aangan[] = {"-select-","Unauthorised Work Site","Other"};
+    String Remarksr_Name="",Remarks_Code="";
+    ArrayAdapter ben_type_aangan_aaray;
+    Spinner spn_remarks;
+    EditText edt_p_remarks;
+    String VerifyType="";
 
 
     @Override
@@ -56,11 +72,14 @@ public class WorkRequirementApproval_Activity extends Activity implements Adapte
         getActionBar().hide();
         initialisation();
         ll_btn.setVisibility(View.GONE);
+        lin_p_remarks.setVisibility(View.GONE);
         lin_remarks.setVisibility(View.GONE);
         work_id = getIntent().getStringExtra("worksid");
         work_site = getIntent().getStringExtra("worksite");
         // status = getIntent().getStringExtra("StatusFlag");
         a_Id = getIntent().getStringExtra("a_ID");
+        UserId=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserId", "");
+
 
 
         tv_skill11.setText("Work Requirment Details");
@@ -93,6 +112,7 @@ public class WorkRequirementApproval_Activity extends Activity implements Adapte
                     chk_reject.setChecked(false);
                     ll_btn.setVisibility(View.VISIBLE);
                     btn_accpt.setVisibility(View.VISIBLE);
+                    lin_p_remarks.setVisibility(View.GONE);
                     lin_remarks.setVisibility(View.GONE);
                     btn_rjct.setVisibility(View.GONE);
                     btn_permannet_rjct.setVisibility(View.GONE);
@@ -112,6 +132,37 @@ public class WorkRequirementApproval_Activity extends Activity implements Adapte
                     btn_permannet_rjct.setVisibility(View.VISIBLE);
                 }
             }
+        });
+
+        spn_remarks.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Log.e("arg2",""+position);
+                if (position > 0) {
+                    Remarksr_Name = ben_type_aangan[position].toString();
+
+                    if (Remarksr_Name.equals("Unauthorised Work Site")) {
+
+                        Remarks_Code = "1";
+                        lin_p_remarks.setVisibility(View.GONE);
+                    } else if (Remarksr_Name.equals("Other")) {
+
+                        Remarks_Code = "5";
+                        lin_p_remarks.setVisibility(View.VISIBLE);
+                    }
+
+
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // TODO Auto-generated method stub
+
+            }
+
         });
 
     }
@@ -210,7 +261,7 @@ public class WorkRequirementApproval_Activity extends Activity implements Adapte
             }
             else
             {
-               // tv_Norecord_accpt.setVisibility(View.VISIBLE);
+                // tv_Norecord_accpt.setVisibility(View.VISIBLE);
             }
 
         }
@@ -227,8 +278,181 @@ public class WorkRequirementApproval_Activity extends Activity implements Adapte
         chk_reject=(CheckBox) findViewById(R.id.chk_reject);
         lin_remarks=(LinearLayout) findViewById(R.id.lin_remarks);
         ll_btn=(LinearLayout) findViewById(R.id.ll_btn);
+        lin_p_remarks=(LinearLayout) findViewById(R.id.lin_p_remarks);
         btn_accpt=(Button) findViewById(R.id.btn_accpt);
         btn_rjct=(Button) findViewById(R.id.btn_rjct);
         btn_permannet_rjct=(Button) findViewById(R.id.btn_permannet_rjct);
+        spn_remarks=(Spinner) findViewById(R.id.spn_remarks);
+        edt_p_remarks=(EditText) findViewById(R.id.edt_p_remarks);
+
+        ben_type_aangan_aaray = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, ben_type_aangan);
+        spn_remarks.setAdapter(ben_type_aangan_aaray);
+    }
+
+    public void onApprove(View view){
+        VerifyType="ACCP";
+        if(Utiilties.isOnline(getApplicationContext())) {
+            new UpdateWorksiteApproval().execute();
+        }else {
+            Utiilties.internetNotAvailableDialog(WorkRequirementApproval_Activity.this);
+        }
+    }
+
+    public void onReject(View view)
+    {
+        VerifyType="RJCT";
+        if (Remarks_Code.equals("")){
+            Toast.makeText(WorkRequirementApproval_Activity.this,"Please select remarks",Toast.LENGTH_SHORT).show();
+        }
+        else {
+            if (Remarks_Code.equals("1")){
+                if(Utiilties.isOnline(getApplicationContext())) {
+                    new UpdateWorksiteApproval().execute();
+                }else {
+                    Utiilties.internetNotAvailableDialog(WorkRequirementApproval_Activity.this);
+                }
+            }
+            else if (Remarks_Code.equals("5"))  {
+                String other_remarks=edt_p_remarks.getText().toString();
+                if (other_remarks.equals("")){
+                    Toast.makeText(WorkRequirementApproval_Activity.this,"Please enter remarks",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    if(Utiilties.isOnline(getApplicationContext())) {
+                        new UpdateWorksiteApproval().execute();
+                    }else {
+                        Utiilties.internetNotAvailableDialog(WorkRequirementApproval_Activity.this);
+                    }
+                }
+
+            }
+        }
+    }
+
+    public void onP_Reject(View view){
+        VerifyType="PRJCT";
+        if (Remarks_Code.equals("")){
+            Toast.makeText(WorkRequirementApproval_Activity.this,"Please select remarks",Toast.LENGTH_SHORT).show();
+        }
+        else {
+            if (Remarks_Code.equals("1")){
+                if(Utiilties.isOnline(getApplicationContext())) {
+                    new UpdateWorksiteApproval().execute();
+                }else {
+                    Utiilties.internetNotAvailableDialog(WorkRequirementApproval_Activity.this);
+                }
+            }
+            else if (Remarks_Code.equals("5"))  {
+                String other_remarks=edt_p_remarks.getText().toString();
+                if (other_remarks.equals("")){
+                    Toast.makeText(WorkRequirementApproval_Activity.this,"Please enter remarks",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    if(Utiilties.isOnline(getApplicationContext())) {
+                        new UpdateWorksiteApproval().execute();
+                    }else {
+                        Utiilties.internetNotAvailableDialog(WorkRequirementApproval_Activity.this);
+                    }
+                }
+
+            }
+        }
+    }
+
+
+
+    private class UpdateWorksiteApproval extends AsyncTask<String, Void, DefaultResponse> {
+        DefaultResponse data;
+        String _uid;
+        private final ProgressDialog dialog = new ProgressDialog(WorkRequirementApproval_Activity.this);
+        private final AlertDialog alertDialog = new AlertDialog.Builder(WorkRequirementApproval_Activity.this).create();
+
+
+        @Override
+        protected void onPreExecute() {
+
+            this.dialog.setCanceledOnTouchOutside(false);
+            this.dialog.setMessage("UpLoading...");
+            if (!WorkRequirementApproval_Activity.this.isFinishing()) {
+                this.dialog.show();
+            }
+        }
+
+        @Override
+        protected DefaultResponse doInBackground(String... param) {
+
+            return WebserviceHelper.WorksiteApprove(work_id,UserId,VerifyType,Remarks_Code,edt_p_remarks.getText().toString());
+
+        }
+
+        @Override
+        protected void onPostExecute(DefaultResponse result) {
+            if (this.dialog.isShowing()) {
+                this.dialog.dismiss();
+            }
+            Log.d("Responsevalue", "" + result);
+            if (result != null) {
+
+
+
+                if (result.getStatus()==true) {
+
+
+                    AlertDialog.Builder ab = new AlertDialog.Builder(WorkRequirementApproval_Activity.this);
+                    ab.setCancelable(false);
+                    ab.setTitle("Successful");
+                    //ab.setIcon(R.drawable.labour1);
+                    ab.setMessage(result.getMessage());
+                    ab.setPositiveButton("[OK]", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            Intent intent = new Intent(getBaseContext(), Login.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                            //setFinishOnTouchOutside(false);
+                            finish();
+                            dialog.dismiss();
+                        }
+                    });
+
+                    ab.create().getWindow().getAttributes().windowAnimations = R.style.alert_animation;
+                    ab.show();
+
+
+                }
+                else  if (result.getStatus()==false){
+                    // Toast.makeText(getApplicationContext(), "Uploading data failed ", Toast.LENGTH_SHORT).show();
+
+
+                    AlertDialog.Builder ab = new AlertDialog.Builder(WorkRequirementApproval_Activity.this);
+                    ab.setCancelable(false);
+                    ab.setTitle("Failed");
+                    //  ab.setIcon(R.drawable.labour1);
+                    ab.setMessage(result.getMessage());
+                    ab.setPositiveButton("[OK]", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            Intent intent = new Intent(getBaseContext(),Login.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                            //setFinishOnTouchOutside(false);
+                            finish();
+                            dialog.dismiss();
+                        }
+                    });
+
+                    ab.create().getWindow().getAttributes().windowAnimations = R.style.alert_animation;
+                    ab.show();
+
+
+
+                }
+
+            } else {
+                //chk_msg_OK_networkdata("Uploading failed.Please Try Again Later");
+                Toast.makeText(getApplicationContext(), "Result Null..Please Try Later", Toast.LENGTH_SHORT).show();
+            }
+
+        }
     }
 }

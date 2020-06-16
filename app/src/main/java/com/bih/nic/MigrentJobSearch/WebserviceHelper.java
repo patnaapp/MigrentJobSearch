@@ -62,6 +62,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.sql.Struct;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
@@ -142,6 +143,7 @@ public class WebserviceHelper implements KvmSerializable {
     public static final  String REGISTRATION_EMP_MOB_METHOD = "OrgsendOtp";
     public static final  String ConsolidatedRptForStatus = "ConsolidatedRptForStatus";
     public static final  String ConsolidatedRptForDistWiseBlockStatus = "ConsolidatedRptForDistWiseBlockStatus";
+    public static final  String Approve_Work_Site = "BenApprovalbyOrgAdmUpdate";
     static String rest;
 
 
@@ -2492,5 +2494,44 @@ public class WebserviceHelper implements KvmSerializable {
 
 
         return pvmArrayList;
+    }
+
+
+    public static DefaultResponse WorksiteApprove(String wrkid, String userid, String verifytype,String remarks,String premarks)
+    {
+
+        SoapObject request = new SoapObject(SERVICENAMESPACE, Approve_Work_Site);
+
+        request.addProperty("_Worksid",wrkid);
+        request.addProperty("_verifiedBY", userid);
+        request.addProperty("_VerifyType", verifytype);
+        request.addProperty("_RejectionRemaks", remarks);
+        request.addProperty("_VerifiedRemarksType", premarks);
+
+
+        DefaultResponse userDetails;
+        SoapObject res1;
+        try {
+
+            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+            envelope.dotNet = true;
+            envelope.setOutputSoapObject(request);
+            envelope.addMapping(SERVICENAMESPACE, DefaultResponse.DefaultResponse_CLASS.getSimpleName(), DefaultResponse.DefaultResponse_CLASS);
+            HttpTransportSE androidHttpTransport = new HttpTransportSE(SERVICEURL);
+            androidHttpTransport.call(SERVICENAMESPACE + Approve_Work_Site, envelope);
+
+            res1 = (SoapObject) envelope.getResponse();
+
+            int TotalProperty = res1.getPropertyCount();
+
+            userDetails = new DefaultResponse(res1);
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return userDetails;
+
     }
 }
