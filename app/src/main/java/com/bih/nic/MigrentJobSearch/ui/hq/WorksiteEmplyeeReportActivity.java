@@ -171,7 +171,7 @@ public class WorksiteEmplyeeReportActivity extends Activity implements AdapterVi
             Log.e("data", ""+data.size());
             // tv_Norecord.setVisibility(View.GONE);
             ll_content.setVisibility(View.VISIBLE);
-            adaptor_showedit_listDetail = new WorksiteEmployeeReportAdapter(this, data, "0");
+            adaptor_showedit_listDetail = new WorksiteEmployeeReportAdapter(this, data, DistrictCode, BlockCode);
             listView.setLayoutManager(new LinearLayoutManager(this));
             listView.setAdapter(adaptor_showedit_listDetail);
         }
