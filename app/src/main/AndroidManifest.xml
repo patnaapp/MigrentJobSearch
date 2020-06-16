@@ -65,7 +65,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.dept.ApproveRejectWorkSite_activity"></activity>
+        <activity android:name=".ui.hq.WorksiteEmployeeLegacyActivity"></activity>
+        <activity android:name=".ui.dept.ApproveRejectWorkSite_activity" />
         <activity
             android:name=".ui.hq.WorksiteEmplyeeReportActivity"
             android:theme="@style/NoActionBar" />

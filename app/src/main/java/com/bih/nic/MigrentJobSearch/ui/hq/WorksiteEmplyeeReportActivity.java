@@ -125,7 +125,7 @@ public class WorksiteEmplyeeReportActivity extends Activity implements AdapterVi
                 }else{
                     BlockCode = "0";
                 }
-
+                new SyncWorksiteEmployeeData().execute();
                 break;
         }
     }
@@ -178,7 +178,6 @@ public class WorksiteEmplyeeReportActivity extends Activity implements AdapterVi
         else
         {
             ll_content.setVisibility(View.GONE);
-            //   tv_Norecord.setVisibility(View.VISIBLE);
         }
     }
 }

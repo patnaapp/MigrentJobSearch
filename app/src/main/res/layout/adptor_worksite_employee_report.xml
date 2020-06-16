@@ -33,7 +33,7 @@
                     android:layout_weight="0.4"
                     android:gravity="center"
                     android:text="Sl. No"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/black"
                     android:textStyle="normal">
 
                 </TextView>
@@ -63,7 +63,7 @@
                 <TextView
                     android:layout_gravity="center"
                     android:id="@+id/tv_skillname"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/black"
                     android:textStyle="normal"
                     android:gravity="center"
                     android:layout_width="0dp"
@@ -78,7 +78,7 @@
                 <TextView
                     android:layout_gravity="center"
                     android:id="@+id/tv_sub_skillname"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/black"
                     android:textStyle="normal"
                     android:gravity="center"
                     android:layout_width="0dp"
@@ -94,7 +94,7 @@
                 <TextView
                     android:layout_gravity="center"
                     android:id="@+id/tv_no_perosn"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/colorClickable"
                     android:textStyle="normal"
                     android:gravity="center"
                     android:layout_width="0dp"
@@ -110,7 +110,7 @@
                 <TextView
                     android:layout_gravity="center"
                     android:id="@+id/tv_offered"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/colorClickable"
                     android:textStyle="normal"
                     android:gravity="center"
                     android:layout_width="0dp"
@@ -126,7 +126,7 @@
                 <TextView
                     android:layout_gravity="center"
                     android:id="@+id/tv_accpted"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/colorClickable"
                     android:textStyle="normal"
                     android:gravity="center"
                     android:layout_width="0dp"
@@ -142,7 +142,7 @@
                 <TextView
                     android:layout_gravity="center"
                     android:id="@+id/tv_rejected"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/colorClickable"
                     android:textStyle="normal"
                     android:gravity="center"
                     android:layout_width="0dp"
@@ -158,7 +158,7 @@
                 <TextView
                     android:layout_gravity="center"
                     android:id="@+id/tv_appointed"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/colorClickable"
                     android:textStyle="normal"
                     android:gravity="center"
                     android:layout_width="0dp"

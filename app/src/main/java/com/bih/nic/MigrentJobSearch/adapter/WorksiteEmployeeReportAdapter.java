@@ -16,6 +16,7 @@ import com.bih.nic.MigrentJobSearch.Model.DepartmentWiseVacancy;
 import com.bih.nic.MigrentJobSearch.Model.WorkSiteEmployeeReportEntity;
 import com.bih.nic.MigrentJobSearch.R;
 import com.bih.nic.MigrentJobSearch.ui.hq.SubDeptJobVacencyReportActivity;
+import com.bih.nic.MigrentJobSearch.ui.hq.WorksiteEmployeeLegacyActivity;
 
 import java.util.ArrayList;
 
@@ -24,13 +25,14 @@ public class WorksiteEmployeeReportAdapter extends RecyclerView.Adapter<Worksite
     Activity activity;
     LayoutInflater mInflater;
     ArrayList<WorkSiteEmployeeReportEntity> ThrList=new ArrayList<>();
-    String regNo;
+    String distCode,blockCode;
 
-    public WorksiteEmployeeReportAdapter(Activity listViewshowedit, ArrayList<WorkSiteEmployeeReportEntity> rlist, String regNo) {
+    public WorksiteEmployeeReportAdapter(Activity listViewshowedit, ArrayList<WorkSiteEmployeeReportEntity> rlist, String distCode, String blockCode) {
         this.activity=listViewshowedit;
         this.ThrList=rlist;
         mInflater = (LayoutInflater)activity.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-        this.regNo = regNo;
+        this.distCode = distCode;
+        this.blockCode = blockCode;
     }
 
     @Override
@@ -53,20 +55,65 @@ public class WorksiteEmployeeReportAdapter extends RecyclerView.Adapter<Worksite
         holder.tv_rejected.setText(info.getTtlRegR());
         holder.tv_appointed.setText(info.getTtlAppointed());
 
-//        holder.tv_dept_name.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                    Intent intent = new Intent(activity,SubDeptJobVacencyReportActivity.class);
-//                    //intent.putExtra("data",Reg_No);
-//                    intent.putExtra("DeptCode",info.getDeptId());
-//                    intent.putExtra("DeptName",info.getDeptName());
-//                    intent.putExtra("DeptName",info.getDeptName());
-//                    activity.startActivity(intent);
-//
-//            }
-//        });
+        holder.tv_worksite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onShowReport("shwOrgD", info);
+            }
+        });
 
+        holder.tv_worksite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onShowReport("shwOrgD", info);
+            }
+        });
 
+        holder.tv_no_perosn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onShowReport("shwNuP", info);
+            }
+        });
+
+        holder.tv_offered.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onShowReport("JobReg", info);
+            }
+        });
+
+        holder.tv_accpted.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onShowReport("JobRegA", info);
+            }
+        });
+
+        holder.tv_rejected.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onShowReport("JobRegR", info);
+            }
+        });
+
+        holder.tv_appointed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onShowReport("shorAppted", info);
+            }
+        });
+    }
+
+    public void onShowReport(String status, WorkSiteEmployeeReportEntity info){
+        Intent intent = new Intent(activity, WorksiteEmployeeLegacyActivity.class);
+        //intent.putExtra("data",Reg_No);
+        intent.putExtra("status",status);
+        intent.putExtra("DistCode",distCode);
+        intent.putExtra("blockCode",blockCode);
+        intent.putExtra("WorkId",info.getWorksId());
+        intent.putExtra("WorksRegId",info.getWorksRegId());
+        activity.startActivity(intent);
     }
 
     @Override
