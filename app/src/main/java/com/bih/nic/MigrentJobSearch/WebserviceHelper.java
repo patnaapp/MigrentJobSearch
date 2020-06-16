@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.bih.nic.MigrentJobSearch.Model.AcptdRjctdJobOfferEntity;
+import com.bih.nic.MigrentJobSearch.Model.ApproveWorkSiteEntity;
 import com.bih.nic.MigrentJobSearch.Model.BenDetails;
 import com.bih.nic.MigrentJobSearch.Model.BlkCompanyJobDetailsEntity;
 import com.bih.nic.MigrentJobSearch.Model.BlockJobOfferPostedEntity;
@@ -84,11 +85,11 @@ public class WebserviceHelper implements KvmSerializable {
 
     private Context ctx;
 
-    public static final String SERVICENAMESPACE = "http://shramsadhan.bih.nic.in/";
-    public static final String SERVICEURL = "http://shramsadhan.bih.nic.in/MigrantJobSearchWebservice.asmx";
+//    public static final String SERVICENAMESPACE = "http://shramsadhan.bih.nic.in/";
+//    public static final String SERVICEURL = "http://shramsadhan.bih.nic.in/MigrantJobSearchWebservice.asmx";
 
-//    public static final String SERVICENAMESPACE = "http://10.133.20.159/";
-//    public static final String SERVICEURL = "http://10.133.20.159/TestService/MigrantJobSearchWebservice.asmx";
+    public static final String SERVICENAMESPACE = "http://10.133.20.159/";
+    public static final String SERVICEURL = "http://10.133.20.159/TestService/MigrantJobSearchWebservice.asmx";
 
     private static final String AuthenticateUser = "Authenticate";
     private static final String AuthenticateORGUser = "AuthenticateOrgLogin";
@@ -101,6 +102,7 @@ public class WebserviceHelper implements KvmSerializable {
     private static final String JOB_SEARCH_METHOD="JobSearchDetails1";
     private static final String GET_JOB_REQUEST_METHOD="GetJobRequest";
     private static final String GET_JOB_Offer_Posted_METHOD="GetJobOfferOrg";
+    private static final String GET_Work_Details_Approval="BenApprovalbyOrgAdm";
     private static final String GET_DEPT_WISE_VACENCY_METHOD="rpt_DepartmentWiseVacancy";
     private static final String GET_JOB_Offer_Posted_HQ="GetJobOfferOrg";
     private static final String GET_JOB_Offer_block_Posted_METHOD="GetJobOfferBlockwise";
@@ -2320,6 +2322,58 @@ public class WebserviceHelper implements KvmSerializable {
                 if (property instanceof SoapObject) {
                     SoapObject final_object = (SoapObject) property;
                     BlockJobOfferPostedEntity panchayat = new BlockJobOfferPostedEntity(final_object);
+                    pvmArrayList.add(panchayat);
+                }
+            } else
+                return pvmArrayList;
+        }
+
+
+        return pvmArrayList;
+    }
+
+
+    public static ArrayList<ApproveWorkSiteEntity> GetWorkSiteForApproval(String block, String deptid,String status) {
+
+
+        SoapObject request = new SoapObject(SERVICENAMESPACE, GET_Work_Details_Approval);
+
+        request.addProperty("_Block", block);
+        request.addProperty("_deptid", deptid);
+        request.addProperty("_Status", status);
+
+        SoapObject res1;
+        try {
+
+            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
+                    SoapEnvelope.VER11);
+            envelope.dotNet = true;
+            envelope.setOutputSoapObject(request);
+
+            envelope.addMapping(SERVICENAMESPACE, ApproveWorkSiteEntity.Approval_CLASS.getSimpleName(), ApproveWorkSiteEntity.Approval_CLASS);
+
+            HttpTransportSE androidHttpTransport = new HttpTransportSE(
+                    SERVICEURL);
+            androidHttpTransport.call(SERVICENAMESPACE + GET_Work_Details_Approval,
+                    envelope);
+
+            res1 = (SoapObject) envelope.getResponse();
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        int TotalProperty = res1.getPropertyCount();
+
+        ArrayList<ApproveWorkSiteEntity> pvmArrayList = new ArrayList<ApproveWorkSiteEntity>();
+
+        for (int ii = 0; ii < TotalProperty; ii++) {
+            if (res1.getProperty(ii) != null) {
+                Object property = res1.getProperty(ii);
+                if (property instanceof SoapObject) {
+                    SoapObject final_object = (SoapObject) property;
+                    ApproveWorkSiteEntity panchayat = new ApproveWorkSiteEntity(final_object);
                     pvmArrayList.add(panchayat);
                 }
             } else

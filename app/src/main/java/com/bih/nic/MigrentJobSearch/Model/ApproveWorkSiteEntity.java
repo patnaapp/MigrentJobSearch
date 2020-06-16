@@ -9,43 +9,73 @@ import java.util.Hashtable;
 
 public class ApproveWorkSiteEntity implements KvmSerializable, Serializable {
 
-    public static Class<ApproveWorkSiteEntity> JobOffer_CLASS = ApproveWorkSiteEntity.class;
-    private String DistrictCode = "";
+    public static Class<ApproveWorkSiteEntity> Approval_CLASS = ApproveWorkSiteEntity.class;
+    private String ComanyNameEn = "";
+    private String WorksId = "";
+    private String a_id = "";
     private String DistrictName = "";
-    private String ttlReg = "";
-    private String TotalJobOffer = "";
-    private String ttlRegA = "";
-    private String ttlRegR = "";
+    private String BlockName = "";
+    private String WorkSiteName = "";
+    private String Location = "";
+    private String PinNo = "";
+    private String EntryDate = "";
+    private String CPMobileNo = "";
+    private String BenStatus = "";
+    private String IsVerifiedOrgAdm = "";
+    private String VerifiedRemarksOrgAdm = "";
+    private String VerifiedRemarksTypeOrgAdm = "";
 
 
     public ApproveWorkSiteEntity(SoapObject obj) {
 
-        this.DistrictCode = obj.getProperty("DistrictCode").toString();
-        this.DistrictName = obj.getProperty("DistrictName").toString();
-        this.ttlReg = obj.getProperty("ttlReg").toString();
-        this.TotalJobOffer = obj.getProperty("TotalJobOffer").toString();
-        this.ttlRegA = obj.getProperty("ttlRegA").toString();
-        this.ttlRegR = obj.getProperty("ttlRegR").toString();
+        this.ComanyNameEn = obj.getProperty("ComanyNameEn").toString();
+        this.WorksId = obj.getProperty("WorksId").toString();
+        this.a_id = obj.getProperty("a_id").toString();
+        this.BlockName = obj.getProperty("BlockName").toString();
+        this.WorkSiteName = obj.getProperty("WorkSiteName").toString();
+        this.Location = obj.getProperty("Location").toString();
+        this.PinNo = obj.getProperty("PinNo").toString();
+        this.EntryDate = obj.getProperty("EntryDate").toString();
+        this.CPMobileNo = obj.getProperty("CPMobileNo").toString();
+        this.BenStatus = obj.getProperty("BenStatus").toString();
+        this.IsVerifiedOrgAdm = obj.getProperty("IsVerifiedOrgAdm").toString();
+        this.VerifiedRemarksOrgAdm = obj.getProperty("VerifiedRemarksOrgAdm").toString();
+        this.VerifiedRemarksTypeOrgAdm = obj.getProperty("VerifiedRemarksTypeOrgAdm").toString();
         //this.skillName = obj.getProperty("SkillNameHn").toString();
 
 
     }
 
-
-    public static Class<ApproveWorkSiteEntity> getJobOffer_CLASS() {
-        return JobOffer_CLASS;
+    public static Class<ApproveWorkSiteEntity> getApproval_CLASS() {
+        return Approval_CLASS;
     }
 
-    public static void setJobOffer_CLASS(Class<ApproveWorkSiteEntity> jobOffer_CLASS) {
-        JobOffer_CLASS = jobOffer_CLASS;
+    public static void setApproval_CLASS(Class<ApproveWorkSiteEntity> approval_CLASS) {
+        Approval_CLASS = approval_CLASS;
     }
 
-    public String getDistrictCode() {
-        return DistrictCode;
+    public String getComanyNameEn() {
+        return ComanyNameEn;
     }
 
-    public void setDistrictCode(String districtCode) {
-        DistrictCode = districtCode;
+    public void setComanyNameEn(String comanyNameEn) {
+        ComanyNameEn = comanyNameEn;
+    }
+
+    public String getWorksId() {
+        return WorksId;
+    }
+
+    public void setWorksId(String worksId) {
+        WorksId = worksId;
+    }
+
+    public String getA_id() {
+        return a_id;
+    }
+
+    public void setA_id(String a_id) {
+        this.a_id = a_id;
     }
 
     public String getDistrictName() {
@@ -56,36 +86,84 @@ public class ApproveWorkSiteEntity implements KvmSerializable, Serializable {
         DistrictName = districtName;
     }
 
-    public String getTtlReg() {
-        return ttlReg;
+    public String getBlockName() {
+        return BlockName;
     }
 
-    public void setTtlReg(String ttlReg) {
-        this.ttlReg = ttlReg;
+    public void setBlockName(String blockName) {
+        BlockName = blockName;
     }
 
-    public String getTotalJobOffer() {
-        return TotalJobOffer;
+    public String getWorkSiteName() {
+        return WorkSiteName;
     }
 
-    public void setTotalJobOffer(String totalJobOffer) {
-        TotalJobOffer = totalJobOffer;
+    public void setWorkSiteName(String workSiteName) {
+        WorkSiteName = workSiteName;
     }
 
-    public String getTtlRegA() {
-        return ttlRegA;
+    public String getLocation() {
+        return Location;
     }
 
-    public void setTtlRegA(String ttlRegA) {
-        this.ttlRegA = ttlRegA;
+    public void setLocation(String location) {
+        Location = location;
     }
 
-    public String getTtlRegR() {
-        return ttlRegR;
+    public String getPinNo() {
+        return PinNo;
     }
 
-    public void setTtlRegR(String ttlRegR) {
-        this.ttlRegR = ttlRegR;
+    public void setPinNo(String pinNo) {
+        PinNo = pinNo;
+    }
+
+    public String getEntryDate() {
+        return EntryDate;
+    }
+
+    public void setEntryDate(String entryDate) {
+        EntryDate = entryDate;
+    }
+
+    public String getCPMobileNo() {
+        return CPMobileNo;
+    }
+
+    public void setCPMobileNo(String CPMobileNo) {
+        this.CPMobileNo = CPMobileNo;
+    }
+
+    public String getBenStatus() {
+        return BenStatus;
+    }
+
+    public void setBenStatus(String benStatus) {
+        BenStatus = benStatus;
+    }
+
+    public String getIsVerifiedOrgAdm() {
+        return IsVerifiedOrgAdm;
+    }
+
+    public void setIsVerifiedOrgAdm(String isVerifiedOrgAdm) {
+        IsVerifiedOrgAdm = isVerifiedOrgAdm;
+    }
+
+    public String getVerifiedRemarksOrgAdm() {
+        return VerifiedRemarksOrgAdm;
+    }
+
+    public void setVerifiedRemarksOrgAdm(String verifiedRemarksOrgAdm) {
+        VerifiedRemarksOrgAdm = verifiedRemarksOrgAdm;
+    }
+
+    public String getVerifiedRemarksTypeOrgAdm() {
+        return VerifiedRemarksTypeOrgAdm;
+    }
+
+    public void setVerifiedRemarksTypeOrgAdm(String verifiedRemarksTypeOrgAdm) {
+        VerifiedRemarksTypeOrgAdm = verifiedRemarksTypeOrgAdm;
     }
 
     @Override

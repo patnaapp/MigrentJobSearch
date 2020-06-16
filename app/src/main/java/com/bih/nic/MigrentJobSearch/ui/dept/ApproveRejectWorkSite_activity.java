@@ -25,6 +25,7 @@ import com.bih.nic.MigrentJobSearch.R;
 import com.bih.nic.MigrentJobSearch.Utiilties;
 import com.bih.nic.MigrentJobSearch.WebserviceHelper;
 import com.bih.nic.MigrentJobSearch.adapter.PostedJobAdapter;
+import com.bih.nic.MigrentJobSearch.adapter.WorkApprovalAdapter;
 import com.bih.nic.MigrentJobSearch.ui.employer.JobOfferPostedActivity;
 
 import java.util.ArrayList;
@@ -44,7 +45,7 @@ public class ApproveRejectWorkSite_activity extends Activity implements AdapterV
     ImageView img_back;
     ProgressDialog dialog;
     ArrayList<ApproveWorkSiteEntity> data;
-    PostedJobAdapter adaptor_showedit_listDetail;
+    WorkApprovalAdapter adaptor_showedit_listDetail;
     String OrgId="",UserId="",UserRole="";
 
 
@@ -224,7 +225,7 @@ public class ApproveRejectWorkSite_activity extends Activity implements AdapterV
     }
 
 
-    private class GetWorkSiteForApproval extends AsyncTask<String, Void, ArrayList<JobOfferPostedEntity>> {
+    private class GetWorkSiteForApproval extends AsyncTask<String, Void, ArrayList<ApproveWorkSiteEntity>> {
         private final ProgressDialog dialog = new ProgressDialog(ApproveRejectWorkSite_activity.this);
         int optionType;
 
@@ -236,36 +237,38 @@ public class ApproveRejectWorkSite_activity extends Activity implements AdapterV
         }
 
         @Override
-        protected ArrayList<JobOfferPostedEntity> doInBackground(String...arg) {
-            return WebserviceHelper.JobOfferPosted(block_id, Status_Code);
+        protected ArrayList<ApproveWorkSiteEntity> doInBackground(String...arg) {
+            return WebserviceHelper.GetWorkSiteForApproval(block_id,OrgId, Status_Code);
         }
 
         @Override
-        protected void onPostExecute(ArrayList<JobOfferPostedEntity> result) {
+        protected void onPostExecute(ArrayList<ApproveWorkSiteEntity> result) {
             if (this.dialog.isShowing()) {
                 this.dialog.dismiss();
             }
 
-            //data = result;
+            data = result;
 
             populateData();
 
         }
     }
 
-    public void populateData(){
-        if(data != null && data.size()> 0){
+    public void populateData()
+    {
+        if(data != null && data.size()> 0)
+        {
             Log.e("data", ""+data.size());
-//            tv_Norecord.setVisibility(View.GONE);
+            tv_Norecord.setVisibility(View.GONE);
             listView.setVisibility(View.VISIBLE);
 
-            //adaptor_showedit_listDetail = new PostedJobAdapter(this, data, block_id);
+            adaptor_showedit_listDetail = new WorkApprovalAdapter(this, data, block_id);
             listView.setLayoutManager(new LinearLayoutManager(this));
             listView.setAdapter(adaptor_showedit_listDetail);
 
         }else{
             listView.setVisibility(View.GONE);
-            //  tv_Norecord.setVisibility(View.VISIBLE);
+              tv_Norecord.setVisibility(View.VISIBLE);
         }
     }
 }
