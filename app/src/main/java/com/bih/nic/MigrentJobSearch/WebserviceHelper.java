@@ -27,6 +27,7 @@ import com.bih.nic.MigrentJobSearch.Model.Versioninfo;
 import com.bih.nic.MigrentJobSearch.Model.WorkDetailsEntity;
 import com.bih.nic.MigrentJobSearch.Model.WorkRequirementsEntity;
 import com.bih.nic.MigrentJobSearch.Model.WorkerModel;
+import com.bih.nic.MigrentJobSearch.Model.WrkReqApprovalDetailsEntity;
 import com.bih.nic.MigrentJobSearch.Model.panchayat;
 import com.bih.nic.MigrentJobSearch.Model.ward_model;
 import com.bih.nic.MigrentJobSearch.Model.workListModel;
@@ -108,6 +109,7 @@ public class WebserviceHelper implements KvmSerializable {
     private static final String GET_JOB_Offer_block_Posted_METHOD="GetJobOfferBlockwise";
     private static final String GET_Acpt_Rjct_Job_By_Labour="GetJobOfferLabourDetails";
     private static final String GET_Blk_Wise_company_Jobs="GetCompanayBlockWise";
+    private static final String GET_Work_Requirement_approval="BenApprovalbyOrgAdmWorkRequirement";
     private static final String UPDATE_PROFILE_IMAGE_METHOD="UpdateImage";
     private static final String SUBSKILL_METHOD="SubSkilMasterList";
     private static final String DISTRICT_METHOD="getDistrict";
@@ -2378,6 +2380,60 @@ public class WebserviceHelper implements KvmSerializable {
                 }
             } else
                 return pvmArrayList;
+        }
+
+
+        return pvmArrayList;
+    }
+
+
+    public static ArrayList<WrkReqApprovalDetailsEntity> WorkRequirementForApproval(String workid) {
+
+
+        SoapObject request = new SoapObject(SERVICENAMESPACE, GET_Work_Requirement_approval);
+
+        request.addProperty("_Worksid", workid);
+
+        SoapObject res1;
+        try
+        {
+
+            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+            envelope.dotNet = true;
+            envelope.setOutputSoapObject(request);
+
+            envelope.addMapping(SERVICENAMESPACE, WrkReqApprovalDetailsEntity.RequirementApproval_CLASS.getSimpleName(), WrkReqApprovalDetailsEntity.RequirementApproval_CLASS);
+
+            HttpTransportSE androidHttpTransport = new HttpTransportSE(SERVICEURL);
+            androidHttpTransport.call(SERVICENAMESPACE + GET_Work_Requirement_approval,envelope);
+
+            res1 = (SoapObject) envelope.getResponse();
+
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+        int TotalProperty = res1.getPropertyCount();
+
+        ArrayList<WrkReqApprovalDetailsEntity> pvmArrayList = new ArrayList<WrkReqApprovalDetailsEntity>();
+
+        for (int ii = 0; ii < TotalProperty; ii++)
+        {
+            if (res1.getProperty(ii) != null) {
+                Object property = res1.getProperty(ii);
+                if (property instanceof SoapObject)
+                {
+                    SoapObject final_object = (SoapObject) property;
+                    WrkReqApprovalDetailsEntity panchayat = new WrkReqApprovalDetailsEntity(final_object);
+                    pvmArrayList.add(panchayat);
+                }
+            }
+//            {
+//                return pvmArrayList;
+//            }
+
         }
 
 

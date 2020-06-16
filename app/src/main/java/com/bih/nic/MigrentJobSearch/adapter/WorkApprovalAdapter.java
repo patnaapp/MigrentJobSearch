@@ -75,6 +75,7 @@ public class WorkApprovalAdapter extends RecyclerView.Adapter<WorkApprovalAdapte
                 Intent intent = new Intent(activity, WorkRequirementApproval_Activity.class);
 
                 intent.putExtra("worksid",info.getWorksId());
+                intent.putExtra("worksite",info.getWorkSiteName());
                 intent.putExtra("a_ID",info.getA_id());
                 activity.startActivity(intent);
             }
