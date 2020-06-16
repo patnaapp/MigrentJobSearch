@@ -406,7 +406,7 @@ public class WorkRequirementApproval_Activity extends Activity implements Adapte
                     ab.setPositiveButton("[OK]", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int whichButton) {
-                            Intent intent = new Intent(getBaseContext(), Login.class);
+                            Intent intent = new Intent(getBaseContext(), ApproveRejectWorkSite_activity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
                             //setFinishOnTouchOutside(false);
@@ -432,7 +432,7 @@ public class WorkRequirementApproval_Activity extends Activity implements Adapte
                     ab.setPositiveButton("[OK]", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int whichButton) {
-                            Intent intent = new Intent(getBaseContext(),Login.class);
+                            Intent intent = new Intent(getBaseContext(),ApproveRejectWorkSite_activity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
                             //setFinishOnTouchOutside(false);
