@@ -65,12 +65,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.hq.WorksiteEmployeeLegacyActivity"
+        <activity android:name=".ui.hq.OrganisationWorkDetailActivity"
             android:theme="@style/NoActionBar"/>
-        <activity android:name=".ui.dept.ApproveRejectWorkSite_activity" />
-        <activity
-            android:name=".ui.hq.WorksiteEmplyeeReportActivity"
-            android:theme="@style/NoActionBar" />
+        <activity android:name=".ui.hq.SubDeptLegacyTableActivity"
+            android:theme="@style/NoActionBar"/>
+        <activity android:name=".ui.hq.SubDeptNoVacencyLegacyTableActivity"
+            android:theme="@style/NoActionBar"/>
         <activity android:name=".OfficeReport.DistricWise" />
         <activity
             android:name=".ui.hq.DeptJobVacencyReportActivity"
@@ -106,15 +106,20 @@
         <activity android:name=".ui.employer.JobOfferPosted_BlockActivity" />
         <activity android:name=".ui.hq.Job_Offer_activity_HQ" />
         <activity android:name=".ui.hq.JobOffer_HQ_BlockActivity" />
+        <activity android:name=".ui.hq.SubDeptJobVacencyReportActivity"
+            android:theme="@style/NoActionBar" />
+        <activity android:name=".ui.hq.WorkSiteLegacyTableViewActivity"
+            android:theme="@style/NoActionBar" />
+        <activity android:name=".ui.hq.DeptPostReportActivity"
+            android:theme="@style/NoActionBar" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".VerifyAadhaar1" />
         <activity android:name=".ui.employer.EmployerRegistrartionActivity" />
-        <activity android:name=".ui.dstadm.WorkSiteApproval_dst_activity" />
-        <activity android:name=".ui.dstadm.WorkReqApproval_Dst_Activity" />
-        <activity android:name=".ui.dept.WorkRequirementApproval_Activity" />
         <activity
             android:name=".ui.employer.AddWorkSiteDetails_Activity"
             android:theme="@style/NoActionBar" />
+
+
         <activity android:name=".Login" /> <!-- <activity -->
         <!-- android:name=".UpdateAdhaar" -->
         <!-- android:exported="true"> -->

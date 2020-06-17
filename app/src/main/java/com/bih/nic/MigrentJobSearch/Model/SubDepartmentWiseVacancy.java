@@ -6,51 +6,43 @@ import org.ksoap2.serialization.SoapObject;
 
 import java.util.Hashtable;
 
-public class DepartmentWiseVacancy implements KvmSerializable {
+public class SubDepartmentWiseVacancy implements KvmSerializable {
 
-    public static Class<DepartmentWiseVacancy> DepartmentWiseVacancy_CLASS = DepartmentWiseVacancy.class;
+    public static Class<SubDepartmentWiseVacancy> DepartmentWiseVacancy_CLASS = SubDepartmentWiseVacancy.class;
 
     private String DeptId="";
     private String DeptName = "";
     private String DeptTotalWork = "";
     private String DeptTotalRequirement = "";
 
-    private String DeptOrgId = "";
-    private String Dept_orgname = "";
-    private String Dept_orgTotalWork = "";
-    private String Dept_orgTotlWorkReq = "";
-
     private String Dept_WorkSiteName = "";
     private String Dept_Location = "";
     private String Dept_ContactPerson = "";
     private String Dept_CPMobileNo = "";
 
-//    private String Dept_WorkSiteName = "";
-//    private String Dept_Location = "";
-//    private String Dept_ContactPerson = "";
-//    private String Dept_CPMobileNo = "";
+    private String DeptOrgId = "";
+    private String Dept_orgname = "";
+    private String Dept_orgTotalWork = "";
+    private String Dept_orgTotlWorkReq = "";
+
+
     private String Dept_ComanyNameEn = "";
     private String Dept_NoOfPerson = "";
     private String Dept_Salary = "";
     private String Dept_SkillName = "";
 
-    public DepartmentWiseVacancy(SoapObject res1,String i) {
+    public SubDepartmentWiseVacancy(SoapObject res1, String i) {
         if(i.equalsIgnoreCase("1")) {
             this.DeptId = res1.getProperty("DeptID").toString();
             this.DeptName = res1.getProperty("DeptName").toString();
             this.DeptTotalWork = res1.getProperty("DeptTotalWork").toString();
             this.DeptTotalRequirement = res1.getProperty("DeptTotalRequirement").toString();
         }else if(i.equalsIgnoreCase("2")) {
-            this.DeptOrgId = res1.getProperty("DeptOrgId").toString();
-            this.Dept_orgname = res1.getProperty("Dept_orgname").toString();
-            this.Dept_orgTotalWork = res1.getProperty("Dept_orgTotalWork").toString();
-            this.Dept_orgTotlWorkReq = res1.getProperty("Dept_orgTotlWorkReq").toString();
-        }else if(i.equalsIgnoreCase("3")) {
             this.Dept_WorkSiteName = res1.getProperty("Dept_WorkSiteName").toString();
             this.Dept_Location = res1.getProperty("Dept_Location").toString();
             this.Dept_ContactPerson = res1.getProperty("Dept_ContactPerson").toString();
             this.Dept_CPMobileNo = res1.getProperty("Dept_CPMobileNo").toString();
-        }else if(i.equalsIgnoreCase("4")) {
+        }else if(i.equalsIgnoreCase("3")) {
             this.Dept_WorkSiteName = res1.getProperty("Dept_WorkSiteName").toString();
             this.Dept_Location = res1.getProperty("Dept_Location").toString();
             this.Dept_ContactPerson = res1.getProperty("Dept_ContactPerson").toString();

@@ -14,10 +14,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bih.nic.MigrentJobSearch.Model.DepartmentWiseVacancy;
+import com.bih.nic.MigrentJobSearch.Model.SubDepartmentWiseVacancy;
 import com.bih.nic.MigrentJobSearch.R;
 import com.bih.nic.MigrentJobSearch.Utiilties;
 import com.bih.nic.MigrentJobSearch.WebserviceHelper;
 import com.bih.nic.MigrentJobSearch.adapter.DeptJobVacencyAdapter;
+import com.bih.nic.MigrentJobSearch.adapter.SubDeptJobVacencyAdapter;
 
 import java.util.ArrayList;
 
@@ -25,9 +27,9 @@ public class SubDeptJobVacencyReportActivity extends Activity {
     RecyclerView listView;
     ImageView img_back;
     TextView tv_skill11;
-    DeptJobVacencyAdapter adaptor_showedit_listDetail;
+    SubDeptJobVacencyAdapter adaptor_showedit_listDetail;
 
-    ArrayList<DepartmentWiseVacancy> data;
+    ArrayList<SubDepartmentWiseVacancy> data;
 
     String UserId="",UserRole="",Dept_Id="",Dept_Name="";
 
@@ -58,7 +60,7 @@ public class SubDeptJobVacencyReportActivity extends Activity {
         img_back=(ImageView) findViewById(R.id.img);
         tv_skill11=(TextView) findViewById(R.id.tv_skill11);
     }
-    private class SyncSubDepartmentWiseVacancyData extends AsyncTask<String, Void, ArrayList<DepartmentWiseVacancy>> {
+    private class SyncSubDepartmentWiseVacancyData extends AsyncTask<String, Void, ArrayList<SubDepartmentWiseVacancy>> {
         private final ProgressDialog dialog = new ProgressDialog(SubDeptJobVacencyReportActivity.this);
         int optionType;
 
@@ -70,12 +72,12 @@ public class SubDeptJobVacencyReportActivity extends Activity {
         }
 
         @Override
-        protected ArrayList<DepartmentWiseVacancy> doInBackground(String...arg) {
-            return WebserviceHelper.getDeptWiseVacencyReport("ShowOrg", Dept_Id);
+        protected ArrayList<SubDepartmentWiseVacancy> doInBackground(String...arg) {
+            return WebserviceHelper.getSubDeptWiseVacencyReport("ShowOrg", Dept_Id);
         }
 
         @Override
-        protected void onPostExecute(ArrayList<DepartmentWiseVacancy> result) {
+        protected void onPostExecute(ArrayList<SubDepartmentWiseVacancy> result) {
             if (this.dialog.isShowing()) {
                 this.dialog.dismiss();
             }
@@ -95,7 +97,7 @@ public class SubDeptJobVacencyReportActivity extends Activity {
             // tv_Norecord.setVisibility(View.GONE);
             listView.setVisibility(View.VISIBLE);
 
-            adaptor_showedit_listDetail = new DeptJobVacencyAdapter(this, data, "0");
+            adaptor_showedit_listDetail = new SubDeptJobVacencyAdapter(this, data, "0");
             listView.setLayoutManager(new LinearLayoutManager(this));
             listView.setAdapter(adaptor_showedit_listDetail);
 

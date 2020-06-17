@@ -13,22 +13,22 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bih.nic.MigrentJobSearch.Model.DepartmentWiseVacancy;
-import com.bih.nic.MigrentJobSearch.Model.JobOfferPostedEntity;
+import com.bih.nic.MigrentJobSearch.Model.SubDepartmentWiseVacancy;
 import com.bih.nic.MigrentJobSearch.R;
-import com.bih.nic.MigrentJobSearch.ui.hq.DeptPostReportActivity;
 import com.bih.nic.MigrentJobSearch.ui.hq.SubDeptJobVacencyReportActivity;
-import com.bih.nic.MigrentJobSearch.ui.hq.WorkSiteLegacyTableViewActivity;
+import com.bih.nic.MigrentJobSearch.ui.hq.SubDeptLegacyTableActivity;
+import com.bih.nic.MigrentJobSearch.ui.hq.SubDeptNoVacencyLegacyTableActivity;
 
 import java.util.ArrayList;
 
-public class DeptJobVacencyAdapter extends RecyclerView.Adapter<DeptJobVacencyAdapter.ViewHolder> {
+public class SubDeptJobVacencyAdapter extends RecyclerView.Adapter<SubDeptJobVacencyAdapter.ViewHolder> {
 
     Activity activity;
     LayoutInflater mInflater;
-    ArrayList<DepartmentWiseVacancy> ThrList=new ArrayList<>();
+    ArrayList<SubDepartmentWiseVacancy> ThrList=new ArrayList<>();
     String regNo;
 
-    public DeptJobVacencyAdapter(Activity listViewshowedit, ArrayList<DepartmentWiseVacancy> rlist, String regNo) {
+    public SubDeptJobVacencyAdapter(Activity listViewshowedit, ArrayList<SubDepartmentWiseVacancy> rlist, String regNo) {
         this.activity=listViewshowedit;
         this.ThrList=rlist;
         mInflater = (LayoutInflater)activity.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
@@ -43,20 +43,20 @@ public class DeptJobVacencyAdapter extends RecyclerView.Adapter<DeptJobVacencyAd
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        final DepartmentWiseVacancy info = ThrList.get(position);
+        final SubDepartmentWiseVacancy info = ThrList.get(position);
 
          holder.tv_slno.setText(String.valueOf(position+1)+").");
-        holder.tv_dept_name.setText(info.getDeptName());
-        holder.tv_worksite.setText(info.getDeptTotalWork());
-        holder.tv_vacnecy.setText(info.getDeptTotalRequirement());
+        holder.tv_dept_name.setText(info.getDept_orgname());
+        holder.tv_worksite.setText(info.getDept_orgTotalWork());
+        holder.tv_vacnecy.setText(info.getDept_orgTotlWorkReq());
 
         holder.tv_dept_name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    Intent intent = new Intent(activity,SubDeptJobVacencyReportActivity.class);
+                    Intent intent = new Intent(activity, SubDeptLegacyTableActivity.class);
                     //intent.putExtra("data",Reg_No);
-                    intent.putExtra("DeptCode",info.getDeptId());
-                    intent.putExtra("DeptName",info.getDeptName());
+                    intent.putExtra("DeptCode",info.getDeptOrgId());
+                    intent.putExtra("DeptName",info.getDept_orgname());
                     activity.startActivity(intent);
 
             }
@@ -64,10 +64,10 @@ public class DeptJobVacencyAdapter extends RecyclerView.Adapter<DeptJobVacencyAd
         holder.tv_worksite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(activity,WorkSiteLegacyTableViewActivity.class);
+                Intent intent = new Intent(activity,SubDeptJobVacencyReportActivity.class);
                 //intent.putExtra("data",Reg_No);
-                intent.putExtra("DeptCode",info.getDeptId());
-                intent.putExtra("DeptName",info.getDeptName());
+                intent.putExtra("DeptCode",info.getDeptOrgId());
+                intent.putExtra("DeptName",info.getDept_orgname());
                 activity.startActivity(intent);
 
             }
@@ -75,10 +75,10 @@ public class DeptJobVacencyAdapter extends RecyclerView.Adapter<DeptJobVacencyAd
         holder.tv_vacnecy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(activity, DeptPostReportActivity.class);
+                Intent intent = new Intent(activity, SubDeptNoVacencyLegacyTableActivity.class);
                 //intent.putExtra("data",Reg_No);
-                intent.putExtra("DeptCode",info.getDeptId());
-                intent.putExtra("DeptName",info.getDeptName());
+                intent.putExtra("DeptCode",info.getDeptOrgId());
+                intent.putExtra("DeptName",info.getDept_orgname());
                 activity.startActivity(intent);
 
             }
