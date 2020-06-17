@@ -60,7 +60,7 @@ public class WorkSiteApproval_dst_activity extends Activity implements AdapterVi
         OrgId= PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("OrgId", "");
         UserId=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserId", "");
         UserRole=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserRole", "");
-        DstCode=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("DstCode", "");
+        DstCode=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("DistCode", "");
         initialization();
 
         // loadDistrictSpinnerData();

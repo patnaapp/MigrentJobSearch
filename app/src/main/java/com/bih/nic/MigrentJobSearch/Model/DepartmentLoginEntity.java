@@ -21,6 +21,7 @@ public class DepartmentLoginEntity implements KvmSerializable {
     private String LvlThree="";
     private String LastVisitedOn="";
     private String msg="";
+    private String DistrictCode="";
 
 
     public DepartmentLoginEntity() {
@@ -46,6 +47,7 @@ public class DepartmentLoginEntity implements KvmSerializable {
         this.LvlThree=res1.getProperty("LvlThree").toString();
         this.LastVisitedOn=res1.getProperty("LastVisitedOn").toString();
         this.msg=res1.getProperty("msg").toString();
+        this.DistrictCode=res1.getProperty("DistrictCode").toString();
 
 
     }
@@ -172,5 +174,13 @@ public class DepartmentLoginEntity implements KvmSerializable {
 
     public void setMsg(String msg) {
         this.msg = msg;
+    }
+
+    public String getDistrictCode() {
+        return DistrictCode;
+    }
+
+    public void setDistrictCode(String districtCode) {
+        DistrictCode = districtCode;
     }
 }
