@@ -86,8 +86,8 @@ public class WorkRequirementApproval_Activity extends Activity implements Adapte
 
 
         tv_skill11.setText("Work Requirment Details");
-        tv_total_count.setText("Work Id-"+work_id);
-        tv_worksite.setText("Work Site-"+work_site);
+        tv_total_count.setText("Work Id:-"+work_id);
+        tv_worksite.setText("Work Site:-"+work_site);
         tv_skill11.setTextColor(getApplicationContext().getResources().getColor(R.color.green));
 
         OrgId= PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("OrgId", "");

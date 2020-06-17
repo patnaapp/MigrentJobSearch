@@ -84,8 +84,8 @@ public class WorkReqApproval_Dst_Activity extends Activity implements AdapterVie
 
 
         tv_skill11.setText("Work Requirment Details");
-        tv_total_count.setText("Work Id-"+work_id);
-        tv_worksite.setText("Work Site-"+work_site);
+        tv_total_count.setText("Work Id:-"+work_id);
+        tv_worksite.setText("Work Site:-"+work_site);
         tv_skill11.setTextColor(getApplicationContext().getResources().getColor(R.color.green));
 
         OrgId= PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("OrgId", "");
@@ -407,7 +407,7 @@ public class WorkReqApproval_Dst_Activity extends Activity implements AdapterVie
                     ab.setPositiveButton("[OK]", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int whichButton) {
-                            Intent intent = new Intent(getBaseContext(), ApproveRejectWorkSite_activity.class);
+                            Intent intent = new Intent(getBaseContext(), WorkSiteApproval_dst_activity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
                             //setFinishOnTouchOutside(false);
@@ -433,7 +433,7 @@ public class WorkReqApproval_Dst_Activity extends Activity implements AdapterVie
                     ab.setPositiveButton("[OK]", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int whichButton) {
-                            Intent intent = new Intent(getBaseContext(),ApproveRejectWorkSite_activity.class);
+                            Intent intent = new Intent(getBaseContext(),WorkSiteApproval_dst_activity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
                             //setFinishOnTouchOutside(false);
