@@ -270,7 +270,8 @@ public class WorkRequirementApproval_Activity extends Activity implements Adapte
     }
 
 
-    public void initialisation(){
+    public void initialisation()
+    {
         tv_skill11=findViewById(R.id.tv_skill);
         // tv_Norecord_accpt=findViewById(R.id.tv_Norecord_accpt);
         img_back=(ImageView) findViewById(R.id.img);
@@ -292,11 +293,14 @@ public class WorkRequirementApproval_Activity extends Activity implements Adapte
         spn_remarks.setAdapter(ben_type_aangan_aaray);
     }
 
-    public void onApprove(View view){
+    public void onApprove(View view)
+    {
         VerifyType="ACCP";
-        if(Utiilties.isOnline(getApplicationContext())) {
+        if(Utiilties.isOnline(getApplicationContext()))
+        {
             new UpdateWorksiteApproval().execute();
-        }else {
+        }
+        else {
             Utiilties.internetNotAvailableDialog(WorkRequirementApproval_Activity.this);
         }
     }

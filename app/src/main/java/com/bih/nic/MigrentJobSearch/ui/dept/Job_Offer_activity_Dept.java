@@ -45,7 +45,7 @@ public class Job_Offer_activity_Dept extends Activity implements AdapterView.OnI
 
     String skillId,subSkillId;
 
-    String OrgId="",user_name="", mobile="", address="", DistName="", ProfileImg="",CompanyName="", UserId="",UserRole="";
+    String OrgId="",user_name="", mobile="", address="", DistName="", ProfileImg="",CompanyName="", UserId="",UserRole="",DeptID="";
 
     DataBaseHelper dataBaseHelper;
 
@@ -63,6 +63,7 @@ public class Job_Offer_activity_Dept extends Activity implements AdapterView.OnI
 
         UserId=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserId", "");
         UserRole=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserRole", "");
+        DeptID=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("OrgId", "");
 
         new SyncHQJobOfferData().execute();
 
@@ -117,7 +118,7 @@ public class Job_Offer_activity_Dept extends Activity implements AdapterView.OnI
         @Override
         protected ArrayList<JobOfferPostedEntity> doInBackground(String...arg)
         {
-            return WebserviceHelper.JobOfferPosted(UserRole, "");
+            return WebserviceHelper.JobOfferPosted(UserRole, DeptID);
         }
 
         @Override

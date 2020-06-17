@@ -1512,30 +1512,28 @@ public class WebserviceHelper implements KvmSerializable {
     public static ArrayList<JobOfferPostedEntity> JobOfferPosted(String role, String orgid)
     {
 
-
         SoapObject request = new SoapObject(SERVICENAMESPACE, GET_JOB_Offer_Posted_METHOD);
-
         request.addProperty("Role", role);
         request.addProperty("orgId", orgid);
 
         SoapObject res1;
-        try {
+        try
+        {
 
-            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
-                    SoapEnvelope.VER11);
+            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
             envelope.dotNet = true;
             envelope.setOutputSoapObject(request);
 
             envelope.addMapping(SERVICENAMESPACE, JobOfferPostedEntity.JobOffer_CLASS.getSimpleName(), JobOfferPostedEntity.JobOffer_CLASS);
 
-            HttpTransportSE androidHttpTransport = new HttpTransportSE(
-                    SERVICEURL);
-            androidHttpTransport.call(SERVICENAMESPACE + GET_JOB_Offer_Posted_METHOD,
-                    envelope);
+            HttpTransportSE androidHttpTransport = new HttpTransportSE(SERVICEURL);
+            androidHttpTransport.call(SERVICENAMESPACE + GET_JOB_Offer_Posted_METHOD,envelope);
 
             res1 = (SoapObject) envelope.getResponse();
 
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
             return null;
         }
