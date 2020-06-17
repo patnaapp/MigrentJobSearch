@@ -28,7 +28,7 @@ public class HqHomeActivity extends Activity {
     DataBaseHelper dataBaseHelper;
     SQLiteDatabase db;
     TextView tv_email,tv_dept_name,tv_version;
-    LinearLayout ll_first,ll_username,aprove_rjct_worksite;
+    LinearLayout ll_first,ll_username,aprove_rjct_worksite,ll_emp_reports;
     String OrgId="",user_name="",lvlthree_id="", mobile="", address="", DistName="", ProfileImg="",CompanyName="", UserId,UserRole="",Block_Code="",lvlone_id="",lvltwo_id="";
 
     @Override
@@ -42,6 +42,7 @@ public class HqHomeActivity extends Activity {
         tv_email=findViewById(R.id.tv_email);
         tv_dept_name=findViewById(R.id.tv_dept_name);
         ll_first=findViewById(R.id.ll_first);
+        ll_emp_reports=findViewById(R.id.ll_emp_reports);
         aprove_rjct_worksite=findViewById(R.id.aprove_rjct_worksite);
         ll_username=findViewById(R.id.ll_username);
         tv_version=(TextView) findViewById(R.id.tv_version);
@@ -65,9 +66,17 @@ public class HqHomeActivity extends Activity {
         UserRole=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserRole", "");
         String username = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserName", "");
         tv_email.setText(UserId);
-        if(UserRole.equals("ORGADM")||UserRole.equals("DSTADM"))
+        if(UserRole.equals("ORGADM"))
         {
             ll_first.setVisibility(View.GONE);
+            ll_username.setVisibility(View.VISIBLE);
+            aprove_rjct_worksite.setVisibility(View.VISIBLE);
+            tv_dept_name.setText(username);
+        }
+        else if (UserRole.equals("DSTADM"))
+        {
+            ll_first.setVisibility(View.GONE);
+            ll_emp_reports.setVisibility(View.GONE);
             ll_username.setVisibility(View.VISIBLE);
             aprove_rjct_worksite.setVisibility(View.VISIBLE);
             tv_dept_name.setText(username);
@@ -133,10 +142,9 @@ public class HqHomeActivity extends Activity {
     }
 
     @Override
-    protected void onResume() {
+    protected void onResume()
+    {
         super.onResume();
-
-
     }
 
     public  void onViewConsolidatedReport(View view)
