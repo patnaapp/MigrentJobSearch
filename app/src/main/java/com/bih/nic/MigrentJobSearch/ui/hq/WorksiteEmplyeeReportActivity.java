@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
+import com.bih.nic.MigrentJobSearch.AppConstant;
 import com.bih.nic.MigrentJobSearch.DataBaseHelper.DataBaseHelper;
 import com.bih.nic.MigrentJobSearch.Model.BlockWeb;
 import com.bih.nic.MigrentJobSearch.Model.DepartmentWiseVacancy;
@@ -148,7 +149,7 @@ public class WorksiteEmplyeeReportActivity extends Activity implements AdapterVi
 
         @Override
         protected ArrayList<WorkSiteEmployeeReportEntity> doInBackground(String...arg) {
-            return WebserviceHelper.getWorksiteEmployeeReport("Detail", DistrictCode, BlockCode,"","","" );
+            return WebserviceHelper.getWorksiteEmployeeReport(AppConstant.WORKSITE_EMPLOYEE_REPORT, DistrictCode, BlockCode,"","","" );
         }
 
         @Override

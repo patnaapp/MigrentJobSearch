@@ -1,5 +1,7 @@
 package com.bih.nic.MigrentJobSearch.Model;
 
+import com.bih.nic.MigrentJobSearch.AppConstant;
+
 import org.ksoap2.serialization.KvmSerializable;
 import org.ksoap2.serialization.PropertyInfo;
 import org.ksoap2.serialization.SoapObject;
@@ -31,6 +33,9 @@ public class WorkSiteEmployeeReportEntity implements KvmSerializable, Serializab
     private String CPMobileNo="";
     private String SubSkillName="";
 
+    private String ComanyNameEn="";
+    private String AddressEn="";
+
 
     public WorkSiteEmployeeReportEntity() {
 
@@ -39,11 +44,10 @@ public class WorkSiteEmployeeReportEntity implements KvmSerializable, Serializab
     public WorkSiteEmployeeReportEntity(SoapObject res1, String status)
     {
         this.WorkSiteName=res1.getProperty("WorkSiteName").toString();
-        this.SkillName=res1.getProperty("SkillName").toString();
         this.NoOfPerson=res1.getProperty("NoOfPerson").toString();
 
         switch (status){
-            case "Detail":
+            case AppConstant.WORKSITE_EMPLOYEE_REPORT:
                 this.WorksRegId=res1.getProperty("WorksRegId").toString();
                 this.WorksId=res1.getProperty("WorksId").toString();
                 this.SkillCategory=res1.getProperty("SkillCategory").toString();
@@ -53,13 +57,25 @@ public class WorkSiteEmployeeReportEntity implements KvmSerializable, Serializab
                 this.ttlRegR=res1.getProperty("ttlRegR").toString();
                 this.ttlPendinAppoint=res1.getProperty("ttlPendinAppoint").toString();
                 this.ttlAppointed=res1.getProperty("ttlAppointed").toString();
+                this.SkillName=res1.getProperty("SkillName").toString();
                 break;
-            case "ShwNuP":
+
+            case AppConstant.WORKSITE_DETAIL:
+                this.Location=res1.getProperty("Location").toString();
+                this.ContactPerson=res1.getProperty("ContactPerson").toString();
+                this.CPMobileNo=res1.getProperty("CPMobileNo").toString();
+                this.ComanyNameEn=res1.getProperty("ComanyNameEn").toString();
+                this.AddressEn=res1.getProperty("AddressEn").toString();
+                this.TotalJobOffer=res1.getProperty("TotalJobOfferCount").toString();
+                break;
+
+            case AppConstant.WORKSITE_NO_PERSON:
                 this.Location=res1.getProperty("Location").toString();
                 this.ContactPerson=res1.getProperty("ContactPerson").toString();
                 this.Designaton=res1.getProperty("Designaton").toString();
                 this.CPMobileNo=res1.getProperty("CPMobileNo").toString();
                 this.SubSkillName=res1.getProperty("SubSkillName").toString();
+                this.SkillName=res1.getProperty("SkillName").toString();
                 break;
         }
 
@@ -84,6 +100,22 @@ public class WorkSiteEmployeeReportEntity implements KvmSerializable, Serializab
     @Override
     public void getPropertyInfo(int index, Hashtable properties, PropertyInfo info) {
 
+    }
+
+    public String getComanyNameEn() {
+        return ComanyNameEn;
+    }
+
+    public void setComanyNameEn(String comanyNameEn) {
+        ComanyNameEn = comanyNameEn;
+    }
+
+    public String getAddressEn() {
+        return AddressEn;
+    }
+
+    public void setAddressEn(String addressEn) {
+        AddressEn = addressEn;
     }
 
     public String getLocation() {
