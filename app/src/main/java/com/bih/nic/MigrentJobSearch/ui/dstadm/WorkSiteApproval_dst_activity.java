@@ -144,6 +144,7 @@ public class WorkSiteApproval_dst_activity extends Activity implements AdapterVi
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+
                 // TODO Auto-generated method stub
 
             }
