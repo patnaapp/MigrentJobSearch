@@ -109,6 +109,8 @@
         <activity android:name=".HomeActivity" />
         <activity android:name=".VerifyAadhaar1" />
         <activity android:name=".ui.employer.EmployerRegistrartionActivity" />
+        <activity android:name=".ui.dstadm.WorkSiteApproval_dst_activity" />
+        <activity android:name=".ui.dstadm.WorkReqApproval_Dst_Activity" />
         <activity android:name=".ui.dept.WorkRequirementApproval_Activity" />
         <activity
             android:name=".ui.employer.AddWorkSiteDetails_Activity"

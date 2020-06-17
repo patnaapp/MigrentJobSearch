@@ -20,6 +20,8 @@ import com.bih.nic.MigrentJobSearch.R;
 import com.bih.nic.MigrentJobSearch.Utiilties;
 import com.bih.nic.MigrentJobSearch.ui.MultiLoginActivity;
 import com.bih.nic.MigrentJobSearch.ui.dept.ApproveRejectWorkSite_activity;
+import com.bih.nic.MigrentJobSearch.ui.dstadm.WorkReqApproval_Dst_Activity;
+import com.bih.nic.MigrentJobSearch.ui.dstadm.WorkSiteApproval_dst_activity;
 
 public class HqHomeActivity extends Activity {
 
@@ -34,7 +36,7 @@ public class HqHomeActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hq_home);
 
-       // getActionBar().hide();
+        // getActionBar().hide();
         Utiilties.setStatusBarColor(this);
         dataBaseHelper=new DataBaseHelper(HqHomeActivity.this);
         tv_email=findViewById(R.id.tv_email);
@@ -63,18 +65,23 @@ public class HqHomeActivity extends Activity {
         UserRole=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserRole", "");
         String username = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserName", "");
         tv_email.setText(UserId);
-        if(UserRole.equals("ORGADM")){
+        if(UserRole.equals("ORGADM")||UserRole.equals("DSTADM"))
+        {
             ll_first.setVisibility(View.GONE);
             ll_username.setVisibility(View.VISIBLE);
             aprove_rjct_worksite.setVisibility(View.VISIBLE);
             tv_dept_name.setText(username);
-        }else{
+        }
+
+        else
+        {
             ll_username.setVisibility(View.GONE);
             aprove_rjct_worksite.setVisibility(View.GONE);
         }
     }
 
-    public void OnClick_goToLoginScreen(View view){
+    public void OnClick_goToLoginScreen(View view)
+    {
         new AlertDialog.Builder(this)
                 .setTitle("लॉग आउट ?")
                 .setMessage("क्या आप वाकई एप्लिकेशन से लॉगआउट करना चाहते हैं \n ")
@@ -154,7 +161,17 @@ public class HqHomeActivity extends Activity {
     }
 
     public void onApproveWorkSite(View view){
-        Intent intent = new Intent(this, ApproveRejectWorkSite_activity.class);
-        startActivity(intent);
+
+        if(UserRole.equals("ORGADM"))
+        {
+            Intent intent = new Intent(this, ApproveRejectWorkSite_activity.class);
+            startActivity(intent);
+        }
+        else if (UserRole.equals("DSTADM"))
+        {
+            Intent intent = new Intent(this, WorkSiteApproval_dst_activity.class);
+            startActivity(intent);
+        }
+
     }
 }

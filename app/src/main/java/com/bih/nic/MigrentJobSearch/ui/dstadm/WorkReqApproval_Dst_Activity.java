@@ -1,4 +1,4 @@
-package com.bih.nic.MigrentJobSearch.ui.dept;
+package com.bih.nic.MigrentJobSearch.ui.dstadm;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -23,23 +23,20 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bih.nic.MigrentJobSearch.Login;
-import com.bih.nic.MigrentJobSearch.Model.BlkCompanyJobDetailsEntity;
 import com.bih.nic.MigrentJobSearch.Model.DefaultResponse;
 import com.bih.nic.MigrentJobSearch.Model.WrkReqApprovalDetailsEntity;
 import com.bih.nic.MigrentJobSearch.R;
 import com.bih.nic.MigrentJobSearch.Utiilties;
 import com.bih.nic.MigrentJobSearch.WebserviceHelper;
-import com.bih.nic.MigrentJobSearch.ui.labour.RequestOtpActivity;
+import com.bih.nic.MigrentJobSearch.ui.dept.ApproveRejectWorkSite_activity;
 import com.levitnudi.legacytableview.LegacyTableView;
 
 import java.util.ArrayList;
 
 import static com.levitnudi.legacytableview.LegacyTableView.BOLD;
 import static com.levitnudi.legacytableview.LegacyTableView.DEFAULT;
-import static com.levitnudi.legacytableview.LegacyTableView.OCEAN;
 
-public class WorkRequirementApproval_Activity extends Activity implements AdapterView.OnItemSelectedListener  {
+public class WorkReqApproval_Dst_Activity extends Activity implements AdapterView.OnItemSelectedListener  {
 
 
     LegacyTableView legacyTableView;
@@ -206,7 +203,7 @@ public class WorkRequirementApproval_Activity extends Activity implements Adapte
 
     private class GetRequirementsForApproval extends AsyncTask<String, Void, ArrayList<WrkReqApprovalDetailsEntity>>
     {
-        private final ProgressDialog dialog = new ProgressDialog(WorkRequirementApproval_Activity.this);
+        private final ProgressDialog dialog = new ProgressDialog(WorkReqApproval_Dst_Activity.this);
         int optionType;
 
         @Override
@@ -297,7 +294,7 @@ public class WorkRequirementApproval_Activity extends Activity implements Adapte
         if(Utiilties.isOnline(getApplicationContext())) {
             new UpdateWorksiteApproval().execute();
         }else {
-            Utiilties.internetNotAvailableDialog(WorkRequirementApproval_Activity.this);
+            Utiilties.internetNotAvailableDialog(WorkReqApproval_Dst_Activity.this);
         }
     }
 
@@ -305,26 +302,26 @@ public class WorkRequirementApproval_Activity extends Activity implements Adapte
     {
         VerifyType="RJCT";
         if (Remarks_Code.equals("")){
-            Toast.makeText(WorkRequirementApproval_Activity.this,"Please select remarks",Toast.LENGTH_SHORT).show();
+            Toast.makeText(WorkReqApproval_Dst_Activity.this,"Please select remarks",Toast.LENGTH_SHORT).show();
         }
         else {
             if (Remarks_Code.equals("1")){
                 if(Utiilties.isOnline(getApplicationContext())) {
                     new UpdateWorksiteApproval().execute();
                 }else {
-                    Utiilties.internetNotAvailableDialog(WorkRequirementApproval_Activity.this);
+                    Utiilties.internetNotAvailableDialog(WorkReqApproval_Dst_Activity.this);
                 }
             }
             else if (Remarks_Code.equals("5"))  {
                 String other_remarks=edt_p_remarks.getText().toString();
                 if (other_remarks.equals("")){
-                    Toast.makeText(WorkRequirementApproval_Activity.this,"Please enter remarks",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(WorkReqApproval_Dst_Activity.this,"Please enter remarks",Toast.LENGTH_SHORT).show();
                 }
                 else {
                     if(Utiilties.isOnline(getApplicationContext())) {
                         new UpdateWorksiteApproval().execute();
                     }else {
-                        Utiilties.internetNotAvailableDialog(WorkRequirementApproval_Activity.this);
+                        Utiilties.internetNotAvailableDialog(WorkReqApproval_Dst_Activity.this);
                     }
                 }
 
@@ -335,26 +332,26 @@ public class WorkRequirementApproval_Activity extends Activity implements Adapte
     public void onP_Reject(View view){
         VerifyType="PRJCT";
         if (Remarks_Code.equals("")){
-            Toast.makeText(WorkRequirementApproval_Activity.this,"Please select remarks",Toast.LENGTH_SHORT).show();
+            Toast.makeText(WorkReqApproval_Dst_Activity.this,"Please select remarks",Toast.LENGTH_SHORT).show();
         }
         else {
             if (Remarks_Code.equals("1")){
                 if(Utiilties.isOnline(getApplicationContext())) {
                     new UpdateWorksiteApproval().execute();
                 }else {
-                    Utiilties.internetNotAvailableDialog(WorkRequirementApproval_Activity.this);
+                    Utiilties.internetNotAvailableDialog(WorkReqApproval_Dst_Activity.this);
                 }
             }
             else if (Remarks_Code.equals("5"))  {
                 String other_remarks=edt_p_remarks.getText().toString();
                 if (other_remarks.equals("")){
-                    Toast.makeText(WorkRequirementApproval_Activity.this,"Please enter remarks",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(WorkReqApproval_Dst_Activity.this,"Please enter remarks",Toast.LENGTH_SHORT).show();
                 }
                 else {
                     if(Utiilties.isOnline(getApplicationContext())) {
                         new UpdateWorksiteApproval().execute();
                     }else {
-                        Utiilties.internetNotAvailableDialog(WorkRequirementApproval_Activity.this);
+                        Utiilties.internetNotAvailableDialog(WorkReqApproval_Dst_Activity.this);
                     }
                 }
 
@@ -367,8 +364,8 @@ public class WorkRequirementApproval_Activity extends Activity implements Adapte
     private class UpdateWorksiteApproval extends AsyncTask<String, Void, DefaultResponse> {
         DefaultResponse data;
         String _uid;
-        private final ProgressDialog dialog = new ProgressDialog(WorkRequirementApproval_Activity.this);
-        private final AlertDialog alertDialog = new AlertDialog.Builder(WorkRequirementApproval_Activity.this).create();
+        private final ProgressDialog dialog = new ProgressDialog(WorkReqApproval_Dst_Activity.this);
+        private final AlertDialog alertDialog = new AlertDialog.Builder(WorkReqApproval_Dst_Activity.this).create();
 
 
         @Override
@@ -376,7 +373,7 @@ public class WorkRequirementApproval_Activity extends Activity implements Adapte
 
             this.dialog.setCanceledOnTouchOutside(false);
             this.dialog.setMessage("UpLoading...");
-            if (!WorkRequirementApproval_Activity.this.isFinishing()) {
+            if (!WorkReqApproval_Dst_Activity.this.isFinishing()) {
                 this.dialog.show();
             }
         }
@@ -401,7 +398,7 @@ public class WorkRequirementApproval_Activity extends Activity implements Adapte
                 if (result.getStatus()==true) {
 
 
-                    AlertDialog.Builder ab = new AlertDialog.Builder(WorkRequirementApproval_Activity.this);
+                    AlertDialog.Builder ab = new AlertDialog.Builder(WorkReqApproval_Dst_Activity.this);
                     ab.setCancelable(false);
                     ab.setTitle("Successful");
                     //ab.setIcon(R.drawable.labour1);
@@ -427,7 +424,7 @@ public class WorkRequirementApproval_Activity extends Activity implements Adapte
                     // Toast.makeText(getApplicationContext(), "Uploading data failed ", Toast.LENGTH_SHORT).show();
 
 
-                    AlertDialog.Builder ab = new AlertDialog.Builder(WorkRequirementApproval_Activity.this);
+                    AlertDialog.Builder ab = new AlertDialog.Builder(WorkReqApproval_Dst_Activity.this);
                     ab.setCancelable(false);
                     ab.setTitle("Failed");
                     //  ab.setIcon(R.drawable.labour1);

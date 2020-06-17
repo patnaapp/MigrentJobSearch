@@ -2418,7 +2418,8 @@ public class WebserviceHelper implements KvmSerializable {
             res1 = (SoapObject) envelope.getResponse();
 
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
             e.printStackTrace();
             return null;
         }
