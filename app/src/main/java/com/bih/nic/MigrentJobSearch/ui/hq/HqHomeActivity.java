@@ -20,6 +20,7 @@ import com.bih.nic.MigrentJobSearch.R;
 import com.bih.nic.MigrentJobSearch.Utiilties;
 import com.bih.nic.MigrentJobSearch.ui.MultiLoginActivity;
 import com.bih.nic.MigrentJobSearch.ui.dept.ApproveRejectWorkSite_activity;
+import com.bih.nic.MigrentJobSearch.ui.dept.Job_Offer_activity_Dept;
 import com.bih.nic.MigrentJobSearch.ui.dstadm.WorkReqApproval_Dst_Activity;
 import com.bih.nic.MigrentJobSearch.ui.dstadm.WorkSiteApproval_dst_activity;
 
@@ -159,8 +160,16 @@ public class HqHomeActivity extends Activity {
     }
 
     public void  onJobOfferReport(View view){
-        Intent intent = new Intent(this, Job_Offer_activity_HQ.class);
-        startActivity(intent);
+        if(UserRole.equals("ORGADM"))
+        {
+            Intent intent = new Intent(this, Job_Offer_activity_Dept.class);
+            startActivity(intent);
+        }
+        else {
+            Intent intent = new Intent(this, Job_Offer_activity_HQ.class);
+            startActivity(intent);
+        }
+
     }
 
     public void onViewWorkOrgDetail(View view){

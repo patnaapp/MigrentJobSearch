@@ -26,6 +26,8 @@ import com.bih.nic.MigrentJobSearch.Model.JobOfferPostedEntity;
 import com.bih.nic.MigrentJobSearch.R;
 import com.bih.nic.MigrentJobSearch.Utiilties;
 import com.bih.nic.MigrentJobSearch.WebserviceHelper;
+import com.bih.nic.MigrentJobSearch.ui.dept.JobOffer_DEPT_BlockActivity;
+import com.bih.nic.MigrentJobSearch.ui.dept.Job_Offer_activity_Dept;
 import com.bih.nic.MigrentJobSearch.ui.employer.JobOfferPosted_BlockActivity;
 import com.bih.nic.MigrentJobSearch.ui.hq.JobOffer_HQ_BlockActivity;
 
@@ -38,7 +40,7 @@ public class PostedJobAdapter extends RecyclerView.Adapter<PostedJobAdapter.View
     ArrayList<JobOfferPostedEntity> ThrList=new ArrayList<>();
     String panchayatCode,panchayatName="";
     Boolean isShowDetail = false;
-    String regNo;
+    String regNo="",UserRole="";
 
     public PostedJobAdapter(Activity listViewshowedit, ArrayList<JobOfferPostedEntity> rlist, String regNo) {
         this.activity=listViewshowedit;
@@ -57,6 +59,7 @@ public class PostedJobAdapter extends RecyclerView.Adapter<PostedJobAdapter.View
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         final JobOfferPostedEntity info = ThrList.get(position);
 
+
          holder.tv_slno.setText(String.valueOf(position+1)+").");
         holder.tv_dise_name.setText(info.getDistrictName());
         holder.total_reg.setText(info.getTtlReg());
@@ -73,6 +76,13 @@ public class PostedJobAdapter extends RecyclerView.Adapter<PostedJobAdapter.View
                 String UserRole= PreferenceManager.getDefaultSharedPreferences(activity).getString("UserRole", "");
                 if (UserRole.equals("HQ")){
                     Intent intent = new Intent(activity, JobOffer_HQ_BlockActivity.class);
+                    //intent.putExtra("data",Reg_No);
+                    intent.putExtra("DistCode",info.getDistrictCode());
+                    intent.putExtra("DistName",info.getDistrictName());
+                    activity.startActivity(intent);
+                }
+                else if (UserRole.equals("ORGADM")){
+                    Intent intent = new Intent(activity, JobOffer_DEPT_BlockActivity.class);
                     //intent.putExtra("data",Reg_No);
                     intent.putExtra("DistCode",info.getDistrictCode());
                     intent.putExtra("DistName",info.getDistrictName());

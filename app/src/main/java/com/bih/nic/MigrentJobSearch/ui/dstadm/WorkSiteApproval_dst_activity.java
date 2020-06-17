@@ -46,10 +46,9 @@ public class WorkSiteApproval_dst_activity extends Activity implements AdapterVi
     String OrgId="",UserId="",UserRole="",DstCode="";
     LinearLayout lin_dist;
 
-
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_approve_reject_work_site_activity);
 
@@ -63,76 +62,63 @@ public class WorkSiteApproval_dst_activity extends Activity implements AdapterVi
         DstCode=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("DistCode", "");
         initialization();
 
-        // loadDistrictSpinnerData();
         loadBlockSpinnerData(DstCode);
 
-//        spn_district.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                if (position > 0) {
-//                    Dist_id = DistrictList.get(position-1).get_DistCode();
-//                    Dist_name = DistrictList.get(position-1).get_DistName();
-//
-//
-//
-//                } else {
-//                    block_name = "";
-//                    block_name = "";
-//
-//                }
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//                block_name = "";
-//                block_name = "";
-//            }
-//
-//        });
-        spn_block.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spn_block.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+        {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position > 0) {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+            {
+                if (position > 0)
+                {
                     block_id = BlockList.get(position-1).getBlockCode();
                     block_name = BlockList.get(position-1).getBlockName();
 
-
-
-                } else {
+                }
+                else
+                {
                     block_id = "";
                     block_name = "";
                 }
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+            public void onNothingSelected(AdapterView<?> parent)
+            {
                 block_id = "";
                 block_name = "";
             }
 
         });
 
-        spn_status.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spn_status.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+        {
 
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+            {
                 Log.e("arg2",""+position);
                 if (position > 0) {
                     Status_Name = ben_type_aangan[position].toString();
 
-                    if (Status_Name.equals("Pending")) {
+                    if (Status_Name.equals("Pending"))
+                    {
 
                         Status_Code = "1";
-                    } else if (Status_Name.equals("Accept")) {
+                    }
+                    else if (Status_Name.equals("Accept"))
+                    {
 
                         Status_Code = "2";
                     }
 
-                    else if (Status_Name.equals("Reject")) {
+                    else if (Status_Name.equals("Reject"))
+                    {
 
                         Status_Code = "3";
                     }
-                    else if (Status_Name.equals("Permanent Reject")) {
+                    else if (Status_Name.equals("Permanent Reject"))
+                    {
 
                         Status_Code = "4";
                     }
@@ -143,7 +129,8 @@ public class WorkSiteApproval_dst_activity extends Activity implements AdapterVi
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+            public void onNothingSelected(AdapterView<?> parent)
+            {
 
                 // TODO Auto-generated method stub
 
@@ -158,7 +145,6 @@ public class WorkSiteApproval_dst_activity extends Activity implements AdapterVi
             }
         });
 
-
     }
 
     public void initialization()
@@ -170,35 +156,12 @@ public class WorkSiteApproval_dst_activity extends Activity implements AdapterVi
         listView=findViewById(R.id.listviewshow);
         tv_Norecord=findViewById(R.id.tv_Norecord);
         img_back=(ImageView) findViewById(R.id.img);
-
         lin_dist.setVisibility(View.GONE);
-
         ben_type_aangan_aaray = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, ben_type_aangan);
         spn_status.setAdapter(ben_type_aangan_aaray);
 
     }
 
-    public void loadDistrictSpinnerData()
-    {
-        DistrictList = dataBaseHelper.getDistDetail();
-        ArrayList<String> list = new ArrayList<String>();
-        list.add("-Select-");
-        int index = 0;
-        for (District info: DistrictList)
-        {
-            list.add(info.get_DistName());
-            //if(benDetails.get)
-        }
-        ArrayAdapter adaptor = new ArrayAdapter(this, android.R.layout.simple_spinner_item, list);
-        adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spn_district.setAdapter(adaptor);
-
-//        if(benDetails.getDistrictName()!=null){
-//            spn_dist_name.setSelection(((ArrayAdapter<String>) spn_dist_name.getAdapter()).getPosition(benDetails.getDistrictName()));
-//
-//        }
-//        spn_district.setEnabled(false);
-    }
 
     public void loadBlockSpinnerData(String district)
     {
@@ -210,17 +173,12 @@ public class WorkSiteApproval_dst_activity extends Activity implements AdapterVi
         for (BlockWeb info: BlockList)
         {
             list.add(info.getBlockName());
-            //if(benDetails.get)
+
         }
         ArrayAdapter adaptor = new ArrayAdapter(this, android.R.layout.simple_spinner_item, list);
         adaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spn_block.setAdapter(adaptor);
-//        if(benDetails.getBlockName()!=null){
-//            spn_block_name.setSelection(((ArrayAdapter<String>) spn_block_name.getAdapter()).getPosition(benDetails.getBlockName()));
-//
-//        }
-//
-//        spn_block_name.setEnabled(false);
+
     }
 
     @Override
