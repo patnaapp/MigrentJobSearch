@@ -59,31 +59,34 @@ public class DeptJobVacencyReportActivity extends Activity  {
         img_back=(ImageView) findViewById(R.id.img);
     }
 
-    private class SyncDepartmentWiseVacancyData extends AsyncTask<String, Void, ArrayList<DepartmentWiseVacancy>> {
+    private class SyncDepartmentWiseVacancyData extends AsyncTask<String, Void, ArrayList<DepartmentWiseVacancy>>
+    {
         private final ProgressDialog dialog = new ProgressDialog(DeptJobVacencyReportActivity.this);
         int optionType;
 
         @Override
-        protected void onPreExecute() {
+        protected void onPreExecute()
+        {
             this.dialog.setCanceledOnTouchOutside(false);
             this.dialog.setMessage("लोड हो रहा है...");
             this.dialog.show();
         }
 
         @Override
-        protected ArrayList<DepartmentWiseVacancy> doInBackground(String...arg) {
+        protected ArrayList<DepartmentWiseVacancy> doInBackground(String...arg)
+        {
             return WebserviceHelper.getDeptWiseVacencyReport("ShowRec", "0");
         }
 
         @Override
-        protected void onPostExecute(ArrayList<DepartmentWiseVacancy> result) {
-            if (this.dialog.isShowing()) {
+        protected void onPostExecute(ArrayList<DepartmentWiseVacancy> result)
+        {
+            if (this.dialog.isShowing())
+            {
                 this.dialog.dismiss();
             }
-
             data = result;
             populateData();
-
         }
     }
 

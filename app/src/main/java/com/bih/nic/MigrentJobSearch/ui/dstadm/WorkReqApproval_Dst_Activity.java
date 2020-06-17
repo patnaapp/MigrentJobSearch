@@ -46,7 +46,7 @@ public class WorkReqApproval_Dst_Activity extends Activity implements AdapterVie
     String OrgId="",user_name="", mobile="", address="",work_site="", DistName="", ProfileImg="",CompanyName="", UserId="",UserRole="",distid="";
 
     String DistId="",DistNAme="";
-    TextView tv_skill11,tv_Norecord_accpt,tv_total_count,tv_worksite;
+    TextView tv_skill11,tv_Norecord_accpt,tv_total_count,tv_worksite,tv_orgname;
     ImageView img_back,btn_previous,btn_next;
     String work_id="",a_Id="";
     CheckBox chk_approve,chk_reject;
@@ -57,7 +57,7 @@ public class WorkReqApproval_Dst_Activity extends Activity implements AdapterVie
     ArrayAdapter ben_type_aangan_aaray;
     Spinner spn_remarks;
     EditText edt_p_remarks;
-    String VerifyType="";
+    String VerifyType="",org_name="";
 
 
     @Override
@@ -78,6 +78,7 @@ public class WorkReqApproval_Dst_Activity extends Activity implements AdapterVie
         lin_remarks.setVisibility(View.GONE);
         work_id = getIntent().getStringExtra("worksid");
         work_site = getIntent().getStringExtra("worksite");
+        org_name = getIntent().getStringExtra("orhname");
         // status = getIntent().getStringExtra("StatusFlag");
         a_Id = getIntent().getStringExtra("a_ID");
         UserId=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserId", "");
@@ -85,8 +86,9 @@ public class WorkReqApproval_Dst_Activity extends Activity implements AdapterVie
 
 
         tv_skill11.setText("Work Requirment Details");
-        tv_total_count.setText(Html.fromHtml("<B><font color='#2C3673'>Work Id:-</font></B>")+work_id);
-        tv_worksite.setText(Html.fromHtml("<B><font color='#2C3673'>Work Site:-</font></B>")+work_site);
+        tv_total_count.setText(Html.fromHtml("<font color='#2C3673'>Work Id:-</font>")+work_id);
+        tv_worksite.setText(Html.fromHtml("<font color='#2C3673'>Work Site:-</font>")+work_site);
+        tv_orgname.setText(Html.fromHtml("<font color='#2C3673'>Organization:-</font>")+org_name);
         tv_skill11.setTextColor(getApplicationContext().getResources().getColor(R.color.green));
 
         OrgId= PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("OrgId", "");
@@ -245,17 +247,14 @@ public class WorkReqApproval_Dst_Activity extends Activity implements AdapterVie
                 legacyTableView.setTitle(LegacyTableView.readLegacyTitle());
                 legacyTableView.setContent(LegacyTableView.readLegacyContent());
                 legacyTableView.setTheme(DEFAULT);
-                legacyTableView.setTablePadding(20);
+                legacyTableView.setTablePadding(15);
                 legacyTableView.setHighlight(1);
-
                 legacyTableView.setShowZoomControls(true);
                 legacyTableView.setBottomShadowVisible(true);
                 legacyTableView.setTitleFont(BOLD);
                 legacyTableView.setContentTextSize(30);
                 legacyTableView.setTitleTextSize(35);
-
                 legacyTableView.build();
-
                 if (this.dialog.isShowing())
                 {
                     this.dialog.dismiss();
@@ -275,6 +274,7 @@ public class WorkReqApproval_Dst_Activity extends Activity implements AdapterVie
         // tv_Norecord_accpt=findViewById(R.id.tv_Norecord_accpt);
         img_back=(ImageView) findViewById(R.id.img);
         tv_total_count=(TextView) findViewById(R.id.tv_total_count);
+        tv_orgname=(TextView) findViewById(R.id.tv_orgname);
         tv_worksite=(TextView) findViewById(R.id.tv_worksite);
         chk_approve=(CheckBox) findViewById(R.id.chk_approve);
         chk_reject=(CheckBox) findViewById(R.id.chk_reject);
