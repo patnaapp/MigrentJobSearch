@@ -45,13 +45,14 @@ public class Job_Offer_activity_Dept extends Activity implements AdapterView.OnI
 
     String skillId,subSkillId;
 
-    String OrgId="",user_name="", mobile="", address="", DistName="", ProfileImg="",CompanyName="", UserId="",UserRole="";
+    String OrgId="",user_name="", mobile="", address="", DistName="", ProfileImg="",CompanyName="", UserId="",UserRole="",DeptID="";
 
     DataBaseHelper dataBaseHelper;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_job_offer_posted);
 
@@ -60,9 +61,9 @@ public class Job_Offer_activity_Dept extends Activity implements AdapterView.OnI
 
         initialise();
 
-
         UserId=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserId", "");
         UserRole=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserRole", "");
+        DeptID=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("OrgId", "");
 
         new SyncHQJobOfferData().execute();
 
@@ -75,12 +76,14 @@ public class Job_Offer_activity_Dept extends Activity implements AdapterView.OnI
     }
 
     @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+    {
 
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> parent) {
+    public void onNothingSelected(AdapterView<?> parent)
+    {
 
     }
 
@@ -105,20 +108,24 @@ public class Job_Offer_activity_Dept extends Activity implements AdapterView.OnI
         int optionType;
 
         @Override
-        protected void onPreExecute() {
+        protected void onPreExecute()
+        {
             this.dialog.setCanceledOnTouchOutside(false);
             this.dialog.setMessage("लोड हो रहा है...");
             this.dialog.show();
         }
 
         @Override
-        protected ArrayList<JobOfferPostedEntity> doInBackground(String...arg) {
-            return WebserviceHelper.JobOfferPosted(UserRole, "");
+        protected ArrayList<JobOfferPostedEntity> doInBackground(String...arg)
+        {
+            return WebserviceHelper.JobOfferPosted(UserRole, DeptID);
         }
 
         @Override
-        protected void onPostExecute(ArrayList<JobOfferPostedEntity> result) {
-            if (this.dialog.isShowing()) {
+        protected void onPostExecute(ArrayList<JobOfferPostedEntity> result)
+        {
+            if (this.dialog.isShowing())
+            {
                 this.dialog.dismiss();
             }
 

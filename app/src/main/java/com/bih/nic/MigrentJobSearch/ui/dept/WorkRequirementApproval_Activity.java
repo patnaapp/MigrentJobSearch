@@ -49,7 +49,7 @@ public class WorkRequirementApproval_Activity extends Activity implements Adapte
     String OrgId="",user_name="", mobile="", address="",work_site="", DistName="", ProfileImg="",CompanyName="", UserId="",UserRole="",distid="";
 
     String DistId="",DistNAme="";
-    TextView tv_skill11,tv_Norecord_accpt,tv_total_count,tv_worksite;
+    TextView tv_skill11,tv_Norecord_accpt,tv_total_count,tv_worksite,tv_orgname;
     ImageView img_back,btn_previous,btn_next;
     String work_id="",a_Id="";
     CheckBox chk_approve,chk_reject;
@@ -60,7 +60,7 @@ public class WorkRequirementApproval_Activity extends Activity implements Adapte
     ArrayAdapter ben_type_aangan_aaray;
     Spinner spn_remarks;
     EditText edt_p_remarks;
-    String VerifyType="";
+    String VerifyType="",org_name="";
 
 
     @Override
@@ -80,14 +80,16 @@ public class WorkRequirementApproval_Activity extends Activity implements Adapte
         lin_remarks.setVisibility(View.GONE);
         work_id = getIntent().getStringExtra("worksid");
         work_site = getIntent().getStringExtra("worksite");
+        org_name = getIntent().getStringExtra("orhname");
         // status = getIntent().getStringExtra("StatusFlag");
         a_Id = getIntent().getStringExtra("a_ID");
         UserId=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserId", "");
 
         tv_skill11.setText("Work Requirment Details");
 
-        tv_total_count.setText(Html.fromHtml("<B><font color='#2C3673'>Work Id:-</font></B>")+work_id);
-        tv_worksite.setText(Html.fromHtml("<B><font color='#2C3673'>Work Site:-</font></B>")+work_site);
+        tv_total_count.setText(Html.fromHtml("<font color='#2C3673'>Work Id:-</font>")+work_id);
+        tv_worksite.setText(Html.fromHtml("<font color='#2C3673'>Work Site:-</font>")+work_site);
+        tv_orgname.setText(Html.fromHtml("<font color='#2C3673'>Organization:-</font>")+org_name);
         tv_skill11.setTextColor(getApplicationContext().getResources().getColor(R.color.green));
 
         OrgId= PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("OrgId", "");
@@ -246,17 +248,14 @@ public class WorkRequirementApproval_Activity extends Activity implements Adapte
                 legacyTableView.setTitle(LegacyTableView.readLegacyTitle());
                 legacyTableView.setContent(LegacyTableView.readLegacyContent());
                 legacyTableView.setTheme(DEFAULT);
-                legacyTableView.setTablePadding(20);
+                legacyTableView.setTablePadding(15);
                 legacyTableView.setHighlight(1);
-
                 legacyTableView.setShowZoomControls(true);
                 legacyTableView.setBottomShadowVisible(true);
                 legacyTableView.setTitleFont(BOLD);
                 legacyTableView.setContentTextSize(30);
                 legacyTableView.setTitleTextSize(35);
-
                 legacyTableView.build();
-
                 if (this.dialog.isShowing())
                 {
                     this.dialog.dismiss();
@@ -271,7 +270,8 @@ public class WorkRequirementApproval_Activity extends Activity implements Adapte
     }
 
 
-    public void initialisation(){
+    public void initialisation()
+    {
         tv_skill11=findViewById(R.id.tv_skill);
         // tv_Norecord_accpt=findViewById(R.id.tv_Norecord_accpt);
         img_back=(ImageView) findViewById(R.id.img);
@@ -287,16 +287,20 @@ public class WorkRequirementApproval_Activity extends Activity implements Adapte
         btn_permannet_rjct=(Button) findViewById(R.id.btn_permannet_rjct);
         spn_remarks=(Spinner) findViewById(R.id.spn_remarks);
         edt_p_remarks=(EditText) findViewById(R.id.edt_p_remarks);
+        tv_orgname=(TextView) findViewById(R.id.tv_orgname);
 
         ben_type_aangan_aaray = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, ben_type_aangan);
         spn_remarks.setAdapter(ben_type_aangan_aaray);
     }
 
-    public void onApprove(View view){
+    public void onApprove(View view)
+    {
         VerifyType="ACCP";
-        if(Utiilties.isOnline(getApplicationContext())) {
+        if(Utiilties.isOnline(getApplicationContext()))
+        {
             new UpdateWorksiteApproval().execute();
-        }else {
+        }
+        else {
             Utiilties.internetNotAvailableDialog(WorkRequirementApproval_Activity.this);
         }
     }
