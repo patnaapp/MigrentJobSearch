@@ -152,9 +152,6 @@ public class HqFragment extends Fragment {
                     PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putString("UserName",result.getUserName()).commit();
                     PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putString("DistCode",result.getDistrictCode()).commit();
                     PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putBoolean("isLogin",true).commit();
-//                    PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putString("BlockName",result.getBlockName()).commit();
-//                    PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putString("PanchayatName",result.getPanchayatName()).commit();
-//                    PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putString("Photo",result.getProfileImg()).commit();
                     GlobalVariables.isLogin=true;
 
                     Intent intent=new Intent(getContext(), HqHomeActivity.class);
