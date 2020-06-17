@@ -147,8 +147,6 @@
         <activity android:name=".ui.labour.UpdateMobileNumberActivity" />
         <activity android:name=".ui.employer.EmployerMainHomeActivity" />
 
-
-        <activity android:name=".ui.dept.ApproveRejectWorkSite_activity" />
         <activity
             android:name=".ui.hq.WorksiteEmplyeeReportActivity"
             android:theme="@style/NoActionBar" />
