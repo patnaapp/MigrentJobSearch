@@ -27,6 +27,7 @@ public class SubDeptLegacyTableActivity extends Activity implements AdapterView.
 
     LegacyTableView legacyTableView;
     ArrayList<SubDepartmentWiseVacancy> data;
+
     String status="",blkcode="", blkname="";
     String OrgId="",user_name="", mobile="", address="", DistName="", ProfileImg="",CompanyName="", UserId="",UserRole="",distid="";
 

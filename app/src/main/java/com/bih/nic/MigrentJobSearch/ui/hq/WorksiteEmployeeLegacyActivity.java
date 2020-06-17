@@ -35,7 +35,8 @@ public class WorksiteEmployeeLegacyActivity extends Activity {
     String status="",distCode="", blockCode="", workId="", workRegId="";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_worksite_employee_legacy);
 

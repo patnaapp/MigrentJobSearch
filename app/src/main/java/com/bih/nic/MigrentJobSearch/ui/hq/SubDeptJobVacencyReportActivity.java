@@ -23,7 +23,8 @@ import com.bih.nic.MigrentJobSearch.adapter.SubDeptJobVacencyAdapter;
 
 import java.util.ArrayList;
 
-public class SubDeptJobVacencyReportActivity extends Activity {
+public class SubDeptJobVacencyReportActivity extends Activity
+{
     RecyclerView listView;
     ImageView img_back;
     TextView tv_skill11;

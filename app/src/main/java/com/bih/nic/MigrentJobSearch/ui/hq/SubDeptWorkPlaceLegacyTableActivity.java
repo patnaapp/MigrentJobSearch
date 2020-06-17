@@ -161,6 +161,7 @@ public class SubDeptWorkPlaceLegacyTableActivity extends Activity implements Ada
         {
             this.dialog.setCanceledOnTouchOutside(false);
             this.dialog.setMessage("लोड हो रहा है...");
+
             this.dialog.show();
         }
 
