@@ -125,6 +125,7 @@ public class WebserviceHelper implements KvmSerializable {
     private static final String UPLOAD_METHOD="InsertDetails";
     private static final String BindWard="BindWard";
     private static final String INSERT_WORK_DETAIL="InsertWorkDataNew";
+    private static final String INSERT_WORK_DETAIL12="InsertWorkDataNew12";
 
     public static final  String APPVERSION_METHOD = "getAppLatest";
     public static final  String UpdateUserDetails = "UpdateUserDetails";
