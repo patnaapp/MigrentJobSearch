@@ -104,6 +104,13 @@
         <activity android:name=".ui.employer.LegacyTableViewActivity" />
         <activity android:name=".ui.employer.BlocJobOfferActivity" />
         <activity android:name=".ui.employer.JobOfferPosted_BlockActivity" />
+        <activity android:name=".ui.dstadm.WorkSiteApproval_dst_activity" />
+        <activity android:name=".ui.dstadm.WorkReqApproval_Dst_Activity" />
+        <activity android:name=".ui.dept.ApproveRejectWorkSite_activity" />
+        <activity android:name=".ui.dept.WorkRequirementApproval_Activity" />
+        <activity android:name=".ui.dept.JobOffer_DEPT_BlockActivity" />
+        <activity android:name=".ui.dept.Job_Offer_activity_Dept" />
+
         <activity android:name=".ui.hq.Job_Offer_activity_HQ" />
         <activity android:name=".ui.hq.JobOffer_HQ_BlockActivity" />
         <activity android:name=".ui.hq.SubDeptJobVacencyReportActivity"
