@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bih.nic.MigrentJobSearch.AppConstant;
 import com.bih.nic.MigrentJobSearch.Model.DepartmentWiseVacancy;
 import com.bih.nic.MigrentJobSearch.Model.WorkSiteEmployeeReportEntity;
 import com.bih.nic.MigrentJobSearch.R;
@@ -57,52 +58,46 @@ public class WorksiteEmployeeReportAdapter extends RecyclerView.Adapter<Worksite
         holder.tv_rejected.setText(info.getTtlRegR());
         holder.tv_appointed.setText(info.getTtlAppointed());
 
-        holder.tv_worksite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onShowReport("shwOrgD", info);
-            }
-        });
 
         holder.tv_worksite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onShowReport("shwOrgD", info);
+                onShowReport(AppConstant.WORKSITE_DETAIL, info);
             }
         });
 
         holder.tv_no_perosn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onShowReport("shwNuP", info);
+                onShowReport(AppConstant.WORKSITE_NO_PERSON, info);
             }
         });
 
         holder.tv_offered.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onShowReport("JobReg", info);
+                onShowReport(AppConstant.WORKSITE_JOB_OFFERED, info);
             }
         });
 
         holder.tv_accpted.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onShowReport("JobRegA", info);
+                onShowReport(AppConstant.WORKSITE_JOB_ACCEPTED, info);
             }
         });
 
         holder.tv_rejected.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onShowReport("JobRegR", info);
+                onShowReport(AppConstant.WORKSITE_JOB_REJECTED, info);
             }
         });
 
         holder.tv_appointed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onShowReport("shorAppted", info);
+                onShowReport(AppConstant.WORKSITE_JOB_APPOINTED, info);
             }
         });
     }

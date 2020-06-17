@@ -67,10 +67,23 @@
     </LinearLayout>
 
 
+
     <com.levitnudi.legacytableview.LegacyTableView
         android:id="@+id/legacy_table_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/ll_skill"
+        android:layout_above="@+id/ll_btn"/>
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_no_record_found"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="No Record Found"
+        android:gravity="center"
+        android:textSize="22sp"
+        android:textColor="@color/holo_red_dark"
         android:layout_below="@+id/ll_skill"
         android:layout_above="@+id/ll_btn"/>
 
