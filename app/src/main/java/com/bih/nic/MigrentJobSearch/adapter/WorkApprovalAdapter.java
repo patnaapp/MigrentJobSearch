@@ -2,6 +2,7 @@ package com.bih.nic.MigrentJobSearch.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import com.bih.nic.MigrentJobSearch.Model.WorkRequirementsEntity;
 import com.bih.nic.MigrentJobSearch.R;
 import com.bih.nic.MigrentJobSearch.listener.WorkReqrmntListener;
 import com.bih.nic.MigrentJobSearch.ui.dept.WorkRequirementApproval_Activity;
+import com.bih.nic.MigrentJobSearch.ui.dstadm.WorkReqApproval_Dst_Activity;
 import com.bih.nic.MigrentJobSearch.ui.employer.BlocJobOfferActivity;
 
 import java.util.ArrayList;
@@ -30,6 +32,7 @@ public class WorkApprovalAdapter extends RecyclerView.Adapter<WorkApprovalAdapte
     WorkReqrmntListener listener;
     String keyid;
     DataBaseHelper dataBaseHelper;
+    String UserRole="";
 
     // public WorkApprovalAdapter(Activity listViewshowedit, ArrayList<ApproveWorkSiteEntity> rlist, WorkReqrmntListener listener, String isEdit) {
     public WorkApprovalAdapter(Activity listViewshowedit, ArrayList<ApproveWorkSiteEntity> rlist, String isEdit) {
@@ -45,6 +48,7 @@ public class WorkApprovalAdapter extends RecyclerView.Adapter<WorkApprovalAdapte
     {
         View view = mInflater.inflate(R.layout.adaptor_work_approval, parent, false);
         return new ViewHolder(view);
+
     }
 
     @Override
@@ -52,7 +56,7 @@ public class WorkApprovalAdapter extends RecyclerView.Adapter<WorkApprovalAdapte
         final ApproveWorkSiteEntity info = ThrList.get(position);
 
         dataBaseHelper = new DataBaseHelper(activity);
-
+        UserRole= PreferenceManager.getDefaultSharedPreferences(activity).getString("UserRole", "");
         holder.tv_slno.setText(String.valueOf(position+1));
 
         holder.tv_block.setText(info.getBlockName());
@@ -72,12 +76,21 @@ public class WorkApprovalAdapter extends RecyclerView.Adapter<WorkApprovalAdapte
         holder.iv_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(activity, WorkRequirementApproval_Activity.class);
+                if (UserRole.equals("ORGADM")){
+                    Intent intent = new Intent(activity, WorkRequirementApproval_Activity.class);
+                    intent.putExtra("worksid",info.getWorksId());
+                    intent.putExtra("worksite",info.getWorkSiteName());
+                    intent.putExtra("a_ID",info.getA_id());
+                    activity.startActivity(intent);
+                }
+                else if (UserRole.equals("DSTADM")){
+                    Intent intent = new Intent(activity, WorkReqApproval_Dst_Activity.class);
+                    intent.putExtra("worksid",info.getWorksId());
+                    intent.putExtra("worksite",info.getWorkSiteName());
+                    intent.putExtra("a_ID",info.getA_id());
+                    activity.startActivity(intent);
+                }
 
-                intent.putExtra("worksid",info.getWorksId());
-                intent.putExtra("worksite",info.getWorkSiteName());
-                intent.putExtra("a_ID",info.getA_id());
-                activity.startActivity(intent);
             }
         });
     }

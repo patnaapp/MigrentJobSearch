@@ -60,7 +60,8 @@ public class WorkReqApproval_Dst_Activity extends Activity implements AdapterVie
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_requirement_approval_view);
@@ -220,7 +221,7 @@ public class WorkReqApproval_Dst_Activity extends Activity implements AdapterVie
             if(OrgId.equals("NA")){
                 OrgId="";
             }
-            return WebserviceHelper.WorkRequirementForApproval(work_id);
+            return WebserviceHelper.WorkRequirementApprovalBy_Dst(work_id);
         }
 
         @Override

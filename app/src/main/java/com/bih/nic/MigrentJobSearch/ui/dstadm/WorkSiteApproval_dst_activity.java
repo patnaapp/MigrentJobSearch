@@ -63,7 +63,7 @@ public class WorkSiteApproval_dst_activity extends Activity implements AdapterVi
         DstCode=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("DstCode", "");
         initialization();
 
-       // loadDistrictSpinnerData();
+        // loadDistrictSpinnerData();
         loadBlockSpinnerData(DstCode);
 
 //        spn_district.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -177,12 +177,14 @@ public class WorkSiteApproval_dst_activity extends Activity implements AdapterVi
 
     }
 
-    public void loadDistrictSpinnerData(){
+    public void loadDistrictSpinnerData()
+    {
         DistrictList = dataBaseHelper.getDistDetail();
         ArrayList<String> list = new ArrayList<String>();
         list.add("-Select-");
         int index = 0;
-        for (District info: DistrictList){
+        for (District info: DistrictList)
+        {
             list.add(info.get_DistName());
             //if(benDetails.get)
         }
@@ -197,13 +199,15 @@ public class WorkSiteApproval_dst_activity extends Activity implements AdapterVi
 //        spn_district.setEnabled(false);
     }
 
-    public void loadBlockSpinnerData(String district){
+    public void loadBlockSpinnerData(String district)
+    {
         BlockList.clear();
         BlockList = dataBaseHelper.getBlockDetail(district);
         ArrayList<String> list = new ArrayList<String>();
         list.add("-Select-");
         int index = 0;
-        for (BlockWeb info: BlockList){
+        for (BlockWeb info: BlockList)
+        {
             list.add(info.getBlockName());
             //if(benDetails.get)
         }
@@ -219,35 +223,42 @@ public class WorkSiteApproval_dst_activity extends Activity implements AdapterVi
     }
 
     @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+    {
 
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> parent) {
+    public void onNothingSelected(AdapterView<?> parent)
+    {
 
     }
 
 
-    private class GetWorkSiteForApproval extends AsyncTask<String, Void, ArrayList<ApproveWorkSiteEntity>> {
+    private class GetWorkSiteForApproval extends AsyncTask<String, Void, ArrayList<ApproveWorkSiteEntity>>
+    {
         private final ProgressDialog dialog = new ProgressDialog(WorkSiteApproval_dst_activity.this);
         int optionType;
 
         @Override
-        protected void onPreExecute() {
+        protected void onPreExecute()
+        {
             this.dialog.setCanceledOnTouchOutside(false);
             this.dialog.setMessage("लोड हो रहा है...");
             this.dialog.show();
         }
 
         @Override
-        protected ArrayList<ApproveWorkSiteEntity> doInBackground(String...arg) {
-            return WebserviceHelper.GetWorkSiteForApproval(block_id,OrgId, Status_Code);
+        protected ArrayList<ApproveWorkSiteEntity> doInBackground(String...arg)
+        {
+            return WebserviceHelper.GetWorkSiteForApprovalByDst(block_id,Status_Code);
         }
 
         @Override
-        protected void onPostExecute(ArrayList<ApproveWorkSiteEntity> result) {
-            if (this.dialog.isShowing()) {
+        protected void onPostExecute(ArrayList<ApproveWorkSiteEntity> result)
+        {
+            if (this.dialog.isShowing())
+            {
                 this.dialog.dismiss();
             }
 
@@ -270,9 +281,11 @@ public class WorkSiteApproval_dst_activity extends Activity implements AdapterVi
             listView.setLayoutManager(new LinearLayoutManager(this));
             listView.setAdapter(adaptor_showedit_listDetail);
 
-        }else{
+        }
+        else
+        {
             listView.setVisibility(View.GONE);
-              tv_Norecord.setVisibility(View.VISIBLE);
+            tv_Norecord.setVisibility(View.VISIBLE);
         }
     }
 }

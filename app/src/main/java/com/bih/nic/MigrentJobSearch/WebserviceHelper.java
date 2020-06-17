@@ -106,6 +106,7 @@ public class WebserviceHelper implements KvmSerializable {
     private static final String GET_JOB_REQUEST_METHOD="GetJobRequest";
     private static final String GET_JOB_Offer_Posted_METHOD="GetJobOfferOrg";
     private static final String GET_Work_Details_Approval="BenApprovalbyOrgAdm";
+    private static final String GET_Work_Details_ApprovalBy_Dst="BenApprovalbyDSTAdm";
     private static final String GET_DEPT_WISE_VACENCY_METHOD="rpt_DepartmentWiseVacancy";
     private static final String GET_WORKSITE_EMPLOYEE="WorkEmployeeDtls";
     private static final String GET_JOB_Offer_Posted_HQ="GetJobOfferOrg";
@@ -113,6 +114,7 @@ public class WebserviceHelper implements KvmSerializable {
     private static final String GET_Acpt_Rjct_Job_By_Labour="GetJobOfferLabourDetails";
     private static final String GET_Blk_Wise_company_Jobs="GetCompanayBlockWise";
     private static final String GET_Work_Requirement_approval="BenApprovalbyOrgAdmWorkRequirement";
+    private static final String GET_Work_Requirement_approval_By_Dst="BenApprovalbyDSTAdmWorkRequirement";
     private static final String UPDATE_PROFILE_IMAGE_METHOD="UpdateImage";
     private static final String SUBSKILL_METHOD="SubSkilMasterList";
     private static final String DISTRICT_METHOD="getDistrict";
@@ -1131,7 +1133,7 @@ public class WebserviceHelper implements KvmSerializable {
                 return result.toString();
             }
             else
-                {
+            {
                 return null;
             }
 
@@ -1959,7 +1961,7 @@ public class WebserviceHelper implements KvmSerializable {
                 return result.toString();
             }
             else
-                {
+            {
                 return null;
             }
         }
@@ -2391,9 +2393,8 @@ public class WebserviceHelper implements KvmSerializable {
     }
 
 
-    public static ArrayList<ApproveWorkSiteEntity> GetWorkSiteForApproval(String block, String deptid,String status) {
-
-
+    public static ArrayList<ApproveWorkSiteEntity> GetWorkSiteForApproval(String block, String deptid,String status)
+    {
         SoapObject request = new SoapObject(SERVICENAMESPACE, GET_Work_Details_Approval);
 
         request.addProperty("_Block", block);
@@ -2401,7 +2402,8 @@ public class WebserviceHelper implements KvmSerializable {
         request.addProperty("_Status", status);
 
         SoapObject res1;
-        try {
+        try
+        {
 
             SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
                     SoapEnvelope.VER11);
@@ -2427,19 +2429,24 @@ public class WebserviceHelper implements KvmSerializable {
 
         ArrayList<ApproveWorkSiteEntity> pvmArrayList = new ArrayList<ApproveWorkSiteEntity>();
 
-        for (int ii = 0; ii < TotalProperty; ii++) {
-            if (res1.getProperty(ii) != null) {
+        for (int ii = 0; ii < TotalProperty; ii++)
+        {
+            if (res1.getProperty(ii) != null)
+            {
                 Object property = res1.getProperty(ii);
-                if (property instanceof SoapObject) {
+                if (property instanceof SoapObject)
+                {
                     SoapObject final_object = (SoapObject) property;
                     ApproveWorkSiteEntity panchayat = new ApproveWorkSiteEntity(final_object);
                     pvmArrayList.add(panchayat);
                 }
-            } else
+            }
+            else
+            {
                 return pvmArrayList;
+            }
+
         }
-
-
         return pvmArrayList;
     }
 
@@ -2534,5 +2541,116 @@ public class WebserviceHelper implements KvmSerializable {
         }
         return userDetails;
 
+    }
+
+
+    public static ArrayList<ApproveWorkSiteEntity> GetWorkSiteForApprovalByDst(String block,String status)
+    {
+        SoapObject request = new SoapObject(SERVICENAMESPACE, GET_Work_Details_ApprovalBy_Dst);
+
+        request.addProperty("_Block", block);
+        request.addProperty("_Status", status);
+
+        SoapObject res1;
+        try
+        {
+
+            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
+                    SoapEnvelope.VER11);
+            envelope.dotNet = true;
+            envelope.setOutputSoapObject(request);
+
+            envelope.addMapping(SERVICENAMESPACE, ApproveWorkSiteEntity.Approval_CLASS.getSimpleName(), ApproveWorkSiteEntity.Approval_CLASS);
+
+            HttpTransportSE androidHttpTransport = new HttpTransportSE(
+                    SERVICEURL);
+            androidHttpTransport.call(SERVICENAMESPACE + GET_Work_Details_ApprovalBy_Dst,
+                    envelope);
+
+            res1 = (SoapObject) envelope.getResponse();
+
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+        int TotalProperty = res1.getPropertyCount();
+
+        ArrayList<ApproveWorkSiteEntity> pvmArrayList = new ArrayList<ApproveWorkSiteEntity>();
+
+        for (int ii = 0; ii < TotalProperty; ii++)
+        {
+            if (res1.getProperty(ii) != null)
+            {
+                Object property = res1.getProperty(ii);
+                if (property instanceof SoapObject)
+                {
+                    SoapObject final_object = (SoapObject) property;
+                    ApproveWorkSiteEntity panchayat = new ApproveWorkSiteEntity(final_object);
+                    pvmArrayList.add(panchayat);
+                }
+            }
+            else
+            {
+                return pvmArrayList;
+            }
+
+        }
+        return pvmArrayList;
+    }
+
+
+    public static ArrayList<WrkReqApprovalDetailsEntity> WorkRequirementApprovalBy_Dst(String workid) {
+
+
+        SoapObject request = new SoapObject(SERVICENAMESPACE, GET_Work_Requirement_approval_By_Dst);
+
+        request.addProperty("_Worksid", workid);
+
+        SoapObject res1;
+        try
+        {
+
+            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+            envelope.dotNet = true;
+            envelope.setOutputSoapObject(request);
+
+            envelope.addMapping(SERVICENAMESPACE, WrkReqApprovalDetailsEntity.RequirementApproval_CLASS.getSimpleName(), WrkReqApprovalDetailsEntity.RequirementApproval_CLASS);
+
+            HttpTransportSE androidHttpTransport = new HttpTransportSE(SERVICEURL);
+            androidHttpTransport.call(SERVICENAMESPACE + GET_Work_Requirement_approval_By_Dst,envelope);
+
+            res1 = (SoapObject) envelope.getResponse();
+
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+        int TotalProperty = res1.getPropertyCount();
+
+        ArrayList<WrkReqApprovalDetailsEntity> pvmArrayList = new ArrayList<WrkReqApprovalDetailsEntity>();
+
+        for (int ii = 0; ii < TotalProperty; ii++)
+        {
+            if (res1.getProperty(ii) != null) {
+                Object property = res1.getProperty(ii);
+                if (property instanceof SoapObject)
+                {
+                    SoapObject final_object = (SoapObject) property;
+                    WrkReqApprovalDetailsEntity panchayat = new WrkReqApprovalDetailsEntity(final_object);
+                    pvmArrayList.add(panchayat);
+                }
+            }
+//            {
+//                return pvmArrayList;
+//            }
+
+        }
+
+
+        return pvmArrayList;
     }
 }
