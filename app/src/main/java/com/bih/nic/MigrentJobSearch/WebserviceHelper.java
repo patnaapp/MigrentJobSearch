@@ -1509,7 +1509,8 @@ public class WebserviceHelper implements KvmSerializable {
     }
 
 
-    public static ArrayList<JobOfferPostedEntity> JobOfferPosted(String role, String orgid) {
+    public static ArrayList<JobOfferPostedEntity> JobOfferPosted(String role, String orgid)
+    {
 
 
         SoapObject request = new SoapObject(SERVICENAMESPACE, GET_JOB_Offer_Posted_METHOD);

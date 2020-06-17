@@ -61,7 +61,6 @@ public class Job_Offer_activity_Dept extends Activity implements AdapterView.OnI
 
         initialise();
 
-
         UserId=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserId", "");
         UserRole=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserRole", "");
 
@@ -108,20 +107,24 @@ public class Job_Offer_activity_Dept extends Activity implements AdapterView.OnI
         int optionType;
 
         @Override
-        protected void onPreExecute() {
+        protected void onPreExecute()
+        {
             this.dialog.setCanceledOnTouchOutside(false);
             this.dialog.setMessage("लोड हो रहा है...");
             this.dialog.show();
         }
 
         @Override
-        protected ArrayList<JobOfferPostedEntity> doInBackground(String...arg) {
+        protected ArrayList<JobOfferPostedEntity> doInBackground(String...arg)
+        {
             return WebserviceHelper.JobOfferPosted(UserRole, "");
         }
 
         @Override
-        protected void onPostExecute(ArrayList<JobOfferPostedEntity> result) {
-            if (this.dialog.isShowing()) {
+        protected void onPostExecute(ArrayList<JobOfferPostedEntity> result)
+        {
+            if (this.dialog.isShowing())
+            {
                 this.dialog.dismiss();
             }
 
