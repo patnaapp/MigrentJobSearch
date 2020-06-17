@@ -238,7 +238,7 @@ public class WorkRequirementApproval_Activity extends Activity implements Adapte
                 int i=1;
                 for (WrkReqApprovalDetailsEntity info: data)
                 {
-                    LegacyTableView.insertLegacyContent(String.valueOf(i),info.getSkillNameHn(),info.getSkillSub(),info.getNoOfPerson(),info.getGender(),info.getExperiance(),info.getExperianceMax(),info.getSalary(),info.getSalaryMax(),info.getActive());
+                    LegacyTableView.insertLegacyContent(String.valueOf(i),info.getSkillCategoryHn(),info.getSkillNameHn(),info.getNoOfPerson(),info.getGender(),info.getExperiance(),info.getExperianceMax(),info.getSalary(),info.getSalaryMax(),info.getActive());
                     i++;
                 }
 
