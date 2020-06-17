@@ -146,6 +146,7 @@ public class WebserviceHelper implements KvmSerializable {
     public static final  String ConsolidatedRptForStatus = "ConsolidatedRptForStatus";
     public static final  String ConsolidatedRptForDistWiseBlockStatus = "ConsolidatedRptForDistWiseBlockStatus";
     public static final  String Approve_Work_Site = "BenApprovalbyOrgAdmUpdate";
+    public static final  String Approve_Work_Site_By_dst = "BenApprovalbyDSTAdmUpdate";
     static String rest;
 
 
@@ -2437,7 +2438,7 @@ public class WebserviceHelper implements KvmSerializable {
                 if (property instanceof SoapObject)
                 {
                     SoapObject final_object = (SoapObject) property;
-                    ApproveWorkSiteEntity panchayat = new ApproveWorkSiteEntity(final_object);
+                    ApproveWorkSiteEntity panchayat = new ApproveWorkSiteEntity(final_object,"1");
                     pvmArrayList.add(panchayat);
                 }
             }
@@ -2587,7 +2588,7 @@ public class WebserviceHelper implements KvmSerializable {
                 if (property instanceof SoapObject)
                 {
                     SoapObject final_object = (SoapObject) property;
-                    ApproveWorkSiteEntity panchayat = new ApproveWorkSiteEntity(final_object);
+                    ApproveWorkSiteEntity panchayat = new ApproveWorkSiteEntity(final_object,"2");
                     pvmArrayList.add(panchayat);
                 }
             }
@@ -2652,5 +2653,44 @@ public class WebserviceHelper implements KvmSerializable {
 
 
         return pvmArrayList;
+    }
+
+
+    public static DefaultResponse WorksiteApproveByDst(String wrkid, String userid, String verifytype,String remarks,String premarks)
+    {
+
+        SoapObject request = new SoapObject(SERVICENAMESPACE, Approve_Work_Site_By_dst);
+
+        request.addProperty("_Worksid",wrkid);
+        request.addProperty("_verifiedBY", userid);
+        request.addProperty("_VerifyType", verifytype);
+        request.addProperty("_RejectionRemaks", remarks);
+        request.addProperty("_VerifiedRemarksType", premarks);
+
+
+        DefaultResponse userDetails;
+        SoapObject res1;
+        try {
+
+            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+            envelope.dotNet = true;
+            envelope.setOutputSoapObject(request);
+            envelope.addMapping(SERVICENAMESPACE, DefaultResponse.DefaultResponse_CLASS.getSimpleName(), DefaultResponse.DefaultResponse_CLASS);
+            HttpTransportSE androidHttpTransport = new HttpTransportSE(SERVICEURL);
+            androidHttpTransport.call(SERVICENAMESPACE + Approve_Work_Site_By_dst, envelope);
+
+            res1 = (SoapObject) envelope.getResponse();
+
+            int TotalProperty = res1.getPropertyCount();
+
+            userDetails = new DefaultResponse(res1);
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return userDetails;
+
     }
 }

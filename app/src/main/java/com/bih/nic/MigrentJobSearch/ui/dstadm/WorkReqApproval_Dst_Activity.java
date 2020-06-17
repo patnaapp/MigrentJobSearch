@@ -382,7 +382,7 @@ public class WorkReqApproval_Dst_Activity extends Activity implements AdapterVie
         @Override
         protected DefaultResponse doInBackground(String... param) {
 
-            return WebserviceHelper.WorksiteApprove(work_id,UserId,VerifyType,Remarks_Code,edt_p_remarks.getText().toString());
+            return WebserviceHelper.WorksiteApproveByDst(work_id,UserId,VerifyType,Remarks_Code,edt_p_remarks.getText().toString());
 
         }
 

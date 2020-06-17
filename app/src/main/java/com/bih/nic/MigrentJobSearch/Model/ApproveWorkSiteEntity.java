@@ -26,21 +26,36 @@ public class ApproveWorkSiteEntity implements KvmSerializable, Serializable {
     private String VerifiedRemarksTypeOrgAdm = "";
 
 
-    public ApproveWorkSiteEntity(SoapObject obj) {
+    public ApproveWorkSiteEntity(SoapObject obj,String status) {
 
-        this.ComanyNameEn = obj.getProperty("ComanyNameEn").toString();
-        this.WorksId = obj.getProperty("WorksId").toString();
-        this.a_id = obj.getProperty("a_id").toString();
-        this.BlockName = obj.getProperty("BlockName").toString();
-        this.WorkSiteName = obj.getProperty("WorkSiteName").toString();
-        this.Location = obj.getProperty("Location").toString();
-        this.PinNo = obj.getProperty("PinNo").toString();
-        this.EntryDate = obj.getProperty("EntryDate").toString();
-        this.CPMobileNo = obj.getProperty("CPMobileNo").toString();
-        this.BenStatus = obj.getProperty("BenStatus").toString();
-        this.IsVerifiedOrgAdm = obj.getProperty("IsVerifiedOrgAdm").toString();
-        this.VerifiedRemarksOrgAdm = obj.getProperty("VerifiedRemarksOrgAdm").toString();
-        this.VerifiedRemarksTypeOrgAdm = obj.getProperty("VerifiedRemarksTypeOrgAdm").toString();
+        if (status.equals("1")){
+            this.ComanyNameEn = obj.getProperty("ComanyNameEn").toString();
+            this.WorksId = obj.getProperty("WorksId").toString();
+            this.a_id = obj.getProperty("a_id").toString();
+            this.BlockName = obj.getProperty("BlockName").toString();
+            this.WorkSiteName = obj.getProperty("WorkSiteName").toString();
+            this.Location = obj.getProperty("Location").toString();
+            this.PinNo = obj.getProperty("PinNo").toString();
+            this.EntryDate = obj.getProperty("EntryDate").toString();
+            this.CPMobileNo = obj.getProperty("CPMobileNo").toString();
+            this.BenStatus = obj.getProperty("BenStatus").toString();
+            this.IsVerifiedOrgAdm = obj.getProperty("IsVerifiedOrgAdm").toString();
+            this.VerifiedRemarksOrgAdm = obj.getProperty("VerifiedRemarksOrgAdm").toString();
+            this.VerifiedRemarksTypeOrgAdm = obj.getProperty("VerifiedRemarksTypeOrgAdm").toString();
+        }
+        else if (status.equals("2")){
+            this.ComanyNameEn = obj.getProperty("ComanyNameEn").toString();
+            this.WorksId = obj.getProperty("WorksId").toString();
+            this.a_id = obj.getProperty("a_id").toString();
+            this.BlockName = obj.getProperty("BlockName").toString();
+            this.WorkSiteName = obj.getProperty("WorkSiteName").toString();
+            this.Location = obj.getProperty("Location").toString();
+            this.PinNo = obj.getProperty("PinNo").toString();
+            this.EntryDate = obj.getProperty("EntryDate").toString();
+            this.CPMobileNo = obj.getProperty("CPMobileNo").toString();
+            this.BenStatus = obj.getProperty("BenStatus").toString();
+        }
+
         //this.skillName = obj.getProperty("SkillNameHn").toString();
 
 

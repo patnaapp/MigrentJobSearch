@@ -305,7 +305,7 @@ public class SplashActivity extends Activity {
                         startActivity(i);
                         finish();
                     }
-                    else if(userRole.equals("HQ") || userRole.equals("ORGADM")){
+                    else if(userRole.equals("HQ") || userRole.equals("ORGADM")|| userRole.equals("DSTADM")){
                         Intent i = new Intent(SplashActivity.this, HqHomeActivity.class);
                         startActivity(i);
                         finish();
