@@ -65,12 +65,15 @@ public class WorkRequirementApproval_Activity extends Activity implements Adapte
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_requirement_approval_view);
 
 
         Utiilties.setStatusBarColor(this);
         getActionBar().hide();
+
         initialisation();
+
         ll_btn.setVisibility(View.GONE);
         lin_p_remarks.setVisibility(View.GONE);
         lin_remarks.setVisibility(View.GONE);
