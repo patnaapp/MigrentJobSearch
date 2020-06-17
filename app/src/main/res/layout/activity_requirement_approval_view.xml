@@ -165,7 +165,7 @@
                 android:layout_marginLeft="10dp"
                 android:id="@+id/tv_p_remarks"
                 android:layout_marginStart="10dp"
-                android:text="Permanent Rejection Remarks :"
+                android:text="Remarks :"
                 android:textColor="#222222"
                 android:textSize="13sp"
                 android:textStyle="normal" />

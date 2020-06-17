@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.Html;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -84,8 +85,8 @@ public class WorkReqApproval_Dst_Activity extends Activity implements AdapterVie
 
 
         tv_skill11.setText("Work Requirment Details");
-        tv_total_count.setText("Work Id:-"+work_id);
-        tv_worksite.setText("Work Site:-"+work_site);
+        tv_total_count.setText(Html.fromHtml("<B><font color='#2C3673'>Work Id:-</font></B>")+work_id);
+        tv_worksite.setText(Html.fromHtml("<B><font color='#2C3673'>Work Site:-</font></B>")+work_site);
         tv_skill11.setTextColor(getApplicationContext().getResources().getColor(R.color.green));
 
         OrgId= PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("OrgId", "");
