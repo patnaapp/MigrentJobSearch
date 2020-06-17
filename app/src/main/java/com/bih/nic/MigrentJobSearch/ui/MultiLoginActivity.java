@@ -37,7 +37,6 @@ public class MultiLoginActivity extends AppCompatActivity implements BottomNavig
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
-
         String from = getIntent().getStringExtra("From");
         if(from != null && !from.equals("")){
             if(from.equals(AppConstant.HQ))

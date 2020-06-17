@@ -35,8 +35,7 @@ public class WorksiteEmployeeLegacyActivity extends Activity {
     String status="",distCode="", blockCode="", workId="", workRegId="";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_worksite_employee_legacy);
 
@@ -137,17 +136,16 @@ public class WorksiteEmployeeLegacyActivity extends Activity {
                 legacyTableView.setContentTextSize(30);
                 legacyTableView.setTitleTextSize(35);
                 legacyTableView.build();
-                if (this.dialog.isShowing())
-                {
-                    this.dialog.dismiss();
-                }
             }
             else
             {
                 legacyTableView.setVisibility(View.GONE);
+                tv_sub_header.setVisibility(View.GONE);
                 tv_no_record_found.setVisibility(View.VISIBLE);
             }
 
+            if (this.dialog.isShowing())
+                this.dialog.dismiss();
         }
     }
 
@@ -157,13 +155,78 @@ public class WorksiteEmployeeLegacyActivity extends Activity {
             case AppConstant.WORKSITE_DETAIL:
                 tv_sub_header.setText("Total Count:-"+data.size());
 
-                LegacyTableView.insertLegacyTitle("Sl No.","Company Name", "Comany Address","WorkSite Name", "Location", "Contact Person Name", "Contact person number", "No. of Person", "Total Job Offer");
+                LegacyTableView.insertLegacyTitle("Sl No.","Company Name", "Comany Address","WorkSite Name", "Location", "Contact Person Name", "Contact Person No.", "No. of Person", "Total Job Offer");
                 int i=1;
 
                 for (WorkSiteEmployeeReportEntity info: data)
                 {
                     LegacyTableView.insertLegacyContent(String.valueOf(i),info.getComanyNameEn(),info.getAddressEn(),info.getWorkSiteName(),info.getLocation(),info.getContactPerson(),info.getCPMobileNo(), info.getNoOfPerson(), info.getTotalJobOffer());
                     i++;
+                }
+                break;
+
+            case AppConstant.WORKSITE_NO_PERSON:
+                tv_sub_header.setText("Total Count:-"+data.size());
+
+                LegacyTableView.insertLegacyTitle("Sl No.","WorkSite Name", "Location", "Contact Person", "Designaton", "Contact Person No.", "No. of Person", "Skill Name", "Sub Skill Name");
+                int i2=1;
+
+                for (WorkSiteEmployeeReportEntity info: data)
+                {
+                    LegacyTableView.insertLegacyContent(String.valueOf(i2),info.getWorkSiteName(),info.getLocation(),info.getContactPerson(),info.getDesignaton(),info.getCPMobileNo(), info.getNoOfPerson(), info.getSkillName(), info.getSubSkillName());
+                    i2++;
+                }
+                break;
+
+            case AppConstant.WORKSITE_JOB_OFFERED:
+                tv_sub_header.setText("Total Count:-"+data.size());
+
+                LegacyTableView.insertLegacyTitle("Sl No.","Registration No.", "Labharthi Name", "Labharthi Mobile", "Gender", "Skill Name");
+                int i3=1;
+
+                for (WorkSiteEmployeeReportEntity info: data)
+                {
+                    LegacyTableView.insertLegacyContent(String.valueOf(i3),info.getVchregnum(),info.getVchName(),info.getVchMobile(),info.getIntGender(), info.getSkillName());
+                    i3++;
+                }
+                break;
+
+            case AppConstant.WORKSITE_JOB_ACCEPTED:
+                tv_sub_header.setText("Total Count:-"+data.size());
+
+                LegacyTableView.insertLegacyTitle("Sl No.","Company Name", "Contact Person Name", "Contact Person No.", "Registration No.", "Labharthi Name", "Labharthi Mobile", "Gender", "Skill Name");
+                int i4=1;
+
+                for (WorkSiteEmployeeReportEntity info: data)
+                {
+                    LegacyTableView.insertLegacyContent(String.valueOf(i4),info.getComanyNameEn(),info.getContactPerson(),info.getCPMobileNo(),info.getVchregnum(),info.getVchName(),info.getVchMobile(),info.getIntGender(), info.getSkillName());
+                    i4++;
+                }
+                break;
+
+            case AppConstant.WORKSITE_JOB_REJECTED:
+                tv_sub_header.setText("Total Count:-"+data.size());
+
+                LegacyTableView.insertLegacyTitle("Sl No.","Registration No.", "Labharthi Name", "Labharthi Mobile", "Gender", "Skill Name");
+                int i5=1;
+
+                for (WorkSiteEmployeeReportEntity info: data)
+                {
+                    LegacyTableView.insertLegacyContent(String.valueOf(i5),info.getVchregnum(),info.getVchName(),info.getVchMobile(),info.getIntGender(), info.getSkillName());
+                    i5++;
+                }
+                break;
+
+            case AppConstant.WORKSITE_JOB_APPOINTED:
+                tv_sub_header.setText("Total Count:-"+data.size());
+
+                LegacyTableView.insertLegacyTitle("Sl No.","Registration No.", "Labharthi Name", "Labharthi Mobile", "Gender", "Skill Name");
+                int i6=1;
+
+                for (WorkSiteEmployeeReportEntity info: data)
+                {
+                    LegacyTableView.insertLegacyContent(String.valueOf(i6),info.getVchregnum(),info.getVchName(),info.getVchMobile(),info.getIntGender(), info.getSkillName());
+                    i6++;
                 }
                 break;
         }

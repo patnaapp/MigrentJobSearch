@@ -65,6 +65,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".ui.hq.WorksiteEmployeeLegacyActivity"
+            android:theme="@style/NoActionBar"/>
         <activity android:name=".ui.hq.OrganisationWorkDetailActivity"
             android:theme="@style/NoActionBar"/>
         <activity android:name=".ui.hq.SubDeptLegacyTableActivity"

@@ -36,6 +36,11 @@ public class WorkSiteEmployeeReportEntity implements KvmSerializable, Serializab
     private String ComanyNameEn="";
     private String AddressEn="";
 
+    private String vchregnum="";
+    private String vchName="";
+    private String vchMobile="";
+    private String intGender="";
+
 
     public WorkSiteEmployeeReportEntity() {
 
@@ -43,8 +48,6 @@ public class WorkSiteEmployeeReportEntity implements KvmSerializable, Serializab
 
     public WorkSiteEmployeeReportEntity(SoapObject res1, String status)
     {
-        this.WorkSiteName=res1.getProperty("WorkSiteName").toString();
-        this.NoOfPerson=res1.getProperty("NoOfPerson").toString();
 
         switch (status){
             case AppConstant.WORKSITE_EMPLOYEE_REPORT:
@@ -58,6 +61,8 @@ public class WorkSiteEmployeeReportEntity implements KvmSerializable, Serializab
                 this.ttlPendinAppoint=res1.getProperty("ttlPendinAppoint").toString();
                 this.ttlAppointed=res1.getProperty("ttlAppointed").toString();
                 this.SkillName=res1.getProperty("SkillName").toString();
+                this.WorkSiteName=res1.getProperty("WorkSiteName").toString();
+                this.NoOfPerson=res1.getProperty("NoOfPerson").toString();
                 break;
 
             case AppConstant.WORKSITE_DETAIL:
@@ -67,6 +72,8 @@ public class WorkSiteEmployeeReportEntity implements KvmSerializable, Serializab
                 this.ComanyNameEn=res1.getProperty("ComanyNameEn").toString();
                 this.AddressEn=res1.getProperty("AddressEn").toString();
                 this.TotalJobOffer=res1.getProperty("TotalJobOfferCount").toString();
+                this.WorkSiteName=res1.getProperty("WorkSiteName").toString();
+                this.NoOfPerson=res1.getProperty("NoOfPerson").toString();
                 break;
 
             case AppConstant.WORKSITE_NO_PERSON:
@@ -76,6 +83,40 @@ public class WorkSiteEmployeeReportEntity implements KvmSerializable, Serializab
                 this.CPMobileNo=res1.getProperty("CPMobileNo").toString();
                 this.SubSkillName=res1.getProperty("SubSkillName").toString();
                 this.SkillName=res1.getProperty("SkillName").toString();
+                this.WorkSiteName=res1.getProperty("WorkSiteName").toString();
+                this.NoOfPerson=res1.getProperty("NoOfPerson").toString();
+                break;
+
+            case AppConstant.WORKSITE_JOB_OFFERED:
+                this.SkillName=res1.getProperty("SkillName").toString();
+                this.vchregnum=res1.getProperty("vchregnum").toString();
+                this.vchName=res1.getProperty("vchName").toString();
+                this.vchMobile=res1.getProperty("vchMobile").toString();
+                this.intGender=res1.getProperty("intGender").toString();
+                break;
+
+            case AppConstant.WORKSITE_JOB_ACCEPTED:
+                this.SkillName=res1.getProperty("SkillName").toString();
+                this.vchregnum=res1.getProperty("vchregnum").toString();
+                this.vchName=res1.getProperty("vchName").toString();
+                this.vchMobile=res1.getProperty("vchMobile").toString();
+                this.intGender=res1.getProperty("intGender").toString();
+                break;
+
+            case AppConstant.WORKSITE_JOB_REJECTED:
+                this.SkillName=res1.getProperty("SkillName").toString();
+                this.vchregnum=res1.getProperty("vchregnum").toString();
+                this.vchName=res1.getProperty("vchName").toString();
+                this.vchMobile=res1.getProperty("vchMobile").toString();
+                this.intGender=res1.getProperty("intGender").toString();
+                break;
+
+            case AppConstant.WORKSITE_JOB_APPOINTED:
+                this.SkillName=res1.getProperty("SkillName").toString();
+                this.vchregnum=res1.getProperty("vchregnum").toString();
+                this.vchName=res1.getProperty("vchName").toString();
+                this.vchMobile=res1.getProperty("vchMobile").toString();
+                this.intGender=res1.getProperty("intGender").toString();
                 break;
         }
 
@@ -100,6 +141,38 @@ public class WorkSiteEmployeeReportEntity implements KvmSerializable, Serializab
     @Override
     public void getPropertyInfo(int index, Hashtable properties, PropertyInfo info) {
 
+    }
+
+    public String getVchregnum() {
+        return vchregnum;
+    }
+
+    public void setVchregnum(String vchregnum) {
+        this.vchregnum = vchregnum;
+    }
+
+    public String getVchName() {
+        return vchName;
+    }
+
+    public void setVchName(String vchName) {
+        this.vchName = vchName;
+    }
+
+    public String getVchMobile() {
+        return vchMobile;
+    }
+
+    public void setVchMobile(String vchMobile) {
+        this.vchMobile = vchMobile;
+    }
+
+    public String getIntGender() {
+        return intGender;
+    }
+
+    public void setIntGender(String intGender) {
+        this.intGender = intGender;
     }
 
     public String getComanyNameEn() {
