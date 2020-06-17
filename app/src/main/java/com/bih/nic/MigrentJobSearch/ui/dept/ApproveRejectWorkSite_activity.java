@@ -65,7 +65,8 @@ public class ApproveRejectWorkSite_activity extends Activity implements AdapterV
 
         loadDistrictSpinnerData();
 
-        spn_district.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spn_district.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+        {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position > 0) {
@@ -95,31 +96,35 @@ public class ApproveRejectWorkSite_activity extends Activity implements AdapterV
                     block_id = BlockList.get(position-1).getBlockCode();
                     block_name = BlockList.get(position-1).getBlockName();
 
-
-
-                } else {
+                }
+                else
+                    {
                     block_id = "";
                     block_name = "";
                 }
             }
-
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+            public void onNothingSelected(AdapterView<?> parent)
+            {
                 block_id = "";
                 block_name = "";
             }
 
         });
 
-        spn_status.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spn_status.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+        {
 
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+            {
                 Log.e("arg2",""+position);
-                if (position > 0) {
+                if (position > 0)
+                {
                     Status_Name = ben_type_aangan[position].toString();
 
-                    if (Status_Name.equals("Pending")) {
+                    if (Status_Name.equals("Pending"))
+                    {
 
                         Status_Code = "1";
                     } else if (Status_Name.equals("Accept")) {

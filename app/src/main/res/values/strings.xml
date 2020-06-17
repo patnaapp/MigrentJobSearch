@@ -34,7 +34,7 @@
     <string name="title_activity_multi_login">MultiLoginActivity</string>
     <string name="title_home">श्रमिक लॉगिन</string>
     <string name="title_dashboard">नियोक्ता लॉगिन</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_notifications">आधिकारिक लॉगिन</string>
 
 
     <string name="invalid_email">This email address is invalid</string>
