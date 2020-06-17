@@ -58,7 +58,6 @@ public class WorksiteEmployeeReportAdapter extends RecyclerView.Adapter<Worksite
         holder.tv_rejected.setText(info.getTtlRegR());
         holder.tv_appointed.setText(info.getTtlAppointed());
 
-
         holder.tv_worksite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
