@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bih.nic.MigrentJobSearch.AppConstant;
 import com.bih.nic.MigrentJobSearch.DataBaseHelper.DataBaseHelper;
 import com.bih.nic.MigrentJobSearch.GlobalVariables;
 import com.bih.nic.MigrentJobSearch.OfficeReport.DistricWise;
@@ -113,6 +114,7 @@ public class HqHomeActivity extends Activity {
         GlobalVariables.isLogin=false;
         Intent intent = new Intent(this, MultiLoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK| Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.putExtra("From", AppConstant.HQ);
         startActivity(intent);
         finish();
     }

@@ -15,6 +15,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.bih.nic.MigrentJobSearch.AppConstant;
 import com.bih.nic.MigrentJobSearch.Login;
 import com.bih.nic.MigrentJobSearch.R;
 import com.bih.nic.MigrentJobSearch.Utiilties;
@@ -36,6 +37,16 @@ public class MultiLoginActivity extends AppCompatActivity implements BottomNavig
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+
+        String from = getIntent().getStringExtra("From");
+        if(from != null && !from.equals("")){
+            if(from.equals(AppConstant.HQ))
+                navController.navigate(R.id.navigation_hq);
+            else if(from.equals(AppConstant.EMPLOYER))
+                navController.navigate(R.id.navigation_employer);
+            else
+                navController.navigate(R.id.navigation_labour);
+        }
     }
 
     @Override

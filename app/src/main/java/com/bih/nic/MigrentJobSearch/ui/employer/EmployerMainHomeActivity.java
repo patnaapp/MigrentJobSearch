@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bih.nic.MigrentJobSearch.AppConstant;
 import com.bih.nic.MigrentJobSearch.DataBaseHelper.DataBaseHelper;
 import com.bih.nic.MigrentJobSearch.GlobalVariables;
 import com.bih.nic.MigrentJobSearch.Model.BenDetails;
@@ -151,6 +152,7 @@ public class EmployerMainHomeActivity extends Activity {
 //        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("UserRole","").commit();
         Intent intent = new Intent(this, MultiLoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK| Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.putExtra("From", AppConstant.EMPLOYER);
         startActivity(intent);
         finish();
     }
