@@ -110,7 +110,8 @@ public class PostedJobBlockAdapter extends RecyclerView.Adapter<PostedJobBlockAd
                 if (!(info.getTtlRegA().equals("0"))){
                     Intent intent = new Intent(activity, LegacyTableViewActivity.class);
                     //intent.putExtra("data",Reg_No);
-                    intent.putExtra("distid","");
+                    String distid = activity.getIntent().getStringExtra("DistCode");
+                    intent.putExtra("distid",distid);
                     intent.putExtra("StatusFlag","SHRGJA");
                     intent.putExtra("BlockCode",info.getBlockCode());
                     intent.putExtra("BlockNAme",info.getBlockName());
@@ -130,7 +131,8 @@ public class PostedJobBlockAdapter extends RecyclerView.Adapter<PostedJobBlockAd
                 if (!(info.getTtlRegR().equals("0"))) {
                     Intent intent = new Intent(activity, LegacyTableViewActivity.class);
                     //intent.putExtra("data",Reg_No);
-                    intent.putExtra("distid","");
+                    String distid = activity.getIntent().getStringExtra("DistCode");
+                    intent.putExtra("distid",distid);
                     intent.putExtra("StatusFlag", "SHRGJR");
                     intent.putExtra("BlockCode", info.getBlockCode());
                     intent.putExtra("BlockNAme", info.getBlockName());
@@ -152,7 +154,8 @@ public class PostedJobBlockAdapter extends RecyclerView.Adapter<PostedJobBlockAd
         return ThrList.size();
     }
 
-    public class ViewHolder  extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder  extends RecyclerView.ViewHolder implements View.OnClickListener
+    {
         TextView tv_blk_name,total_reg,tv_joboffer,tv_accpted,tv_rejected,tv_slno;
         ImageView iv_call;
 
