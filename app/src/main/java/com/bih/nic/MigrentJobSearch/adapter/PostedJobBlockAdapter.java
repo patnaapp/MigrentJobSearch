@@ -62,7 +62,7 @@ public class PostedJobBlockAdapter extends RecyclerView.Adapter<PostedJobBlockAd
                 Intent intent = new Intent(activity, BlocJobOfferActivity.class);
                 String distid = activity.getIntent().getStringExtra("DistCode");
                 intent.putExtra("distid",distid);
-               // intent.putExtra("StatusFlag","SHRG");
+                // intent.putExtra("StatusFlag","SHRG");
                 intent.putExtra("BlockCode",info.getBlockCode());
                 intent.putExtra("BlockNAme",info.getBlockName());
                 activity.startActivity(intent);
@@ -127,8 +127,10 @@ public class PostedJobBlockAdapter extends RecyclerView.Adapter<PostedJobBlockAd
 
         holder.tv_rejected.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                if (!(info.getTtlRegR().equals("0"))) {
+            public void onClick(View v)
+            {
+                if (!(info.getTtlRegR().equals("0")))
+                {
                     Intent intent = new Intent(activity, LegacyTableViewActivity.class);
                     //intent.putExtra("data",Reg_No);
                     String distid = activity.getIntent().getStringExtra("DistCode");
@@ -139,12 +141,12 @@ public class PostedJobBlockAdapter extends RecyclerView.Adapter<PostedJobBlockAd
                     intent.putExtra("Count",info.getTtlRegR());
                     activity.startActivity(intent);
                 }
-                else {
+                else
+                {
                     Toast.makeText(activity, "कोई अस्वीकृत नौकरी नहीं है", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
 
     }
 
