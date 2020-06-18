@@ -73,7 +73,8 @@
             android:theme="@style/NoActionBar"/>
         <activity android:name=".ui.hq.SubDeptNoVacencyLegacyTableActivity"
             android:theme="@style/NoActionBar"/>
-        <activity android:name=".OfficeReport.DistricWise" />
+        <activity android:name=".OfficeReport.DistricWise"
+            android:theme="@style/NoActionBar" />
         <activity
             android:name=".ui.hq.DeptJobVacencyReportActivity"
             android:theme="@style/NoActionBar" />

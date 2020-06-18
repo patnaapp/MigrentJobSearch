@@ -82,10 +82,10 @@ public class WorksiteEmployeeLegacyActivity extends Activity {
                 tv_header.setText("Worker Detail of Accepted Job");
                 break;
             case AppConstant.WORKSITE_JOB_REJECTED:
-                tv_header.setText("Work Site Detail");
+                tv_header.setText("Worker Detail of Rejected Job");
                 break;
             case AppConstant.WORKSITE_JOB_APPOINTED:
-                tv_header.setText("Work Site Detail");
+                tv_header.setText("Worker Detail of Appointed Job");
                 break;
 
         }
@@ -179,6 +179,10 @@ public class WorksiteEmployeeLegacyActivity extends Activity {
                 break;
 
             case AppConstant.WORKSITE_JOB_OFFERED:
+
+            case AppConstant.WORKSITE_JOB_REJECTED:
+
+            case AppConstant.WORKSITE_JOB_APPOINTED:
                 tv_sub_header.setText("Total Count:-"+data.size());
 
                 LegacyTableView.insertLegacyTitle("Sl No.","Registration No.", "Labharthi Name", "Labharthi Mobile", "Gender", "Skill Name");
@@ -204,31 +208,6 @@ public class WorksiteEmployeeLegacyActivity extends Activity {
                 }
                 break;
 
-            case AppConstant.WORKSITE_JOB_REJECTED:
-                tv_sub_header.setText("Total Count:-"+data.size());
-
-                LegacyTableView.insertLegacyTitle("Sl No.","Registration No.", "Labharthi Name", "Labharthi Mobile", "Gender", "Skill Name");
-                int i5=1;
-
-                for (WorkSiteEmployeeReportEntity info: data)
-                {
-                    LegacyTableView.insertLegacyContent(String.valueOf(i5),info.getVchregnum(),info.getVchName(),info.getVchMobile(),info.getIntGender(), info.getSkillName());
-                    i5++;
-                }
-                break;
-
-            case AppConstant.WORKSITE_JOB_APPOINTED:
-                tv_sub_header.setText("Total Count:-"+data.size());
-
-                LegacyTableView.insertLegacyTitle("Sl No.","Registration No.", "Labharthi Name", "Labharthi Mobile", "Gender", "Skill Name");
-                int i6=1;
-
-                for (WorkSiteEmployeeReportEntity info: data)
-                {
-                    LegacyTableView.insertLegacyContent(String.valueOf(i6),info.getVchregnum(),info.getVchName(),info.getVchMobile(),info.getIntGender(), info.getSkillName());
-                    i6++;
-                }
-                break;
         }
     }
 }
