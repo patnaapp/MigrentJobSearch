@@ -25,21 +25,20 @@ import static com.levitnudi.legacytableview.LegacyTableView.BOLD;
 
 import static com.levitnudi.legacytableview.LegacyTableView.OCEAN;
 
-public class BlocJobOfferActivity extends Activity implements AdapterView.OnItemSelectedListener  {
-
-
+public class BlocJobOfferActivity extends Activity implements AdapterView.OnItemSelectedListener
+{
     LegacyTableView legacyTableView;
     ArrayList<BlkCompanyJobDetailsEntity> data;
     String status="",blkcode="", blkname="";
     String OrgId="",user_name="", mobile="", address="", DistName="", ProfileImg="",CompanyName="", UserId="",UserRole="",distid="";
-
     String DistId="",DistNAme="";
     TextView tv_skill11,tv_Norecord_accpt;
     ImageView img_back,btn_previous,btn_next;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_legacy_table_view);
         tv_skill11=findViewById(R.id.tv_skill);
@@ -130,7 +129,8 @@ public class BlocJobOfferActivity extends Activity implements AdapterView.OnItem
         @Override
         protected ArrayList<BlkCompanyJobDetailsEntity> doInBackground(String...arg)
         {
-            if(OrgId.equals("NA")){
+            if(OrgId.equals("NA"))
+            {
                 OrgId="";
             }
             return WebserviceHelper.BlkCompanyWiseJobOffers(distid,blkcode, OrgId,UserRole);
@@ -151,22 +151,18 @@ public class BlocJobOfferActivity extends Activity implements AdapterView.OnItem
                     LegacyTableView.insertLegacyContent(String.valueOf(i),info.getComanyNameEn(),info.getAddressEn(),info.getWorkSiteNameHn(),info.getNoOfPerson(),info.getSalary(),info.getLocation(),info.getSkillName());
                     i++;
                 }
-
                 legacyTableView = (LegacyTableView)findViewById(R.id.legacy_table_view);
                 legacyTableView.setTitle(LegacyTableView.readLegacyTitle());
                 legacyTableView.setContent(LegacyTableView.readLegacyContent());
                 legacyTableView.setTheme(OCEAN);
                 legacyTableView.setTablePadding(20);
                 legacyTableView.setHighlight(1);
-
                 legacyTableView.setShowZoomControls(true);
                 legacyTableView.setBottomShadowVisible(true);
                 legacyTableView.setTitleFont(BOLD);
                 legacyTableView.setContentTextSize(30);
                 legacyTableView.setTitleTextSize(35);
-
                 legacyTableView.build();
-
                 if (this.dialog.isShowing())
                 {
                     this.dialog.dismiss();

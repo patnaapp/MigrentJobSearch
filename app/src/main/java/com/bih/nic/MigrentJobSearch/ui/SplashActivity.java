@@ -74,7 +74,8 @@ public class SplashActivity extends Activity {
 
     }
     @Override
-    protected void onResume() {
+    protected void onResume()
+    {
         // TODO Auto-generated method stub
         super.onResume();
 
@@ -83,42 +84,52 @@ public class SplashActivity extends Activity {
         new CheckUpdate().execute();}else {start();}
     }
 
-    public void modifyTable(){
+    public void modifyTable()
+    {
         String UserTable = "UserDetails";
 
-        if(isColumnExists(UserTable, "UserName") == false){
+        if(isColumnExists(UserTable, "UserName") == false)
+        {
             AlterTable(UserTable, "UserName");
         }
 
-        if(isColumnExists(UserTable, "PanchayatCode") == false){
+        if(isColumnExists(UserTable, "PanchayatCode") == false)
+        {
             AlterTable(UserTable, "PanchayatCode");
         }
 
-        if(isColumnExists(UserTable, "PanchayatName") == false){
+        if(isColumnExists(UserTable, "PanchayatName") == false)
+        {
             AlterTable(UserTable, "PanchayatName");
         }
 
-        if(isColumnExists(UserTable, "Age") == false){
+        if(isColumnExists(UserTable, "Age") == false)
+        {
             AlterTable(UserTable, "Age");
         }
 
-        if(isColumnExists(UserTable, "Mobile") == false){
+        if(isColumnExists(UserTable, "Mobile") == false)
+        {
             AlterTable(UserTable, "Mobile");
         }
 
-        if(isColumnExists(UserTable, "Address") == false){
+        if(isColumnExists(UserTable, "Address") == false)
+        {
             AlterTable(UserTable, "Address");
         }
 
-        if(isColumnExists(UserTable, "Img_ben") == false){
+        if(isColumnExists(UserTable, "Img_ben") == false)
+        {
             AlterTable(UserTable, "Img_ben");
         }
 
-        if(isColumnExists(UserTable, "Lat1") == false){
+        if(isColumnExists(UserTable, "Lat1") == false)
+        {
             AlterTable(UserTable, "Lat1");
         }
 
-        if(isColumnExists(UserTable, "Long1") == false){
+        if(isColumnExists(UserTable, "Long1") == false)
+        {
             AlterTable(UserTable, "Long1");
         }
     }

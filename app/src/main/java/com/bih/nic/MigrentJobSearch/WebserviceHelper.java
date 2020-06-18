@@ -1717,7 +1717,7 @@ public class WebserviceHelper implements KvmSerializable {
         return pvmArrayList;
     }
 
-    public static ArrayList<AcptdRjctdJobOfferEntity> JobOfferAcptdRjctd(String distid,String blkid, String orgid, String role,String status,String serialno)
+    public static ArrayList<AcptdRjctdJobOfferEntity>  JobOfferAcptdRjctd(String distid,String blkid, String orgid, String role,String status,String serialno)
     {
         SoapObject request = new SoapObject(SERVICENAMESPACE, GET_Acpt_Rjct_Job_By_Labour);
         request.addProperty("Distcode", distid);
@@ -1735,9 +1735,8 @@ public class WebserviceHelper implements KvmSerializable {
             envelope.setOutputSoapObject(request);
             envelope.addMapping(SERVICENAMESPACE, AcptdRjctdJobOfferEntity.AcptdRjctdOffer_CLASS.getSimpleName(), AcptdRjctdJobOfferEntity.AcptdRjctdOffer_CLASS);
             HttpTransportSE androidHttpTransport = new HttpTransportSE(
-                    SERVICEURL);
-            androidHttpTransport.call(SERVICENAMESPACE + GET_Acpt_Rjct_Job_By_Labour,
-                    envelope);
+                    SERVICEURL,60000);
+            androidHttpTransport.call(SERVICENAMESPACE + GET_Acpt_Rjct_Job_By_Labour,envelope);
 
             res1 = (SoapObject) envelope.getResponse();
 
@@ -1881,7 +1880,8 @@ public class WebserviceHelper implements KvmSerializable {
         return pvmArrayList;
     }
 
-    public static ArrayList<BlkCompanyJobDetailsEntity> BlkCompanyWiseJobOffers(String distid, String blkid, String orgid, String role) {
+    public static ArrayList<BlkCompanyJobDetailsEntity> BlkCompanyWiseJobOffers(String distid, String blkid, String orgid, String role)
+    {
 
 
         SoapObject request = new SoapObject(SERVICENAMESPACE, GET_Blk_Wise_company_Jobs);

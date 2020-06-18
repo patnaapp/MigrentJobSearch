@@ -47,7 +47,7 @@ public class JobOffer_DEPT_BlockActivity extends Activity implements AdapterView
     String DistId="",DistNAme="";
 
     DataBaseHelper dataBaseHelper;
-    String OrgId="",user_name="", mobile="", address="", DistName="", ProfileImg="",CompanyName="", UserId="",UserRole="";
+    String OrgId="",user_name="", mobile="", address="", DistName="", ProfileImg="",CompanyName="", UserId="",UserRole="",DeptID="";
 
 
     @Override
@@ -67,7 +67,7 @@ public class JobOffer_DEPT_BlockActivity extends Activity implements AdapterView
 
         UserId=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserId", "");
         UserRole=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserRole", "");
-
+        DeptID=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("OrgId", "");
 
 
 
@@ -122,7 +122,7 @@ public class JobOffer_DEPT_BlockActivity extends Activity implements AdapterView
 
         @Override
         protected ArrayList<BlockJobOfferPostedEntity> doInBackground(String...arg) {
-            return WebserviceHelper.BlockJobOfferPosted(DistId, "",UserRole);
+            return WebserviceHelper.BlockJobOfferPosted(DistId, DeptID,UserRole);
         }
 
         @Override

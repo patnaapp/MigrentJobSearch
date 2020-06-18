@@ -241,18 +241,24 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
 //            }
             if (status.equals("SHRG"))
             {
-
                 LegacyTableView.insertLegacyTitle("क्रम सं.","पंजीकरण संख्या", "नाम","मोबाइल नंबर", "लिंग");
 
                 //,"अभिभावक का नाम","अभिभावक क                      ा मोबाइल नंबर"
+                try{
 
-                int i=1;
-                for (AcptdRjctdJobOfferEntity info: data)
+
+                    int i=1;
+                    for (AcptdRjctdJobOfferEntity info: data)
+                    {
+                        tv_total_count.setText("Total Count:-"+info.getCount());
+
+                        LegacyTableView.insertLegacyContent(info.getRow_num(),info.getVchregnum(),info.getVchName(),info.getVchMobile(),info.getGender());
+                        i++;
+                    }
+                }
+                catch(Exception e)
                 {
-                    tv_total_count.setText("Total Count:-"+info.getCount());
-
-                    LegacyTableView.insertLegacyContent(info.getRow_num(),info.getVchregnum(),info.getVchName(),info.getVchMobile(),info.getGender());
-                    i++;
+                    e.printStackTrace();
                 }
 
             }
@@ -263,15 +269,20 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
                 LegacyTableView.insertLegacyTitle("क्रम सं.","कंपनी", "कंपनी का पता", "कार्य स्थल", "लोकेशन","संपर्क व्यक्ति","संपर्क व्यक्ति मोबाइल","पंजीकरण संख्या","लाभार्थी का नाम","लाभार्थी का मोबाइल","लिंग","कौशल","उप कौशल","कार्य स्थल का नाम");
                 //,"अभिभावक का नाम","अभिभावक का मोबाइल नंबर"
 
-
-                int i=1;
-                for (AcptdRjctdJobOfferEntity info: data)
-                {
-                    tv_total_count.setText("Total Count:-"+info.getCount());
+                try{
+                    int i=1;
+                    for (AcptdRjctdJobOfferEntity info: data)
+                    {
+                        tv_total_count.setText("Total Count:-"+info.getCount());
 //,info.getVchMobile(),info.getGender(),info.getSkillCategory(),info.getSkillName(),info.getWorkSiteNameHn()
-                    // LegacyTableView.insertLegacyContent(info.getRow_num(),info.getVchregnum(),info.getSkillName(),info.getVchName(),info.getGender(),info.getVchMobile());
-                    LegacyTableView.insertLegacyContent(info.getRow_num(),info.getComanyNameEn(),info.getAddressEn(),info.getWorkSiteNameHn(),info.getLocation(),info.getVchGuardian_name(),info.getVchGuardian_number(),info.getVchregnum(),info.getVchName(),info.getVchMobile(),info.getGender(),info.getSkillCategory(),info.getSkillName(),info.getWorkSiteNameHn());
-                    i++;
+                        // LegacyTableView.insertLegacyContent(info.getRow_num(),info.getVchregnum(),info.getSkillName(),info.getVchName(),info.getGender(),info.getVchMobile());
+                        LegacyTableView.insertLegacyContent(info.getRow_num(),info.getComanyNameEn(),info.getAddressEn(),info.getWorkSiteNameHn(),info.getLocation(),info.getVchGuardian_name(),info.getVchGuardian_number(),info.getVchregnum(),info.getVchName(),info.getVchMobile(),info.getGender(),info.getSkillCategory(),info.getSkillName(),info.getWorkSiteNameHn());
+                        i++;
+                    }
+                }
+                catch(Exception e)
+                {
+                    e.printStackTrace();
                 }
 
             }
