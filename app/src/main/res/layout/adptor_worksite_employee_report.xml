@@ -92,13 +92,14 @@
                     android:layout_width="1dp"
                     android:layout_height="match_parent"/>
                 <TextView
+
                     android:layout_gravity="center"
                     android:id="@+id/tv_no_perosn"
                     android:textColor="@color/colorClickable"
                     android:textStyle="normal"
                     android:gravity="center"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginRight="2dp"
                     android:layout_weight="1"
                     android:text="no of person"/>
@@ -114,7 +115,7 @@
                     android:textStyle="normal"
                     android:gravity="center"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginRight="2dp"
                     android:layout_weight="1"
                     android:text="offered"/>

@@ -269,7 +269,6 @@ public class SplashActivity extends Activity {
                     Toast.makeText(getApplicationContext(),
                             getResources().getString(R.string.wrong_device_text),
                             Toast.LENGTH_LONG).show();
-
                 }
                 else
                 {
