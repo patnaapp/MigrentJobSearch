@@ -38,22 +38,22 @@ public class PostedJobBlockAdapter extends RecyclerView.Adapter<PostedJobBlockAd
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+    {
         View view = mInflater.inflate(R.layout.adptor_job_posting_block, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position)
+    {
         final BlockJobOfferPostedEntity info = ThrList.get(position);
-
         holder.tv_slno.setText(String.valueOf(position+1)+").");
         holder.tv_blk_name.setText(info.getBlockName().toUpperCase());
         holder.total_reg.setText(info.getTtlReg());
         holder.tv_joboffer.setText(info.getTotalJobOffer());
         holder.tv_accpted.setText(info.getTtlRegA());
         holder.tv_rejected.setText(info.getTtlRegR());
-
 //
         holder.tv_blk_name.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,10 +69,11 @@ public class PostedJobBlockAdapter extends RecyclerView.Adapter<PostedJobBlockAd
             }
         });
 
-
-        holder.total_reg.setOnClickListener(new View.OnClickListener() {
+        holder.total_reg.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 Intent intent = new Intent(activity, LegacyTableViewActivity.class);
                 String distid = activity.getIntent().getStringExtra("DistCode");
                 intent.putExtra("distid",distid);
@@ -84,9 +85,11 @@ public class PostedJobBlockAdapter extends RecyclerView.Adapter<PostedJobBlockAd
             }
         });
 
-        holder.tv_joboffer.setOnClickListener(new View.OnClickListener() {
+        holder.tv_joboffer.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 Intent intent = new Intent(activity, LegacyTableViewActivity.class);
                 String distid = activity.getIntent().getStringExtra("DistCode");
                 intent.putExtra("distid",distid);
@@ -99,15 +102,14 @@ public class PostedJobBlockAdapter extends RecyclerView.Adapter<PostedJobBlockAd
         });
 //
 //
-
-
-
-        holder.tv_accpted.setOnClickListener(new View.OnClickListener() {
+        holder.tv_accpted.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 //Intent intent = new Intent(activity, AcceptedRejctd_Job_Activity.class);
-
-                if (!(info.getTtlRegA().equals("0"))){
+                if (!(info.getTtlRegA().equals("0")))
+                {
                     Intent intent = new Intent(activity, LegacyTableViewActivity.class);
                     //intent.putExtra("data",Reg_No);
                     String distid = activity.getIntent().getStringExtra("DistCode");
@@ -118,14 +120,15 @@ public class PostedJobBlockAdapter extends RecyclerView.Adapter<PostedJobBlockAd
                     intent.putExtra("Count",info.getTtlRegA());
                     activity.startActivity(intent);
                 }
-                else {
+                else
+                {
                     Toast.makeText(activity, "कोई स्वीकृत नौकरी नहीं है", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-
-        holder.tv_rejected.setOnClickListener(new View.OnClickListener() {
+        holder.tv_rejected.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View v)
             {
@@ -160,11 +163,10 @@ public class PostedJobBlockAdapter extends RecyclerView.Adapter<PostedJobBlockAd
     {
         TextView tv_blk_name,total_reg,tv_joboffer,tv_accpted,tv_rejected,tv_slno;
         ImageView iv_call;
-
-
         Button btn_accpt,btn_rjct;
         LinearLayout ll_btn,ll_status,ll_selection;
-        ViewHolder(View itemView) {
+        ViewHolder(View itemView)
+        {
             super(itemView);
             tv_slno=itemView.findViewById(R.id.tv_slno);
             tv_blk_name=itemView.findViewById(R.id.tv_blk_name);
@@ -173,16 +175,14 @@ public class PostedJobBlockAdapter extends RecyclerView.Adapter<PostedJobBlockAd
             tv_accpted=itemView.findViewById(R.id.tv_accpted_blk);
             tv_rejected=itemView.findViewById(R.id.tv_rejected_blk);
 
-
         }
-
         @Override
-        public void onClick(View v) {
+        public void onClick(View v)
+        {
 
         }
 
     }
-
 
     public String getGenderHindi(String gender)
     {

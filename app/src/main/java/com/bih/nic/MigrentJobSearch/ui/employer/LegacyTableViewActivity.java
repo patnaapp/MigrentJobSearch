@@ -19,6 +19,8 @@ import com.bih.nic.MigrentJobSearch.WebserviceHelper;
 import com.levitnudi.legacytableview.LegacyTableView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import static com.levitnudi.legacytableview.LegacyTableView.BOLD;
 import static com.levitnudi.legacytableview.LegacyTableView.DESKTOP;
@@ -67,19 +69,23 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
         blkname = getIntent().getStringExtra("BlockNAme");
         count = getIntent().getStringExtra("Count");
 
-        if (status.equals("SHRGJA")){
+        if (status.equals("SHRGJA"))
+        {
             tv_skill11.setText("प्रखंड वाइज स्वीकृत नौकरी प्रस्ताव");
             tv_skill11.setTextColor(getApplicationContext().getResources().getColor(R.color.green));
         }
-        else if (status.equals("SHRGJR")){
+        else if (status.equals("SHRGJR"))
+        {
             tv_skill11.setText("प्रखंड वाइज अस्वीकृत नौकरी प्रस्ताव");
             tv_skill11.setTextColor(getApplicationContext().getResources().getColor(R.color.holo_red_dark));
         }
-        else if (status.equals("SHRG")){
+        else if (status.equals("SHRG"))
+        {
             tv_skill11.setText("प्रखंड वाइज पंजीकरण");
             tv_skill11.setTextColor(getApplicationContext().getResources().getColor(R.color.green));
         }
-        else if (status.equals("SHRGJ")){
+        else if (status.equals("SHRGJ"))
+        {
             tv_skill11.setText("प्रखंड वाइज नौकरी प्रस्ताव");
             tv_skill11.setTextColor(getApplicationContext().getResources().getColor(R.color.green));
         }
@@ -103,9 +109,6 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
 
         new SyncAcceptedRjctdJobsOffers("0").execute();
 
-
-
-
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,8 +119,6 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 new SyncAcceptedRjctdJobsOffers(data.get(data.size()-1).getRow_num()).execute();
             }
         });
@@ -126,8 +127,6 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
         btn_previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 Integer slno= Integer.parseInt(data.get(0).getRow_num());
                 new SyncAcceptedRjctdJobsOffers(String.valueOf(slno-201)).execute();
             }
@@ -149,15 +148,18 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> parent) {
+    public void onNothingSelected(AdapterView<?> parent)
+    {
 
     }
 
 
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId()){
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
             case android.R.id.home:
                 //finish activity once user presses back button
                 finish();
@@ -167,7 +169,8 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
         return super.onOptionsItemSelected(item);
     }
 
-    public void handleButtonView(String start, String end){
+    public void handleButtonView(String start, String end)
+    {
         if(start.equals("1")){
             btn_previous.setVisibility(View.GONE);
         }else{
@@ -188,10 +191,10 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
         int optionType;
         String serial_no;
 
-        public SyncAcceptedRjctdJobsOffers(String serial_no) {
+        public SyncAcceptedRjctdJobsOffers(String serial_no)
+        {
             this.serial_no = serial_no;
         }
-
         @Override
         protected void onPreExecute()
         {
@@ -199,7 +202,6 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
             this.dialog.setMessage("लोड हो रहा है...");
             this.dialog.show();
         }
-
         @Override
         protected ArrayList<AcptdRjctdJobOfferEntity> doInBackground(String...arg)
         {
@@ -214,14 +216,10 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
         @Override
         protected void onPostExecute(ArrayList<AcptdRjctdJobOfferEntity> result)
         {
-
-
             data = result;
-
             ArrayList<String>  Content=new ArrayList<>();
 
-//
-//            if (status.equals("SHRGJ")){
+////            if (status.equals("SHRGJ")){
 //
 //                // LegacyTableView.insertLegacyTitle("क्रम सं.","पंजीकरण संख्या", "कौशल", "नाम", "लिंग","मोबाइल नंबर","कार्य स्थल का नाम");
 //                LegacyTableView.insertLegacyTitle("क्रम सं.","कंपनी", "कंपनी का पता", "कार्य स्थल", "लोकेशन","संपर्क व्यक्ति","संपर्क व्यक्ति मोबाइल","पंजीकरण संख्या","लाभार्थी का नाम","लाभार्थी का मोबाइल","लिंग","कौशल","उप कौशल","कार्य स्थल का नाम");
@@ -242,12 +240,11 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
             if (status.equals("SHRG"))
             {
                 LegacyTableView.insertLegacyTitle("क्रम सं.","पंजीकरण संख्या", "नाम","मोबाइल नंबर", "लिंग");
-
                 //,"अभिभावक का नाम","अभिभावक क                      ा मोबाइल नंबर"
-                try{
-
-
+                try
+                {
                     int i=1;
+
                     for (AcptdRjctdJobOfferEntity info: data)
                     {
                         tv_total_count.setText("Total Count:-"+info.getCount());
@@ -268,7 +265,6 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
                 // LegacyTableView.insertLegacyTitle("क्रम सं.","पंजीकरण संख्या", "कौशल", "नाम", "लिंग","मोबाइल नंबर");
                 LegacyTableView.insertLegacyTitle("क्रम सं.","कंपनी", "कंपनी का पता", "कार्य स्थल", "लोकेशन","संपर्क व्यक्ति","संपर्क व्यक्ति मोबाइल","पंजीकरण संख्या","लाभार्थी का नाम","लाभार्थी का मोबाइल","लिंग","कौशल","उप कौशल","कार्य स्थल का नाम");
                 //,"अभिभावक का नाम","अभिभावक का मोबाइल नंबर"
-
                 try{
                     int i=1;
                     for (AcptdRjctdJobOfferEntity info: data)
@@ -284,7 +280,6 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
                 {
                     e.printStackTrace();
                 }
-
             }
             if(data != null && data.size()> 0)
             {
@@ -299,7 +294,9 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
                 legacyTableView.setHighlight(1);
                 legacyTableView.setZoomEnabled(true);
                 legacyTableView.setShowZoomControls(false);
+
                 legacyTableView.setBottomShadowVisible(true);
+
                 legacyTableView.setTitleFont(BOLD);
                 legacyTableView.setContentTextSize(30);
                 legacyTableView.setTitleTextSize(35);
@@ -311,7 +308,6 @@ public class LegacyTableViewActivity extends Activity implements AdapterView.OnI
             }
             else
             {
-
                 // tv_Norecord_accpt.setVisibility(View.VISIBLE);
             }
 
