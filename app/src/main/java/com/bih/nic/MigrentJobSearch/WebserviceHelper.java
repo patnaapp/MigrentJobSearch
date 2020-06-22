@@ -154,7 +154,8 @@ public class WebserviceHelper implements KvmSerializable {
     static String rest;
 
 
-    public static ArrayList<District> getDistrictData() {
+    public static ArrayList<District> getDistrictData()
+     {
 
         SoapObject res1;
         res1=getServerData(DISTRICT_METHOD, District.DISTRICT_CLASS);
@@ -184,7 +185,8 @@ public class WebserviceHelper implements KvmSerializable {
         return fieldList;
     }
 
-    public static DefaultResponse updateProfileImage(String regId, String lat, String longi, String img) {
+    public static DefaultResponse updateProfileImage(String regId, String lat, String longi, String img)
+    {
 
         SoapObject request = new SoapObject(SERVICENAMESPACE, UPDATE_PROFILE_IMAGE_METHOD);
 
@@ -195,7 +197,8 @@ public class WebserviceHelper implements KvmSerializable {
         DefaultResponse userDetails;
         SoapObject res1;
 
-        try {
+        try
+        {
             SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
             envelope.dotNet = true;
             envelope.setOutputSoapObject(request);
@@ -227,22 +230,30 @@ public class WebserviceHelper implements KvmSerializable {
 
         ArrayList<JobListEntity> fieldList = new ArrayList<JobListEntity>();
 
-        for (int i = 0; i < TotalProperty; i++) {
-            if (res1.getProperty(i) != null) {
+        for (int i = 0; i < TotalProperty; i++)
+        {
+            if (res1.getProperty(i) != null)
+            {
                 Object property = res1.getProperty(i);
-                if (property instanceof SoapObject) {
+                if (property instanceof SoapObject)
+                {
                     SoapObject final_object = (SoapObject) property;
                     JobListEntity block= new JobListEntity(final_object);
                     fieldList.add(block);
                 }
-            } else
+            }
+            else
+                {
                 return fieldList;
+            }
+
         }
 
         return fieldList;
     }
 
-    public static ArrayList<SkillMaster> getSkillMasterData() {
+    public static ArrayList<SkillMaster> getSkillMasterData()
+    {
 
         SoapObject res1;
         res1=getServerData(SKILL_METHOD, SkillMaster.SkillMaster_CLASS);

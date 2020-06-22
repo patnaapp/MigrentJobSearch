@@ -178,7 +178,8 @@ public class ApproveRejectWorkSite_activity extends Activity implements AdapterV
 
     }
 
-    public void loadDistrictSpinnerData(){
+    public void loadDistrictSpinnerData()
+    {
         DistrictList = dataBaseHelper.getDistDetail();
         ArrayList<String> list = new ArrayList<String>();
         list.add("-Select-");
@@ -198,13 +199,15 @@ public class ApproveRejectWorkSite_activity extends Activity implements AdapterV
 //        spn_district.setEnabled(false);
     }
 
-    public void loadBlockSpinnerData(String district){
+    public void loadBlockSpinnerData(String district)
+    {
         BlockList.clear();
         BlockList = dataBaseHelper.getBlockDetail(district);
         ArrayList<String> list = new ArrayList<String>();
         list.add("-Select-");
         int index = 0;
-        for (BlockWeb info: BlockList){
+        for (BlockWeb info: BlockList)
+        {
             list.add(info.getBlockName());
             //if(benDetails.get)
         }

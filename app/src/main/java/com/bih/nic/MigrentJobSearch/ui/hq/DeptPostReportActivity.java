@@ -112,7 +112,8 @@ public class DeptPostReportActivity extends Activity implements AdapterView.OnIt
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> parent) {
+    public void onNothingSelected(AdapterView<?> parent)
+    {
 
     }
 
@@ -152,7 +153,8 @@ public class DeptPostReportActivity extends Activity implements AdapterView.OnIt
         int optionType;
         String serial_no;
 
-        public SyncWorkSite() {
+        public SyncWorkSite()
+        {
 
         }
 
@@ -174,20 +176,13 @@ public class DeptPostReportActivity extends Activity implements AdapterView.OnIt
         @Override
         protected void onPostExecute(ArrayList<DepartmentWiseVacancy> result)
         {
-
-
             data = result;
-
             ArrayList<String>  Content=new ArrayList<>();
-
             // LegacyTableView.insertLegacyTitle("क्रम सं.","पंजीकरण संख्या", "कौशल", "नाम", "लिंग","मोबाइल नंबर","कार्य स्थल का नाम");
             LegacyTableView.insertLegacyTitle("क्रम सं.","कंपनी", "कार्य स्थल", "स्थान", "संपर्क व्यक्ति","संपर्क व्यक्ति मोबाइल नं","रिक्तियों की संख्या","वेतन","कौशल का नाम");
             //  LegacyTableView.insertLegacyTitle("क्रम सं.","पंजीकरण संख्या", "कौशल", "नाम", "लिंग","मोबाइल नंबर","कार्य स्थल का नाम");
             //,"अभिभावक का नाम","अभिभावक का मोबाइल नंबर"
-
-
             int i=1;
-
             for (DepartmentWiseVacancy info: data)
             {
 
@@ -197,7 +192,6 @@ public class DeptPostReportActivity extends Activity implements AdapterView.OnIt
             legacyTableView.resetVariables();
             legacyTableView.setTitle(LegacyTableView.readLegacyTitle());
             legacyTableView.setContent(LegacyTableView.readLegacyContent());
-
             legacyTableView.setTheme(GOLDALINE);
             legacyTableView.setTablePadding(20);
             legacyTableView.setHighlight(1);
