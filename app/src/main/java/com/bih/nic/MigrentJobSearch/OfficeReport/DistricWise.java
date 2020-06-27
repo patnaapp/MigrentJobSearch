@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import com.bih.nic.MigrentJobSearch.Model.AcptdRjctdJobOfferEntity;
 import com.bih.nic.MigrentJobSearch.Model.ConsolidatedReportModel;
 import com.bih.nic.MigrentJobSearch.R;
+import com.bih.nic.MigrentJobSearch.Utiilties;
 import com.bih.nic.MigrentJobSearch.WebserviceHelper;
 import com.bih.nic.MigrentJobSearch.adapter.AccptedRctdJobAdapter;
 import com.bih.nic.MigrentJobSearch.adapter.DistrictWiseConsolidatedReportAdaptor;
@@ -27,6 +28,8 @@ public class DistricWise extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_distric_wise);
+
+        Utiilties.setStatusBarColor(this);
         listView=(RecyclerView)findViewById(R.id.listviewacptrjct);
 
        new  SyncAcceptedRjctdJobsOffers("").execute();

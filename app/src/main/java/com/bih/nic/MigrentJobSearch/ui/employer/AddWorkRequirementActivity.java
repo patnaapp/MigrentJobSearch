@@ -212,7 +212,11 @@ public class AddWorkRequirementActivity extends Activity implements AdapterView.
                 focusView = et_no_person;
                 isValid = false;
             }else if (Integer.parseInt(et_no_person.getText().toString()) <= 0){
-                et_no_person.setError("कृपया सही व्यक्ति की संख्या डाले |");
+                et_no_person.setError("व्यक्ति की संख्या 0 से ज्यदा होना चाहिए |");
+                focusView = et_no_person;
+                isValid = false;
+            }else if (Integer.parseInt(et_no_person.getText().toString()) > 5000){
+                et_no_person.setError("व्यक्ति की संख्या 5000 से ज्यदा अनुमानित नहीं हैं |");
                 focusView = et_no_person;
                 isValid = false;
             }

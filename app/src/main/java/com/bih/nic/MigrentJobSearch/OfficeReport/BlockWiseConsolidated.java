@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.bih.nic.MigrentJobSearch.Model.ConsolidatedReportModel;
 import com.bih.nic.MigrentJobSearch.R;
@@ -19,6 +21,7 @@ import java.util.ArrayList;
 
 public class BlockWiseConsolidated extends Activity {
     RecyclerView listView;
+    ImageView img_back;
     ArrayList<ConsolidatedReportModel>consolidatedReportList=new ArrayList<>();
     BlockWiseConsolidatedReport blockWiseConsolidatedReport;
     String DistrictName,DistrictCode;
@@ -31,10 +34,18 @@ public class BlockWiseConsolidated extends Activity {
         Utiilties.setStatusBarColor(this);
         getActionBar().hide();
         listView=(RecyclerView)findViewById(R.id.listviewacptrjct);
+        img_back=(ImageView) findViewById(R.id.img);
         DistrictCode=getIntent().getStringExtra("DistCode");
         DistrictName=getIntent().getStringExtra("DistName");
 
         new  SyncBlockWiseConsolidated(DistrictCode).execute();
+
+        img_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private class SyncBlockWiseConsolidated extends AsyncTask<String, Void, ArrayList<ConsolidatedReportModel>> {

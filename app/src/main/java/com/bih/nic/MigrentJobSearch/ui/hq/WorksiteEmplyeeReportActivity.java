@@ -55,7 +55,6 @@ public class WorksiteEmplyeeReportActivity extends Activity implements AdapterVi
         UserId= PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserId", "");
         UserRole=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("UserRole", "");
 
-        loadDistrictSpinnerData();
 
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
