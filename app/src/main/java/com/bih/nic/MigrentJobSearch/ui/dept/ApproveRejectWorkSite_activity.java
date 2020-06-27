@@ -98,7 +98,7 @@ public class ApproveRejectWorkSite_activity extends Activity implements AdapterV
 
                 }
                 else
-                    {
+                {
                     block_id = "";
                     block_name = "";
                 }
@@ -233,25 +233,30 @@ public class ApproveRejectWorkSite_activity extends Activity implements AdapterV
     }
 
 
-    private class GetWorkSiteForApproval extends AsyncTask<String, Void, ArrayList<ApproveWorkSiteEntity>> {
+    private class GetWorkSiteForApproval extends AsyncTask<String, Void, ArrayList<ApproveWorkSiteEntity>>
+    {
         private final ProgressDialog dialog = new ProgressDialog(ApproveRejectWorkSite_activity.this);
         int optionType;
 
         @Override
-        protected void onPreExecute() {
+        protected void onPreExecute()
+        {
             this.dialog.setCanceledOnTouchOutside(false);
             this.dialog.setMessage("लोड हो रहा है...");
             this.dialog.show();
         }
 
         @Override
-        protected ArrayList<ApproveWorkSiteEntity> doInBackground(String...arg) {
+        protected ArrayList<ApproveWorkSiteEntity> doInBackground(String...arg)
+        {
             return WebserviceHelper.GetWorkSiteForApproval(block_id,OrgId, Status_Code);
         }
 
         @Override
-        protected void onPostExecute(ArrayList<ApproveWorkSiteEntity> result) {
-            if (this.dialog.isShowing()) {
+        protected void onPostExecute(ArrayList<ApproveWorkSiteEntity> result)
+        {
+            if (this.dialog.isShowing())
+            {
                 this.dialog.dismiss();
             }
 
@@ -274,9 +279,11 @@ public class ApproveRejectWorkSite_activity extends Activity implements AdapterV
             listView.setLayoutManager(new LinearLayoutManager(this));
             listView.setAdapter(adaptor_showedit_listDetail);
 
-        }else{
+        }
+        else
+        {
             listView.setVisibility(View.GONE);
-              tv_Norecord.setVisibility(View.VISIBLE);
+            tv_Norecord.setVisibility(View.VISIBLE);
         }
     }
 }

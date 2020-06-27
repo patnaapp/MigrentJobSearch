@@ -293,7 +293,6 @@ public class ProfileActivity extends Activity implements View.OnClickListener
             }
         }
 
-
     }
     private void buildAlertMessageNoGps() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);

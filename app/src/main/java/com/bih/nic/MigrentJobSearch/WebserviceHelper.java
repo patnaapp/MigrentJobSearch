@@ -89,11 +89,11 @@ public class WebserviceHelper implements KvmSerializable {
 
     private Context ctx;
 
-//    public static final String SERVICENAMESPACE = "http://shramsadhan.bih.nic.in/";
-//    public static final String SERVICEURL = "http://shramsadhan.bih.nic.in/MigrantJobSearchWebservice.asmx";
+    public static final String SERVICENAMESPACE = "http://shramsadhan.bih.nic.in/";
+    public static final String SERVICEURL = "http://shramsadhan.bih.nic.in/MigrantJobSearchWebservice.asmx";
 
-    public static final String SERVICENAMESPACE = "http://10.133.20.159/";
-    public static final String SERVICEURL = "http://10.133.20.159/TestService/MigrantJobSearchWebservice.asmx";
+//    public static final String SERVICENAMESPACE = "http://10.133.20.159/";
+//    public static final String SERVICEURL = "http://10.133.20.159/TestService/MigrantJobSearchWebservice.asmx";
 
     private static final String AuthenticateUser = "Authenticate";
     private static final String AuthenticateORGUser = "AuthenticateOrgLogin";
@@ -155,7 +155,7 @@ public class WebserviceHelper implements KvmSerializable {
 
 
     public static ArrayList<District> getDistrictData()
-     {
+    {
 
         SoapObject res1;
         res1=getServerData(DISTRICT_METHOD, District.DISTRICT_CLASS);
@@ -243,7 +243,7 @@ public class WebserviceHelper implements KvmSerializable {
                 }
             }
             else
-                {
+            {
                 return fieldList;
             }
 
@@ -262,16 +262,22 @@ public class WebserviceHelper implements KvmSerializable {
 
         ArrayList<SkillMaster> fieldList = new ArrayList<SkillMaster>();
 
-        for (int i = 0; i < TotalProperty; i++) {
-            if (res1.getProperty(i) != null) {
+        for (int i = 0; i < TotalProperty; i++)
+        {
+            if (res1.getProperty(i) != null)
+            {
                 Object property = res1.getProperty(i);
-                if (property instanceof SoapObject) {
+                if (property instanceof SoapObject)
+                {
                     SoapObject final_object = (SoapObject) property;
                     SkillMaster block= new SkillMaster(final_object);
                     fieldList.add(block);
                 }
-            } else
+            }
+            else{
                 return fieldList;
+            }
+
         }
 
         return fieldList;
@@ -350,22 +356,29 @@ public class WebserviceHelper implements KvmSerializable {
 
         ArrayList<ward_model> fieldList = new ArrayList<ward_model>();
 
-        for (int i = 0; i < TotalProperty; i++) {
-            if (res1.getProperty(i) != null) {
+        for (int i = 0; i < TotalProperty; i++)
+        {
+            if (res1.getProperty(i) != null)
+            {
                 Object property = res1.getProperty(i);
                 if (property instanceof SoapObject) {
                     SoapObject final_object = (SoapObject) property;
                     ward_model block= new ward_model(final_object);
                     fieldList.add(block);
                 }
-            } else
+            }
+            else
+            {
                 return fieldList;
+            }
+
         }
 
         return fieldList;
     }
 
-    public static ArrayList<panchayat> getPanchayatData(String panch) {
+    public static ArrayList<panchayat> getPanchayatData(String panch)
+    {
 
         SoapObject res1;
         res1=getServerData(PANCHAYAT_METHOD, panchayat.panchayat,"_BlockCode",panch);
@@ -374,21 +387,27 @@ public class WebserviceHelper implements KvmSerializable {
 
         ArrayList<panchayat> fieldList = new ArrayList<panchayat>();
 
-        for (int i = 0; i < TotalProperty; i++) {
-            if (res1.getProperty(i) != null) {
+        for (int i = 0; i < TotalProperty; i++)
+        {
+            if (res1.getProperty(i) != null)
+            {
                 Object property = res1.getProperty(i);
                 if (property instanceof SoapObject) {
                     SoapObject final_object = (SoapObject) property;
                     panchayat block= new panchayat(final_object);
                     fieldList.add(block);
                 }
-            } else
+            }
+            else{
                 return fieldList;
+            }
+
         }
 
         return fieldList;
     }
-    public static ArrayList<workListModel> GetWorkDetails(String panch) {
+    public static ArrayList<workListModel> GetWorkDetails(String panch)
+    {
 
         SoapObject res1;
         res1=getServerData(GetWorkDetails, panchayat.panchayat,"orgId",panch);
@@ -397,31 +416,45 @@ public class WebserviceHelper implements KvmSerializable {
 
         ArrayList<workListModel> fieldList = new ArrayList<workListModel>();
 
-        for (int i = 0; i < TotalProperty; i++) {
-            if (res1.getProperty(i) != null) {
+        for (int i = 0; i < TotalProperty; i++)
+        {
+            if (res1.getProperty(i) != null)
+            {
                 Object property = res1.getProperty(i);
-                if (property instanceof SoapObject) {
+                if (property instanceof SoapObject)
+                {
                     SoapObject final_object = (SoapObject) property;
                     workListModel block= new workListModel(final_object);
                     fieldList.add(block);
                 }
-            } else
+            }
+            else
+            {
                 return fieldList;
+            }
+
         }
 
         return fieldList;
     }
 
-    public static UserDetails Login(String User_ID, String Pwd) {
-        try {
+    public static UserDetails Login(String User_ID, String Pwd)
+    {
+        try
+        {
             SoapObject res1;
             res1=getServerData(AuthenticateUser, UserDetails.getUserClass(),"UserID","Password",User_ID,Pwd);
-            if (res1 != null) {
+            if (res1 != null)
+            {
                 return new UserDetails(res1);
-            } else
+            }
+            else
+                {
                 return null;
-
-        } catch (Exception e) {
+            }
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
             return null;
         }

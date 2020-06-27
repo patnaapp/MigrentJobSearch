@@ -160,8 +160,8 @@ public class JobOffer_DEPT_BlockActivity extends Activity implements AdapterView
         }
     }
 
-    protected void onResume() {
+    protected void onResume()
+    {
         super.onResume();
-
     }
 }

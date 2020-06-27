@@ -6,6 +6,7 @@
 
     <LinearLayout
         android:padding="4dp"
+        android:visibility="gone"
         android:id="@+id/rl_nav"
         android:layout_width="match_parent"
         android:layout_alignParentTop="true"
