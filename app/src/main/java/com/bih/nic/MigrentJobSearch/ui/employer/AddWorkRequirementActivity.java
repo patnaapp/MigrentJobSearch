@@ -80,7 +80,6 @@ public class AddWorkRequirementActivity extends Activity implements AdapterView.
         initiliazation();
 
         try {
-
             keyid = getIntent().getExtras().getString("KeyId");
 
             isEdit = getIntent().getExtras().getString("isEdit");
@@ -88,7 +87,6 @@ public class AddWorkRequirementActivity extends Activity implements AdapterView.
             if (Integer.parseInt(keyid) > 0 && isEdit.equals("Yes")) {
 
                 edit = true;
-
                 extractDataFromItent();
                 loadSkillSpinnerData();
             }
@@ -252,6 +250,10 @@ public class AddWorkRequirementActivity extends Activity implements AdapterView.
             }
 
             if (et_salary_mnm.getText().toString().isEmpty()){
+                et_salary_mnm.setError("कृपया न्यूनतम वेतन डाले |");
+                focusView = et_salary_mnm;
+                isValid = false;
+            }else if (Integer.parseInt(et_salary_mnm.getText().toString()) < 200){
                 et_salary_mnm.setError("कृपया न्यूनतम वेतन डाले |");
                 focusView = et_salary_mnm;
                 isValid = false;

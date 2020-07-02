@@ -60,28 +60,28 @@
 
     <RelativeLayout
         android:id="@+id/rl_user_info"
-        android:padding="10dp"
-        android:layout_width="match_parent"
+        android:layout_width="360dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/header"
-        android:layout_marginTop="8dp"
         android:layout_marginLeft="24dp"
+        android:layout_marginTop="12dp"
         android:layout_marginRight="24dp"
-        android:background="@drawable/shape_adapter_cell">
+        android:background="@drawable/shape_adapter_cell"
+        android:padding="10dp">
 
         <LinearLayout
-            android:visibility="visible"
             android:id="@+id/ll_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="visible">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Department Name"
                 android:textColor="@color/colorGreyDark"
-                android:textSize="12sp"/>
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/tv_dept_name"
@@ -89,33 +89,33 @@
                 android:layout_height="wrap_content"
                 android:text="EEARWALTEST"
                 android:textColor="@android:color/black"
-                android:textSize="14sp"/>
+                android:textSize="14sp" />
         </LinearLayout>
 
         <LinearLayout
-            android:visibility="visible"
-            android:layout_marginTop="4dp"
+            android:id="@+id/ll_div_zone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/ll_div_zone"
             android:layout_below="@+id/ll_username"
+            android:layout_marginTop="4dp"
             android:orientation="horizontal"
+            android:visibility="visible"
             android:weightSum="2">
 
             <LinearLayout
-                android:visibility="gone"
-                android:layout_weight="1"
                 android:id="@+id/ll_division"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="मोबाइल संख्या"
                     android:textColor="@color/colorGreyDark"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/tv_phone"
@@ -123,14 +123,14 @@
                     android:layout_height="wrap_content"
                     android:text="23586362466"
                     android:textColor="@android:color/black"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_weight="1"
                 android:id="@+id/ll_zone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
@@ -138,7 +138,7 @@
                     android:layout_height="wrap_content"
                     android:text="UserId"
                     android:textColor="@color/colorGreyDark"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/tv_email"
@@ -146,25 +146,25 @@
                     android:layout_height="wrap_content"
                     android:text="asgsdg"
                     android:textColor="@android:color/black"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
-            android:visibility="gone"
-            android:layout_marginTop="4dp"
+            android:id="@+id/ll_dist_role"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/ll_dist_role"
             android:layout_below="@+id/ll_div_zone"
+            android:layout_marginTop="4dp"
             android:orientation="horizontal"
+            android:visibility="gone"
             android:weightSum="2">
 
             <LinearLayout
-                android:layout_weight="1"
                 android:id="@+id/ll_district"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
@@ -178,26 +178,26 @@
                     android:id="@+id/tv_work_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Arwal"
                     android:maxLines="3"
+                    android:text="Arwal"
                     android:textColor="@android:color/black"
-                    android:textSize="13sp"/>
+                    android:textSize="13sp" />
             </LinearLayout>
 
             <LinearLayout
-                android:visibility="gone"
-                android:layout_weight="1"
                 android:id="@+id/ll_role"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Role"
                     android:textColor="@color/colorGreyDark"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/tv_role"
@@ -205,48 +205,48 @@
                     android:layout_height="wrap_content"
                     android:text="EE"
                     android:textColor="@android:color/black"
-                    android:textSize="15sp"/>
+                    android:textSize="15sp" />
             </LinearLayout>
         </LinearLayout>
 
-<!--        <LinearLayout-->
-<!--            android:visibility="gone"-->
-<!--            android:layout_marginTop="12dp"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_below="@+id/ll_dist_role"-->
-<!--            android:orientation="horizontal"-->
-<!--            android:clickable="true"-->
-<!--            android:weightSum="2">-->
+        <!--        <LinearLayout-->
+        <!--            android:visibility="gone"-->
+        <!--            android:layout_marginTop="12dp"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_below="@+id/ll_dist_role"-->
+        <!--            android:orientation="horizontal"-->
+        <!--            android:clickable="true"-->
+        <!--            android:weightSum="2">-->
 
-<!--            <RelativeLayout-->
-<!--                android:id="@+id/rl_sync_panchayat"-->
-<!--                android:layout_marginRight="4dp"-->
-<!--                android:padding="6dp"-->
-<!--                android:layout_weight="1"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:onClick="syncSchemes"-->
-<!--                android:background="@drawable/shape_white">-->
+        <!--            <RelativeLayout-->
+        <!--                android:id="@+id/rl_sync_panchayat"-->
+        <!--                android:layout_marginRight="4dp"-->
+        <!--                android:padding="6dp"-->
+        <!--                android:layout_weight="1"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:onClick="syncSchemes"-->
+        <!--                android:background="@drawable/shape_white">-->
 
-<!--                <ImageView-->
-<!--                    android:id="@+id/iv_sync"-->
-<!--                    android:layout_width="20dp"-->
-<!--                    android:layout_height="20dp"-->
-<!--                    android:layout_toLeftOf="@+id/tv_sync"-->
-<!--                    android:clickable="true"-->
-<!--                    android:src="@drawable/synmain"/>-->
+        <!--                <ImageView-->
+        <!--                    android:id="@+id/iv_sync"-->
+        <!--                    android:layout_width="20dp"-->
+        <!--                    android:layout_height="20dp"-->
+        <!--                    android:layout_toLeftOf="@+id/tv_sync"-->
+        <!--                    android:clickable="true"-->
+        <!--                    android:src="@drawable/synmain"/>-->
 
-<!--                <TextView-->
-<!--                    android:id="@+id/tv_sync"-->
-<!--                    android:layout_centerInParent="true"-->
-<!--                    android:layout_marginLeft="4dp"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="Sync Schemes"/>-->
-<!--            </RelativeLayout>-->
+        <!--                <TextView-->
+        <!--                    android:id="@+id/tv_sync"-->
+        <!--                    android:layout_centerInParent="true"-->
+        <!--                    android:layout_marginLeft="4dp"-->
+        <!--                    android:layout_width="wrap_content"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:text="Sync Schemes"/>-->
+        <!--            </RelativeLayout>-->
 
-<!--        </LinearLayout>-->
+        <!--        </LinearLayout>-->
     </RelativeLayout>
 
     <LinearLayout
